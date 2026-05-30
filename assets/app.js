@@ -640,6 +640,7 @@ function setupMinimap() {
 }
 
 // ── Brand font mixing ──
+var _brandPool = [];
 function randomizeBrandFonts() {
   var brand = document.querySelector('.brand-text') || document.querySelector('.brand');
   if (!brand) return;
@@ -648,15 +649,32 @@ function randomizeBrandFonts() {
   brand.textContent = '';
   brand.style.display = 'inline-flex';
   brand.style.gap = '3px';
-  var pool = [...FONTS_DISPLAY, ...FONTS_SERIF, ...FONTS_HAND, ...FONTS_SANS];
+  _brandPool = [...FONTS_DISPLAY, ...FONTS_SERIF, ...FONTS_HAND, ...FONTS_SANS];
+  var letters = [];
   for (var i = 0; i < text.length; i++) {
     var ch = text[i];
     if (ch === ' ') { brand.appendChild(document.createTextNode(' ')); continue; }
     var span = document.createElement('span');
+    span.className = 'bl';
     span.textContent = ch;
-    span.style.fontFamily = "'" + pick(pool) + "',system-ui,sans-serif";
+    span.style.fontFamily = "'" + pick(_brandPool) + "',system-ui,sans-serif";
     brand.appendChild(span);
+    letters.push(span);
   }
+  startBrandRoll(letters);
+}
+function startBrandRoll(letters) {
+  function roll() {
+    letters.forEach(function(sp, i) {
+      setTimeout(function() {
+        sp.classList.add('bl-rolling');
+        setTimeout(function() { sp.style.fontFamily = "'" + pick(_brandPool) + "',system-ui,sans-serif"; }, 200);
+        setTimeout(function() { sp.classList.remove('bl-rolling'); }, 500);
+      }, i * 70);
+    });
+  }
+  roll();
+  setInterval(roll, 5000);
 }
 
 // ── Init ──

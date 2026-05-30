@@ -759,18 +759,26 @@ apply();
 
 (function(){
   var brand=document.querySelector('.brand');
-  if(brand){
-    var text=brand.textContent.trim(),fonts=["Playfair Display","DM Serif Display","Bebas Neue","Oswald","Righteous","Fredoka","Permanent Marker","Cinzel","Rajdhani","Exo 2","Caveat","Dancing Script","Pacifico","Satisfy","Great Vibes","Inter","Space Grotesk","Sora"];
-    brand.textContent='';
-    brand.style.display='inline-flex';brand.style.gap='3px';
-    for(var i=0;i<text.length;i++){
-      var ch=text[i];if(ch===' '){brand.appendChild(document.createTextNode(' '));continue;}
-      var span=document.createElement('span');
-      span.textContent=ch;
-      span.style.fontFamily="'"+fonts[Math.floor(Math.random()*fonts.length)]+"',system-ui,sans-serif";
-      brand.appendChild(span);
-    }
+  if(!brand)return;
+  var text=brand.textContent.trim(),fonts=["Playfair Display","DM Serif Display","Bebas Neue","Oswald","Righteous","Fredoka","Permanent Marker","Cinzel","Rajdhani","Exo 2","Caveat","Dancing Script","Pacifico","Satisfy","Great Vibes","Inter","Space Grotesk","Sora"];
+  brand.textContent='';brand.style.display='inline-flex';brand.style.gap='3px';
+  var letters=[];
+  for(var i=0;i<text.length;i++){
+    var ch=text[i];if(ch===' '){brand.appendChild(document.createTextNode(' '));continue;}
+    var span=document.createElement('span');span.className='bl';span.textContent=ch;
+    span.style.fontFamily="'"+fonts[Math.floor(Math.random()*fonts.length)]+"',system-ui,sans-serif";
+    brand.appendChild(span);letters.push(span);
   }
+  function roll(){
+    letters.forEach(function(sp,i){
+      setTimeout(function(){
+        sp.classList.add('bl-rolling');
+        setTimeout(function(){sp.style.fontFamily="'"+fonts[Math.floor(Math.random()*fonts.length)]+"',system-ui,sans-serif"},200);
+        setTimeout(function(){sp.classList.remove('bl-rolling')},500);
+      },i*70);
+    });
+  }
+  roll();setInterval(roll,5000);
 })();
 
 document.getElementById('surprise-btn').addEventListener('click',surprise);
