@@ -8,15 +8,16 @@
 
 /* ── Button ── */
 .cn-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;border-radius:var(--radius);font-size:0.875rem;font-weight:500;height:36px;padding:0 16px;border:var(--bw) solid transparent;cursor:pointer;transition:all 0.15s cubic-bezier(.16,1,.3,1);font-family:var(--font);outline:none;position:relative}
-.cn-btn-default{background:var(--primary);color:var(--primary-fg);box-shadow:var(--btn-shadow,0 3px 16px color-mix(in oklab,var(--primary)35%,transparent)),inset 0 1px 0 color-mix(in oklab,var(--primary-fg)12%,transparent);transform:translateY(0)}
-.cn-btn-default:hover{box-shadow:0 6px 28px color-mix(in oklab,var(--primary)50%,transparent),0 0 0 1px color-mix(in oklab,var(--primary)10%,transparent),inset 0 1px 0 color-mix(in oklab,var(--primary-fg)18%,transparent);transform:translateY(-1px)}
-.cn-btn-default:active{transform:translateY(var(--btn-press-y,0));box-shadow:var(--btn-shadow-active,0 1px 4px color-mix(in oklab,var(--primary)25%,transparent)),inset 0 1px 0 color-mix(in oklab,var(--primary-fg)6%,transparent)}
-.cn-btn-outline{background:transparent;color:var(--fg);border-color:var(--border)}
-.cn-btn-outline:hover{background:color-mix(in oklab,var(--fg)4%,transparent);border-color:color-mix(in oklab,var(--fg)30%,transparent);box-shadow:0 2px 12px color-mix(in oklab,var(--fg)15%,transparent)}
+.cn-btn-default{background:linear-gradient(180deg,color-mix(in oklab,#fff 6%,var(--primary)) 0%,var(--primary) 50%,color-mix(in oklab,#000 3%,var(--primary)) 100%);color:var(--primary-fg);box-shadow:var(--btn-shadow,0 0.5px 1px color-mix(in oklab,#000 20%,transparent)),inset 0 1px 0 color-mix(in oklab,#fff 10%,transparent);transform:translateY(0)}
+.cn-btn-default:hover{background:linear-gradient(180deg,color-mix(in oklab,#fff 9%,var(--primary)) 0%,color-mix(in oklab,#fff 2%,var(--primary)) 50%,color-mix(in oklab,#000 5%,var(--primary)) 100%);box-shadow:var(--btn-shadow,0 1px 2px color-mix(in oklab,#000 25%,transparent)),inset 0 1px 0 color-mix(in oklab,#fff 14%,transparent);transform:translateY(-1px)}
+.cn-btn-default:active{background:var(--primary);transform:translateY(var(--btn-press-y,0));box-shadow:var(--btn-shadow-active,0 0.5px 1px color-mix(in oklab,#000 15%,transparent)),inset 0 0.5px 0 color-mix(in oklab,#fff 5%,transparent)}
+.cn-btn-outline{background:transparent;color:var(--fg);border-color:var(--border);box-shadow:inset 0 1px 0 color-mix(in oklab,#fff 4%,transparent)}
+.cn-btn-outline:hover{background:color-mix(in oklab,var(--fg)3%,transparent);border-color:color-mix(in oklab,var(--fg)25%,transparent);box-shadow:0 0.5px 1px color-mix(in oklab,#000 12%,transparent),inset 0 1px 0 color-mix(in oklab,#fff 6%,transparent)}
 .cn-btn-ghost{background:transparent;color:var(--fg);border-color:transparent}
 .cn-btn-ghost:hover{background:color-mix(in oklab,var(--fg)6%,transparent)}
-.cn-btn-destructive{background:var(--destructive);color:#fff;box-shadow:0 3px 16px color-mix(in oklab,var(--destructive)35%,transparent),inset 0 1px 0 color-mix(in oklab,#fff 12%,transparent)}
-.cn-btn-destructive:hover{box-shadow:0 6px 28px color-mix(in oklab,var(--destructive)50%,transparent),inset 0 1px 0 color-mix(in oklab,#fff 18%,transparent);transform:translateY(-1px)}
+.cn-btn-destructive{background:linear-gradient(180deg,color-mix(in oklab,#fff 6%,var(--destructive)) 0%,var(--destructive) 50%,color-mix(in oklab,#000 3%,var(--destructive)) 100%);color:#fff;box-shadow:0 0.5px 1px color-mix(in oklab,#000 20%,transparent),inset 0 1px 0 color-mix(in oklab,#fff 10%,transparent)}
+.cn-btn-destructive:hover{background:linear-gradient(180deg,color-mix(in oklab,#fff 9%,var(--destructive)) 0%,color-mix(in oklab,#fff 2%,var(--destructive)) 50%,color-mix(in oklab,#000 5%,var(--destructive)) 100%);box-shadow:0 1px 2px color-mix(in oklab,#000 25%,transparent),inset 0 1px 0 color-mix(in oklab,#fff 14%,transparent);transform:translateY(-1px)}
+.cn-btn-destructive:active{background:var(--destructive);box-shadow:0 0.5px 1px color-mix(in oklab,#000 15%,transparent),inset 0 0.5px 0 color-mix(in oklab,#fff 5%,transparent)}
 .cn-btn-sm{height:30px;padding:0 12px;font-size:0.8rem}
 .cn-btn svg{width:16px;height:16px;flex-shrink:0}
 
