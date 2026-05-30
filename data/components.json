@@ -1,0 +1,642 @@
+[
+  {
+    "id": "01",
+    "name": "Contribution History",
+    "category": "chart",
+    "col": 0,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"01\" data-name=\"Contribution History\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Contribution History</div><div class=\"cn-card-desc\">Last 6 months of activity</div></div><div class=\"cn-card-content\"><div class=\"cn-chart\"><div class=\"cn-chart-area\"></div><div class=\"cn-chart-line\"></div></div><div class=\"flex justify-between mt-2\" style=\"padding:0 4px\"><span class=\"text-xs text-muted\">Jan</span><span class=\"text-xs text-muted\">Feb</span><span class=\"text-xs text-muted\">Mar</span><span class=\"text-xs text-muted\">Apr</span><span class=\"text-xs text-muted\">May</span><span class=\"text-xs text-muted\">Jun</span></div></div><div class=\"cn-card-footer\"><button class=\"cn-btn cn-btn-outline cn-btn-sm w-full\">View Full Report</button></div></div>"
+  },
+  {
+    "id": "23",
+    "name": "Kitchen Island",
+    "category": "switch",
+    "col": 0,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"23\" data-name=\"Kitchen Island\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Kitchen Island</div><div class=\"cn-card-desc\">Hue Color Ambient</div></div><div class=\"cn-card-content\"><div class=\"flex justify-between items-center\" style=\"padding:8px 0\"><span class=\"text-sm\">Power</span><div class=\"cn-switch on\"></div></div><div class=\"cn-field mt-2\"><div class=\"flex justify-between\"><label class=\"cn-label\">Brightness</label><span class=\"text-sm text-muted\">80%</span></div><div class=\"cn-slider\" style=\"margin-top:8px\"><div class=\"cn-slider-track\"><div class=\"cn-slider-range\" style=\"width:80%\"></div><div class=\"cn-slider-thumb\" style=\"left:80%\"></div></div></div></div><div class=\"flex justify-between items-center mt-2\" style=\"padding:8px 0\"><span class=\"text-sm\">Adaptive Lighting</span><div class=\"cn-switch\"></div></div><div class=\"cn-sep\"></div><span class=\"text-sm text-muted\" style=\"display:block;margin-bottom:8px\">Scenes</span><div class=\"cn-toggle-group\"><button class=\"cn-toggle on\">Cooking</button><button class=\"cn-toggle\">Dining</button><button class=\"cn-toggle\">Nightlight</button><button class=\"cn-toggle\">Focus</button></div></div></div>"
+  },
+  {
+    "id": "45",
+    "name": "Features",
+    "category": "features",
+    "col": 0,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"45\" data-name=\"Features\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Features</div><div class=\"cn-card-desc\">Everything you need to build modern apps.</div></div><div class=\"cn-card-content\"><div class=\"cn-features\"><div class=\"cn-feature\"><div class=\"cn-feature-icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M13 2L3 14h9l-1 8 10-12h-9l1-8z\"/></svg></div><div class=\"cn-feature-title\">Lightning Fast</div><div class=\"cn-feature-desc\">Sub-second response times globally.</div></div><div class=\"cn-feature\"><div class=\"cn-feature-icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10\"/></svg></div><div class=\"cn-feature-title\">Secure</div><div class=\"cn-feature-desc\">Enterprise-grade security built in.</div></div><div class=\"cn-feature\"><div class=\"cn-feature-icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z\"/></svg></div><div class=\"cn-feature-title\">Modular</div><div class=\"cn-feature-desc\">Use only what you need.</div></div><div class=\"cn-feature\"><div class=\"cn-feature-icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 20h9\"/><path d=\"M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z\"/></svg></div><div class=\"cn-feature-title\">Customizable</div><div class=\"cn-feature-desc\">Tailor everything to your needs.</div></div></div></div></div>"
+  },
+  {
+    "id": "04",
+    "name": "Card 4",
+    "category": "table",
+    "col": 0,
+    "width": 2,
+    "html": "<div class=\"cn-card-content\" style=\"padding:0\"><table class=\"cn-table\"><thead><tr><th>Merchant</th><th>Category</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead><tbody><tr><td>Blue Bottle Coffee</td><td>Food & Drink</td><td>-$6.50</td><td>Today</td><td><span class=\"cn-badge cn-badge-default\">Completed</span></td></tr><tr><td>Whole Foods Market</td><td>Groceries</td><td>-$142.30</td><td>Yesterday</td><td><span class=\"cn-badge cn-badge-default\">Completed</span></td></tr><tr><td>Stripe Payout</td><td>Income</td><td>+$4,200.00</td><td>Mar 15</td><td><span class=\"cn-badge cn-badge-secondary\">Pending</span></td></tr><tr><td>Amazon</td><td>Shopping</td><td>-$89.99</td><td>Mar 14</td><td><span class=\"cn-badge cn-badge-default\">Completed</span></td></tr><tr><td>Netflix</td><td>Entertainment</td><td>-$15.99</td><td>Mar 13</td><td><span class=\"cn-badge cn-badge-default\">Completed</span></td></tr></tbody></table></div>"
+  },
+  {
+    "id": "11",
+    "name": "Payout Threshold",
+    "category": "form",
+    "col": 0,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"11\" data-name=\"Payout Threshold\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Payout Threshold</div><div class=\"cn-card-desc\">Set the minimum balance required before a payout is triggered.</div></div><div class=\"cn-card-content\"><div class=\"cn-field\"><div class=\"flex justify-between\"><label class=\"cn-label\">Minimum Balance</label><span class=\"text-sm text-muted\">$50.00</span></div><div class=\"cn-slider\" style=\"margin-top:8px\"><div class=\"cn-slider-track\"><div class=\"cn-slider-range\" style=\"width:50%\"></div><div class=\"cn-slider-thumb\" style=\"left:50%\"></div></div></div></div><div class=\"cn-field mt-2\"><label class=\"cn-label\">Currency</label><select class=\"cn-select\"><option selected>USD — US Dollar</option><option>EUR — Euro</option><option>GBP — British Pound</option></select></div><div class=\"cn-field mt-2\"><label class=\"cn-label\">Notes</label><textarea class=\"cn-textarea\" placeholder=\"Optional payout notes…\" style=\"min-height:60px\"></textarea></div></div><div class=\"cn-card-footer\"><button class=\"cn-btn cn-btn-default cn-btn-sm\">Save Threshold</button></div></div>"
+  },
+  {
+    "id": "65",
+    "name": "Upcoming Payments",
+    "category": "calendar",
+    "col": 0,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"65\" data-name=\"Upcoming Payments\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Upcoming Payments</div><div class=\"cn-card-desc\">Select a date to view scheduled payments.</div></div><div class=\"cn-card-content\"><div class=\"cn-calendar\"><div class=\"cn-calendar-header\"><button><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"m15 18-6-6 6-6\"/></svg></button><span>March 2025</span><button><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"m9 18 6-6-6-6\"/></svg></button></div><div class=\"cn-calendar-grid\"><span class=\"day-name\">Su</span><span class=\"day-name\">Mo</span><span class=\"day-name\">Tu</span><span class=\"day-name\">We</span><span class=\"day-name\">Th</span><span class=\"day-name\">Fr</span><span class=\"day-name\">Sa</span><span class=\"day\" style=\"color:var(--muted-fg)\">25</span><span class=\"day\" style=\"color:var(--muted-fg)\">26</span><span class=\"day\" style=\"color:var(--muted-fg)\">27</span><span class=\"day\" style=\"color:var(--muted-fg)\">28</span><span class=\"day\">1</span><span class=\"day\">2</span><span class=\"day\">3</span><span class=\"day\">4</span><span class=\"day\">5</span><span class=\"day\">6</span><span class=\"day\">7</span><span class=\"day\">8</span><span class=\"day\">9</span><span class=\"day\">10</span><span class=\"day today\">11</span><span class=\"day\">12</span><span class=\"day\">13</span><span class=\"day selected\">14</span><span class=\"day\">15</span><span class=\"day\">16</span><span class=\"day\">17</span><span class=\"day\">18</span><span class=\"day\">19</span><span class=\"day\">20</span><span class=\"day\">21</span><span class=\"day\">22</span><span class=\"day\">23</span><span class=\"day\">24</span><span class=\"day\">25</span><span class=\"day\">26</span><span class=\"day\">27</span><span class=\"day\">28</span><span class=\"day\">29</span><span class=\"day\">30</span><span class=\"day\">31</span></div></div><div class=\"cn-sep\"></div><div class=\"cn-item\"><div class=\"cn-item-content\"><div class=\"cn-item-title\">Rent</div><div class=\"cn-item-desc\">Mar 14 · Auto-pay</div></div><span class=\"text-sm font-medium\">$1,200</span></div><div class=\"cn-item\"><div class=\"cn-item-content\"><div class=\"cn-item-title\">Internet</div><div class=\"cn-item-desc\">Mar 14 · Auto-pay</div></div><span class=\"text-sm font-medium\">$79.99</span></div></div></div>"
+  },
+  {
+    "id": "21",
+    "name": "Ship products",
+    "category": "hero",
+    "col": 0,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"21\" data-name=\"Ship products\"><div class=\"cn-hero-left\"><span class=\"cn-hero-badge\">New</span><div class=\"cn-hero-title\">Ship products<br>10x faster</div><div class=\"cn-hero-desc\">Automate your workflow with AI-powered tools that handle the boring stuff.</div><div class=\"cn-hero-actions\"><button class=\"cn-btn cn-btn-default\">Start Free</button><button class=\"cn-btn cn-btn-ghost\">See how →</button></div></div></div>"
+  },
+  {
+    "id": "12",
+    "name": "API-first",
+    "category": "hero",
+    "col": 0,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"12\" data-name=\"API-first\"><div class=\"cn-hero-left\"><span class=\"cn-hero-eyebrow\">For developers</span><div class=\"cn-hero-title\" style=\"font-size:1.1rem\">API-first<br>by design</div><div class=\"cn-hero-desc\" style=\"font-size:0.78rem\">RESTful API, webhooks, SDKs in every language. Build anything.</div><div class=\"cn-hero-actions\"><button class=\"cn-btn cn-btn-outline cn-btn-sm\">Read Docs →</button></div></div></div>"
+  },
+  {
+    "id": "31",
+    "name": "FAQ",
+    "category": "faq",
+    "col": 0,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"31\" data-name=\"FAQ\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">FAQ</div></div><div class=\"cn-card-content\"><div class=\"cn-faq\"><div class=\"cn-faq-item\"><div class=\"cn-faq-q open\"><span>How does the free trial work?</span><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"m6 9 6 6 6-6\"/></svg></div><div class=\"cn-faq-a\">Start using all features free for 14 days. No credit card required. Cancel anytime.</div></div><div class=\"cn-faq-item\"><div class=\"cn-faq-q\"><span>Can I change plans later?</span><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"m6 9 6 6 6-6\"/></svg></div></div><div class=\"cn-faq-item\"><div class=\"cn-faq-q\"><span>What payment methods do you accept?</span><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"m6 9 6 6 6-6\"/></svg></div></div></div></div></div>"
+  },
+  {
+    "id": "47",
+    "name": "Trust Badges",
+    "category": "trust",
+    "col": 0,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"47\" data-name=\"Trust Badges\"><div class=\"cn-card-content\"><div class=\"cn-trust\"><div class=\"cn-trust-badge\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10\"/></svg>SOC 2</div><div class=\"cn-trust-badge\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10\"/></svg>GDPR</div><div class=\"cn-trust-badge\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10\"/></svg>ISO 27001</div><div class=\"cn-trust-badge\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10\"/></svg>HIPAA</div></div></div></div>"
+  },
+  {
+    "id": "80",
+    "name": "Stop juggling tools.",
+    "category": "hero",
+    "col": 0,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"80\" data-name=\"Stop juggling tools.\"><div class=\"cn-hero-left\"><div class=\"cn-hero-title\" style=\"font-size:1rem\">Stop juggling tools.<br>Start shipping.</div><div class=\"cn-hero-desc\" style=\"font-size:0.78rem\">One platform for issues, docs, and deploys. Replaces Jira, Notion, and Vercel.</div><div class=\"cn-hero-actions\"><button class=\"cn-btn cn-btn-default cn-btn-sm\">Migrate now</button></div></div></div>"
+  },
+  {
+    "id": "14",
+    "name": "The AI copilot for",
+    "category": "hero",
+    "col": 0,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"14\" data-name=\"The AI copilot for\"><div class=\"cn-hero\"><span class=\"cn-hero-badge\">Beta</span><div class=\"cn-hero-title\" style=\"font-size:1rem\">The AI copilot for<br>your entire stack</div><div class=\"cn-hero-desc\" style=\"font-size:0.78rem\">Ask questions in natural language. Get answers from your codebase.</div><div class=\"cn-hero-actions\"><button class=\"cn-btn cn-btn-default cn-btn-sm\">Join Waitlist</button></div><div class=\"cn-hero-proof\"><span>Backed by</span><span>Y Combinator</span></div></div></div>"
+  },
+  {
+    "id": "06",
+    "name": "Deploy in seconds",
+    "category": "hero",
+    "col": 0,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"06\" data-name=\"Deploy in seconds\"><div class=\"cn-hero-split\"><div class=\"cn-hero-split-text\"><div class=\"cn-hero-title\" style=\"font-size:0.95rem\">Deploy in seconds</div><div class=\"cn-hero-desc\" style=\"font-size:0.78rem\">Push to main. We handle the rest. Zero-downtime deploys to the edge.</div><button class=\"cn-btn cn-btn-default cn-btn-sm\" style=\"margin-top:4px\">Try it →</button></div><div class=\"cn-hero-split-visual\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M13 2L3 14h9l-1 8 10-12h-9l1-8z\"/></svg></div></div></div>"
+  },
+  {
+    "id": "02",
+    "name": "No recent activity",
+    "category": "empty",
+    "col": 1,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"02\" data-name=\"No recent activity\"><div class=\"cn-card-content\"><div class=\"cn-empty\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5\"/><path d=\"M9 18h6\"/><path d=\"M10 22h4\"/></svg><div class=\"cn-empty-title\">No recent activity</div><div class=\"cn-empty-desc\">Your recent transactions will appear here once you start making purchases.</div></div></div><div class=\"cn-card-footer\"><button class=\"cn-btn cn-btn-ghost cn-btn-sm\">View History</button></div></div>"
+  },
+  {
+    "id": "05",
+    "name": "Pro Pricing",
+    "category": "pricing",
+    "col": 1,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"05\" data-name=\"Pro Pricing\"><div class=\"cn-pricing\"><span class=\"cn-pricing-badge\">Most Popular</span><div class=\"cn-pricing-name\">Pro</div><div class=\"cn-pricing-price\">$49<span class=\"cn-pricing-period\">/mo</span></div><div class=\"cn-pricing-features\"><div class=\"cn-pricing-feature\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><polyline points=\"20 6 9 17 4 12\"/></svg>Unlimited projects</div><div class=\"cn-pricing-feature\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><polyline points=\"20 6 9 17 4 12\"/></svg>Priority support</div><div class=\"cn-pricing-feature\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><polyline points=\"20 6 9 17 4 12\"/></svg>Advanced analytics</div><div class=\"cn-pricing-feature\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><polyline points=\"20 6 9 17 4 12\"/></svg>Custom domains</div></div><button class=\"cn-btn cn-btn-default w-full\">Start Free Trial</button></div></div>"
+  },
+  {
+    "id": "46",
+    "name": "Set a new milestone",
+    "category": "form",
+    "col": 1,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"46\" data-name=\"Set a new milestone\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Set a new milestone</div><div class=\"cn-card-desc\">Define your financial target and we'll help you pace your savings.</div></div><div class=\"cn-card-content\"><div class=\"cn-field\"><label class=\"cn-label\">Target Name</label><input class=\"cn-input\" placeholder=\"e.g., New Laptop\"></div><div class=\"cn-field mt-2\"><label class=\"cn-label\">Target Amount</label><input class=\"cn-input\" placeholder=\"$0.00\"></div><div class=\"cn-field mt-2\"><label class=\"cn-label\">Target Date</label><input class=\"cn-input\" placeholder=\"Select date\"></div></div><div class=\"cn-card-footer\"><button class=\"cn-btn cn-btn-default cn-btn-sm\">Create Milestone</button><button class=\"cn-btn cn-btn-ghost cn-btn-sm\">Cancel</button></div></div>"
+  },
+  {
+    "id": "66",
+    "name": "Compare Plans",
+    "category": "table",
+    "col": 1,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"66\" data-name=\"Compare Plans\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Compare Plans</div></div><div class=\"cn-card-content\" style=\"padding:0\"><table class=\"cn-compare\"><thead><tr><th>Feature</th><th>Free</th><th>Pro</th></tr></thead><tbody><tr><td>Projects</td><td>3</td><td>Unlimited</td></tr><tr><td>Storage</td><td>1GB</td><td>100GB</td></tr><tr><td>Members</td><td>1</td><td>Unlimited</td></tr><tr><td>API Access</td><td class=\"x\">✕</td><td class=\"check\">✓</td></tr><tr><td>Priority Support</td><td class=\"x\">✕</td><td class=\"check\">✓</td></tr></table></div></div>"
+  },
+  {
+    "id": "34",
+    "name": "Preferences",
+    "category": "switch",
+    "col": 1,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"34\" data-name=\"Preferences\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Preferences</div><div class=\"cn-card-desc\">Manage your account settings and notifications.</div></div><div class=\"cn-card-content\"><div class=\"flex justify-between items-center\" style=\"padding:8px 0\"><span class=\"text-sm\">Email Notifications</span><div class=\"cn-switch on\"></div></div><div class=\"flex justify-between items-center\" style=\"padding:8px 0\"><span class=\"text-sm\">Push Notifications</span><div class=\"cn-switch\"></div></div><div class=\"flex justify-between items-center\" style=\"padding:8px 0\"><span class=\"text-sm\">Auto-Reinvest</span><div class=\"cn-switch on\"></div></div><div class=\"flex justify-between items-center\" style=\"padding:8px 0\"><span class=\"text-sm\">Two-Factor Auth</span><div class=\"cn-switch on\"></div></div></div><div class=\"cn-card-footer\"><button class=\"cn-btn cn-btn-default cn-btn-sm\">Save Preferences</button></div></div>"
+  },
+  {
+    "id": "27",
+    "name": "Stats",
+    "category": "stats",
+    "col": 1,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"27\" data-name=\"Stats\"><div class=\"cn-card-content\"><div class=\"cn-stats\"><div class=\"cn-stat\"><div class=\"cn-stat-value\">150+</div><div class=\"cn-stat-label\">Countries</div></div><div class=\"cn-stat\"><div class=\"cn-stat-value\">24/7</div><div class=\"cn-stat-label\">Support</div></div><div class=\"cn-stat\"><div class=\"cn-stat-value\">< 50ms</div><div class=\"cn-stat-label\">Latency</div></div></div></div></div>"
+  },
+  {
+    "id": "53",
+    "name": "Dollar-Cost Averaging",
+    "category": "general",
+    "col": 1,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"53\" data-name=\"Dollar-Cost Averaging\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Dollar-Cost Averaging</div><div class=\"cn-card-desc\">A strategy for building wealth over time.</div></div><div class=\"cn-card-content\"><p class=\"text-sm text-muted\" style=\"line-height:1.6\">By investing a fixed amount regularly, you buy more shares when prices are low and fewer when prices are high. Over time, this smooths out the average cost of your investments.</p></div></div>"
+  },
+  {
+    "id": "07",
+    "name": "Common Questions",
+    "category": "faq",
+    "col": 1,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"07\" data-name=\"Common Questions\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Common Questions</div></div><div class=\"cn-card-content\"><div class=\"cn-faq\"><div class=\"cn-faq-item\"><div class=\"cn-faq-q open\"><span>Is there a free plan?</span><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"m6 9 6 6 6-6\"/></svg></div><div class=\"cn-faq-a\">Yes! Our free plan includes 3 projects and 1GB storage. No credit card needed.</div></div><div class=\"cn-faq-item\"><div class=\"cn-faq-q\"><span>Do you offer refunds?</span><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"m6 9 6 6 6-6\"/></svg></div></div><div class=\"cn-faq-item\"><div class=\"cn-faq-q\"><span>How do I contact support?</span><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"m6 9 6 6 6-6\"/></svg></div></div></div></div></div>"
+  },
+  {
+    "id": "10",
+    "name": "One more thing…",
+    "category": "hero",
+    "col": 1,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"10\" data-name=\"One more thing…\"><div class=\"cn-hero\"><div class=\"cn-hero-title\" style=\"font-size:1rem\">One more thing…</div><div class=\"cn-hero-desc\" style=\"font-size:0.78rem\">We just shipped dark mode, real-time collab, and 40+ new integrations.</div><div class=\"cn-hero-features\"><div class=\"cn-hero-feature\"><div class=\"cn-hero-feature-icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z\"/></svg></div><div class=\"cn-hero-feature-label\">Dark Mode</div></div><div class=\"cn-hero-feature\"><div class=\"cn-hero-feature-icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2\"/><circle cx=\"9\" cy=\"7\" r=\"4\"/><path d=\"M23 21v-2a4 4 0 0 0-3-3.87\"/><path d=\"M16 3.13a4 4 0 0 1 0 7.75\"/></svg></div><div class=\"cn-hero-feature-label\">Real-time</div></div><div class=\"cn-hero-feature\"><div class=\"cn-hero-feature-icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"7\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\"/></svg></div><div class=\"cn-hero-feature-label\">40+ Apps</div></div></div></div></div>"
+  },
+  {
+    "id": "43",
+    "name": "Transfer Funds",
+    "category": "form",
+    "col": 1,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"43\" data-name=\"Transfer Funds\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Transfer Funds</div><div class=\"cn-card-desc\">Move money between your connected accounts.</div></div><div class=\"cn-card-content\"><div class=\"cn-field\"><label class=\"cn-label\">From</label><select class=\"cn-select\"><option selected>Checking ···4521</option><option>Savings ···7892</option></select></div><div class=\"cn-field mt-2\"><label class=\"cn-label\">To</label><select class=\"cn-select\"><option>Savings ···7892</option><option selected>Investment ···3210</option></select></div><div class=\"cn-field mt-2\"><label class=\"cn-label\">Amount</label><input class=\"cn-input\" placeholder=\"$0.00\" value=\"$500.00\"></div></div><div class=\"cn-card-footer\"><button class=\"cn-btn cn-btn-default cn-btn-sm\">Transfer</button></div></div>"
+  },
+  {
+    "id": "44",
+    "name": "Trust Badges",
+    "category": "trust",
+    "col": 1,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"44\" data-name=\"Trust Badges\"><div class=\"cn-card-content\"><div class=\"cn-trust\"><div class=\"cn-trust-badge\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10\"/></svg>SSL Secured</div><div class=\"cn-trust-badge\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><polyline points=\"20 6 9 17 4 12\"/></svg>99.9% Uptime</div><div class=\"cn-trust-badge\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2\"/><circle cx=\"9\" cy=\"7\" r=\"4\"/></svg>10K+ Users</div><div class=\"cn-trust-badge\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\"/></svg>4.9 Rating</div></div></div></div>"
+  },
+  {
+    "id": "50",
+    "name": "Chart",
+    "category": "chart",
+    "col": 1,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"50\" data-name=\"Chart\"><div class=\"cn-card-content\"><div class=\"cn-chart\" style=\"height:200px\"><div class=\"cn-chart-area\" style=\"height:70%\"></div><div class=\"cn-chart-line\"></div></div><div class=\"flex justify-between mt-1\" style=\"padding:0 4px\"><span class=\"text-xs text-muted\">Mon</span><span class=\"text-xs text-muted\">Tue</span><span class=\"text-xs text-muted\">Wed</span><span class=\"text-xs text-muted\">Thu</span><span class=\"text-xs text-muted\">Fri</span></div></div></div>"
+  },
+  {
+    "id": "51",
+    "name": "Changelog",
+    "category": "changelog",
+    "col": 1,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"51\" data-name=\"Changelog\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Changelog</div></div><div class=\"cn-card-content\"><div class=\"cn-changelog\"><div class=\"cn-changelog-item\"><div class=\"cn-changelog-date\">v2.4.0</div><div class=\"cn-changelog-content\"><div class=\"cn-changelog-title\">New dashboard</div><div class=\"cn-changelog-desc\">Completely redesigned dashboard with real-time analytics.</div></div></div><div class=\"cn-changelog-item\"><div class=\"cn-changelog-date\">v2.3.2</div><div class=\"cn-changelog-content\"><div class=\"cn-changelog-title\">Bug fixes</div><div class=\"cn-changelog-desc\">Fixed login issue on Safari and improved performance.</div></div></div><div class=\"cn-changelog-item\"><div class=\"cn-changelog-date\">v2.3.0</div><div class=\"cn-changelog-content\"><div class=\"cn-changelog-title\">API v3</div><div class=\"cn-changelog-desc\">New REST API with GraphQL support.</div></div></div></div></div></div>"
+  },
+  {
+    "id": "37",
+    "name": "Build in public.",
+    "category": "hero",
+    "col": 1,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"37\" data-name=\"Build in public.\"><div class=\"cn-hero-dark\"><span class=\"cn-hero-badge\">Open Source</span><div class=\"cn-hero-title\" style=\"font-size:0.95rem\">Build in public.<br>Ship in private.</div><div class=\"cn-hero-desc\" style=\"font-size:0.78rem\">Core is MIT licensed. Self-host or use our cloud. Your choice.</div><div class=\"cn-hero-actions\"><button class=\"cn-btn\">Star on GitHub</button></div></div></div>"
+  },
+  {
+    "id": "41",
+    "name": "Testimonial",
+    "category": "testimonial",
+    "col": 2,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"41\" data-name=\"Testimonial\"><div class=\"cn-testimonial\"><div class=\"cn-testimonial-quote\">\"This tool completely transformed our workflow. We shipped 3x faster in the first month.\"</div><div class=\"cn-testimonial-author\"><div class=\"cn-testimonial-avatar\">JD</div><div><div class=\"cn-testimonial-name\">Jane Doe</div><div class=\"cn-testimonial-role\">CTO, Acme Inc</div></div></div></div></div>"
+  },
+  {
+    "id": "08",
+    "name": "Our Process",
+    "category": "process",
+    "col": 2,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"08\" data-name=\"Our Process\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Our Process</div></div><div class=\"cn-card-content\"><div class=\"cn-process\"><div class=\"cn-process-item\"><div class=\"cn-process-line\"><div class=\"cn-process-dot\"></div><div class=\"cn-process-connector\"></div></div><div class=\"cn-process-content\"><div class=\"cn-process-title\">Discovery</div><div class=\"cn-process-desc\">Understanding your needs and goals.</div></div></div><div class=\"cn-process-item\"><div class=\"cn-process-line\"><div class=\"cn-process-dot\"></div><div class=\"cn-process-connector\"></div></div><div class=\"cn-process-content\"><div class=\"cn-process-title\">Design</div><div class=\"cn-process-desc\">Crafting the perfect solution.</div></div></div><div class=\"cn-process-item\"><div class=\"cn-process-line\"><div class=\"cn-process-dot\"></div><div class=\"cn-process-connector\"></div></div><div class=\"cn-process-content\"><div class=\"cn-process-title\">Develop</div><div class=\"cn-process-desc\">Building with precision and care.</div></div></div><div class=\"cn-process-item\"><div class=\"cn-process-line\"><div class=\"cn-process-dot\"></div></div><div class=\"cn-process-content\"><div class=\"cn-process-title\">Deploy</div><div class=\"cn-process-desc\">Ship it to the world.</div></div></div></div></div></div>"
+  },
+  {
+    "id": "13",
+    "name": "Logo Cloud",
+    "category": "logos",
+    "col": 2,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"13\" data-name=\"Logo Cloud\"><div class=\"cn-card-content\"><div class=\"cn-logos\"><span class=\"cn-logo\">Vercel</span><span class=\"cn-logo\">Linear</span><span class=\"cn-logo\">Stripe</span><span class=\"cn-logo\">Notion</span><span class=\"cn-logo\">Figma</span><span class=\"cn-logo\">GitHub</span></div></div></div>"
+  },
+  {
+    "id": "19",
+    "name": "Badges",
+    "category": "items",
+    "col": 2,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"19\" data-name=\"Badges\"><div class=\"cn-card-content\"><div class=\"cn-item\"><div class=\"cn-item-media\"><div style=\"width:36px;height:36px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:600;color:var(--fg)\">VOO</div></div><div class=\"cn-item-content\"><div class=\"cn-item-title\">Vanguard S&P 500 ETF</div><div class=\"cn-item-desc\">112 Shares · Jan 2021</div></div><span class=\"cn-badge cn-badge-outline\">ETF</span></div><div class=\"cn-item\"><div class=\"cn-item-media\"><div style=\"width:36px;height:36px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:600;color:var(--fg)\">VIG</div></div><div class=\"cn-item-content\"><div class=\"cn-item-title\">Vanguard Dividend Appreciation</div><div class=\"cn-item-desc\">450 Shares · Mar 2022</div></div><span class=\"cn-badge cn-badge-outline\">ETF</span></div><div class=\"cn-item\"><div class=\"cn-item-media\"><div style=\"width:36px;height:36px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:600;color:var(--fg)\">AAPL</div></div><div class=\"cn-item-content\"><div class=\"cn-item-title\">Apple Inc.</div><div class=\"cn-item-desc\">85 Shares · Nov 2020</div></div><span class=\"cn-badge cn-badge-secondary\">Stock</span></div><div class=\"cn-item\"><div class=\"cn-item-media\"><div style=\"width:36px;height:36px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:600;color:var(--fg)\">O</div></div><div class=\"cn-item-content\"><div class=\"cn-item-title\">Realty Income Corp</div><div class=\"cn-item-desc\">320 Shares · Jun 2023</div></div><span class=\"cn-badge cn-badge-outline\">REIT</span></div></div><div class=\"cn-card-footer\"><button class=\"cn-btn cn-btn-outline cn-btn-sm\">View All Holdings</button></div></div>"
+  },
+  {
+    "id": "55",
+    "name": "Chart",
+    "category": "chart",
+    "col": 2,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"55\" data-name=\"Chart\"><div class=\"cn-card-content\"><div class=\"cn-chart\" style=\"height:180px\"><div class=\"cn-chart-area\" style=\"background:linear-gradient(to top,color-mix(in oklab,var(--primary)8%,transparent),transparent)\"></div><div class=\"cn-chart-line\"></div></div></div></div>"
+  },
+  {
+    "id": "54",
+    "name": "Think less.",
+    "category": "hero",
+    "col": 2,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"54\" data-name=\"Think less.\"><div class=\"cn-hero-minimal\"><div class=\"cn-hero-title\" style=\"font-size:1.3rem\">Think less.<br>Build more.</div><div class=\"cn-hero-desc\">Zero config. Zero boilerplate. Just code.</div><div class=\"cn-hero-actions\"><button class=\"cn-btn cn-btn-default\">npm install</button></div></div></div>"
+  },
+  {
+    "id": "42",
+    "name": "Device Manager",
+    "category": "items",
+    "col": 2,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"42\" data-name=\"Device Manager\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Device Manager</div></div><div class=\"cn-card-content\"><input class=\"cn-input\" placeholder=\"Search devices…\" style=\"margin-bottom:12px\"><div class=\"cn-item\"><div class=\"cn-item-media\"><div style=\"width:32px;height:32px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M12 6v6l4 2\"/></svg></div></div><div class=\"cn-item-content\"><div class=\"cn-item-title\">Thermostat</div><div class=\"cn-item-desc\">Living Room · 72°F</div></div><span class=\"cn-badge cn-badge-outline\">Active</span></div><div class=\"cn-item\"><div class=\"cn-item-media\"><div style=\"width:32px;height:32px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 2v8\"/><path d=\"m4.93 10.93 1.41 1.41\"/><path d=\"M2 18h2\"/><path d=\"M20 18h2\"/><path d=\"m19.07 10.93-1.41 1.41\"/><path d=\"M22 22H2\"/><path d=\"m8 22 4-10 4 10\"/></svg></div></div><div class=\"cn-item-content\"><div class=\"cn-item-title\">Smart Bulb</div><div class=\"cn-item-desc\">Bedroom · 40%</div></div><span class=\"cn-badge cn-badge-outline\">Active</span></div><div class=\"cn-item\"><div class=\"cn-item-media\"><div style=\"width:32px;height:32px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/></svg></div></div><div class=\"cn-item-content\"><div class=\"cn-item-title\">Camera</div><div class=\"cn-item-desc\">Porch · Recording</div></div><span class=\"cn-badge cn-badge-destructive\">Alert</span></div></div></div>"
+  },
+  {
+    "id": "30",
+    "name": "Made for",
+    "category": "hero",
+    "col": 2,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"30\" data-name=\"Made for\"><div class=\"cn-hero\"><div class=\"cn-hero-title\" style=\"font-size:1rem\">Made for<br>startups & enterprises</div><div class=\"cn-hero-desc\" style=\"font-size:0.78rem\">From solo founders to Fortune 500 teams. Scale as you grow.</div><div class=\"cn-hero-features\"><div class=\"cn-hero-feature\"><div class=\"cn-hero-feature-icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M13 2L3 14h9l-1 8 10-12h-9l1-8z\"/></svg></div><div class=\"cn-hero-feature-label\">Fast Setup</div></div><div class=\"cn-hero-feature\"><div class=\"cn-hero-feature-icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10\"/></svg></div><div class=\"cn-hero-feature-label\">Secure</div></div><div class=\"cn-hero-feature\"><div class=\"cn-hero-feature-icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z\"/></svg></div><div class=\"cn-hero-feature-label\">Scalable</div></div></div></div></div>"
+  },
+  {
+    "id": "72",
+    "name": "Everything you need.",
+    "category": "hero",
+    "col": 2,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"72\" data-name=\"Everything you need.\"><div class=\"cn-hero\"><span class=\"cn-hero-eyebrow\">Introducing v2.0</span><div class=\"cn-hero-title\">Everything you need.<br>Nothing you don't.</div><div class=\"cn-hero-desc\">The most flexible platform for modern teams. Built for speed, designed for clarity.</div><div class=\"cn-hero-actions\"><button class=\"cn-btn cn-btn-default\">Try it free</button></div><div class=\"cn-hero-proof\"><span>Trusted by</span><span>10K+</span><span>teams</span></div></div></div>"
+  },
+  {
+    "id": "36",
+    "name": "Launching March 2026",
+    "category": "hero",
+    "col": 2,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"36\" data-name=\"Launching March 2026\"><div class=\"cn-hero\" style=\"padding:24px 16px\"><div class=\"cn-hero-title\" style=\"font-size:1.1rem\">Launching March 2026</div><div class=\"cn-hero-countdown\"><div class=\"cn-hero-countdown-item\"><div class=\"cn-hero-countdown-num\">42</div><div class=\"cn-hero-countdown-label\">Days</div></div><div class=\"cn-hero-countdown-item\"><div class=\"cn-hero-countdown-num\">08</div><div class=\"cn-hero-countdown-label\">Hours</div></div><div class=\"cn-hero-countdown-item\"><div class=\"cn-hero-countdown-num\">23</div><div class=\"cn-hero-countdown-label\">Min</div></div></div><div class=\"cn-hero-actions\"><button class=\"cn-btn cn-btn-outline cn-btn-sm\">Get Notified</button></div></div></div>"
+  },
+  {
+    "id": "22",
+    "name": "Simple, transparent pricing",
+    "category": "hero",
+    "col": 2,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"22\" data-name=\"Simple, transparent pricing\"><div class=\"cn-hero\"><div class=\"cn-hero-title\" style=\"font-size:0.95rem\">Simple, transparent pricing</div><div class=\"cn-hero-desc\" style=\"font-size:0.78rem\">No hidden fees. No surprises. Cancel anytime.</div></div><div class=\"cn-card-content\" style=\"padding-top:0\"><div style=\"display:flex;gap:8px\"><div style=\"flex:1;text-align:center;padding:12px 8px;background:var(--muted);border-radius:var(--radius)\"><div style=\"font-size:0.72rem;color:var(--muted-fg);margin-bottom:4px\">Starter</div><div style=\"font-size:1.2rem;font-weight:700;color:var(--fg)\">$9</div><div style=\"font-size:0.65rem;color:var(--muted-fg)\">/mo</div></div><div style=\"flex:1;text-align:center;padding:12px 8px;background:var(--primary);border-radius:var(--radius);color:var(--primary-fg)\"><div style=\"font-size:0.72rem;opacity:0.8;margin-bottom:4px\">Pro</div><div style=\"font-size:1.2rem;font-weight:700\">$29</div><div style=\"font-size:0.65rem;opacity:0.8\">/mo</div></div><div style=\"flex:1;text-align:center;padding:12px 8px;background:var(--muted);border-radius:var(--radius)\"><div style=\"font-size:0.72rem;color:var(--muted-fg);margin-bottom:4px\">Team</div><div style=\"font-size:1.2rem;font-weight:700;color:var(--fg)\">$79</div><div style=\"font-size:0.65rem;color:var(--muted-fg)\">/mo</div></div></div></div></div>"
+  },
+  {
+    "id": "35",
+    "name": "Card",
+    "category": "general",
+    "col": 2,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"35\" data-name=\"Card\" style=\"padding:0\"><div style=\"padding:12px 0\"><div style=\"padding:0 16px;margin-bottom:8px\"><span class=\"text-xs font-semibold text-muted\" style=\"text-transform:uppercase;letter-spacing:0.05em\">Account</span></div><div style=\"display:flex;flex-direction:column;gap:1px\"><div style=\"display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"8\" r=\"5\"/><path d=\"M20 21a8 8 0 1 0-16 0\"/></svg>Profile</div><div style=\"display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect width=\"20\" height=\"14\" x=\"2\" y=\"3\" rx=\"2\"/><line x1=\"8\" x2=\"16\" y1=\"21\" y2=\"21\"/><line x1=\"12\" x2=\"12\" y1=\"17\" y2=\"21\"/></svg>Billing</div><div style=\"display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;background:var(--muted);color:var(--fg);font-weight:500\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9\"/><path d=\"M10.3 21a1.94 1.94 0 0 0 3.4 0\"/></svg>Notifications</div><div style=\"display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10\"/></svg>Security</div><div style=\"display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2\"/><path d=\"M12 20v2\"/><path d=\"m4.93 4.93 1.41 1.41\"/><path d=\"m17.66 17.66 1.41 1.41\"/><path d=\"M2 12h2\"/><path d=\"M20 12h2\"/><path d=\"m6.34 17.66-1.41 1.41\"/><path d=\"m19.07 4.93-1.41 1.41\"/></svg>Appearance</div></div></div></div>"
+  },
+  {
+    "id": "40",
+    "name": "No watchlist items",
+    "category": "empty",
+    "col": 2,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"40\" data-name=\"No watchlist items\"><div class=\"cn-card-content\"><div class=\"cn-empty\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M22 12h-4l-3 9L9 3l-3 9H2\"/></svg><div class=\"cn-empty-title\">No watchlist items</div><div class=\"cn-empty-desc\">Add stocks to your watchlist to track their performance.</div></div></div></div>"
+  },
+  {
+    "id": "38",
+    "name": "Stay in the loop",
+    "category": "newsletter",
+    "col": 2,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"38\" data-name=\"Stay in the loop\"><div class=\"cn-newsletter\"><div class=\"cn-newsletter-title\">Stay in the loop</div><div class=\"cn-newsletter-desc\">Get the latest updates delivered to your inbox.</div><div class=\"cn-newsletter-form\"><input class=\"cn-input\" placeholder=\"you@example.com\" style=\"flex:1\"><button class=\"cn-btn cn-btn-default\">Subscribe</button></div></div></div>"
+  },
+  {
+    "id": "49",
+    "name": "Social Links",
+    "category": "form",
+    "col": 2,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"49\" data-name=\"Social Links\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Social Links</div></div><div class=\"cn-card-content\"><div class=\"cn-field\"><label class=\"cn-label\">Twitter</label><input class=\"cn-input\" placeholder=\"https://twitter.com/...\" value=\"https://twitter.com/alex\"></div><div class=\"cn-field mt-2\"><label class=\"cn-label\">GitHub</label><input class=\"cn-input\" placeholder=\"https://github.com/...\" value=\"https://github.com/alex\"></div><div class=\"cn-field mt-2\"><label class=\"cn-label\">LinkedIn</label><input class=\"cn-input\" placeholder=\"https://linkedin.com/in/...\"></div><div class=\"cn-field mt-2\"><label class=\"cn-label\">Website</label><input class=\"cn-input\" placeholder=\"https://...\"></div></div><div class=\"cn-card-footer\"><button class=\"cn-btn cn-btn-default cn-btn-sm\">Save Links</button><button class=\"cn-btn cn-btn-ghost cn-btn-sm\">Cancel</button></div></div>"
+  },
+  {
+    "id": "60",
+    "name": "Try it free for 14 days",
+    "category": "cta",
+    "col": 3,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"60\" data-name=\"Try it free for 14 days\" style=\"background:var(--muted)\"><div class=\"cn-cta\"><div class=\"cn-cta-title\">Try it free for 14 days</div><div class=\"cn-cta-desc\">No credit card required. Setup takes 2 minutes.</div><div style=\"display:flex;gap:8px\"><button class=\"cn-btn cn-btn-default\">Start Trial</button><button class=\"cn-btn cn-btn-outline\">Watch Demo</button></div></div></div>"
+  },
+  {
+    "id": "74",
+    "name": "Hero",
+    "category": "hero",
+    "col": 3,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"74\" data-name=\"Hero\"><div class=\"cn-hero-bento\"><div class=\"cn-hero-bento-item\"><div class=\"cn-hero-bento-label\">Uptime</div><div class=\"cn-hero-bento-value\">99.99%</div></div><div class=\"cn-hero-bento-item\"><div class=\"cn-hero-bento-label\">Latency</div><div class=\"cn-hero-bento-value\">&lt;50ms</div></div><div class=\"cn-hero-bento-item\"><div class=\"cn-hero-bento-label\">Regions</div><div class=\"cn-hero-bento-value\">32</div></div><div class=\"cn-hero-bento-item\"><div class=\"cn-hero-bento-label\">Deploys/day</div><div class=\"cn-hero-bento-value\">10K+</div></div></div></div>"
+  },
+  {
+    "id": "73",
+    "name": "Investment Guide",
+    "category": "accordion",
+    "col": 3,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"73\" data-name=\"Investment Guide\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Investment Guide</div></div><div class=\"cn-card-content\"><div class=\"cn-tabs\"><div class=\"cn-tab-list\"><button class=\"cn-tab-item active\">Overview</button><button class=\"cn-tab-item\">Strategy</button><button class=\"cn-tab-item\">Risk</button></div></div><div class=\"cn-accordion\"><div class=\"cn-accordion-item\"><button class=\"cn-accordion-trigger open\"><span>What is compound interest?</span><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"m6 9 6 6 6-6\"/></svg></button><div class=\"cn-accordion-content\">Compound interest is interest on interest. It makes your money grow faster because you earn returns not just on your original investment, but on the accumulated interest as well.</div></div><div class=\"cn-accordion-item\"><button class=\"cn-accordion-trigger\"><span>How do I diversify?</span><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"m6 9 6 6 6-6\"/></svg></button></div><div class=\"cn-accordion-item\"><button class=\"cn-accordion-trigger\"><span>When should I rebalance?</span><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"m6 9 6 6 6-6\"/></svg></button></div></div></div></div>"
+  },
+  {
+    "id": "03",
+    "name": "Ready to get started?",
+    "category": "cta",
+    "col": 3,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"03\" data-name=\"Ready to get started?\" style=\"background:var(--primary);color:var(--primary-fg)\"><div class=\"cn-cta\"><div class=\"cn-cta-title\" style=\"color:var(--primary-fg)\">Ready to get started?</div><div class=\"cn-cta-desc\" style=\"color:var(--primary-fg);opacity:0.8\">Join thousands of teams already using our platform.</div><button class=\"cn-btn\" style=\"background:var(--primary-fg);color:var(--primary)\">Start Free Trial</button></div></div>"
+  },
+  {
+    "id": "25",
+    "name": "$0.00",
+    "category": "items",
+    "col": 3,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"25\" data-name=\"$0.00\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">$0.00</div><div class=\"cn-card-desc\">Claimable Balance</div></div><div class=\"cn-card-content\"><div class=\"cn-item\"><div class=\"cn-item-content\"><div class=\"cn-item-title\">Net Royalties</div></div><span class=\"text-sm text-muted\">$0.00</span></div><div class=\"cn-item\"><div class=\"cn-item-content\"><div class=\"cn-item-title\">Processing Fee</div></div><span class=\"text-sm text-muted\">-$0.00</span></div><div class=\"cn-sep\"></div><div class=\"flex justify-between\" style=\"padding:0 16px\"><span class=\"text-sm font-medium\">Total Ready to Claim</span><span class=\"text-sm font-medium\">$0.00 USD</span></div></div><div class=\"cn-card-footer\"><button class=\"cn-btn cn-btn-outline cn-btn-sm\">Claim Now</button><button class=\"cn-btn cn-btn-ghost cn-btn-sm\">History</button></div></div>"
+  },
+  {
+    "id": "58",
+    "name": "Skeleton",
+    "category": "general",
+    "col": 3,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"58\" data-name=\"Skeleton\"><div class=\"cn-card-content\"><div style=\"height:128px;background:var(--muted);border-radius:8px;animation:pulse 2s ease-in-out infinite\"></div><div style=\"display:flex;flex-direction:column;gap:8px;margin-top:12px\"><div style=\"height:12px;background:var(--muted);border-radius:4px;animation:pulse 2s ease-in-out infinite\"></div><div style=\"height:12px;background:var(--muted);border-radius:4px;width:75%;animation:pulse 2s ease-in-out infinite\"></div><div style=\"height:12px;background:var(--muted);border-radius:4px;width:50%;animation:pulse 2s ease-in-out infinite\"></div></div><div style=\"display:flex;gap:8px;margin-top:12px\"><div style=\"height:32px;flex:1;background:var(--muted);border-radius:6px;animation:pulse 2s ease-in-out infinite\"></div><div style=\"height:32px;flex:1;background:var(--muted);border-radius:6px;animation:pulse 2s ease-in-out infinite\"></div></div></div></div>"
+  },
+  {
+    "id": "09",
+    "name": "Build faster.",
+    "category": "hero",
+    "col": 3,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"09\" data-name=\"Build faster.\"><div class=\"cn-hero\"><div class=\"cn-hero-title\">Build faster.<br>Ship smarter.</div><div class=\"cn-hero-desc\">The modern development platform for teams who move fast and build things that matter.</div><div class=\"cn-hero-actions\"><button class=\"cn-btn cn-btn-default\">Get Started</button><button class=\"cn-btn cn-btn-outline\">Learn More</button></div></div></div>"
+  },
+  {
+    "id": "17",
+    "name": "Recent Transactions",
+    "category": "table",
+    "col": 3,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"17\" data-name=\"Recent Transactions\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Recent Transactions</div><div class=\"cn-card-desc\">Your latest account activity.</div></div><div class=\"cn-card-content\" style=\"padding:0\"><table class=\"cn-table\"><thead><tr><th>Merchant</th><th>Category</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead><tbody><tr><td>Blue Bottle Coffee</td><td>Food & Drink</td><td>-$6.50</td><td>Today</td><td><span class=\"cn-badge cn-badge-default\">Completed</span></td></tr><tr><td>Whole Foods Market</td><td>Groceries</td><td>-$142.30</td><td>Yesterday</td><td><span class=\"cn-badge cn-badge-default\">Completed</span></td></tr><tr><td>Stripe Payout</td><td>Income</td><td>+$4,200.00</td><td>Mar 15</td><td><span class=\"cn-badge cn-badge-secondary\">Pending</span></td></tr><tr><td>Amazon</td><td>Shopping</td><td>-$89.99</td><td>Mar 14</td><td><span class=\"cn-badge cn-badge-default\">Completed</span></td></tr><tr><td>Netflix</td><td>Entertainment</td><td>-$15.99</td><td>Mar 13</td><td><span class=\"cn-badge cn-badge-default\">Completed</span></td></tr></tbody></table></div><div class=\"cn-card-footer\"><button class=\"cn-btn cn-btn-ghost cn-btn-sm\">View All</button></div></div>"
+  },
+  {
+    "id": "28",
+    "name": "Welcome to the",
+    "category": "hero",
+    "col": 3,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"28\" data-name=\"Welcome to the\"><div class=\"cn-hero-dark\"><div class=\"cn-hero-title\">Welcome to the<br>future of work</div><div class=\"cn-hero-desc\">One platform to manage everything. No more context switching.</div><div class=\"cn-hero-actions\"><button class=\"cn-btn\">Get Early Access</button></div></div></div>"
+  },
+  {
+    "id": "69",
+    "name": "Front Door",
+    "category": "smart-home",
+    "col": 3,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"69\" data-name=\"Front Door\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Front Door</div><div class=\"cn-card-desc\">Smart Lock Pro</div></div><div class=\"cn-card-content\"><div class=\"cn-lock\"><div class=\"cn-lock-icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect width=\"18\" height=\"11\" x=\"3\" y=\"11\" rx=\"2\" ry=\"2\"/><path d=\"M7 11V7a5 5 0 0 1 10 0v4\"/></svg></div><div class=\"cn-lock-info\"><div class=\"cn-lock-title\">Unlocked</div><div class=\"cn-lock-desc\">Last opened 2 min ago</div></div><span class=\"cn-badge cn-badge-default\">Online</span></div><div class=\"cn-sep\"></div><div class=\"flex justify-between items-center\" style=\"padding:4px 0\"><span class=\"text-sm\">Auto-Lock</span><div class=\"cn-switch on\"></div></div><div class=\"flex justify-between items-center\" style=\"padding:4px 0\"><span class=\"text-sm\">Notifications</span><div class=\"cn-switch on\"></div></div></div></div>"
+  },
+  {
+    "id": "64",
+    "name": "How it works",
+    "category": "steps",
+    "col": 3,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"64\" data-name=\"How it works\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">How it works</div></div><div class=\"cn-card-content\"><div class=\"cn-steps\"><div class=\"cn-step\"><div class=\"cn-step-num\">1</div><div class=\"cn-step-content\"><div class=\"cn-step-title\">Sign up</div><div class=\"cn-step-desc\">Create your free account in seconds.</div></div></div><div class=\"cn-step\"><div class=\"cn-step-num\">2</div><div class=\"cn-step-content\"><div class=\"cn-step-title\">Connect</div><div class=\"cn-step-desc\">Link your existing tools and services.</div></div></div><div class=\"cn-step\"><div class=\"cn-step-num\">3</div><div class=\"cn-step-content\"><div class=\"cn-step-title\">Deploy</div><div class=\"cn-step-desc\">Push your code and we handle the rest.</div></div></div></div></div></div>"
+  },
+  {
+    "id": "59",
+    "name": "Trusted by the best",
+    "category": "hero",
+    "col": 3,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"59\" data-name=\"Trusted by the best\"><div class=\"cn-hero-stats\"><div class=\"cn-hero-title\">Trusted by the best</div><div class=\"cn-stats\"><div class=\"cn-stat\"><div class=\"cn-stat-value\">10K+</div><div class=\"cn-stat-label\">Teams</div></div><div class=\"cn-stat\"><div class=\"cn-stat-value\">99.9%</div><div class=\"cn-stat-label\">Uptime</div></div><div class=\"cn-stat\"><div class=\"cn-stat-value\">50M+</div><div class=\"cn-stat-label\">API calls/day</div></div></div><div class=\"cn-hero-actions\"><button class=\"cn-btn cn-btn-outline\">Read Case Studies</button></div></div></div>"
+  },
+  {
+    "id": "56",
+    "name": "Error 404",
+    "category": "hero",
+    "col": 3,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"56\" data-name=\"Error 404\"><div class=\"cn-error\"><div class=\"cn-error-code\">404</div><div class=\"cn-error-msg\">Page not found</div><div class=\"cn-hero-desc\">The page you're looking for doesn't exist or has been moved.</div><button class=\"cn-btn cn-btn-outline cn-btn-sm\">Go Home</button></div></div>"
+  },
+  {
+    "id": "18",
+    "name": "Why choose us?",
+    "category": "features",
+    "col": 3,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"18\" data-name=\"Why choose us?\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Why choose us?</div></div><div class=\"cn-card-content\"><div class=\"cn-features\"><div class=\"cn-feature\"><div class=\"cn-feature-icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M8 14s1.5 2 4 2 4-2 4-2\"/><line x1=\"9\" x2=\"9.01\" y1=\"9\" y2=\"9\"/><line x1=\"15\" x2=\"15.01\" y1=\"9\" y2=\"9\"/></svg></div><div class=\"cn-feature-title\">Easy to use</div><div class=\"cn-feature-desc\">Intuitive interface anyone can learn.</div></div><div class=\"cn-feature\"><div class=\"cn-feature-icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6\"/></svg></div><div class=\"cn-feature-title\">Affordable</div><div class=\"cn-feature-desc\">Plans for every budget.</div></div><div class=\"cn-feature\"><div class=\"cn-feature-icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M22 12h-4l-3 9L9 3l-3 9H2\"/></svg></div><div class=\"cn-feature-title\">Fast</div><div class=\"cn-feature-desc\">Blazing fast performance.</div></div><div class=\"cn-feature\"><div class=\"cn-feature-icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2\"/><circle cx=\"9\" cy=\"7\" r=\"4\"/><path d=\"M22 21v-2a4 4 0 0 0-3-3.87\"/><path d=\"M16 3.13a4 4 0 0 1 0 7.75\"/></svg></div><div class=\"cn-feature-title\">Team-first</div><div class=\"cn-feature-desc\">Built for collaboration.</div></div></div></div></div>"
+  },
+  {
+    "id": "76",
+    "name": "Stock Performance",
+    "category": "chart",
+    "col": 4,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"76\" data-name=\"Stock Performance\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Stock Performance</div><div class=\"cn-card-desc\">6-month price history.</div></div><div class=\"cn-card-content\"><div class=\"cn-chart\" style=\"height:180px\"><div class=\"cn-chart-area\" style=\"height:65%;background:linear-gradient(to top,color-mix(in oklab,var(--primary)12%,transparent),transparent)\"></div><div class=\"cn-chart-line\"></div></div><div class=\"flex justify-between mt-1\" style=\"padding:0 4px\"><span class=\"text-xs text-muted\">Sep</span><span class=\"text-xs text-muted\">Oct</span><span class=\"text-xs text-muted\">Nov</span><span class=\"text-xs text-muted\">Dec</span><span class=\"text-xs text-muted\">Jan</span><span class=\"text-xs text-muted\">Feb</span></div><div class=\"flex gap-3 mt-2\"><div class=\"cn-field\" style=\"flex:1\"><label class=\"cn-label\">Symbol</label><input class=\"cn-input\" value=\"AAPL\"></div><div class=\"cn-field\" style=\"flex:1\"><label class=\"cn-label\">Period</label><select class=\"cn-select\"><option>1M</option><option>3M</option><option selected>6M</option><option>1Y</option></select></div></div></div><div class=\"cn-card-footer\"><button class=\"cn-btn cn-btn-outline cn-btn-sm\">View Analysis</button></div></div>"
+  },
+  {
+    "id": "63",
+    "name": "Receiving Method",
+    "category": "form",
+    "col": 4,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"63\" data-name=\"Receiving Method\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Receiving Method</div><div class=\"cn-card-desc\">Payout Preferences</div></div><div class=\"cn-card-content\"><div class=\"cn-field\"><label class=\"cn-label\">Bank Name</label><input class=\"cn-input\" value=\"Chase Bank\"></div><div class=\"cn-field mt-2\"><label class=\"cn-label\">Account Number</label><input class=\"cn-input\" value=\"····4521\"></div></div><div class=\"cn-card-footer\"><button class=\"cn-btn cn-btn-default cn-btn-sm\">Save</button><button class=\"cn-btn cn-btn-ghost cn-btn-sm\">Remove</button></div></div>"
+  },
+  {
+    "id": "78",
+    "name": "Notifications",
+    "category": "checkbox",
+    "col": 4,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"78\" data-name=\"Notifications\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Notifications</div><div class=\"cn-card-desc\">Choose what you want to be notified about.</div></div><div class=\"cn-card-content\"><div class=\"flex items-center gap-3\" style=\"padding:8px 0\"><div class=\"cn-checkbox checked\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"><polyline points=\"20 6 9 17 4 12\"/></svg></div><span class=\"text-sm\">Everything</span></div><div class=\"flex items-center gap-3\" style=\"padding:8px 0\"><div class=\"cn-checkbox\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"><polyline points=\"20 6 9 17 4 12\"/></svg></div><span class=\"text-sm\">Available</span></div><div class=\"flex items-center gap-3\" style=\"padding:8px 0\"><div class=\"cn-checkbox\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"><polyline points=\"20 6 9 17 4 12\"/></svg></div><span class=\"text-sm\">Important</span></div><div class=\"flex items-center gap-3\" style=\"padding:8px 0\"><div class=\"cn-checkbox checked\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"><polyline points=\"20 6 9 17 4 12\"/></svg></div><span class=\"text-sm\">Mentions</span></div><div class=\"cn-sep\"></div><div class=\"flex items-center gap-3\" style=\"padding:8px 0\"><div class=\"cn-checkbox\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"><polyline points=\"20 6 9 17 4 12\"/></svg></div><span class=\"text-sm\">Security Alerts</span></div><div class=\"flex items-center gap-3\" style=\"padding:8px 0\"><div class=\"cn-checkbox checked\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"><polyline points=\"20 6 9 17 4 12\"/></svg></div><span class=\"text-sm\">Payment Reminders</span></div><div class=\"flex items-center gap-3\" style=\"padding:8px 0\"><div class=\"cn-checkbox\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"><polyline points=\"20 6 9 17 4 12\"/></svg></div><span class=\"text-sm\">Weekly Summary</span></div><div class=\"flex items-center gap-3\" style=\"padding:8px 0\"><div class=\"cn-checkbox\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"><polyline points=\"20 6 9 17 4 12\"/></svg></div><span class=\"text-sm\">Marketing</span></div></div><div class=\"cn-card-footer\"><button class=\"cn-btn cn-btn-default cn-btn-sm\">Save Preferences</button></div></div>"
+  },
+  {
+    "id": "52",
+    "name": "Q2 Dividend Income",
+    "category": "chart",
+    "col": 4,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"52\" data-name=\"Q2 Dividend Income\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Q2 Dividend Income</div><div class=\"cn-card-desc\">Quarterly dividend payouts across your portfolio holdings.</div></div><div class=\"cn-card-content\"><div class=\"cn-chart\" style=\"height:160px\"><div class=\"cn-bars\"><div class=\"cn-bar\" style=\"height:40%\"></div><div class=\"cn-bar\" style=\"height:65%\"></div><div class=\"cn-bar\" style=\"height:55%\"></div><div class=\"cn-bar\" style=\"height:80%\"></div><div class=\"cn-bar\" style=\"height:45%\"></div><div class=\"cn-bar\" style=\"height:70%\"></div></div></div><div class=\"flex justify-between mt-2\" style=\"padding:0 4px\"><span class=\"text-xs text-muted\">Jan</span><span class=\"text-xs text-muted\">Feb</span><span class=\"text-xs text-muted\">Mar</span><span class=\"text-xs text-muted\">Apr</span><span class=\"text-xs text-muted\">May</span><span class=\"text-xs text-muted\">Jun</span></div></div><div class=\"cn-card-footer\"><button class=\"cn-btn cn-btn-outline cn-btn-sm w-full\">View Details</button></div></div>"
+  },
+  {
+    "id": "77",
+    "name": "Account Access",
+    "category": "form",
+    "col": 4,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"77\" data-name=\"Account Access\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Account Access</div><div class=\"cn-card-desc\">Update your credentials or re-authenticate.</div></div><div class=\"cn-card-content\"><div class=\"cn-field\"><label class=\"cn-label\">Email</label><input class=\"cn-input\" value=\"alex@example.com\"></div><div class=\"cn-field mt-2\"><label class=\"cn-label\">Current Password</label><input class=\"cn-input\" type=\"password\" value=\"password123\"></div></div><div class=\"cn-card-footer\"><button class=\"cn-btn cn-btn-default cn-btn-sm\">Update Credentials</button></div></div>"
+  },
+  {
+    "id": "61",
+    "name": "Scan to connect your mobile de",
+    "category": "qr",
+    "col": 4,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"61\" data-name=\"Scan to connect your mobile de\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Scan to connect your mobile device</div><div class=\"cn-card-desc\">Open the Ledger mobile app and scan this code to link your device.</div></div><div class=\"cn-card-content flex justify-center\"><div style=\"background:#fff;border-radius:14px;padding:16px;border:1px solid var(--border)\"><div class=\"cn-qr\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"14\" width=\"3\" height=\"3\"/><rect x=\"18\" y=\"18\" width=\"3\" height=\"3\"/></svg></div></div></div><div class=\"cn-card-footer\"><button class=\"cn-btn cn-btn-ghost cn-btn-sm w-full\">Show Pairing Code</button></div></div>"
+  },
+  {
+    "id": "67",
+    "name": "US$12.94",
+    "category": "general",
+    "col": 4,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"67\" data-name=\"US$12.94\"><div class=\"cn-card-header\"><div class=\"cn-card-title\" style=\"font-size:1.5rem\">US$12.94</div><div class=\"cn-card-desc\">Card Balance</div></div><div class=\"cn-card-content\"><div class=\"flex justify-between\"><span class=\"text-sm text-muted\">Available Credit</span><span class=\"text-sm font-medium\">$3,987.06</span></div><div class=\"flex justify-between mt-1\"><span class=\"text-sm text-muted\">Pending</span><span class=\"text-sm font-medium\">$0.00</span></div></div></div>"
+  },
+  {
+    "id": "57",
+    "name": "Savings Targets",
+    "category": "items",
+    "col": 4,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"57\" data-name=\"Savings Targets\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Savings Targets</div><div class=\"cn-card-desc\">Active milestones for 2024</div></div><div class=\"cn-card-content\"><div class=\"cn-item\"><div class=\"cn-item-content\"><div class=\"cn-item-title\">Emergency Fund</div><div class=\"cn-progress\" style=\"margin-top:4px\"><div class=\"cn-progress-bar\"><div class=\"cn-progress-fill\" style=\"width:80%\"></div></div></div></div><span class=\"text-xs text-muted\">$12k/$15k</span></div><div class=\"cn-item\"><div class=\"cn-item-content\"><div class=\"cn-item-title\">Vacation</div><div class=\"cn-progress\" style=\"margin-top:4px\"><div class=\"cn-progress-bar\"><div class=\"cn-progress-fill\" style=\"width:64%\"></div></div></div></div><span class=\"text-xs text-muted\">$3.2k/$5k</span></div><div class=\"cn-item\"><div class=\"cn-item-content\"><div class=\"cn-item-title\">New Car</div><div class=\"cn-progress\" style=\"margin-top:4px\"><div class=\"cn-progress-bar\"><div class=\"cn-progress-fill\" style=\"width:28%\"></div></div></div></div><span class=\"text-xs text-muted\">$8.5k/$30k</span></div><div class=\"cn-item\"><div class=\"cn-item-content\"><div class=\"cn-item-title\">Home Down Payment</div><div class=\"cn-progress\" style=\"margin-top:4px\"><div class=\"cn-progress-bar\"><div class=\"cn-progress-fill\" style=\"width:52%\"></div></div></div></div><span class=\"text-xs text-muted\">$42k/$80k</span></div><div class=\"cn-item\"><div class=\"cn-item-content\"><div class=\"cn-item-title\">Wedding</div><div class=\"cn-progress\" style=\"margin-top:4px\"><div class=\"cn-progress-bar\"><div class=\"cn-progress-fill\" style=\"width:60%\"></div></div></div></div><span class=\"text-xs text-muted\">$15k/$25k</span></div></div><div class=\"cn-card-footer\"><button class=\"cn-btn cn-btn-outline cn-btn-sm\">View All Targets</button></div></div>"
+  },
+  {
+    "id": "39",
+    "name": "Card",
+    "category": "general",
+    "col": 4,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"39\" data-name=\"Card\"><div class=\"cn-card-header\"><div class=\"cn-card-desc\">Minimum 3000 × 3000px, JPEG or PNG only</div></div><div class=\"cn-card-content\"><span class=\"text-xs text-muted\" style=\"display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;font-weight:500\">Cover Art</span><div style=\"aspect-ratio:1;border:2px dashed var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:var(--muted)\"><svg width=\"28\" height=\"28\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"var(--muted-fg)\" stroke-width=\"2\"><path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><polyline points=\"17 8 12 3 7 8\"/><line x1=\"12\" x2=\"12\" y1=\"3\" y2=\"15\"/></svg></div></div><div class=\"cn-card-footer\"><button class=\"cn-btn cn-btn-outline cn-btn-sm\">Upload</button></div></div>"
+  },
+  {
+    "id": "26",
+    "name": "Blog",
+    "category": "blog",
+    "col": 4,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"26\" data-name=\"Blog\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Blog</div></div><div class=\"cn-card-content\"><div class=\"cn-blog\"><div class=\"cn-blog-image\" style=\"background:linear-gradient(135deg,var(--muted),var(--primary))\"></div><div class=\"cn-blog-meta\"><span class=\"cn-blog-tag\">Engineering</span><span class=\"cn-blog-date\">May 28, 2026</span></div><div class=\"cn-blog-title\">How we scaled to 10M requests per day</div><div class=\"cn-blog-excerpt\">A deep dive into our architecture decisions and the lessons we learned along the way.</div></div></div></div>"
+  },
+  {
+    "id": "24",
+    "name": "Testimonial",
+    "category": "testimonial",
+    "col": 4,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"24\" data-name=\"Testimonial\"><div class=\"cn-testimonial\"><div class=\"cn-testimonial-quote\">\"The best tool we've ever used. Our team's productivity increased by 40%.\"</div><div class=\"cn-testimonial-author\"><div class=\"cn-testimonial-avatar\">SK</div><div><div class=\"cn-testimonial-name\">Sarah Kim</div><div class=\"cn-testimonial-role\">VP Engineering, TechCorp</div></div></div></div><div class=\"cn-sep\" style=\"margin:0 16px\"></div><div class=\"cn-testimonial\"><div class=\"cn-testimonial-quote\">\"Game changer for our startup. We couldn't imagine going back.\"</div><div class=\"cn-testimonial-author\"><div class=\"cn-testimonial-avatar\">MR</div><div><div class=\"cn-testimonial-name\">Mike Ross</div><div class=\"cn-testimonial-role\">Founder, StartupXYZ</div></div></div></div></div>"
+  },
+  {
+    "id": "33",
+    "name": "Living Room",
+    "category": "switch",
+    "col": 4,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"33\" data-name=\"Living Room\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Living Room</div><div class=\"cn-card-desc\">Roller Shades</div></div><div class=\"cn-card-content\"><div class=\"cn-field\"><div class=\"flex justify-between\"><label class=\"cn-label\">Position</label><span class=\"text-sm text-muted\">65%</span></div><div class=\"cn-slider\" style=\"margin-top:8px\"><div class=\"cn-slider-track\"><div class=\"cn-slider-range\" style=\"width:65%\"></div><div class=\"cn-slider-thumb\" style=\"left:65%\"></div></div></div></div><div class=\"flex justify-between items-center mt-2\" style=\"padding:8px 0\"><span class=\"text-sm\">Auto Schedule</span><div class=\"cn-switch on\"></div></div><div class=\"cn-toggle-group\" style=\"margin-top:8px\"><button class=\"cn-toggle on\">Open</button><button class=\"cn-toggle\">Half</button><button class=\"cn-toggle\">Close</button></div></div></div>"
+  },
+  {
+    "id": "75",
+    "name": "Buy Investment",
+    "category": "form",
+    "col": 4,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"75\" data-name=\"Buy Investment\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Buy Investment</div><div class=\"cn-card-desc\">Trades are typically executed within minutes during market hours.</div></div><div class=\"cn-card-content\"><div class=\"flex gap-3\"><div class=\"cn-field\" style=\"flex:1\"><label class=\"cn-label\">Symbol</label><input class=\"cn-input\" placeholder=\"AAPL\" value=\"AAPL\"></div><div class=\"cn-field\" style=\"flex:1\"><label class=\"cn-label\">Amount</label><input class=\"cn-input\" placeholder=\"$0.00\" value=\"$1,000.00\"></div></div><div class=\"flex gap-3 mt-2\"><div class=\"cn-field\" style=\"flex:1\"><label class=\"cn-label\">Order Type</label><select class=\"cn-select\"><option selected>Market</option><option>Limit</option><option>Stop</option></select></div><div class=\"cn-field\" style=\"flex:1\"><label class=\"cn-label\">Duration</label><select class=\"cn-select\"><option selected>Day</option><option>GTC</option></select></div></div></div><div class=\"cn-card-footer\"><button class=\"cn-btn cn-btn-default cn-btn-sm\">Review Order</button></div></div>"
+  },
+  {
+    "id": "32",
+    "name": "Getting Started",
+    "category": "onboarding",
+    "col": 5,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"32\" data-name=\"Getting Started\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Getting Started</div></div><div class=\"cn-card-content\"><div class=\"cn-onboard\"><div class=\"cn-onboard-item\"><div class=\"cn-onboard-check\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"><polyline points=\"20 6 9 17 4 12\"/></svg></div><div class=\"cn-onboard-text\">Create your account</div></div><div class=\"cn-onboard-item\"><div class=\"cn-onboard-check\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"><polyline points=\"20 6 9 17 4 12\"/></svg></div><div class=\"cn-onboard-text\">Set up your workspace</div></div><div class=\"cn-onboard-item\"><div class=\"cn-onboard-pending\"></div><div class=\"cn-onboard-text\">Connect your first integration</div></div><div class=\"cn-onboard-item\"><div class=\"cn-onboard-pending\"></div><div class=\"cn-onboard-text\">Invite your team</div></div><div class=\"cn-onboard-item\"><div class=\"cn-onboard-pending\"></div><div class=\"cn-onboard-text\">Deploy your first project</div></div></div></div></div>"
+  },
+  {
+    "id": "29",
+    "name": "Integrations",
+    "category": "integrations",
+    "col": 5,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"29\" data-name=\"Integrations\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Integrations</div><div class=\"cn-card-desc\">Connect your favorite tools.</div></div><div class=\"cn-card-content\"><div class=\"cn-integrations\"><div class=\"cn-integration\">GitHub</div><div class=\"cn-integration\">Slack</div><div class=\"cn-integration\">Notion</div><div class=\"cn-integration\">Figma</div><div class=\"cn-integration\">Linear</div><div class=\"cn-integration\">Jira</div></div></div></div>"
+  },
+  {
+    "id": "15",
+    "name": "Stats",
+    "category": "stats",
+    "col": 5,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"15\" data-name=\"Stats\"><div class=\"cn-card-content\"><div class=\"cn-stats\"><div class=\"cn-stat\"><div class=\"cn-stat-value\">10K+</div><div class=\"cn-stat-label\">Teams</div></div><div class=\"cn-stat\"><div class=\"cn-stat-value\">99.9%</div><div class=\"cn-stat-label\">Uptime</div></div><div class=\"cn-stat\"><div class=\"cn-stat-value\">50M+</div><div class=\"cn-stat-label\">Requests/day</div></div><div class=\"cn-stat\"><div class=\"cn-stat-value\">4.9★</div><div class=\"cn-stat-label\">Rating</div></div></div></div></div>"
+  },
+  {
+    "id": "48",
+    "name": "1 Apr",
+    "category": "general",
+    "col": 5,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"48\" data-name=\"1 Apr\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">1 Apr</div><div class=\"cn-card-desc\">Payment Due</div></div><div class=\"cn-card-content\"><div class=\"flex justify-between\"><span class=\"text-sm text-muted\">Minimum Due</span><span class=\"text-sm font-medium\">$25.00</span></div><div class=\"flex justify-between mt-1\"><span class=\"text-sm text-muted\">Statement Balance</span><span class=\"text-sm font-medium\">$12.94</span></div></div><div class=\"cn-card-footer\"><button class=\"cn-btn cn-btn-default cn-btn-sm\">Pay Now</button></div></div>"
+  },
+  {
+    "id": "16",
+    "name": "Join the waitlist",
+    "category": "hero",
+    "col": 5,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"16\" data-name=\"Join the waitlist\"><div class=\"cn-waitlist\"><div class=\"cn-hero-title\" style=\"font-size:1.1rem\">Join the waitlist</div><div class=\"cn-hero-desc\" style=\"font-size:0.82rem\">Be the first to know when we launch.</div><div class=\"cn-waitlist-count\"><strong>2,847</strong> people waiting</div><div class=\"cn-newsletter-form\"><input class=\"cn-input\" placeholder=\"you@example.com\" style=\"flex:1\"><button class=\"cn-btn cn-btn-default\">Join</button></div></div></div>"
+  },
+  {
+    "id": "70",
+    "name": "Power Usage",
+    "category": "chart",
+    "col": 5,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"70\" data-name=\"Power Usage\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Power Usage</div><div class=\"cn-card-desc\">Whole Home</div></div><div class=\"cn-card-content\"><div class=\"cn-chart\" style=\"height:180px\"><div class=\"cn-bars\"><div class=\"cn-bar\" style=\"height:30%\"></div><div class=\"cn-bar\" style=\"height:45%\"></div><div class=\"cn-bar\" style=\"height:60%\"></div><div class=\"cn-bar\" style=\"height:55%\"></div><div class=\"cn-bar\" style=\"height:70%\"></div><div class=\"cn-bar\" style=\"height:65%\"></div><div class=\"cn-bar\" style=\"height:50%\"></div><div class=\"cn-bar\" style=\"height:80%\"></div><div class=\"cn-bar\" style=\"height:75%\"></div><div class=\"cn-bar\" style=\"height:40%\"></div><div class=\"cn-bar\" style=\"height:55%\"></div><div class=\"cn-bar\" style=\"height:60%\"></div></div></div><div class=\"flex justify-between mt-1\" style=\"padding:0 4px\"><span class=\"text-xs text-muted\">Jan</span><span class=\"text-xs text-muted\">Feb</span><span class=\"text-xs text-muted\">Mar</span><span class=\"text-xs text-muted\">Apr</span><span class=\"text-xs text-muted\">May</span><span class=\"text-xs text-muted\">Jun</span><span class=\"text-xs text-muted\">Jul</span><span class=\"text-xs text-muted\">Aug</span><span class=\"text-xs text-muted\">Sep</span><span class=\"text-xs text-muted\">Oct</span><span class=\"text-xs text-muted\">Nov</span><span class=\"text-xs text-muted\">Dec</span></div><div class=\"cn-sep\"></div><div class=\"flex justify-between items-center\"><span class=\"text-sm\">This Month</span><span class=\"text-sm font-medium\">342 kWh</span></div><div class=\"cn-progress\" style=\"margin-top:8px\"><div class=\"cn-progress-bar\"><div class=\"cn-progress-fill\" style=\"width:68%\"></div></div></div><div class=\"flex justify-between mt-1\"><span class=\"text-xs text-muted\">68% of budget</span><span class=\"text-xs text-muted\">500 kWh</span></div></div></div>"
+  },
+  {
+    "id": "68",
+    "name": "Card",
+    "category": "general",
+    "col": 5,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"68\" data-name=\"Card\" style=\"padding:0\"><div style=\"padding:12px 0\"><div style=\"padding:0 16px;margin-bottom:8px\"><span class=\"text-xs font-semibold text-muted\" style=\"text-transform:uppercase;letter-spacing:0.05em\">Overview</span></div><div style=\"display:flex;flex-direction:column;gap:1px\"><div style=\"display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;background:var(--muted);color:var(--fg);font-weight:500\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect width=\"7\" height=\"9\" x=\"3\" y=\"3\" rx=\"1\"/><rect width=\"7\" height=\"5\" x=\"14\" y=\"3\" rx=\"1\"/><rect width=\"7\" height=\"9\" x=\"14\" y=\"12\" rx=\"1\"/><rect width=\"7\" height=\"5\" x=\"3\" y=\"16\" rx=\"1\"/></svg>Dashboard</div><div style=\"display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6\"/></svg>Transactions</div><div style=\"display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M22 12h-4l-3 9L9 3l-3 9H2\"/></svg>Investments</div><div style=\"display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2\"/><circle cx=\"12\" cy=\"7\" r=\"4\"/></svg>Accounts</div><div style=\"display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/></svg>Spending</div></div><div style=\"padding:0 16px;margin-top:16px;margin-bottom:8px\"><span class=\"text-xs font-semibold text-muted\" style=\"text-transform:uppercase;letter-spacing:0.05em\">Planning</span></div><div style=\"display:flex;flex-direction:column;gap:1px\"><div style=\"display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><polyline points=\"12 6 12 12 16 14\"/></svg>Goals</div><div style=\"display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect width=\"20\" height=\"14\" x=\"2\" y=\"3\" rx=\"2\"/><path d=\"M8 21h8\"/><path d=\"M12 17v4\"/></svg>Budget</div><div style=\"display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M3 3v18h18\"/><path d=\"m19 9-5 5-4-4-3 3\"/></svg>Reports</div><div style=\"display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z\"/><path d=\"M14 2v6h6\"/></svg>Documents</div></div></div></div>"
+  },
+  {
+    "id": "71",
+    "name": "Get updates",
+    "category": "newsletter",
+    "col": 5,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"71\" data-name=\"Get updates\"><div class=\"cn-newsletter\"><div class=\"cn-newsletter-title\">Get updates</div><div class=\"cn-newsletter-desc\">No spam, just the good stuff.</div><div class=\"cn-newsletter-form\"><input class=\"cn-input\" placeholder=\"your@email.com\" style=\"flex:1\"><button class=\"cn-btn cn-btn-default\">Join</button></div><div style=\"font-size:0.68rem;color:var(--muted-fg);margin-top:4px\">Join 5,000+ subscribers</div></div></div>"
+  },
+  {
+    "id": "79",
+    "name": "Your workspace.",
+    "category": "hero",
+    "col": 5,
+    "width": 2,
+    "html": "<div class=\"cn-card\" data-id=\"79\" data-name=\"Your workspace.\"><div class=\"cn-hero-gradient\"><div class=\"cn-hero-title\">Your workspace.<br>Your rules.</div><div class=\"cn-hero-desc\">Customize everything from themes to workflows. Make it yours.</div><div class=\"cn-hero-actions\"><button class=\"cn-btn\">Customize Now</button></div></div></div>"
+  },
+  {
+    "id": "62",
+    "name": "Yearly Activity",
+    "category": "heatmap",
+    "col": 5,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"62\" data-name=\"Yearly Activity\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">Yearly Activity</div></div><div class=\"cn-card-content\"><div class=\"cn-heatmap\"><div class=\"cn-heat-cell\" style=\"background:var(--primary);opacity:0.1\"></div><div class=\"cn-heat-cell\" style=\"background:var(--primary);opacity:0.2\"></div><div class=\"cn-heat-cell\" style=\"background:var(--primary);opacity:0.3\"></div><div class=\"cn-heat-cell\" style=\"background:var(--primary);opacity:0.5\"></div><div class=\"cn-heat-cell\" style=\"background:var(--primary);opacity:0.7\"></div><div class=\"cn-heat-cell\" style=\"background:var(--primary);opacity:0.4\"></div><div class=\"cn-heat-cell\" style=\"background:var(--primary);opacity:0.2\"></div><div class=\"cn-heat-cell\" style=\"background:var(--primary);opacity:0.6\"></div><div class=\"cn-heat-cell\" style=\"background:var(--primary);opacity:0.8\"></div><div class=\"cn-heat-cell\" style=\"background:var(--primary);opacity:0.3\"></div><div class=\"cn-heat-cell\" style=\"background:var(--primary);opacity:0.5\"></div><div class=\"cn-heat-cell\" style=\"background:var(--primary);opacity:0.9\"></div></div><span class=\"cn-badge cn-badge-secondary mt-2\">+12% from last year</span></div></div>"
+  },
+  {
+    "id": "20",
+    "name": "System Status",
+    "category": "status",
+    "col": 5,
+    "width": 1,
+    "html": "<div class=\"cn-card\" data-id=\"20\" data-name=\"System Status\"><div class=\"cn-card-header\"><div class=\"cn-card-title\">System Status</div></div><div class=\"cn-card-content\"><div class=\"cn-status\"><div class=\"cn-status-row\"><div class=\"cn-status-dot green\"></div><div class=\"cn-status-name\">API</div><div class=\"cn-status-label\">Operational</div></div><div class=\"cn-status-row\"><div class=\"cn-status-dot green\"></div><div class=\"cn-status-name\">Dashboard</div><div class=\"cn-status-label\">Operational</div></div><div class=\"cn-status-row\"><div class=\"cn-status-dot yellow\"></div><div class=\"cn-status-name\">Webhooks</div><div class=\"cn-status-label\">Degraded</div></div><div class=\"cn-status-row\"><div class=\"cn-status-dot green\"></div><div class=\"cn-status-name\">CDN</div><div class=\"cn-status-label\">Operational</div></div></div></div></div>"
+  }
+]

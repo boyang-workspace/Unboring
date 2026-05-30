@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UnBoring Canvas — shadcn/ui</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@400;500;600;700&family=Urbanist:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&family=Albert+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Lora:wght@400;500;600;700&family=DM+Serif+Display&family=Crimson+Text:wght@400;600;700&family=Libre+Baskerville:wght@400;700&family=EB+Garamond:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Caveat:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Pacifico&family=Satisfy&family=Great+Vibes&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Righteous&family=Fredoka:wght@400;500;600;700&family=Permanent+Marker&family=Bitter:wght@400;500;600;700&family=Merriweather:wght@400;700&family=Noto+Serif:wght@400;700&family=PT+Serif:wght@400;700&family=Press+Start+2P&family=Orbitron:wght@400;500;600;700&family=VT323&family=Cinzel:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@400;500;600;700&family=Creepster&family=Special+Elite&family=Nunito:wght@400;500;600;700&family=Bangers&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;border:0 solid;margin:0;padding:0}
+:root{
+  --radius:0.625rem;
+  --bg:oklch(1 0 0);
+  --fg:oklch(0.145 0 0);
+  --card:oklch(1 0 0);
+  --card-fg:oklch(0.145 0 0);
+  --muted:oklch(0.97 0 0);
+  --muted-fg:oklch(0.556 0 0);
+  --primary:oklch(0.205 0 0);
+  --primary-fg:oklch(0.985 0 0);
+  --secondary:oklch(0.97 0 0);
+  --secondary-fg:oklch(0.205 0 0);
+  --border:oklch(0.922 0 0);
+  --input:oklch(0.922 0 0);
+  --ring:oklch(0.708 0 0);
+  --destructive:oklch(0.577 0.245 27.325);
+  --font:'Inter',system-ui,-apple-system,sans-serif;
+  --font-heading:'Inter',system-ui,-apple-system,sans-serif;
+  --mono:'SF Mono','Fira Code',monospace;
+  --bw:1px;
+  --shadow:0 1px 2px 0 rgba(0,0,0,0.05);
+  --bg-pattern:none;
+  --bg-pattern-size:auto;
+  --card-bg-pattern:none;
+  --card-bg-pattern-size:auto;
+  --card-bg:var(--card);
+  --text-shadow:none;
+  --ls:0;
+  --fw:500;
+  --fs:0.875rem;
+  --title-fs:1rem;
+}
+html,body{margin:0;padding:0;overflow:hidden;width:100%;height:100%;font-family:var(--font);background-color:var(--bg);background-image:var(--bg-pattern);background-size:var(--bg-pattern-size);color:var(--fg);-webkit-font-smoothing:antialiased;transition:background 0.5s cubic-bezier(.16,1,.3,1),color 0.4s ease}
+body.dragging{cursor:grabbing}
+body.dragging *{pointer-events:none}
+
+/* ── Canvas ── */
+#canvas{position:fixed;top:var(--header-h);left:var(--sidebar-w);right:0;bottom:0;z-index:1;overflow:hidden}
+#canvas-content{position:absolute;top:0;left:0;transform-origin:0 0}
+
+/* ── Header ── */
+:root{--header-h:52px;--sidebar-w:280px}
+#header{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--header-h);background:#0a0a0a;border-bottom:1px solid #222;display:flex;align-items:center;justify-content:space-between;padding:0 20px;user-select:none}
+#header .brand{font-weight:700;font-size:0.95rem;letter-spacing:-0.02em;color:#e5e5e5}
+#header .actions{display:flex;gap:8px}
+.h-btn{height:32px;padding:0 14px;border-radius:100px;border:1px solid #333;background:transparent;color:#e5e5e5;font-size:0.75rem;font-weight:600;font-family:var(--font,'Inter',sans-serif);cursor:pointer;transition:all 0.15s;white-space:nowrap}
+.h-btn:hover{border-color:#666;color:#fff}
+.h-btn-primary{background:#6366f1;border-color:#6366f1;color:#fff}
+.h-btn-primary:hover{background:#818cf8;border-color:#818cf8}
+
+/* ── Sidebar ── */
+#sidebar{position:fixed;top:var(--header-h);left:0;bottom:0;width:var(--sidebar-w);z-index:100;background:#141414;border-right:1px solid #222;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:20px}
+#sidebar::-webkit-scrollbar{width:4px}
+#sidebar::-webkit-scrollbar-thumb{background:#333;border-radius:2px}
+.panel-title{font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:#888;margin-bottom:10px}
+.control{margin-bottom:14px}
+.control label{display:block;font-size:0.75rem;font-weight:500;color:#888;margin-bottom:6px}
+.control-row{display:flex;gap:8px;align-items:center}
+.c-color{width:32px;height:32px;border:1px solid #222;border-radius:6px;cursor:pointer;background:none;padding:0}
+.c-color::-webkit-color-swatch-wrapper{padding:2px}
+.c-color::-webkit-color-swatch{border:none;border-radius:4px}
+.c-text{flex:1;height:32px;border-radius:6px;border:1px solid #222;background:#0a0a0a;color:#e5e5e5;padding:0 10px;font-size:0.78rem;font-family:var(--font);outline:none}
+.c-text:focus{border-color:#6366f1}
+.c-range{width:100%;height:4px;border-radius:2px;background:#222;outline:none;-webkit-appearance:none;appearance:none}
+.c-range::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:#6366f1;cursor:pointer;border:2px solid #0a0a0a}
+.c-val{font-size:0.72rem;color:#888;font-family:var(--mono,'SF Mono',monospace);min-width:36px;text-align:right}
+.c-select{width:100%;height:32px;border-radius:6px;border:1px solid #222;background:#0a0a0a;color:#e5e5e5;padding:0 10px;font-size:0.78rem;font-family:var(--font);outline:none;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+
+/* ── Grid ── */
+.grid{display:grid;grid-template-columns:394px 394px 394px 394px 394px 394px 394px;align-items:start;width:3000px;gap:40px;padding:40px}
+.col{display:flex;flex-direction:column;gap:40px}
+.col-span-2{grid-column:span 2}
+/* ── Card hover tag ── */
+.cn-card{position:relative}
+.cn-card::before{content:'#' attr(data-id) ' · ' attr(data-name);position:absolute;bottom:calc(100% + 6px);left:0;z-index:10;
+  padding:3px 8px;border-radius:6px;font-size:0.65rem;font-weight:600;font-family:var(--mono,'SF Mono',monospace);
+  background:var(--primary);color:var(--primary-fg);white-space:nowrap;
+  opacity:0;pointer-events:none;transition:opacity 0.15s;letter-spacing:0.02em;
+  box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+.cn-card:hover::before{opacity:1}
+
+/* ── HUD ── */
+#hud{position:fixed;top:0;left:0;right:0;z-index:100;height:44px;background:rgba(255,255,255,0.9);backdrop-filter:blur(16px);border-bottom:var(--bw) solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 16px;user-select:none}
+#hud .brand{font-weight:700;font-size:0.9rem;letter-spacing:-0.02em}
+#surprise-btn{height:32px;padding:0 14px;border-radius:100px;border:1px solid var(--border);background:var(--card);color:var(--fg);font-size:0.78rem;font-weight:600;font-family:var(--font);cursor:pointer;transition:all 0.2s;white-space:nowrap}
+#surprise-btn:hover{background:var(--primary);color:var(--primary-fg);border-color:var(--primary)}
+
+/* ── Card ── */
+.cn-card{display:flex;flex-direction:column;gap:16px;background-color:var(--card-bg,var(--card));background-image:var(--card-bg-pattern);background-size:var(--card-bg-pattern-size);color:var(--card-fg);border-radius:calc(var(--radius)*1.4);padding-top:16px;font-size:var(--fs);line-height:1.5;box-shadow:var(--shadow);overflow:visible;border:var(--bw) solid var(--border);transition:border-radius 0.5s cubic-bezier(.16,1,.3,1),box-shadow 0.5s cubic-bezier(.16,1,.3,1),background 0.4s ease,border-color 0.4s ease}
+.cn-card-header{gap:4px;padding-inline:16px}
+.cn-card-title{font-family:var(--font-heading);font-weight:var(--fw);font-size:var(--title-fs);line-height:1.5;text-shadow:var(--text-shadow);letter-spacing:var(--ls);transition:font-size 0.4s ease,letter-spacing 0.4s ease}
+.cn-card-desc{font-size:var(--fs);color:var(--muted-fg);line-height:1.5;opacity:0.8}
+.cn-card-content{padding-inline:16px}
+.cn-card-footer{display:flex;align-items:center;gap:8px;padding:16px;margin-top:auto;border-top:var(--bw) solid var(--border);background:color-mix(in oklab,var(--muted)50%,transparent);margin-inline:-1px;margin-bottom:-1px;border-radius:0 0 calc(var(--radius)*1.4 - 1px) calc(var(--radius)*1.4 - 1px)}
+
+/* ── Button ── */
+.cn-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;border-radius:var(--radius);font-size:0.875rem;font-weight:500;height:36px;padding:0 16px;border:1px solid transparent;cursor:pointer;transition:all 0.15s;font-family:var(--font);outline:none}
+.cn-btn-default{background:var(--primary);color:var(--primary-fg)}
+.cn-btn-outline{background:transparent;color:var(--fg);border-color:var(--border)}
+.cn-btn-ghost{background:transparent;color:var(--fg);border-color:transparent}
+.cn-btn-ghost:hover{background:var(--muted)}
+.cn-btn-destructive{background:var(--destructive);color:#fff}
+.cn-btn-sm{height:30px;padding:0 12px;font-size:0.8rem}
+.cn-btn svg{width:16px;height:16px;flex-shrink:0}
+
+/* ── Badge ── */
+.cn-badge{display:inline-flex;align-items:center;gap:4px;height:20px;padding:0 8px;border-radius:calc(var(--radius)*2.6);font-size:0.75rem;font-weight:500;border:var(--bw) solid transparent;transition:all 0.15s}
+.cn-badge-default{background:var(--primary);color:var(--primary-fg)}
+.cn-badge-secondary{background:var(--secondary);color:var(--secondary-fg)}
+.cn-badge-outline{border-color:var(--border);color:var(--fg)}
+.cn-badge-destructive{background:color-mix(in oklab,var(--destructive)10%,transparent);color:var(--destructive)}
+
+/* ── Input ── */
+.cn-input{height:32px;border-radius:var(--radius);border:var(--bw) solid var(--input);padding:0 12px;font-size:0.875rem;font-family:var(--font);color:var(--fg);background:transparent;outline:none;width:100%;transition:border-color 0.15s,box-shadow 0.15s}
+.cn-input::placeholder{color:var(--muted-fg)}
+.cn-input:focus{border-color:var(--ring);box-shadow:0 0 0 3px color-mix(in oklab,var(--ring)50%,transparent)}
+
+/* ── Select ── */
+.cn-select{height:32px;border-radius:var(--radius);border:var(--bw) solid var(--input);padding:0 32px 0 12px;font-size:0.875rem;font-family:var(--font);color:var(--fg);background:transparent;outline:none;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.cn-select:focus{border-color:var(--ring);box-shadow:0 0 0 3px color-mix(in oklab,var(--ring)50%,transparent)}
+
+/* ── Checkbox ── */
+.cn-checkbox{width:16px;height:16px;border:var(--bw) solid var(--input);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s}
+.cn-checkbox.checked{background:var(--primary);border-color:var(--primary);color:var(--primary-fg)}
+.cn-checkbox svg{width:12px;height:12px;opacity:0}
+.cn-checkbox.checked svg{opacity:1}
+
+/* ── Switch ── */
+.cn-switch{width:32px;height:18px;border-radius:100px;background:var(--input);cursor:pointer;position:relative;transition:background 0.2s;flex-shrink:0;border:var(--bw) solid transparent;box-sizing:content-box;overflow:hidden}
+.cn-switch.on{background:var(--primary)}
+.cn-switch::after{content:'';position:absolute;top:calc((100% - 14px) / 2);left:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:left 0.2s}
+.cn-switch.on::after{left:calc(100% - 14px - 2px)}
+
+/* ── Slider ── */
+.cn-slider{position:relative;display:flex;align-items:center;width:100%;height:20px;cursor:pointer}
+.cn-slider-track{flex:1;height:4px;border-radius:9999px;background:var(--muted);position:relative}
+.cn-slider-range{position:absolute;left:0;top:0;height:100%;border-radius:9999px;background:var(--primary)}
+.cn-slider-thumb{position:absolute;top:50%;width:12px;height:12px;border:1px solid var(--ring);background:#fff;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+
+/* ── Toggle ── */
+.cn-toggle-group{display:inline-flex;gap:0;border:var(--bw) solid var(--input);border-radius:var(--radius);overflow:hidden}
+.cn-toggle{display:inline-flex;align-items:center;justify-content:center;height:32px;min-width:32px;padding:0 10px;font-size:0.8rem;font-weight:500;font-family:var(--font);background:transparent;border:none;color:var(--muted-fg);cursor:pointer;transition:all 0.15s;border-right:var(--bw) solid var(--input)}
+.cn-toggle:last-child{border-right:0}
+.cn-toggle:hover{background:var(--muted);color:var(--fg)}
+.cn-toggle.on{background:var(--muted);color:var(--fg)}
+
+/* ── Progress ── */
+.cn-progress{width:100%}
+.cn-progress-bar{width:100%;height:6px;border-radius:9999px;background:var(--muted);overflow:hidden}
+.cn-progress-fill{height:100%;border-radius:9999px;background:var(--primary)}
+
+/* ── Table ── */
+.cn-table{width:100%;border-collapse:collapse;font-size:0.875rem}
+.cn-table th{text-align:left;padding:8px 12px;font-weight:500;font-size:0.8rem;color:var(--muted-fg);border-bottom:var(--bw) solid var(--border)}
+.cn-table td{padding:8px 12px;color:var(--muted-fg);border-bottom:var(--bw) solid var(--border)}
+.cn-table tr:hover td{background:var(--muted)}
+
+/* ── Item ── */
+.cn-item{display:flex;align-items:center;gap:12px;padding:8px 16px;font-size:0.875rem}
+.cn-item-content{flex:1;min-width:0}
+.cn-item-title{font-weight:500;color:var(--fg)}
+.cn-item-desc{font-size:0.8rem;color:var(--muted-fg)}
+.cn-item-media{flex-shrink:0}
+
+/* ── Empty state ── */
+.cn-empty{display:flex;flex-direction:column;align-items:center;gap:8px;padding:24px 16px;text-align:center}
+.cn-empty svg{width:32px;height:32px;color:var(--muted-fg)}
+.cn-empty-title{font-weight:500;font-size:0.9rem}
+.cn-empty-desc{font-size:0.8rem;color:var(--muted-fg);max-width:240px;line-height:1.5}
+
+/* ── Alert ── */
+.cn-alert{display:grid;gap:4px;border-radius:var(--radius);border:var(--bw) solid var(--border);padding:12px 16px;font-size:0.875rem;text-align:left}
+.cn-alert:has(> svg){column-gap:10px;grid-template-columns:auto 1fr}
+.cn-alert svg{width:16px;height:16px;color:currentColor;grid-row:span 2}
+.cn-alert-title{font-weight:500}
+.cn-alert-desc{font-size:0.8rem;color:var(--muted-fg)}
+
+/* ── Tabs ── */
+.cn-tabs{width:100%}
+.cn-tab-list{display:flex;gap:0;border-bottom:var(--bw) solid var(--border);margin-bottom:12px}
+.cn-tab-item{padding:8px 16px;font-size:0.875rem;font-weight:500;color:var(--muted-fg);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;background:none;border-top:0;border-left:0;border-right:0;font-family:var(--font)}
+.cn-tab-item:hover{color:var(--fg)}
+.cn-tab-item.active{color:var(--fg);border-bottom-color:var(--primary)}
+
+/* ── Accordion ── */
+.cn-accordion{width:100%}
+.cn-accordion-item{border-bottom:var(--bw) solid var(--border)}
+.cn-accordion-trigger{display:flex;align-items:center;justify-content:space-between;width:100%;padding:12px 0;background:none;border:none;color:var(--fg);font-size:0.875rem;font-weight:500;font-family:var(--font);cursor:pointer}
+.cn-accordion-trigger svg{width:16px;height:16px;color:var(--muted-fg);flex-shrink:0;transition:transform 0.2s}
+.cn-accordion-trigger.open svg{transform:rotate(180deg)}
+.cn-accordion-content{padding-bottom:12px;font-size:0.8rem;color:var(--muted-fg);line-height:1.5}
+
+/* ── Chart ── */
+.cn-chart{width:100%;height:200px;border-radius:8px;background:var(--muted);position:relative;overflow:hidden}
+.cn-chart-line{position:absolute;bottom:20px;left:0;right:0;height:var(--bw);background:var(--border)}
+.cn-chart-area{position:absolute;bottom:20px;left:10%;right:10%;height:60%;background:linear-gradient(to top,color-mix(in oklab,var(--primary)15%,transparent),transparent);border-radius:8px 8px 0 0}
+.cn-bars{display:flex;align-items:flex-end;gap:6px;height:140px;padding:0 4px}
+.cn-bar{flex:1;border-radius:4px 4px 0 0;background:var(--primary);opacity:0.7}
+
+/* ── Calendar ── */
+.cn-calendar{width:100%;padding:8px 0}
+.cn-calendar-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding:0 4px}
+.cn-calendar-header button{width:28px;height:28px;border-radius:6px;border:none;background:transparent;color:var(--muted-fg);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cn-calendar-header button:hover{background:var(--muted)}
+.cn-calendar-header span{font-size:0.875rem;font-weight:500}
+.cn-calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center}
+.cn-calendar-grid .day-name{font-size:0.7rem;color:var(--muted-fg);padding:4px 0;font-weight:500}
+.cn-calendar-grid .day{font-size:0.8rem;padding:6px 0;border-radius:6px;color:var(--muted-fg);cursor:pointer}
+.cn-calendar-grid .day:hover{background:var(--muted)}
+.cn-calendar-grid .day.today{background:color-mix(in oklab,var(--primary)10%,transparent);color:var(--primary);font-weight:600}
+.cn-calendar-grid .day.selected{background:var(--primary);color:var(--primary-fg);font-weight:600}
+
+/* ── Textarea ── */
+.cn-textarea{min-height:80px;border-radius:var(--radius);border:1px solid var(--input);padding:8px 12px;font-size:0.875rem;font-family:var(--font);color:var(--fg);background:transparent;outline:none;width:100%;resize:vertical;line-height:1.5}
+.cn-textarea::placeholder{color:var(--muted-fg)}
+.cn-textarea:focus{border-color:var(--ring);box-shadow:0 0 0 3px color-mix(in oklab,var(--ring)50%,transparent)}
+
+/* ── Label / Field ── */
+.cn-label{font-size:0.875rem;font-weight:500;color:var(--fg)}
+.cn-field{display:flex;flex-direction:column;gap:6px}
+
+/* ── Separator ── */
+.cn-sep{height:var(--bw);background:var(--border);margin:8px 0}
+
+/* ── Smart Lock ── */
+.cn-lock{display:flex;align-items:center;gap:12px;padding:4px 0}
+.cn-lock-icon{width:40px;height:40px;border-radius:10px;background:var(--muted);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cn-lock-icon svg{width:20px;height:20px;color:var(--fg)}
+.cn-lock-info{flex:1}
+.cn-lock-title{font-weight:500;font-size:0.9rem}
+.cn-lock-desc{font-size:0.8rem;color:var(--muted-fg)}
+
+/* ── QR ── */
+.cn-qr{width:120px;height:120px;background:var(--muted);border-radius:10px;display:flex;align-items:center;justify-content:center;margin:0 auto}
+.cn-qr svg{width:48px;height:48px;color:var(--muted-fg)}
+
+/* ── Heatmap ── */
+.cn-heatmap{display:grid;grid-template-columns:repeat(12,1fr);gap:4px}
+.cn-heat-cell{aspect-ratio:1;border-radius:4px;background:var(--muted)}
+
+/* ── Skeleton pulse ── */
+@keyframes pulse{0%,100%{opacity:0.5}50%{opacity:1}}
+
+/* ── Hero Section ── */
+.cn-hero{text-align:center;padding:32px 16px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.cn-hero-title{font-family:var(--font-heading);font-weight:var(--fw);font-size:var(--title-fs);line-height:1.2;letter-spacing:var(--ls);text-shadow:var(--text-shadow)}
+.cn-hero-desc{font-size:var(--fs);color:var(--muted-fg);max-width:400px;line-height:1.6}
+.cn-hero-actions{display:flex;gap:8px;margin-top:8px}
+
+/* ── Hero Variants ── */
+.cn-hero-left{text-align:left;padding:24px 16px;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.cn-hero-left .cn-hero-title{text-align:left}
+.cn-hero-left .cn-hero-desc{text-align:left}
+.cn-hero-dark{background:var(--primary);color:var(--primary-fg);border-radius:calc(var(--radius)*1.4);padding:24px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+.cn-hero-dark .cn-hero-title{color:var(--primary-fg)}
+.cn-hero-dark .cn-hero-desc{color:var(--primary-fg);opacity:0.8}
+.cn-hero-dark .cn-btn{background:var(--primary-fg);color:var(--primary)}
+.cn-hero-gradient{background:linear-gradient(135deg,var(--primary),color-mix(in oklab,var(--primary) 60%,var(--fg)));color:var(--primary-fg);border-radius:calc(var(--radius)*1.4);padding:28px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+.cn-hero-gradient .cn-hero-title{color:var(--primary-fg)}
+.cn-hero-gradient .cn-hero-desc{color:var(--primary-fg);opacity:0.85}
+.cn-hero-stats{padding:20px 16px;display:flex;flex-direction:column;gap:16px;align-items:center;text-align:center}
+.cn-hero-badge{display:inline-block;padding:3px 10px;border-radius:100px;font-size:0.68rem;font-weight:600;background:var(--primary);color:var(--primary-fg);margin-bottom:4px}
+.cn-hero-eyebrow{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--primary);margin-bottom:4px}
+.cn-hero-minimal{padding:28px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
+.cn-hero-split{display:flex;gap:16px;padding:16px;align-items:center}
+.cn-hero-split-text{flex:1;display:flex;flex-direction:column;gap:8px}
+.cn-hero-split-visual{width:100px;height:100px;border-radius:calc(var(--radius)*1.2);background:linear-gradient(135deg,var(--primary),color-mix(in oklab,var(--primary) 50%,var(--fg)));flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.cn-hero-split-visual svg{width:40px;height:40px;color:var(--primary-fg);opacity:0.8}
+.cn-hero-countdown{display:flex;gap:8px;justify-content:center;margin-top:4px}
+.cn-hero-countdown-item{display:flex;flex-direction:column;align-items:center;padding:8px 12px;background:var(--muted);border-radius:var(--radius)}
+.cn-hero-countdown-num{font-family:var(--font-heading);font-size:1.2rem;font-weight:var(--fw);color:var(--fg)}
+.cn-hero-countdown-label{font-size:0.6rem;color:var(--muted-fg);text-transform:uppercase;letter-spacing:0.05em}
+.cn-hero-proof{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center;opacity:0.5;margin-top:4px}
+.cn-hero-proof span{font-size:0.75rem;font-weight:600;color:var(--fg)}
+.cn-hero-features{display:flex;gap:12px;margin-top:4px}
+.cn-hero-feature{text-align:center;flex:1}
+.cn-hero-feature-icon{width:32px;height:32px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center;margin:0 auto 6px}
+.cn-hero-feature-icon svg{width:16px;height:16px;color:var(--primary)}
+.cn-hero-feature-label{font-size:0.68rem;color:var(--muted-fg)}
+.cn-hero-bento{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:4px 0}
+.cn-hero-bento-item{padding:12px;background:var(--muted);border-radius:var(--radius);display:flex;flex-direction:column;gap:4px}
+.cn-hero-bento-label{font-size:0.68rem;color:var(--muted-fg)}
+.cn-hero-bento-value{font-family:var(--font-heading);font-size:1.1rem;font-weight:var(--fw);color:var(--fg)}
+
+/* ── Pricing Table ── */
+.cn-pricing{text-align:center;padding:20px 16px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.cn-pricing-name{font-size:0.85rem;font-weight:500;color:var(--muted-fg);text-transform:uppercase;letter-spacing:0.05em}
+.cn-pricing-price{font-family:var(--font-heading);font-size:2rem;font-weight:var(--fw);color:var(--fg);line-height:1}
+.cn-pricing-period{font-size:0.75rem;color:var(--muted-fg)}
+.cn-pricing-features{display:flex;flex-direction:column;gap:8px;width:100%;text-align:left}
+.cn-pricing-feature{display:flex;align-items:center;gap:8px;font-size:0.82rem;color:var(--fg)}
+.cn-pricing-feature svg{width:14px;height:14px;color:var(--primary);flex-shrink:0}
+.cn-pricing-badge{display:inline-block;padding:2px 8px;border-radius:100px;font-size:0.65rem;font-weight:600;background:var(--primary);color:var(--primary-fg)}
+
+/* ── Stats/Metrics ── */
+.cn-stats{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;padding:16px}
+.cn-stat{text-align:center;min-width:80px}
+.cn-stat-value{font-family:var(--font-heading);font-size:1.5rem;font-weight:var(--fw);color:var(--fg);line-height:1}
+.cn-stat-label{font-size:0.7rem;color:var(--muted-fg);margin-top:4px}
+
+/* ── Testimonial ── */
+.cn-testimonial{padding:20px 16px;display:flex;flex-direction:column;gap:12px}
+.cn-testimonial-quote{font-size:0.9rem;color:var(--fg);line-height:1.6;font-style:italic}
+.cn-testimonial-author{display:flex;align-items:center;gap:10px}
+.cn-testimonial-avatar{width:36px;height:36px;border-radius:50%;background:var(--muted);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:600;color:var(--muted-fg)}
+.cn-testimonial-name{font-size:0.82rem;font-weight:500;color:var(--fg)}
+.cn-testimonial-role{font-size:0.72rem;color:var(--muted-fg)}
+
+/* ── Logo Cloud ── */
+.cn-logos{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:center;padding:16px;opacity:0.6}
+.cn-logo{font-size:0.85rem;font-weight:700;color:var(--fg);letter-spacing:0.02em;opacity:0.7}
+
+/* ── Steps ── */
+.cn-steps{display:flex;flex-direction:column;gap:16px;padding:4px 0}
+.cn-step{display:flex;gap:12px}
+.cn-step-num{width:28px;height:28px;border-radius:50%;background:var(--primary);color:var(--primary-fg);display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;flex-shrink:0}
+.cn-step-content{flex:1}
+.cn-step-title{font-size:0.85rem;font-weight:500;color:var(--fg)}
+.cn-step-desc{font-size:0.75rem;color:var(--muted-fg);margin-top:2px}
+
+/* ── Feature Grid ── */
+.cn-features{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:4px 0}
+.cn-feature{display:flex;flex-direction:column;gap:6px;padding:8px}
+.cn-feature-icon{width:32px;height:32px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center}
+.cn-feature-icon svg{width:16px;height:16px;color:var(--primary)}
+.cn-feature-title{font-size:0.82rem;font-weight:500;color:var(--fg)}
+.cn-feature-desc{font-size:0.72rem;color:var(--muted-fg);line-height:1.4}
+
+/* ── Newsletter ── */
+.cn-newsletter{text-align:center;padding:20px 16px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.cn-newsletter-title{font-family:var(--font-heading);font-size:1.1rem;font-weight:var(--fw);color:var(--fg)}
+.cn-newsletter-desc{font-size:0.8rem;color:var(--muted-fg)}
+.cn-newsletter-form{display:flex;gap:6px;width:100%}
+
+/* ── Trust Badge ── */
+.cn-trust{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;padding:12px}
+.cn-trust-badge{display:flex;align-items:center;gap:6px;padding:6px 12px;background:var(--muted);border-radius:var(--radius);font-size:0.75rem;font-weight:500;color:var(--fg)}
+.cn-trust-badge svg{width:14px;height:14px;color:var(--primary)}
+
+/* ── FAQ ── */
+.cn-faq{display:flex;flex-direction:column;gap:0}
+.cn-faq-item{border-bottom:var(--bw) solid var(--border);padding:12px 0}
+.cn-faq-q{display:flex;align-items:center;justify-content:space-between;font-size:0.85rem;font-weight:500;color:var(--fg);cursor:pointer}
+.cn-faq-q svg{width:14px;height:14px;color:var(--muted-fg);flex-shrink:0;transition:transform 0.2s}
+.cn-faq-q.open svg{transform:rotate(180deg)}
+.cn-faq-a{font-size:0.8rem;color:var(--muted-fg);line-height:1.5;padding-top:8px}
+
+/* ── CTA Section ── */
+.cn-cta{text-align:center;padding:24px 16px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.cn-cta-title{font-family:var(--font-heading);font-size:1.2rem;font-weight:var(--fw);color:var(--fg)}
+.cn-cta-desc{font-size:0.82rem;color:var(--muted-fg);max-width:300px}
+
+/* ── Changelog ── */
+.cn-changelog{display:flex;flex-direction:column;gap:12px}
+.cn-changelog-item{display:flex;gap:10px}
+.cn-changelog-date{font-size:0.72rem;color:var(--muted-fg);font-family:var(--mono);min-width:60px;flex-shrink:0}
+.cn-changelog-content{flex:1}
+.cn-changelog-title{font-size:0.82rem;font-weight:500;color:var(--fg)}
+.cn-changelog-desc{font-size:0.72rem;color:var(--muted-fg);margin-top:2px}
+
+/* ── Status ── */
+.cn-status{display:flex;flex-direction:column;gap:8px}
+.cn-status-row{display:flex;align-items:center;gap:8px}
+.cn-status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.cn-status-dot.green{background:#34d399}
+.cn-status-dot.yellow{background:#fbbf24}
+.cn-status-dot.red{background:#f87171}
+.cn-status-name{font-size:0.82rem;color:var(--fg);flex:1}
+.cn-status-label{font-size:0.72rem;color:var(--muted-fg)}
+
+/* ── Comparison Table ── */
+.cn-compare{width:100%;font-size:0.78rem}
+.cn-compare th{text-align:left;padding:8px;font-weight:500;color:var(--muted-fg);border-bottom:var(--bw) solid var(--border)}
+.cn-compare td{padding:8px;color:var(--fg);border-bottom:var(--bw) solid var(--border)}
+.cn-compare td:first-child{color:var(--muted-fg)}
+.cn-compare .check{color:var(--primary)}
+.cn-compare .x{color:var(--muted-fg);opacity:0.4}
+
+/* ── Waitlist ── */
+.cn-waitlist{text-align:center;padding:20px 16px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.cn-waitlist-count{font-size:0.75rem;color:var(--muted-fg)}
+.cn-waitlist-count strong{color:var(--fg);font-weight:600}
+
+/* ── Blog Card ── */
+.cn-blog{display:flex;flex-direction:column;gap:8px}
+.cn-blog-image{height:80px;background:var(--muted);border-radius:calc(var(--radius)*0.8);overflow:hidden}
+.cn-blog-meta{display:flex;gap:8px;align-items:center}
+.cn-blog-tag{font-size:0.65rem;padding:2px 6px;border-radius:100px;background:var(--muted);color:var(--muted-fg);font-weight:500}
+.cn-blog-date{font-size:0.68rem;color:var(--muted-fg)}
+.cn-blog-title{font-size:0.88rem;font-weight:500;color:var(--fg);line-height:1.3}
+.cn-blog-excerpt{font-size:0.75rem;color:var(--muted-fg);line-height:1.4}
+
+/* ── Process/Timeline ── */
+.cn-process{display:flex;flex-direction:column;gap:0}
+.cn-process-item{display:flex;gap:12px;padding:8px 0}
+.cn-process-line{display:flex;flex-direction:column;align-items:center;gap:0}
+.cn-process-dot{width:10px;height:10px;border-radius:50%;background:var(--primary);flex-shrink:0;z-index:1}
+.cn-process-connector{width:1px;flex:1;background:var(--border)}
+.cn-process-item:last-child .cn-process-connector{display:none}
+.cn-process-content{flex:1;padding-bottom:8px}
+.cn-process-title{font-size:0.82rem;font-weight:500;color:var(--fg)}
+.cn-process-desc{font-size:0.72rem;color:var(--muted-fg);margin-top:2px}
+
+/* ── Error Page ── */
+.cn-error{text-align:center;padding:24px 16px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.cn-error-code{font-family:var(--font-heading);font-size:2.5rem;font-weight:var(--fw);color:var(--fg);line-height:1}
+.cn-error-msg{font-size:0.85rem;color:var(--muted-fg)}
+
+/* ── Onboarding ── */
+.cn-onboard{display:flex;flex-direction:column;gap:12px;padding:4px 0}
+.cn-onboard-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--radius);background:var(--muted)}
+.cn-onboard-check{width:20px;height:20px;border-radius:50%;background:var(--primary);color:var(--primary-fg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cn-onboard-check svg{width:12px;height:12px}
+.cn-onboard-pending{width:20px;height:20px;border-radius:50%;border:var(--bw) solid var(--border);flex-shrink:0}
+.cn-onboard-text{font-size:0.82rem;color:var(--fg)}
+
+/* ── Integration logos ── */
+.cn-integrations{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cn-integration{display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;background:var(--muted);border-radius:var(--radius);font-size:0.75rem;font-weight:500;color:var(--fg)}
+
+/* ── Utility ── */
+.flex{display:flex}.flex-col{flex-direction:column}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-2{gap:8px}.gap-3{gap:12px}.w-full{width:100%}.text-sm{font-size:0.875rem}.text-xs{font-size:0.75rem}.text-muted{color:var(--muted-fg)}.font-medium{font-weight:500}.font-semibold{font-weight:600}.mt-1{margin-top:4px}.mt-2{margin-top:8px}.mb-1{margin-bottom:4px}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div id="header">
+  <div class="brand">UnBoring</div>
+  <div class="actions">
+    <button class="h-btn h-btn-primary" id="surprise-btn">Surprise me!</button>
+    <button class="h-btn" id="export-btn">Export CSS</button>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<div id="sidebar"></div>
+
+<!-- Canvas -->
+<div id="canvas">
+  <div id="canvas-content">
+    <div class="grid">
+  <div class="col">
+    <div class="cn-card" data-id="01" data-name="Contribution History"><div class="cn-card-header"><div class="cn-card-title">Contribution History</div><div class="cn-card-desc">Last 6 months of activity</div></div><div class="cn-card-content"><div class="cn-chart"><svg class="cn-chart-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path class="cn-chart-line-path" d="M0,65 C10,70 20,55 30,50 C40,42 50,48 60,35 C70,28 80,32 90,22 L100,20" /><path class="cn-chart-area-path" d="M0,65 C10,70 20,55 30,50 C40,42 50,48 60,35 C70,28 80,32 90,22 L100,20 L100,100 L0,100 Z" /></svg><div class="cn-chart-line"></div></div><div class="flex justify-between mt-2" style="padding:0 4px"><span class="text-xs text-muted">Jan</span><span class="text-xs text-muted">Feb</span><span class="text-xs text-muted">Mar</span><span class="text-xs text-muted">Apr</span><span class="text-xs text-muted">May</span><span class="text-xs text-muted">Jun</span></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-outline cn-btn-sm w-full">View Full Report</button></div></div>
+    <div class="cn-card" data-id="13" data-name="Logo Cloud"><div class="cn-card-content"><div class="cn-logos"><span class="cn-logo">Vercel</span><span class="cn-logo">Linear</span><span class="cn-logo">Stripe</span><span class="cn-logo">Notion</span><span class="cn-logo">Figma</span><span class="cn-logo">GitHub</span></div></div></div>
+    <div class="cn-card" data-id="16" data-name="Join the waitlist"><div class="cn-waitlist"><div class="cn-hero-title" style="font-size:1.1rem">Join the waitlist</div><div class="cn-hero-desc" style="font-size:0.82rem">Be the first to know when we launch.</div><div class="cn-waitlist-count"><strong>2,847</strong> people waiting</div><div class="cn-newsletter-form"><input class="cn-input" placeholder="you@example.com" style="flex:1"><button class="cn-btn cn-btn-default">Join</button></div></div></div>
+    <div class="cn-card" data-id="27" data-name="Stats"><div class="cn-card-content"><div class="cn-stats"><div class="cn-stat"><div class="cn-stat-value">150+</div><div class="cn-stat-label">Countries</div></div><div class="cn-stat"><div class="cn-stat-value">24/7</div><div class="cn-stat-label">Support</div></div><div class="cn-stat"><div class="cn-stat-value">< 50ms</div><div class="cn-stat-label">Latency</div></div></div></div></div>
+    <div class="cn-card" data-id="31" data-name="FAQ"><div class="cn-card-header"><div class="cn-card-title">FAQ</div></div><div class="cn-card-content"><div class="cn-faq"><div class="cn-faq-item"><div class="cn-faq-q open"><span>How does the free trial work?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div><div class="cn-faq-a">Start using all features free for 14 days. No credit card required. Cancel anytime.</div></div><div class="cn-faq-item"><div class="cn-faq-q"><span>Can I change plans later?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div></div><div class="cn-faq-item"><div class="cn-faq-q"><span>What payment methods do you accept?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div></div></div></div></div>
+    <div class="cn-card" data-id="40" data-name="No watchlist items"><div class="cn-card-content"><div class="cn-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><div class="cn-empty-title">No watchlist items</div><div class="cn-empty-desc">Add stocks to your watchlist to track their performance.</div></div></div></div>
+    <div class="cn-card" data-id="46" data-name="Set a new milestone"><div class="cn-card-header"><div class="cn-card-title">Set a new milestone</div><div class="cn-card-desc">Define your financial target and we'll help you pace your savings.</div></div><div class="cn-card-content"><div class="cn-field"><label class="cn-label">Target Name</label><input class="cn-input" placeholder="e.g., New Laptop"></div><div class="cn-field mt-2"><label class="cn-label">Target Amount</label><input class="cn-input" placeholder="$0.00"></div><div class="cn-field mt-2"><label class="cn-label">Target Date</label><input class="cn-input" placeholder="Select date"></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-default cn-btn-sm">Create Milestone</button><button class="cn-btn cn-btn-ghost cn-btn-sm">Cancel</button></div></div>
+    <div class="cn-card" data-id="53" data-name="Dollar-Cost Averaging"><div class="cn-card-header"><div class="cn-card-title">Dollar-Cost Averaging</div><div class="cn-card-desc">A strategy for building wealth over time.</div></div><div class="cn-card-content"><p class="text-sm text-muted" style="line-height:1.6">By investing a fixed amount regularly, you buy more shares when prices are low and fewer when prices are high. Over time, this smooths out the average cost of your investments.</p></div></div>
+    <div class="cn-card" data-id="56" data-name="Error 404"><div class="cn-error"><div class="cn-error-code">404</div><div class="cn-error-msg">Page not found</div><div class="cn-hero-desc">The page you're looking for doesn't exist or has been moved.</div><button class="cn-btn cn-btn-outline cn-btn-sm">Go Home</button></div></div>
+    <div class="cn-card" data-id="64" data-name="How it works"><div class="cn-card-header"><div class="cn-card-title">How it works</div></div><div class="cn-card-content"><div class="cn-steps"><div class="cn-step"><div class="cn-step-num">1</div><div class="cn-step-content"><div class="cn-step-title">Sign up</div><div class="cn-step-desc">Create your free account in seconds.</div></div></div><div class="cn-step"><div class="cn-step-num">2</div><div class="cn-step-content"><div class="cn-step-title">Connect</div><div class="cn-step-desc">Link your existing tools and services.</div></div></div><div class="cn-step"><div class="cn-step-num">3</div><div class="cn-step-content"><div class="cn-step-title">Deploy</div><div class="cn-step-desc">Push your code and we handle the rest.</div></div></div></div></div></div>
+    <div class="cn-card" data-id="72" data-name="Everything you need."><div class="cn-hero"><span class="cn-hero-eyebrow">Introducing v2.0</span><div class="cn-hero-title">Everything you need.<br>Nothing you don't.</div><div class="cn-hero-desc">The most flexible platform for modern teams. Built for speed, designed for clarity.</div><div class="cn-hero-actions"><button class="cn-btn cn-btn-default">Try it free</button></div><div class="cn-hero-proof"><span>Trusted by</span><span>10K+</span><span>teams</span></div></div></div>
+    <div class="cn-card" data-id="78" data-name="Notifications"><div class="cn-card-header"><div class="cn-card-title">Notifications</div><div class="cn-card-desc">Choose what you want to be notified about.</div></div><div class="cn-card-content"><div class="flex items-center gap-3" style="padding:8px 0"><div class="cn-checkbox checked"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span class="text-sm">Everything</span></div><div class="flex items-center gap-3" style="padding:8px 0"><div class="cn-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span class="text-sm">Available</span></div><div class="flex items-center gap-3" style="padding:8px 0"><div class="cn-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span class="text-sm">Important</span></div><div class="flex items-center gap-3" style="padding:8px 0"><div class="cn-checkbox checked"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span class="text-sm">Mentions</span></div><div class="cn-sep"></div><div class="flex items-center gap-3" style="padding:8px 0"><div class="cn-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span class="text-sm">Security Alerts</span></div><div class="flex items-center gap-3" style="padding:8px 0"><div class="cn-checkbox checked"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span class="text-sm">Payment Reminders</span></div><div class="flex items-center gap-3" style="padding:8px 0"><div class="cn-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span class="text-sm">Weekly Summary</span></div><div class="flex items-center gap-3" style="padding:8px 0"><div class="cn-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span class="text-sm">Marketing</span></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-default cn-btn-sm">Save Preferences</button></div></div>
+  </div>
+  <div class="col">
+    <div class="cn-card" data-id="02" data-name="No recent activity"><div class="cn-card-content"><div class="cn-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg><div class="cn-empty-title">No recent activity</div><div class="cn-empty-desc">Your recent transactions will appear here once you start making purchases.</div></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-ghost cn-btn-sm">View History</button></div></div>
+    <div class="cn-card" data-id="09" data-name="Build faster."><div class="cn-hero"><div class="cn-hero-title">Build faster.<br>Ship smarter.</div><div class="cn-hero-desc">The modern development platform for teams who move fast and build things that matter.</div><div class="cn-hero-actions"><button class="cn-btn cn-btn-default">Get Started</button><button class="cn-btn cn-btn-outline">Learn More</button></div></div></div>
+    <div class="cn-card" data-id="15" data-name="Stats"><div class="cn-card-content"><div class="cn-stats"><div class="cn-stat"><div class="cn-stat-value">10K+</div><div class="cn-stat-label">Teams</div></div><div class="cn-stat"><div class="cn-stat-value">99.9%</div><div class="cn-stat-label">Uptime</div></div><div class="cn-stat"><div class="cn-stat-value">50M+</div><div class="cn-stat-label">Requests/day</div></div><div class="cn-stat"><div class="cn-stat-value">4.9★</div><div class="cn-stat-label">Rating</div></div></div></div></div>
+    <div class="cn-card" data-id="21" data-name="Ship products"><div class="cn-hero-left"><span class="cn-hero-badge">New</span><div class="cn-hero-title">Ship products<br>10x faster</div><div class="cn-hero-desc">Automate your workflow with AI-powered tools that handle the boring stuff.</div><div class="cn-hero-actions"><button class="cn-btn cn-btn-default">Start Free</button><button class="cn-btn cn-btn-ghost">See how →</button></div></div></div>
+    <div class="cn-card" data-id="26" data-name="Blog"><div class="cn-card-header"><div class="cn-card-title">Blog</div></div><div class="cn-card-content"><div class="cn-blog"><div class="cn-blog-image" style="background:linear-gradient(135deg,var(--muted),var(--primary))"></div><div class="cn-blog-meta"><span class="cn-blog-tag">Engineering</span><span class="cn-blog-date">May 28, 2026</span></div><div class="cn-blog-title">How we scaled to 10M requests per day</div><div class="cn-blog-excerpt">A deep dive into our architecture decisions and the lessons we learned along the way.</div></div></div></div>
+    <div class="cn-card" data-id="33" data-name="Living Room"><div class="cn-card-header"><div class="cn-card-title">Living Room</div><div class="cn-card-desc">Roller Shades</div></div><div class="cn-card-content"><div class="cn-field"><div class="flex justify-between"><label class="cn-label">Position</label><span class="text-sm text-muted">65%</span></div><div class="cn-slider" style="margin-top:8px"><div class="cn-slider-track"><div class="cn-slider-range" style="width:65%"></div><div class="cn-slider-thumb" style="left:65%"></div></div></div></div><div class="flex justify-between items-center mt-2" style="padding:8px 0"><span class="text-sm">Auto Schedule</span><div class="cn-switch on"></div></div><div class="cn-toggle-group" style="margin-top:8px"><button class="cn-toggle on">Open</button><button class="cn-toggle">Half</button><button class="cn-toggle">Close</button></div></div></div>
+    <div class="cn-card" data-id="41" data-name="Testimonial"><div class="cn-testimonial"><div class="cn-testimonial-quote">"This tool completely transformed our workflow. We shipped 3x faster in the first month."</div><div class="cn-testimonial-author"><div class="cn-testimonial-avatar">JD</div><div><div class="cn-testimonial-name">Jane Doe</div><div class="cn-testimonial-role">CTO, Acme Inc</div></div></div></div></div>
+    <div class="cn-card" data-id="45" data-name="Features"><div class="cn-card-header"><div class="cn-card-title">Features</div><div class="cn-card-desc">Everything you need to build modern apps.</div></div><div class="cn-card-content"><div class="cn-features"><div class="cn-feature"><div class="cn-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="cn-feature-title">Lightning Fast</div><div class="cn-feature-desc">Sub-second response times globally.</div></div><div class="cn-feature"><div class="cn-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg></div><div class="cn-feature-title">Secure</div><div class="cn-feature-desc">Enterprise-grade security built in.</div></div><div class="cn-feature"><div class="cn-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><div class="cn-feature-title">Modular</div><div class="cn-feature-desc">Use only what you need.</div></div><div class="cn-feature"><div class="cn-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div><div class="cn-feature-title">Customizable</div><div class="cn-feature-desc">Tailor everything to your needs.</div></div></div></div></div>
+    <div class="cn-card" data-id="54" data-name="Think less."><div class="cn-hero-minimal"><div class="cn-hero-title" style="font-size:1.3rem">Think less.<br>Build more.</div><div class="cn-hero-desc">Zero config. Zero boilerplate. Just code.</div><div class="cn-hero-actions"><button class="cn-btn cn-btn-default">npm install</button></div></div></div>
+    <div class="cn-card" data-id="60" data-name="Try it free for 14 days" style="background:var(--muted)"><div class="cn-cta"><div class="cn-cta-title">Try it free for 14 days</div><div class="cn-cta-desc">No credit card required. Setup takes 2 minutes.</div><div style="display:flex;gap:8px"><button class="cn-btn cn-btn-default">Start Trial</button><button class="cn-btn cn-btn-outline">Watch Demo</button></div></div></div>
+    <div class="cn-card" data-id="62" data-name="Yearly Activity"><div class="cn-card-header"><div class="cn-card-title">Yearly Activity</div></div><div class="cn-card-content"><div class="cn-heatmap"><div class="cn-heat-cell" style="background:var(--primary);opacity:0.1"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.2"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.3"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.5"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.7"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.4"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.2"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.6"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.8"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.3"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.5"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.9"></div></div><span class="cn-badge cn-badge-secondary mt-2">+12% from last year</span></div></div>
+    <div class="cn-card" data-id="67" data-name="US$12.94"><div class="cn-card-header"><div class="cn-card-title" style="font-size:1.5rem">US$12.94</div><div class="cn-card-desc">Card Balance</div></div><div class="cn-card-content"><div class="flex justify-between"><span class="text-sm text-muted">Available Credit</span><span class="text-sm font-medium">$3,987.06</span></div><div class="flex justify-between mt-1"><span class="text-sm text-muted">Pending</span><span class="text-sm font-medium">$0.00</span></div></div></div>
+    <div class="cn-card" data-id="71" data-name="Get updates"><div class="cn-newsletter"><div class="cn-newsletter-title">Get updates</div><div class="cn-newsletter-desc">No spam, just the good stuff.</div><div class="cn-newsletter-form"><input class="cn-input" placeholder="your@email.com" style="flex:1"><button class="cn-btn cn-btn-default">Join</button></div><div style="font-size:0.68rem;color:var(--muted-fg);margin-top:4px">Join 5,000+ subscribers</div></div></div>
+    <div class="cn-card" data-id="76" data-name="Stock Performance"><div class="cn-card-header"><div class="cn-card-title">Stock Performance</div><div class="cn-card-desc">6-month price history.</div></div><div class="cn-card-content"><div class="cn-chart" style="height:180px"><svg class="cn-chart-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path class="cn-chart-line-path" d="M0,80 C10,78 20,65 30,50 C40,35 50,30 60,28 C70,25 80,22 90,20 L100,20" /><path class="cn-chart-area-path" d="M0,80 C10,78 20,65 30,50 C40,35 50,30 60,28 C70,25 80,22 90,20 L100,20 L100,100 L0,100 Z" /></svg><div class="cn-chart-line"></div></div><div class="flex justify-between mt-1" style="padding:0 4px"><span class="text-xs text-muted">Sep</span><span class="text-xs text-muted">Oct</span><span class="text-xs text-muted">Nov</span><span class="text-xs text-muted">Dec</span><span class="text-xs text-muted">Jan</span><span class="text-xs text-muted">Feb</span></div><div class="flex gap-3 mt-2"><div class="cn-field" style="flex:1"><label class="cn-label">Symbol</label><input class="cn-input" value="AAPL"></div><div class="cn-field" style="flex:1"><label class="cn-label">Period</label><select class="cn-select"><option>1M</option><option>3M</option><option selected>6M</option><option>1Y</option></select></div></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-outline cn-btn-sm">View Analysis</button></div></div>
+  </div>
+  <div class="col col-span-2">
+    <div class="cn-card" data-id="03" data-name="Ready to get started?" style="background:var(--primary);color:var(--primary-fg)"><div class="cn-cta"><div class="cn-cta-title" style="color:var(--primary-fg)">Ready to get started?</div><div class="cn-cta-desc" style="color:var(--primary-fg);opacity:0.8">Join thousands of teams already using our platform.</div><button class="cn-btn" style="background:var(--primary-fg);color:var(--primary)">Start Free Trial</button></div></div>
+    <div class="cn-card" data-id="07" data-name="Common Questions"><div class="cn-card-header"><div class="cn-card-title">Common Questions</div></div><div class="cn-card-content"><div class="cn-faq"><div class="cn-faq-item"><div class="cn-faq-q open"><span>Is there a free plan?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div><div class="cn-faq-a">Yes! Our free plan includes 3 projects and 1GB storage. No credit card needed.</div></div><div class="cn-faq-item"><div class="cn-faq-q"><span>Do you offer refunds?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div></div><div class="cn-faq-item"><div class="cn-faq-q"><span>How do I contact support?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div></div></div></div></div>
+    <div class="cn-card" data-id="11" data-name="Payout Threshold"><div class="cn-card-header"><div class="cn-card-title">Payout Threshold</div><div class="cn-card-desc">Set the minimum balance required before a payout is triggered.</div></div><div class="cn-card-content"><div class="cn-field"><div class="flex justify-between"><label class="cn-label">Minimum Balance</label><span class="text-sm text-muted">$50.00</span></div><div class="cn-slider" style="margin-top:8px"><div class="cn-slider-track"><div class="cn-slider-range" style="width:50%"></div><div class="cn-slider-thumb" style="left:50%"></div></div></div></div><div class="cn-field mt-2"><label class="cn-label">Currency</label><select class="cn-select"><option selected>USD — US Dollar</option><option>EUR — Euro</option><option>GBP — British Pound</option></select></div><div class="cn-field mt-2"><label class="cn-label">Notes</label><textarea class="cn-textarea" placeholder="Optional payout notes…" style="min-height:60px"></textarea></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-default cn-btn-sm">Save Threshold</button></div></div>
+    <div class="cn-card" data-id="14" data-name="The AI copilot for"><div class="cn-hero"><span class="cn-hero-badge">Beta</span><div class="cn-hero-title" style="font-size:1rem">The AI copilot for<br>your entire stack</div><div class="cn-hero-desc" style="font-size:0.78rem">Ask questions in natural language. Get answers from your codebase.</div><div class="cn-hero-actions"><button class="cn-btn cn-btn-default cn-btn-sm">Join Waitlist</button></div><div class="cn-hero-proof"><span>Backed by</span><span>Y Combinator</span></div></div></div>
+    <div class="cn-card" data-id="19" data-name="Badges"><div class="cn-card-content"><div class="cn-item"><div class="cn-item-media"><div style="width:36px;height:36px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:600;color:var(--fg)">VOO</div></div><div class="cn-item-content"><div class="cn-item-title">Vanguard S&P 500 ETF</div><div class="cn-item-desc">112 Shares · Jan 2021</div></div><span class="cn-badge cn-badge-outline">ETF</span></div><div class="cn-item"><div class="cn-item-media"><div style="width:36px;height:36px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:600;color:var(--fg)">VIG</div></div><div class="cn-item-content"><div class="cn-item-title">Vanguard Dividend Appreciation</div><div class="cn-item-desc">450 Shares · Mar 2022</div></div><span class="cn-badge cn-badge-outline">ETF</span></div><div class="cn-item"><div class="cn-item-media"><div style="width:36px;height:36px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:600;color:var(--fg)">AAPL</div></div><div class="cn-item-content"><div class="cn-item-title">Apple Inc.</div><div class="cn-item-desc">85 Shares · Nov 2020</div></div><span class="cn-badge cn-badge-secondary">Stock</span></div><div class="cn-item"><div class="cn-item-media"><div style="width:36px;height:36px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:600;color:var(--fg)">O</div></div><div class="cn-item-content"><div class="cn-item-title">Realty Income Corp</div><div class="cn-item-desc">320 Shares · Jun 2023</div></div><span class="cn-badge cn-badge-outline">REIT</span></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-outline cn-btn-sm">View All Holdings</button></div></div>
+    <div class="cn-card" data-id="22" data-name="Simple, transparent pricing"><div class="cn-hero"><div class="cn-hero-title" style="font-size:0.95rem">Simple, transparent pricing</div><div class="cn-hero-desc" style="font-size:0.78rem">No hidden fees. No surprises. Cancel anytime.</div></div><div class="cn-card-content" style="padding-top:0"><div style="display:flex;gap:8px"><div style="flex:1;text-align:center;padding:12px 8px;background:var(--muted);border-radius:var(--radius)"><div style="font-size:0.72rem;color:var(--muted-fg);margin-bottom:4px">Starter</div><div style="font-size:1.2rem;font-weight:700;color:var(--fg)">$9</div><div style="font-size:0.65rem;color:var(--muted-fg)">/mo</div></div><div style="flex:1;text-align:center;padding:12px 8px;background:var(--primary);border-radius:var(--radius);color:var(--primary-fg)"><div style="font-size:0.72rem;opacity:0.8;margin-bottom:4px">Pro</div><div style="font-size:1.2rem;font-weight:700">$29</div><div style="font-size:0.65rem;opacity:0.8">/mo</div></div><div style="flex:1;text-align:center;padding:12px 8px;background:var(--muted);border-radius:var(--radius)"><div style="font-size:0.72rem;color:var(--muted-fg);margin-bottom:4px">Team</div><div style="font-size:1.2rem;font-weight:700;color:var(--fg)">$79</div><div style="font-size:0.65rem;color:var(--muted-fg)">/mo</div></div></div></div></div>
+    <div class="cn-card" data-id="25" data-name="$0.00"><div class="cn-card-header"><div class="cn-card-title">$0.00</div><div class="cn-card-desc">Claimable Balance</div></div><div class="cn-card-content"><div class="cn-item"><div class="cn-item-content"><div class="cn-item-title">Net Royalties</div></div><span class="text-sm text-muted">$0.00</span></div><div class="cn-item"><div class="cn-item-content"><div class="cn-item-title">Processing Fee</div></div><span class="text-sm text-muted">-$0.00</span></div><div class="cn-sep"></div><div class="flex justify-between" style="padding:0 16px"><span class="text-sm font-medium">Total Ready to Claim</span><span class="text-sm font-medium">$0.00 USD</span></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-outline cn-btn-sm">Claim Now</button><button class="cn-btn cn-btn-ghost cn-btn-sm">History</button></div></div>
+
+    <div class="cn-card" data-id="17" data-name="Recent Transactions"><div class="cn-card-header"><div class="cn-card-title">Recent Transactions</div><div class="cn-card-desc">Your latest account activity.</div></div><div class="cn-card-content" style="padding:0"><table class="cn-table"><thead><tr><th>Merchant</th><th>Category</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead><tbody><tr><td>Blue Bottle Coffee</td><td>Food & Drink</td><td>-$6.50</td><td>Today</td><td><span class="cn-badge cn-badge-default">Completed</span></td></tr><tr><td>Whole Foods Market</td><td>Groceries</td><td>-$142.30</td><td>Yesterday</td><td><span class="cn-badge cn-badge-default">Completed</span></td></tr><tr><td>Stripe Payout</td><td>Income</td><td>+$4,200.00</td><td>Mar 15</td><td><span class="cn-badge cn-badge-secondary">Pending</span></td></tr><tr><td>Amazon</td><td>Shopping</td><td>-$89.99</td><td>Mar 14</td><td><span class="cn-badge cn-badge-default">Completed</span></td></tr><tr><td>Netflix</td><td>Entertainment</td><td>-$15.99</td><td>Mar 13</td><td><span class="cn-badge cn-badge-default">Completed</span></td></tr></tbody></table></div><div class="cn-card-footer"><button class="cn-btn cn-btn-ghost cn-btn-sm">View All</button></div></div>
+    <div class="cn-card" data-id="28" data-name="Welcome to the" style="padding:0"><div class="cn-hero-dark"><div class="cn-hero-title">Welcome to the<br>future of work</div><div class="cn-hero-desc">One platform to manage everything. No more context switching.</div><div class="cn-hero-actions"><button class="cn-btn">Get Early Access</button></div></div></div>
+    <div class="cn-card" data-id="32" data-name="Getting Started"><div class="cn-card-header"><div class="cn-card-title">Getting Started</div></div><div class="cn-card-content"><div class="cn-onboard"><div class="cn-onboard-item"><div class="cn-onboard-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div class="cn-onboard-text">Create your account</div></div><div class="cn-onboard-item"><div class="cn-onboard-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div class="cn-onboard-text">Set up your workspace</div></div><div class="cn-onboard-item"><div class="cn-onboard-pending"></div><div class="cn-onboard-text">Connect your first integration</div></div><div class="cn-onboard-item"><div class="cn-onboard-pending"></div><div class="cn-onboard-text">Invite your team</div></div><div class="cn-onboard-item"><div class="cn-onboard-pending"></div><div class="cn-onboard-text">Deploy your first project</div></div></div></div></div>
+    <div class="cn-card" data-id="38" data-name="Stay in the loop"><div class="cn-newsletter"><div class="cn-newsletter-title">Stay in the loop</div><div class="cn-newsletter-desc">Get the latest updates delivered to your inbox.</div><div class="cn-newsletter-form"><input class="cn-input" placeholder="you@example.com" style="flex:1"><button class="cn-btn cn-btn-default">Subscribe</button></div></div></div>
+    <div class="cn-card" data-id="43" data-name="Transfer Funds"><div class="cn-card-header"><div class="cn-card-title">Transfer Funds</div><div class="cn-card-desc">Move money between your connected accounts.</div></div><div class="cn-card-content"><div class="cn-field"><label class="cn-label">From</label><select class="cn-select"><option selected>Checking ···4521</option><option>Savings ···7892</option></select></div><div class="cn-field mt-2"><label class="cn-label">To</label><select class="cn-select"><option>Savings ···7892</option><option selected>Investment ···3210</option></select></div><div class="cn-field mt-2"><label class="cn-label">Amount</label><input class="cn-input" placeholder="$0.00" value="$500.00"></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-default cn-btn-sm">Transfer</button></div></div>
+    <div class="cn-card" data-id="48" data-name="1 Apr"><div class="cn-card-header"><div class="cn-card-title">1 Apr</div><div class="cn-card-desc">Payment Due</div></div><div class="cn-card-content"><div class="flex justify-between"><span class="text-sm text-muted">Minimum Due</span><span class="text-sm font-medium">$25.00</span></div><div class="flex justify-between mt-1"><span class="text-sm text-muted">Statement Balance</span><span class="text-sm font-medium">$12.94</span></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-default cn-btn-sm">Pay Now</button></div></div>
+    <div class="cn-card" data-id="51" data-name="Changelog"><div class="cn-card-header"><div class="cn-card-title">Changelog</div></div><div class="cn-card-content"><div class="cn-changelog"><div class="cn-changelog-item"><div class="cn-changelog-date">v2.4.0</div><div class="cn-changelog-content"><div class="cn-changelog-title">New dashboard</div><div class="cn-changelog-desc">Completely redesigned dashboard with real-time analytics.</div></div></div><div class="cn-changelog-item"><div class="cn-changelog-date">v2.3.2</div><div class="cn-changelog-content"><div class="cn-changelog-title">Bug fixes</div><div class="cn-changelog-desc">Fixed login issue on Safari and improved performance.</div></div></div><div class="cn-changelog-item"><div class="cn-changelog-date">v2.3.0</div><div class="cn-changelog-content"><div class="cn-changelog-title">API v3</div><div class="cn-changelog-desc">New REST API with GraphQL support.</div></div></div></div></div></div>
+    <div class="cn-card" data-id="57" data-name="Savings Targets"><div class="cn-card-header"><div class="cn-card-title">Savings Targets</div><div class="cn-card-desc">Active milestones for 2024</div></div><div class="cn-card-content"><div class="cn-item"><div class="cn-item-content"><div class="cn-item-title">Emergency Fund</div><div class="cn-progress" style="margin-top:4px"><div class="cn-progress-bar"><div class="cn-progress-fill" style="width:80%"></div></div></div></div><span class="text-xs text-muted">$12k/$15k</span></div><div class="cn-item"><div class="cn-item-content"><div class="cn-item-title">Vacation</div><div class="cn-progress" style="margin-top:4px"><div class="cn-progress-bar"><div class="cn-progress-fill" style="width:64%"></div></div></div></div><span class="text-xs text-muted">$3.2k/$5k</span></div><div class="cn-item"><div class="cn-item-content"><div class="cn-item-title">New Car</div><div class="cn-progress" style="margin-top:4px"><div class="cn-progress-bar"><div class="cn-progress-fill" style="width:28%"></div></div></div></div><span class="text-xs text-muted">$8.5k/$30k</span></div><div class="cn-item"><div class="cn-item-content"><div class="cn-item-title">Home Down Payment</div><div class="cn-progress" style="margin-top:4px"><div class="cn-progress-bar"><div class="cn-progress-fill" style="width:52%"></div></div></div></div><span class="text-xs text-muted">$42k/$80k</span></div><div class="cn-item"><div class="cn-item-content"><div class="cn-item-title">Wedding</div><div class="cn-progress" style="margin-top:4px"><div class="cn-progress-bar"><div class="cn-progress-fill" style="width:60%"></div></div></div></div><span class="text-xs text-muted">$15k/$25k</span></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-outline cn-btn-sm">View All Targets</button></div></div>
+    <div class="cn-card" data-id="59" data-name="Trusted by the best"><div class="cn-hero-stats"><div class="cn-hero-title">Trusted by the best</div><div class="cn-stats"><div class="cn-stat"><div class="cn-stat-value">10K+</div><div class="cn-stat-label">Teams</div></div><div class="cn-stat"><div class="cn-stat-value">99.9%</div><div class="cn-stat-label">Uptime</div></div><div class="cn-stat"><div class="cn-stat-value">50M+</div><div class="cn-stat-label">API calls/day</div></div></div><div class="cn-hero-actions"><button class="cn-btn cn-btn-outline">Read Case Studies</button></div></div></div>
+    <div class="cn-card" data-id="66" data-name="Compare Plans"><div class="cn-card-header"><div class="cn-card-title">Compare Plans</div></div><div class="cn-card-content" style="padding:0"><table class="cn-compare"><thead><tr><th>Feature</th><th>Free</th><th>Pro</th></tr></thead><tbody><tr><td>Projects</td><td>3</td><td>Unlimited</td></tr><tr><td>Storage</td><td>1GB</td><td>100GB</td></tr><tr><td>Members</td><td>1</td><td>Unlimited</td></tr><tr><td>API Access</td><td class="x">✕</td><td class="check">✓</td></tr><tr><td>Priority Support</td><td class="x">✕</td><td class="check">✓</td></tr></table></div></div>
+    <div class="cn-card" data-id="74" data-name="Hero"><div class="cn-hero-bento"><div class="cn-hero-bento-item"><div class="cn-hero-bento-label">Uptime</div><div class="cn-hero-bento-value">99.99%</div></div><div class="cn-hero-bento-item"><div class="cn-hero-bento-label">Latency</div><div class="cn-hero-bento-value">&lt;50ms</div></div><div class="cn-hero-bento-item"><div class="cn-hero-bento-label">Regions</div><div class="cn-hero-bento-value">32</div></div><div class="cn-hero-bento-item"><div class="cn-hero-bento-label">Deploys/day</div><div class="cn-hero-bento-value">10K+</div></div></div></div>
+    <div class="cn-card" data-id="77" data-name="Account Access"><div class="cn-card-header"><div class="cn-card-title">Account Access</div><div class="cn-card-desc">Update your credentials or re-authenticate.</div></div><div class="cn-card-content"><div class="cn-field"><label class="cn-label">Email</label><input class="cn-input" value="alex@example.com"></div><div class="cn-field mt-2"><label class="cn-label">Current Password</label><input class="cn-input" type="password" value="password123"></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-default cn-btn-sm">Update Credentials</button></div></div>
+      <div <div class="cn-card-content" style="padding:0"><table class="cn-table"><thead><tr><th>Merchant</th><th>Category</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead><tbody><tr><td>Blue Bottle Coffee</td><td>Food & Drink</td><td>-$6.50</td><td>Today</td><td><span class="cn-badge cn-badge-default">Completed</span></td></tr><tr><td>Whole Foods Market</td><td>Groceries</td><td>-$142.30</td><td>Yesterday</td><td><span class="cn-badge cn-badge-default">Completed</span></td></tr><tr><td>Stripe Payout</td><td>Income</td><td>+$4,200.00</td><td>Mar 15</td><td><span class="cn-badge cn-badge-secondary">Pending</span></td></tr><tr><td>Amazon</td><td>Shopping</td><td>-$89.99</td><td>Mar 14</td><td><span class="cn-badge cn-badge-default">Completed</span></td></tr><tr><td>Netflix</td><td>Entertainment</td><td>-$15.99</td><td>Mar 13</td><td><span class="cn-badge cn-badge-default">Completed</span></td></tr></tbody></table></div><div class="cn-card-footer"><button class="cn-btn cn-btn-ghost cn-btn-sm">View All</button></div></div>
+  </div>
+  <div class="col">
+    <div class="cn-card" data-id="04" data-name="No devices connected"><div class="cn-card-content"><div class="cn-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg><div class="cn-empty-title">No devices connected</div><div class="cn-empty-desc">Connect a smart device to get started with home automation.</div></div></div></div>
+    <div class="cn-card" data-id="08" data-name="Our Process"><div class="cn-card-header"><div class="cn-card-title">Our Process</div></div><div class="cn-card-content"><div class="cn-process"><div class="cn-process-item"><div class="cn-process-line"><div class="cn-process-dot"></div><div class="cn-process-connector"></div></div><div class="cn-process-content"><div class="cn-process-title">Discovery</div><div class="cn-process-desc">Understanding your needs and goals.</div></div></div><div class="cn-process-item"><div class="cn-process-line"><div class="cn-process-dot"></div><div class="cn-process-connector"></div></div><div class="cn-process-content"><div class="cn-process-title">Design</div><div class="cn-process-desc">Crafting the perfect solution.</div></div></div><div class="cn-process-item"><div class="cn-process-line"><div class="cn-process-dot"></div><div class="cn-process-connector"></div></div><div class="cn-process-content"><div class="cn-process-title">Develop</div><div class="cn-process-desc">Building with precision and care.</div></div></div><div class="cn-process-item"><div class="cn-process-line"><div class="cn-process-dot"></div></div><div class="cn-process-content"><div class="cn-process-title">Deploy</div><div class="cn-process-desc">Ship it to the world.</div></div></div></div></div></div>
+    <div class="cn-card-footer"><button class="cn-btn cn-btn-ghost cn-btn-sm">View All</button></div>
+    <div class="cn-card" data-id="20" data-name="System Status"><div class="cn-card-header"><div class="cn-card-title">System Status</div></div><div class="cn-card-content"><div class="cn-status"><div class="cn-status-row"><div class="cn-status-dot green"></div><div class="cn-status-name">API</div><div class="cn-status-label">Operational</div></div><div class="cn-status-row"><div class="cn-status-dot green"></div><div class="cn-status-name">Dashboard</div><div class="cn-status-label">Operational</div></div><div class="cn-status-row"><div class="cn-status-dot yellow"></div><div class="cn-status-name">Webhooks</div><div class="cn-status-label">Degraded</div></div><div class="cn-status-row"><div class="cn-status-dot green"></div><div class="cn-status-name">CDN</div><div class="cn-status-label">Operational</div></div></div></div></div>
+    
+    <div class="cn-card" data-id="36" data-name="Launching March 2026"><div class="cn-hero" style="padding:24px 16px"><div class="cn-hero-title" style="font-size:1.1rem">Launching March 2026</div><div class="cn-hero-countdown"><div class="cn-hero-countdown-item"><div class="cn-hero-countdown-num">42</div><div class="cn-hero-countdown-label">Days</div></div><div class="cn-hero-countdown-item"><div class="cn-hero-countdown-num">08</div><div class="cn-hero-countdown-label">Hours</div></div><div class="cn-hero-countdown-item"><div class="cn-hero-countdown-num">23</div><div class="cn-hero-countdown-label">Min</div></div></div><div class="cn-hero-actions"><button class="cn-btn cn-btn-outline cn-btn-sm">Get Notified</button></div></div></div>
+    <div class="cn-card" data-id="42" data-name="Device Manager"><div class="cn-card-header"><div class="cn-card-title">Device Manager</div></div><div class="cn-card-content"><input class="cn-input" placeholder="Search devices…" style="margin-bottom:12px"><div class="cn-item"><div class="cn-item-media"><div style="width:32px;height:32px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div></div><div class="cn-item-content"><div class="cn-item-title">Thermostat</div><div class="cn-item-desc">Living Room · 72°F</div></div><span class="cn-badge cn-badge-outline">Active</span></div><div class="cn-item"><div class="cn-item-media"><div style="width:32px;height:32px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v8"/><path d="m4.93 10.93 1.41 1.41"/><path d="M2 18h2"/><path d="M20 18h2"/><path d="m19.07 10.93-1.41 1.41"/><path d="M22 22H2"/><path d="m8 22 4-10 4 10"/></svg></div></div><div class="cn-item-content"><div class="cn-item-title">Smart Bulb</div><div class="cn-item-desc">Bedroom · 40%</div></div><span class="cn-badge cn-badge-outline">Active</span></div><div class="cn-item"><div class="cn-item-media"><div style="width:32px;height:32px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></div></div><div class="cn-item-content"><div class="cn-item-title">Camera</div><div class="cn-item-desc">Porch · Recording</div></div><span class="cn-badge cn-badge-destructive">Alert</span></div></div></div>
+    <div class="cn-card" data-id="47" data-name="Trust Badges"><div class="cn-card-content"><div class="cn-trust"><div class="cn-trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>SOC 2</div><div class="cn-trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>GDPR</div><div class="cn-trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>ISO 27001</div><div class="cn-trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>HIPAA</div></div></div></div>
+    <div class="cn-card" data-id="52" data-name="Q2 Dividend Income"><div class="cn-card-header"><div class="cn-card-title">Q2 Dividend Income</div><div class="cn-card-desc">Quarterly dividend payouts across your portfolio holdings.</div></div><div class="cn-card-content"><div class="cn-chart" style="height:160px"><div class="cn-bars"><div class="cn-bar" style="height:40%"></div><div class="cn-bar" style="height:65%"></div><div class="cn-bar" style="height:55%"></div><div class="cn-bar" style="height:80%"></div><div class="cn-bar" style="height:45%"></div><div class="cn-bar" style="height:70%"></div></div></div><div class="flex justify-between mt-2" style="padding:0 4px"><span class="text-xs text-muted">Jan</span><span class="text-xs text-muted">Feb</span><span class="text-xs text-muted">Mar</span><span class="text-xs text-muted">Apr</span><span class="text-xs text-muted">May</span><span class="text-xs text-muted">Jun</span></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-outline cn-btn-sm w-full">View Details</button></div></div>
+    <div class="cn-card" data-id="65" data-name="Upcoming Payments"><div class="cn-card-header"><div class="cn-card-title">Upcoming Payments</div><div class="cn-card-desc">Select a date to view scheduled payments.</div></div><div class="cn-card-content"><div class="cn-calendar"><div class="cn-calendar-header"><button><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><span>March 2025</span><button><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button></div><div class="cn-calendar-grid"><span class="day-name">Su</span><span class="day-name">Mo</span><span class="day-name">Tu</span><span class="day-name">We</span><span class="day-name">Th</span><span class="day-name">Fr</span><span class="day-name">Sa</span><span class="day" style="color:var(--muted-fg)">25</span><span class="day" style="color:var(--muted-fg)">26</span><span class="day" style="color:var(--muted-fg)">27</span><span class="day" style="color:var(--muted-fg)">28</span><span class="day">1</span><span class="day">2</span><span class="day">3</span><span class="day">4</span><span class="day">5</span><span class="day">6</span><span class="day">7</span><span class="day">8</span><span class="day">9</span><span class="day">10</span><span class="day today">11</span><span class="day">12</span><span class="day">13</span><span class="day selected">14</span><span class="day">15</span><span class="day">16</span><span class="day">17</span><span class="day">18</span><span class="day">19</span><span class="day">20</span><span class="day">21</span><span class="day">22</span><span class="day">23</span><span class="day">24</span><span class="day">25</span><span class="day">26</span><span class="day">27</span><span class="day">28</span><span class="day">29</span><span class="day">30</span><span class="day">31</span></div></div><div class="cn-sep"></div><div class="cn-item"><div class="cn-item-content"><div class="cn-item-title">Rent</div><div class="cn-item-desc">Mar 14 · Auto-pay</div></div><span class="text-sm font-medium">$1,200</span></div><div class="cn-item"><div class="cn-item-content"><div class="cn-item-title">Internet</div><div class="cn-item-desc">Mar 14 · Auto-pay</div></div><span class="text-sm font-medium">$79.99</span></div></div></div>
+    <div class="cn-card" data-id="75" data-name="Buy Investment"><div class="cn-card-header"><div class="cn-card-title">Buy Investment</div><div class="cn-card-desc">Trades are typically executed within minutes during market hours.</div></div><div class="cn-card-content"><div class="flex gap-3"><div class="cn-field" style="flex:1"><label class="cn-label">Symbol</label><input class="cn-input" placeholder="AAPL" value="AAPL"></div><div class="cn-field" style="flex:1"><label class="cn-label">Amount</label><input class="cn-input" placeholder="$0.00" value="$1,000.00"></div></div><div class="flex gap-3 mt-2"><div class="cn-field" style="flex:1"><label class="cn-label">Order Type</label><select class="cn-select"><option selected>Market</option><option>Limit</option><option>Stop</option></select></div><div class="cn-field" style="flex:1"><label class="cn-label">Duration</label><select class="cn-select"><option selected>Day</option><option>GTC</option></select></div></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-default cn-btn-sm">Review Order</button></div></div>
+    <div class="cn-card" data-id="79" data-name="Your workspace." style="padding:0"><div class="cn-hero-gradient"><div class="cn-hero-title">Your workspace.<br>Your rules.</div><div class="cn-hero-desc">Customize everything from themes to workflows. Make it yours.</div><div class="cn-hero-actions"><button class="cn-btn">Customize Now</button></div></div></div>
+  </div>
+  <div class="col">
+    <div class="cn-card" data-id="05" data-name="Pro Pricing"><div class="cn-pricing"><span class="cn-pricing-badge">Most Popular</span><div class="cn-pricing-name">Pro</div><div class="cn-pricing-price">$49<span class="cn-pricing-period">/mo</span></div><div class="cn-pricing-features"><div class="cn-pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Unlimited projects</div><div class="cn-pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Priority support</div><div class="cn-pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Advanced analytics</div><div class="cn-pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Custom domains</div></div><button class="cn-btn cn-btn-default w-full">Start Free Trial</button></div></div>
+    <div class="cn-card" data-id="12" data-name="API-first"><div class="cn-hero-left"><span class="cn-hero-eyebrow">For developers</span><div class="cn-hero-title" style="font-size:1.1rem">API-first<br>by design</div><div class="cn-hero-desc" style="font-size:0.78rem">RESTful API, webhooks, SDKs in every language. Build anything.</div><div class="cn-hero-actions"><button class="cn-btn cn-btn-outline cn-btn-sm">Read Docs →</button></div></div></div>
+    <div class="cn-card" data-id="18" data-name="Why choose us?"><div class="cn-card-header"><div class="cn-card-title">Why choose us?</div></div><div class="cn-card-content"><div class="cn-features"><div class="cn-feature"><div class="cn-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg></div><div class="cn-feature-title">Easy to use</div><div class="cn-feature-desc">Intuitive interface anyone can learn.</div></div><div class="cn-feature"><div class="cn-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="cn-feature-title">Affordable</div><div class="cn-feature-desc">Plans for every budget.</div></div><div class="cn-feature"><div class="cn-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="cn-feature-title">Fast</div><div class="cn-feature-desc">Blazing fast performance.</div></div><div class="cn-feature"><div class="cn-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="cn-feature-title">Team-first</div><div class="cn-feature-desc">Built for collaboration.</div></div></div></div></div>
+    <div class="cn-card" data-id="24" data-name="Testimonial"><div class="cn-testimonial"><div class="cn-testimonial-quote">"The best tool we've ever used. Our team's productivity increased by 40%."</div><div class="cn-testimonial-author"><div class="cn-testimonial-avatar">SK</div><div><div class="cn-testimonial-name">Sarah Kim</div><div class="cn-testimonial-role">VP Engineering, TechCorp</div></div></div></div><div class="cn-sep" style="margin:0 16px"></div><div class="cn-testimonial"><div class="cn-testimonial-quote">"Game changer for our startup. We couldn't imagine going back."</div><div class="cn-testimonial-author"><div class="cn-testimonial-avatar">MR</div><div><div class="cn-testimonial-name">Mike Ross</div><div class="cn-testimonial-role">Founder, StartupXYZ</div></div></div></div></div>
+    <div class="cn-card" data-id="29" data-name="Integrations"><div class="cn-card-header"><div class="cn-card-title">Integrations</div><div class="cn-card-desc">Connect your favorite tools.</div></div><div class="cn-card-content"><div class="cn-integrations"><div class="cn-integration">GitHub</div><div class="cn-integration">Slack</div><div class="cn-integration">Notion</div><div class="cn-integration">Figma</div><div class="cn-integration">Linear</div><div class="cn-integration">Jira</div></div></div></div>
+    <div class="cn-card" data-id="34" data-name="Preferences"><div class="cn-card-header"><div class="cn-card-title">Preferences</div><div class="cn-card-desc">Manage your account settings and notifications.</div></div><div class="cn-card-content"><div class="flex justify-between items-center" style="padding:8px 0"><span class="text-sm">Email Notifications</span><div class="cn-switch on"></div></div><div class="flex justify-between items-center" style="padding:8px 0"><span class="text-sm">Push Notifications</span><div class="cn-switch"></div></div><div class="flex justify-between items-center" style="padding:8px 0"><span class="text-sm">Auto-Reinvest</span><div class="cn-switch on"></div></div><div class="flex justify-between items-center" style="padding:8px 0"><span class="text-sm">Two-Factor Auth</span><div class="cn-switch on"></div></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-default cn-btn-sm">Save Preferences</button></div></div>
+    <div class="cn-card" data-id="39" data-name="Card"><div class="cn-card-header"><div class="cn-card-desc">Minimum 3000 × 3000px, JPEG or PNG only</div></div><div class="cn-card-content"><span class="text-xs text-muted" style="display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;font-weight:500">Cover Art</span><div style="aspect-ratio:1;border:2px dashed var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:var(--muted)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--muted-fg)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-outline cn-btn-sm">Upload</button></div></div>
+    <div class="cn-card" data-id="44" data-name="Trust Badges"><div class="cn-card-content"><div class="cn-trust"><div class="cn-trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>SSL Secured</div><div class="cn-trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>99.9% Uptime</div><div class="cn-trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>10K+ Users</div><div class="cn-trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>4.9 Rating</div></div></div></div>
+    <div class="cn-card" data-id="49" data-name="Social Links"><div class="cn-card-header"><div class="cn-card-title">Social Links</div></div><div class="cn-card-content"><div class="cn-field"><label class="cn-label">Twitter</label><input class="cn-input" placeholder="https://twitter.com/..." value="https://twitter.com/alex"></div><div class="cn-field mt-2"><label class="cn-label">GitHub</label><input class="cn-input" placeholder="https://github.com/..." value="https://github.com/alex"></div><div class="cn-field mt-2"><label class="cn-label">LinkedIn</label><input class="cn-input" placeholder="https://linkedin.com/in/..."></div><div class="cn-field mt-2"><label class="cn-label">Website</label><input class="cn-input" placeholder="https://..."></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-default cn-btn-sm">Save Links</button><button class="cn-btn cn-btn-ghost cn-btn-sm">Cancel</button></div></div>
+    <div class="cn-card" data-id="55" data-name="Chart"><div class="cn-card-content"><div class="cn-chart" style="height:180px"><svg class="cn-chart-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path class="cn-chart-line-path" d="M0,60 C10,65 20,35 30,55 C40,40 50,20 60,50 C70,55 80,30 90,45 L100,50" /><path class="cn-chart-area-path" d="M0,60 C10,65 20,35 30,55 C40,40 50,20 60,50 C70,55 80,30 90,45 L100,50 L100,100 L0,100 Z" /></svg><div class="cn-chart-line"></div></div></div></div>
+    <div class="cn-card" data-id="61" data-name="Scan to connect your mobile de"><div class="cn-card-header"><div class="cn-card-title">Scan to connect your mobile device</div><div class="cn-card-desc">Open the Ledger mobile app and scan this code to link your device.</div></div><div class="cn-card-content flex justify-center"><div style="background:#fff;border-radius:14px;padding:16px;border:1px solid var(--border)"><div class="cn-qr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/></svg></div></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-ghost cn-btn-sm w-full">Show Pairing Code</button></div></div>
+    <div class="cn-card" data-id="69" data-name="Front Door"><div class="cn-card-header"><div class="cn-card-title">Front Door</div><div class="cn-card-desc">Smart Lock Pro</div></div><div class="cn-card-content"><div class="cn-lock"><div class="cn-lock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div class="cn-lock-info"><div class="cn-lock-title">Unlocked</div><div class="cn-lock-desc">Last opened 2 min ago</div></div><span class="cn-badge cn-badge-default">Online</span></div><div class="cn-sep"></div><div class="flex justify-between items-center" style="padding:4px 0"><span class="text-sm">Auto-Lock</span><div class="cn-switch on"></div></div><div class="flex justify-between items-center" style="padding:4px 0"><span class="text-sm">Notifications</span><div class="cn-switch on"></div></div></div></div>
+    <div class="cn-card" data-id="73" data-name="Investment Guide"><div class="cn-card-header"><div class="cn-card-title">Investment Guide</div></div><div class="cn-card-content"><div class="cn-tabs"><div class="cn-tab-list"><button class="cn-tab-item active">Overview</button><button class="cn-tab-item">Strategy</button><button class="cn-tab-item">Risk</button></div></div><div class="cn-accordion"><div class="cn-accordion-item"><button class="cn-accordion-trigger open"><span>What is compound interest?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button><div class="cn-accordion-content">Compound interest is interest on interest. It makes your money grow faster because you earn returns not just on your original investment, but on the accumulated interest as well.</div></div><div class="cn-accordion-item"><button class="cn-accordion-trigger"><span>How do I diversify?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button></div><div class="cn-accordion-item"><button class="cn-accordion-trigger"><span>When should I rebalance?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button></div></div></div></div>
+    <div class="cn-card" data-id="80" data-name="Stop juggling tools."><div class="cn-hero-left"><div class="cn-hero-title" style="font-size:1rem">Stop juggling tools.<br>Start shipping.</div><div class="cn-hero-desc" style="font-size:0.78rem">One platform for issues, docs, and deploys. Replaces Jira, Notion, and Vercel.</div><div class="cn-hero-actions"><button class="cn-btn cn-btn-default cn-btn-sm">Migrate now</button></div></div></div>
+  </div>
+  <div class="col">
+    <div class="cn-card" data-id="06" data-name="Deploy in seconds"><div class="cn-hero-split"><div class="cn-hero-split-text"><div class="cn-hero-title" style="font-size:0.95rem">Deploy in seconds</div><div class="cn-hero-desc" style="font-size:0.78rem">Push to main. We handle the rest. Zero-downtime deploys to the edge.</div><button class="cn-btn cn-btn-default cn-btn-sm" style="margin-top:4px">Try it →</button></div><div class="cn-hero-split-visual"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div></div></div>
+    <div class="cn-card" data-id="10" data-name="One more thing…"><div class="cn-hero"><div class="cn-hero-title" style="font-size:1rem">One more thing…</div><div class="cn-hero-desc" style="font-size:0.78rem">We just shipped dark mode, real-time collab, and 40+ new integrations.</div><div class="cn-hero-features"><div class="cn-hero-feature"><div class="cn-hero-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div><div class="cn-hero-feature-label">Dark Mode</div></div><div class="cn-hero-feature"><div class="cn-hero-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="cn-hero-feature-label">Real-time</div></div><div class="cn-hero-feature"><div class="cn-hero-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div><div class="cn-hero-feature-label">40+ Apps</div></div></div></div></div>
+    <div class="cn-card-content" style="padding:0"><table class="cn-table"><thead><tr><th>Merchant</th><th>Category</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead><tbody><tr><td>Blue Bottle Coffee</td><td>Food & Drink</td><td>-$6.50</td><td>Today</td><td><span class="cn-badge cn-badge-default">Completed</span></td></tr><tr><td>Whole Foods Market</td><td>Groceries</td><td>-$142.30</td><td>Yesterday</td><td><span class="cn-badge cn-badge-default">Completed</span></td></tr><tr><td>Stripe Payout</td><td>Income</td><td>+$4,200.00</td><td>Mar 15</td><td><span class="cn-badge cn-badge-secondary">Pending</span></td></tr><tr><td>Amazon</td><td>Shopping</td><td>-$89.99</td><td>Mar 14</td><td><span class="cn-badge cn-badge-default">Completed</span></td></tr><tr><td>Netflix</td><td>Entertainment</td><td>-$15.99</td><td>Mar 13</td><td><span class="cn-badge cn-badge-default">Completed</span></td></tr></tbody></table></div>
+    <div class="cn-card" data-id="23" data-name="Kitchen Island"><div class="cn-card-header"><div class="cn-card-title">Kitchen Island</div><div class="cn-card-desc">Hue Color Ambient</div></div><div class="cn-card-content"><div class="flex justify-between items-center" style="padding:8px 0"><span class="text-sm">Power</span><div class="cn-switch on"></div></div><div class="cn-field mt-2"><div class="flex justify-between"><label class="cn-label">Brightness</label><span class="text-sm text-muted">80%</span></div><div class="cn-slider" style="margin-top:8px"><div class="cn-slider-track"><div class="cn-slider-range" style="width:80%"></div><div class="cn-slider-thumb" style="left:80%"></div></div></div></div><div class="flex justify-between items-center mt-2" style="padding:8px 0"><span class="text-sm">Adaptive Lighting</span><div class="cn-switch"></div></div><div class="cn-sep"></div><span class="text-sm text-muted" style="display:block;margin-bottom:8px">Scenes</span><div class="cn-toggle-group"><button class="cn-toggle on">Cooking</button><button class="cn-toggle">Dining</button><button class="cn-toggle">Nightlight</button><button class="cn-toggle">Focus</button></div></div></div>
+    <div class="cn-card" data-id="30" data-name="Made for"><div class="cn-hero"><div class="cn-hero-title" style="font-size:1rem">Made for<br>startups & enterprises</div><div class="cn-hero-desc" style="font-size:0.78rem">From solo founders to Fortune 500 teams. Scale as you grow.</div><div class="cn-hero-features"><div class="cn-hero-feature"><div class="cn-hero-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="cn-hero-feature-label">Fast Setup</div></div><div class="cn-hero-feature"><div class="cn-hero-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg></div><div class="cn-hero-feature-label">Secure</div></div><div class="cn-hero-feature"><div class="cn-hero-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><div class="cn-hero-feature-label">Scalable</div></div></div></div></div>
+    <div class="cn-card" data-id="35" data-name="Card" style="padding:0"><div style="padding:12px 0"><div style="padding:0 16px;margin-bottom:8px"><span class="text-xs font-semibold text-muted" style="text-transform:uppercase;letter-spacing:0.05em">Account</span></div><div style="display:flex;flex-direction:column;gap:1px"><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>Profile</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>Billing</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;background:var(--muted);color:var(--fg);font-weight:500"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>Notifications</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>Security</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>Appearance</div></div></div></div>
+    <div class="cn-card" data-id="37" data-name="Build in public." style="padding:0"><div class="cn-hero-dark"><span class="cn-hero-badge">Open Source</span><div class="cn-hero-title" style="font-size:0.95rem">Build in public.<br>Ship in private.</div><div class="cn-hero-desc" style="font-size:0.78rem">Core is MIT licensed. Self-host or use our cloud. Your choice.</div><div class="cn-hero-actions"><button class="cn-btn">Star on GitHub</button></div></div></div>
+    <div class="cn-card-footer"><button class="cn-btn cn-btn-outline cn-btn-sm">Claim Now</button><button class="cn-btn cn-btn-ghost cn-btn-sm">History</button></div>
+    <div class="cn-card" data-id="50" data-name="Chart"><div class="cn-card-content"><div class="cn-chart" style="height:200px"><svg class="cn-chart-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path class="cn-chart-line-path" d="M0,55 C10,50 20,60 30,45 C40,55 50,40 60,50 C70,45 80,55 90,40 L100,45" /><path class="cn-chart-area-path" d="M0,55 C10,50 20,60 30,45 C40,55 50,40 60,50 C70,45 80,55 90,40 L100,45 L100,100 L0,100 Z" /></svg><div class="cn-chart-line"></div></div><div class="flex justify-between mt-1" style="padding:0 4px"><span class="text-xs text-muted">Mon</span><span class="text-xs text-muted">Tue</span><span class="text-xs text-muted">Wed</span><span class="text-xs text-muted">Thu</span><span class="text-xs text-muted">Fri</span></div></div></div>
+    <div class="cn-card" data-id="58" data-name="Skeleton"><div class="cn-card-content"><div style="height:128px;background:var(--muted);border-radius:8px;animation:pulse 2s ease-in-out infinite"></div><div style="display:flex;flex-direction:column;gap:8px;margin-top:12px"><div style="height:12px;background:var(--muted);border-radius:4px;animation:pulse 2s ease-in-out infinite"></div><div style="height:12px;background:var(--muted);border-radius:4px;width:75%;animation:pulse 2s ease-in-out infinite"></div><div style="height:12px;background:var(--muted);border-radius:4px;width:50%;animation:pulse 2s ease-in-out infinite"></div></div><div style="display:flex;gap:8px;margin-top:12px"><div style="height:32px;flex:1;background:var(--muted);border-radius:6px;animation:pulse 2s ease-in-out infinite"></div><div style="height:32px;flex:1;background:var(--muted);border-radius:6px;animation:pulse 2s ease-in-out infinite"></div></div></div></div>
+    <div class="cn-card" data-id="63" data-name="Receiving Method"><div class="cn-card-header"><div class="cn-card-title">Receiving Method</div><div class="cn-card-desc">Payout Preferences</div></div><div class="cn-card-content"><div class="cn-field"><label class="cn-label">Bank Name</label><input class="cn-input" value="Chase Bank"></div><div class="cn-field mt-2"><label class="cn-label">Account Number</label><input class="cn-input" value="····4521"></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-default cn-btn-sm">Save</button><button class="cn-btn cn-btn-ghost cn-btn-sm">Remove</button></div></div>
+    <div class="cn-card" data-id="68" data-name="Card" style="padding:0"><div style="padding:12px 0"><div style="padding:0 16px;margin-bottom:8px"><span class="text-xs font-semibold text-muted" style="text-transform:uppercase;letter-spacing:0.05em">Overview</span></div><div style="display:flex;flex-direction:column;gap:1px"><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;background:var(--muted);color:var(--fg);font-weight:500"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>Dashboard</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Transactions</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Investments</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Accounts</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Spending</div></div><div style="padding:0 16px;margin-top:16px;margin-bottom:8px"><span class="text-xs font-semibold text-muted" style="text-transform:uppercase;letter-spacing:0.05em">Planning</span></div><div style="display:flex;flex-direction:column;gap:1px"><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Goals</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>Budget</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>Reports</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg>Documents</div></div></div></div>
+    <div class="cn-card" data-id="70" data-name="Power Usage"><div class="cn-card-header"><div class="cn-card-title">Power Usage</div><div class="cn-card-desc">Whole Home</div></div><div class="cn-card-content"><div class="cn-chart" style="height:180px"><div class="cn-bars"><div class="cn-bar" style="height:30%"></div><div class="cn-bar" style="height:45%"></div><div class="cn-bar" style="height:60%"></div><div class="cn-bar" style="height:55%"></div><div class="cn-bar" style="height:70%"></div><div class="cn-bar" style="height:65%"></div><div class="cn-bar" style="height:50%"></div><div class="cn-bar" style="height:80%"></div><div class="cn-bar" style="height:75%"></div><div class="cn-bar" style="height:40%"></div><div class="cn-bar" style="height:55%"></div><div class="cn-bar" style="height:60%"></div></div></div><div class="flex justify-between mt-1" style="padding:0 4px"><span class="text-xs text-muted">Jan</span><span class="text-xs text-muted">Feb</span><span class="text-xs text-muted">Mar</span><span class="text-xs text-muted">Apr</span><span class="text-xs text-muted">May</span><span class="text-xs text-muted">Jun</span><span class="text-xs text-muted">Jul</span><span class="text-xs text-muted">Aug</span><span class="text-xs text-muted">Sep</span><span class="text-xs text-muted">Oct</span><span class="text-xs text-muted">Nov</span><span class="text-xs text-muted">Dec</span></div><div class="cn-sep"></div><div class="flex justify-between items-center"><span class="text-sm">This Month</span><span class="text-sm font-medium">342 kWh</span></div><div class="cn-progress" style="margin-top:8px"><div class="cn-progress-bar"><div class="cn-progress-fill" style="width:68%"></div></div></div><div class="flex justify-between mt-1"><span class="text-xs text-muted">68% of budget</span><span class="text-xs text-muted">500 kWh</span></div></div></div>
+  </div>
+</div>
+
+<script>
+const canvas=document.getElementById('canvas'),content=document.getElementById('canvas-content');
+let panX=0,panY=0,currentScale=1,isDragging=false,startX,startY,startPanX,startPanY;
+const PADDING=200;
+
+function clampPan(){
+  const cw=canvas.clientWidth,ch=canvas.clientHeight;
+  const gw=3000,gh=document.querySelector('.grid')?.offsetHeight||2400;
+  const minX=cw-(gw*currentScale+PADDING);
+  const maxX=PADDING;
+  const minY=ch-(gh*currentScale+PADDING);
+  const maxY=PADDING;
+  panX=Math.min(maxX,Math.max(minX,panX));
+  panY=Math.min(maxY,Math.max(minY,panY));
+}
+function apply(){clampPan();content.style.transform='translate('+panX+'px,'+panY+'px) scale('+currentScale+')'}
+
+canvas.addEventListener('mousedown',e=>{if(e.button)return;isDragging=true;startX=e.clientX;startY=e.clientY;startPanX=panX;startPanY=panY;document.body.classList.add('dragging')});
+window.addEventListener('mousemove',e=>{if(!isDragging)return;panX=startPanX+(e.clientX-startX)/currentScale;panY=startPanY+(e.clientY-startY)/currentScale;apply()});
+window.addEventListener('mouseup',()=>{isDragging=false;document.body.classList.remove('dragging')});
+canvas.addEventListener('touchstart',e=>{if(e.touches.length===2){e.preventDefault();isDragging=true;startX=(e.touches[0].clientX+e.touches[1].clientX)/2;startY=(e.touches[0].clientY+e.touches[1].clientY)/2;startPanX=panX;startPanY=panY;document.body.classList.add('dragging')}},{passive:false});
+canvas.addEventListener('touchmove',e=>{if(isDragging&&e.touches.length===2){e.preventDefault();const cx=(e.touches[0].clientX+e.touches[1].clientX)/2;const cy=(e.touches[0].clientY+e.touches[1].clientY)/2;panX=startPanX+(cx-startX)/currentScale;panY=startPanY+(cy-startY)/currentScale;apply()}},{passive:false});
+canvas.addEventListener('touchend',e=>{if(e.touches.length<2){isDragging=false;document.body.classList.remove('dragging')}});
+canvas.addEventListener('wheel',e=>{e.preventDefault();panX-=e.deltaX/currentScale;panY-=e.deltaY/currentScale;apply()},{passive:false});
+document.addEventListener('keydown',e=>{if(e.key==='f'||e.key==='F'){e.preventDefault();fitAll()}});
+
+function fitAll(){
+  const grid=document.querySelector('.grid');
+  if(!grid)return;
+  const cw=canvas.clientWidth,ch=canvas.clientHeight;
+  const gw=grid.offsetWidth,gh=grid.offsetHeight;
+  const sx=cw/(gw+PADDING*2),sy=ch/(gh+PADDING*2);
+  currentScale=Math.min(sx,sy,1.5);
+  panX=(cw-gw*currentScale)/2;
+  panY=(ch-gh*currentScale)/2;
+  apply();
+}
+
+// ── Surprise me! ──
+const oklch=(l,c,h)=>'oklch('+l+' '+c+' '+h+')';
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const FONTS_SANS=["'Inter'","'DM Sans'","'Plus Jakarta Sans'","'Albert Sans'","'Lexend'"];
+const FONTS_SERIF=["'Playfair Display'","'Lora'","'DM Serif Display'","'Crimson Text'","'EB Garamond'","'Cormorant Garamond'","'Bitter'","'Merriweather'"];
+const FONTS_DISPLAY=["'Bebas Neue'","'Oswald'","'Righteous'","'Fredoka'","'Permanent Marker'"];
+const FONTS_HAND=["'Caveat'","'Dancing Script'","'Pacifico'"];
+const ALL_FONTS=[...FONTS_SANS,...FONTS_SERIF,...FONTS_DISPLAY,...FONTS_HAND];
+
+const PALETTES=[
+  {bg:'oklch(1 0 0)',fg:'oklch(0.145 0 0)',card:'oklch(1 0 0)',cardFg:'oklch(0.145 0 0)',muted:'oklch(0.97 0 0)',mutedFg:'oklch(0.556 0 0)',primary:'oklch(0.205 0 0)',primaryFg:'oklch(0.985 0 0)',secondary:'oklch(0.97 0 0)',secondaryFg:'oklch(0.205 0 0)',border:'oklch(0.922 0 0)',input:'oklch(0.922 0 0)',destructive:'oklch(0.577 0.245 27.3)',radius:'0.625rem',bw:'1px',shadow:'0 1px 2px rgba(0,0,0,0.05)',ls:0,fw:500,fs:'0.875rem',tfs:'1rem',dark:false},
+  {bg:'oklch(0.08 0.005 260)',fg:'oklch(0.97 0.005 260)',card:'oklch(0.11 0.008 260)',cardFg:'oklch(0.97 0.005 260)',muted:'oklch(0.18 0.01 260)',mutedFg:'oklch(0.55 0.01 260)',primary:'oklch(0.6 0.15 270)',primaryFg:'oklch(0.98 0 0)',secondary:'oklch(0.18 0.01 260)',secondaryFg:'oklch(0.6 0.15 270)',border:'oklch(0.22 0.015 260)',input:'oklch(0.22 0.015 260)',destructive:'oklch(0.6 0.2 25)',radius:'6px',bw:'1px',shadow:'0px 2px 4px rgba(0,0,0,0.1), 0px 4px 24px rgba(0,0,0,0.2)',ls:'-0.02em',fw:510,fs:'0.9375rem',tfs:'1.3rem',dark:true},
+  {bg:'oklch(0.96 0.01 65)',fg:'oklch(0.18 0.01 30)',card:'oklch(0.98 0.006 65)',cardFg:'oklch(0.18 0.01 30)',muted:'oklch(0.92 0.015 65)',mutedFg:'oklch(0.45 0.01 40)',primary:'oklch(0.45 0.12 30)',primaryFg:'oklch(0.98 0.006 65)',secondary:'oklch(0.92 0.015 65)',secondaryFg:'oklch(0.45 0.12 30)',border:'oklch(0.85 0.02 60)',input:'oklch(0.85 0.02 60)',destructive:'oklch(0.55 0.2 25)',radius:'0.75rem',bw:'1px',shadow:'0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03)',ls:'-0.01em',fw:400,fs:'0.95rem',tfs:'1.35rem',dark:false},
+  {bg:'oklch(0.12 0.02 60)',fg:'oklch(0.92 0.08 80)',card:'oklch(0.16 0.025 60)',cardFg:'oklch(0.92 0.08 80)',muted:'oklch(0.22 0.04 60)',mutedFg:'oklch(0.6 0.06 70)',primary:'oklch(0.78 0.14 85)',primaryFg:'oklch(0.12 0.02 60)',secondary:'oklch(0.22 0.04 60)',secondaryFg:'oklch(0.78 0.14 85)',border:'oklch(0.78 0.14 85)',input:'oklch(0.78 0.14 85)',destructive:'oklch(0.6 0.25 20)',radius:'0px',bw:'2px',shadow:'inset 0 0 0 1px oklch(0.78 0.14 85 / 0.3), 0 0 30px oklch(0.78 0.14 85 / 0.15)',ls:'0.12em',fw:600,fs:'0.85rem',tfs:'1.2rem',dark:true},
+  {bg:'oklch(0.96 0.02 350)',fg:'oklch(0.12 0.03 350)',card:'oklch(1 0.012 350)',cardFg:'oklch(0.12 0.03 350)',muted:'oklch(0.92 0.025 350)',mutedFg:'oklch(0.4 0.02 350)',primary:'oklch(0.55 0.25 355)',primaryFg:'oklch(1 0 0)',secondary:'oklch(0.92 0.025 350)',secondaryFg:'oklch(0.55 0.25 355)',border:'oklch(0.12 0.03 350)',input:'oklch(0.12 0.03 350)',destructive:'oklch(0.5 0.28 25)',radius:'1.5rem',bw:'4px',shadow:'8px 8px 0 0 oklch(0.55 0.25 355), -4px -4px 0 0 oklch(0.7 0.2 60)',ls:0,fw:800,fs:'1rem',tfs:'1.4rem',dark:false},
+  {bg:'oklch(0.1 0.03 280)',fg:'oklch(0.95 0.02 330)',card:'oklch(0.14 0.04 280)',cardFg:'oklch(0.95 0.02 330)',muted:'oklch(0.2 0.05 280)',mutedFg:'oklch(0.6 0.04 310)',primary:'oklch(0.75 0.22 340)',primaryFg:'oklch(0.1 0.03 280)',secondary:'oklch(0.2 0.05 280)',secondaryFg:'oklch(0.75 0.22 340)',border:'oklch(0.5 0.2 340)',input:'oklch(0.5 0.2 340)',destructive:'oklch(0.7 0.22 30)',radius:'0.5rem',bw:'2px',shadow:'0 0 20px oklch(0.75 0.22 340 / 0.4), 0 0 60px oklch(0.7 0.2 280 / 0.15)',ls:'0.06em',fw:600,fs:'0.85rem',tfs:'1.1rem',dark:true},
+  {bg:'oklch(0.98 0 0)',fg:'oklch(0.09 0 0)',card:'oklch(1 0 0)',cardFg:'oklch(0.09 0 0)',muted:'oklch(0.97 0 0)',mutedFg:'oklch(0.7 0 0)',primary:'oklch(0.55 0.15 155)',primaryFg:'oklch(0.98 0 0)',secondary:'oklch(0.97 0 0)',secondaryFg:'oklch(0.55 0.15 155)',border:'oklch(0.875 0 0)',input:'oklch(0.875 0 0)',destructive:'oklch(0.6 0.22 25)',radius:'8px',bw:'1px',shadow:'0 1px 3px rgba(0,0,0,0.06)',ls:0,fw:400,fs:'0.875rem',tfs:'1.1rem',dark:false},
+  {bg:'oklch(0.06 0 0)',fg:'oklch(0.98 0 0)',card:'oklch(0.1 0 0)',cardFg:'oklch(0.98 0 0)',muted:'oklch(0.16 0 0)',mutedFg:'oklch(0.55 0 0)',primary:'oklch(0.98 0 0)',primaryFg:'oklch(0.06 0 0)',secondary:'oklch(0.16 0 0)',secondaryFg:'oklch(0.98 0 0)',border:'oklch(0.25 0 0)',input:'oklch(0.25 0 0)',destructive:'oklch(0.65 0.25 25)',radius:'0px',bw:'2px',shadow:'none',ls:'0.08em',fw:600,fs:'0.85rem',tfs:'1.1rem',dark:true},
+  {bg:'oklch(0.94 0.012 70)',fg:'oklch(0.2 0.015 50)',card:'oklch(0.96 0.01 70)',cardFg:'oklch(0.2 0.015 50)',muted:'oklch(0.9 0.015 70)',mutedFg:'oklch(0.45 0.015 50)',primary:'oklch(0.45 0.08 50)',primaryFg:'oklch(0.96 0.01 70)',secondary:'oklch(0.9 0.015 70)',secondaryFg:'oklch(0.45 0.08 50)',border:'oklch(0.8 0.02 50)',input:'oklch(0.8 0.02 50)',destructive:'oklch(0.5 0.15 25)',radius:'0.25rem',bw:'1px',shadow:'2px 2px 0 0 oklch(0.8 0.02 50)',ls:'0.02em',fw:400,fs:'0.95rem',tfs:'1.05rem',dark:false},
+  {bg:'oklch(0.08 0.01 10)',fg:'oklch(0.88 0.02 10)',card:'oklch(0.12 0.015 10)',cardFg:'oklch(0.88 0.02 10)',muted:'oklch(0.18 0.02 10)',mutedFg:'oklch(0.55 0.02 10)',primary:'oklch(0.55 0.22 15)',primaryFg:'oklch(0.95 0 0)',secondary:'oklch(0.18 0.02 10)',secondaryFg:'oklch(0.55 0.22 15)',border:'oklch(0.35 0.04 10)',input:'oklch(0.35 0.04 10)',destructive:'oklch(0.65 0.28 20)',radius:'0.25rem',bw:'2px',shadow:'0 6px 20px rgba(0,0,0,0.6)',ls:'0.06em',fw:600,fs:'0.9rem',tfs:'1.25rem',dark:true},
+  {bg:'oklch(0.97 0.005 60)',fg:'oklch(0.08 0 0)',card:'oklch(1 0.005 60)',cardFg:'oklch(0.08 0 0)',muted:'oklch(0.94 0.01 60)',mutedFg:'oklch(0.3 0 0)',primary:'oklch(0.55 0.25 25)',primaryFg:'oklch(1 0 0)',secondary:'oklch(0.94 0.01 60)',secondaryFg:'oklch(0.55 0.25 25)',border:'oklch(0.08 0 0)',input:'oklch(0.08 0 0)',destructive:'oklch(0.55 0.25 25)',radius:'0px',bw:'4px',shadow:'none',ls:0,fw:700,fs:'0.9rem',tfs:'1.2rem',dark:false},
+  {bg:'oklch(0.97 0.015 70)',fg:'oklch(0.25 0.035 50)',card:'oklch(0.99 0.008 70)',cardFg:'oklch(0.25 0.035 50)',muted:'oklch(0.93 0.015 70)',mutedFg:'oklch(0.45 0.03 50)',primary:'oklch(0.5 0.15 30)',primaryFg:'oklch(0.98 0 0)',secondary:'oklch(0.93 0.015 70)',secondaryFg:'oklch(0.5 0.15 30)',border:'oklch(0.85 0.025 60)',input:'oklch(0.85 0.025 60)',destructive:'oklch(0.55 0.2 25)',radius:'1.25rem',bw:'1px',shadow:'0 4px 16px rgba(120,80,50,0.08), 0 8px 32px rgba(120,80,50,0.04)',ls:'0.03em',fw:500,fs:'0.95rem',tfs:'1.2rem',dark:false},
+  {bg:'oklch(0.9 0.06 230)',fg:'oklch(0.2 0.02 250)',card:'oklch(1 0 0)',cardFg:'oklch(0.2 0.02 250)',muted:'oklch(0.93 0.03 230)',mutedFg:'oklch(0.45 0.03 250)',primary:'oklch(0.55 0.25 25)',primaryFg:'oklch(1 0 0)',secondary:'oklch(0.93 0.03 230)',secondaryFg:'oklch(0.55 0.25 25)',border:'oklch(0.6 0.18 240)',input:'oklch(0.6 0.18 240)',destructive:'oklch(0.5 0.25 25)',radius:'1.5rem',bw:'3px',shadow:'6px 6px 0 0 oklch(0.2 0.02 250 / 0.1)',ls:0,fw:700,fs:'0.9rem',tfs:'1.3rem',dark:false},
+  {bg:'oklch(0.92 0.025 80)',fg:'oklch(0.15 0.01 30)',card:'oklch(0.98 0.01 80)',cardFg:'oklch(0.15 0.01 30)',muted:'oklch(0.9 0.02 75)',mutedFg:'oklch(0.4 0.03 50)',primary:'oklch(0.55 0.18 250)',primaryFg:'oklch(0.98 0 0)',secondary:'oklch(0.9 0.02 75)',secondaryFg:'oklch(0.55 0.18 250)',border:'oklch(0.3 0.04 50)',input:'oklch(0.3 0.04 50)',destructive:'oklch(0.55 0.2 25)',radius:'0.25rem',bw:'4px',shadow:'4px 4px 0 0 oklch(0.3 0.04 50 / 0.15)',ls:'0.05em',fw:700,fs:'0.9rem',tfs:'1.25rem',dark:false},
+  {bg:'oklch(0.1 0.02 260)',fg:'oklch(0.95 0.01 70)',card:'oklch(0.15 0.02 260)',cardFg:'oklch(0.95 0.01 70)',muted:'oklch(0.2 0.02 260)',mutedFg:'oklch(0.6 0.01 270)',primary:'oklch(0.7 0.12 80)',primaryFg:'oklch(0.1 0.02 260)',secondary:'oklch(0.2 0.02 260)',secondaryFg:'oklch(0.7 0.12 80)',border:'oklch(0.7 0.12 80)',input:'oklch(0.7 0.12 80)',destructive:'oklch(0.6 0.22 25)',radius:'1rem',bw:'2px',shadow:'0 4px 20px rgba(0,0,0,0.4)',ls:'0.02em',fw:500,fs:'0.9rem',tfs:'1.15rem',dark:true},
+  {bg:'oklch(0.965 0.03 140)',fg:'oklch(0.12 0.03 130)',card:'oklch(1 0 0)',cardFg:'oklch(0.12 0.03 130)',muted:'oklch(0.92 0.05 140)',mutedFg:'oklch(0.45 0.05 140)',primary:'oklch(0.65 0.22 145)',primaryFg:'oklch(1 0 0)',secondary:'oklch(0.92 0.05 140)',secondaryFg:'oklch(0.65 0.22 145)',border:'oklch(0.53 0.18 145)',input:'oklch(0.92 0.05 140)',destructive:'oklch(0.58 0.25 25)',radius:'1rem',bw:'3px',shadow:'0 6px 0 oklch(0.53 0.18 145), 0 8px 24px oklch(0 0 0 / 0.1)',btnShadow:'0 calc(var(--bw)*2) 0 color-mix(in oklab, var(--primary) 55%, black)',btnShadowActive:'0 calc(var(--bw)*0.5px) 0 color-mix(in oklab, var(--primary) 55%, black)',btnPressY:'calc(var(--bw)*1.5px)',ls:'0.02em',fw:700,fs:'0.95rem',tfs:'1.35rem',dark:false},
+  {bg:'oklch(0.965 0.04 0)',fg:'oklch(0.12 0.03 350)',card:'oklch(1 0 0)',cardFg:'oklch(0.12 0.03 350)',muted:'oklch(0.92 0.06 0)',mutedFg:'oklch(0.45 0.06 350)',primary:'oklch(0.62 0.26 5)',primaryFg:'oklch(1 0 0)',secondary:'oklch(0.92 0.06 0)',secondaryFg:'oklch(0.62 0.26 5)',border:'oklch(0.5 0.22 5)',input:'oklch(0.92 0.06 0)',destructive:'oklch(0.58 0.25 25)',radius:'0.875rem',bw:'3px',shadow:'0 6px 0 oklch(0.5 0.22 5), 0 8px 24px oklch(0 0 0 / 0.1)',btnShadow:'0 calc(var(--bw)*2) 0 color-mix(in oklab, var(--primary) 55%, black)',btnShadowActive:'0 calc(var(--bw)*0.5px) 0 color-mix(in oklab, var(--primary) 55%, black)',btnPressY:'calc(var(--bw)*1.5px)',ls:'0.02em',fw:700,fs:'0.95rem',tfs:'1.3rem',dark:false},
+  {bg:'oklch(0.97 0.04 90)',fg:'oklch(0.12 0.03 80)',card:'oklch(1 0 0)',cardFg:'oklch(0.12 0.03 80)',muted:'oklch(0.93 0.05 90)',mutedFg:'oklch(0.45 0.05 85)',primary:'oklch(0.7 0.2 85)',primaryFg:'oklch(0.12 0.03 80)',secondary:'oklch(0.93 0.05 90)',secondaryFg:'oklch(0.7 0.2 85)',border:'oklch(0.58 0.18 85)',input:'oklch(0.93 0.05 90)',destructive:'oklch(0.58 0.25 25)',radius:'1rem',bw:'3px',shadow:'0 6px 0 oklch(0.58 0.18 85), 0 8px 24px oklch(0 0 0 / 0.1)',ls:'0.03em',fw:700,fs:'0.95rem',tfs:'1.3rem',dark:false},
+  {bg:'oklch(0.96 0.03 230)',fg:'oklch(0.12 0.02 240)',card:'oklch(1 0 0)',cardFg:'oklch(0.12 0.02 240)',muted:'oklch(0.92 0.04 230)',mutedFg:'oklch(0.45 0.04 240)',primary:'oklch(0.6 0.2 255)',primaryFg:'oklch(1 0 0)',secondary:'oklch(0.92 0.04 230)',secondaryFg:'oklch(0.6 0.2 255)',border:'oklch(0.48 0.18 255)',input:'oklch(0.92 0.04 230)',destructive:'oklch(0.58 0.25 25)',radius:'1rem',bw:'3px',shadow:'0 6px 0 oklch(0.48 0.18 255), 0 8px 24px oklch(0 0 0 / 0.1)',btnShadow:'0 calc(var(--bw)*2) 0 color-mix(in oklab, var(--primary) 55%, black)',btnShadowActive:'0 calc(var(--bw)*0.5px) 0 color-mix(in oklab, var(--primary) 55%, black)',btnPressY:'calc(var(--bw)*1.5px)',ls:'0em',fw:700,fs:'0.95rem',tfs:'1.3rem',dark:false},
+  {bg:'oklch(0.96 0.04 50)',fg:'oklch(0.12 0.03 40)',card:'oklch(1 0 0)',cardFg:'oklch(0.12 0.03 40)',muted:'oklch(0.92 0.05 50)',mutedFg:'oklch(0.45 0.05 45)',primary:'oklch(0.65 0.22 45)',primaryFg:'oklch(1 0 0)',secondary:'oklch(0.92 0.05 50)',secondaryFg:'oklch(0.65 0.22 45)',border:'oklch(0.53 0.18 45)',input:'oklch(0.92 0.05 50)',destructive:'oklch(0.58 0.25 25)',radius:'0.875rem',bw:'3px',shadow:'0 6px 0 oklch(0.53 0.18 45), 0 8px 24px oklch(0 0 0 / 0.1)',btnShadow:'0 calc(var(--bw)*2) 0 color-mix(in oklab, var(--primary) 55%, black)',btnShadowActive:'0 calc(var(--bw)*0.5px) 0 color-mix(in oklab, var(--primary) 55%, black)',btnPressY:'calc(var(--bw)*1.5px)',ls:'0.02em',fw:700,fs:'0.95rem',tfs:'1.3rem',dark:false},
+  {bg:'oklch(0.96 0.04 300)',fg:'oklch(0.12 0.03 310)',card:'oklch(1 0 0)',cardFg:'oklch(0.12 0.03 310)',muted:'oklch(0.92 0.05 300)',mutedFg:'oklch(0.45 0.05 310)',primary:'oklch(0.6 0.22 310)',primaryFg:'oklch(1 0 0)',secondary:'oklch(0.92 0.05 300)',secondaryFg:'oklch(0.6 0.22 310)',border:'oklch(0.48 0.18 310)',input:'oklch(0.92 0.05 300)',destructive:'oklch(0.58 0.25 25)',radius:'1rem',bw:'3px',shadow:'0 6px 0 oklch(0.48 0.18 310), 0 8px 24px oklch(0 0 0 / 0.1)',btnShadow:'0 calc(var(--bw)*2) 0 color-mix(in oklab, var(--primary) 55%, black)',btnShadowActive:'0 calc(var(--bw)*0.5px) 0 color-mix(in oklab, var(--primary) 55%, black)',btnPressY:'calc(var(--bw)*1.5px)',ls:'0.02em',fw:700,fs:'0.95rem',tfs:'1.3rem',dark:false},
+  {bg:'oklch(0.965 0.03 170)',fg:'oklch(0.12 0.03 165)',card:'oklch(1 0 0)',cardFg:'oklch(0.12 0.03 165)',muted:'oklch(0.93 0.04 170)',mutedFg:'oklch(0.45 0.04 165)',primary:'oklch(0.65 0.18 175)',primaryFg:'oklch(1 0 0)',secondary:'oklch(0.93 0.04 170)',secondaryFg:'oklch(0.65 0.18 175)',border:'oklch(0.53 0.16 175)',input:'oklch(0.93 0.04 170)',destructive:'oklch(0.58 0.25 25)',radius:'1rem',bw:'3px',shadow:'0 6px 0 oklch(0.53 0.16 175), 0 8px 24px oklch(0 0 0 / 0.1)',ls:'0.02em',fw:700,fs:'0.95rem',tfs:'1.3rem',dark:false},
+  {bg:'oklch(0.965 0.04 20)',fg:'oklch(0.12 0.03 15)',card:'oklch(1 0 0)',cardFg:'oklch(0.12 0.03 15)',muted:'oklch(0.92 0.05 20)',mutedFg:'oklch(0.45 0.05 15)',primary:'oklch(0.62 0.24 25)',primaryFg:'oklch(1 0 0)',secondary:'oklch(0.92 0.05 20)',secondaryFg:'oklch(0.62 0.24 25)',border:'oklch(0.5 0.2 25)',input:'oklch(0.92 0.05 20)',destructive:'oklch(0.58 0.25 25)',radius:'0.875rem',bw:'3px',shadow:'0 6px 0 oklch(0.5 0.2 25), 0 8px 24px oklch(0 0 0 / 0.1)',ls:'0.02em',fw:700,fs:'0.95rem',tfs:'1.3rem',dark:false},
+  {bg:'oklch(0.97 0.04 75)',fg:'oklch(0.12 0.03 70)',card:'oklch(1 0 0)',cardFg:'oklch(0.12 0.03 70)',muted:'oklch(0.93 0.05 75)',mutedFg:'oklch(0.45 0.05 70)',primary:'oklch(0.7 0.2 75)',primaryFg:'oklch(0.12 0.03 70)',secondary:'oklch(0.93 0.05 75)',secondaryFg:'oklch(0.7 0.2 75)',border:'oklch(0.58 0.18 75)',input:'oklch(0.93 0.05 75)',destructive:'oklch(0.58 0.25 25)',radius:'0.875rem',bw:'3px',shadow:'0 6px 0 oklch(0.58 0.18 75), 0 8px 24px oklch(0 0 0 / 0.1)',ls:'0.03em',fw:700,fs:'0.95rem',tfs:'1.35rem',dark:false},
+  {bg:'oklch(0.965 0.04 290)',fg:'oklch(0.12 0.03 280)',card:'oklch(1 0 0)',cardFg:'oklch(0.12 0.03 280)',muted:'oklch(0.92 0.05 290)',mutedFg:'oklch(0.45 0.05 280)',primary:'oklch(0.6 0.22 280)',primaryFg:'oklch(1 0 0)',secondary:'oklch(0.92 0.05 290)',secondaryFg:'oklch(0.6 0.22 280)',border:'oklch(0.48 0.18 280)',input:'oklch(0.92 0.05 290)',destructive:'oklch(0.58 0.25 25)',radius:'1rem',bw:'4px',shadow:'0 8px 0 oklch(0.48 0.18 280), 0 10px 28px oklch(0 0 0 / 0.1)',btnShadow:'0 calc(var(--bw)*2) 0 color-mix(in oklab, var(--primary) 55%, black)',btnShadowActive:'0 calc(var(--bw)*0.5px) 0 color-mix(in oklab, var(--primary) 55%, black)',btnPressY:'calc(var(--bw)*1.5px)',ls:'0.02em',fw:700,fs:'0.95rem',tfs:'1.3rem',dark:false}
+];
+
+function surprise(){
+  const p=pick(PALETTES);
+  const r=document.documentElement.style;
+  r.setProperty('--bg',p.bg);r.setProperty('--fg',p.fg);
+  r.setProperty('--card',p.card);r.setProperty('--card-fg',p.cardFg);
+  r.setProperty('--card-bg','var(--card)');
+  r.setProperty('--muted',p.muted);r.setProperty('--muted-fg',p.mutedFg);
+  r.setProperty('--primary',p.primary);r.setProperty('--primary-fg',p.primaryFg);
+  r.setProperty('--secondary',p.secondary);r.setProperty('--secondary-fg',p.secondaryFg);
+  r.setProperty('--border',p.border);r.setProperty('--input',p.input);
+  r.setProperty('--ring',p.primary);r.setProperty('--destructive',p.destructive);
+  r.setProperty('--radius',p.radius);r.setProperty('--bw',p.bw);r.setProperty('--shadow',p.shadow);
+  r.setProperty('--btn-shadow',p.btnShadow||'none');
+  r.setProperty('--btn-shadow-active',p.btnShadowActive||'none');
+  r.setProperty('--btn-press-y',p.btnPressY||'0');
+  r.setProperty('--ls',typeof p.ls==='number'?p.ls+'em':p.ls);
+  r.setProperty('--fw',p.fw);r.setProperty('--fs',p.fs);r.setProperty('--title-fs',p.tfs);
+  r.setProperty('--text-shadow','none');
+  r.setProperty('--font-heading',pick(ALL_FONTS)+',system-ui,sans-serif');
+  r.setProperty('--font',pick(FONTS_SANS)+',system-ui,sans-serif');
+  document.body.style.fontFamily=r.getPropertyValue('--font');
+
+  updateSidebarValues();
+}
+
+function exportCSS(){
+  const root=getComputedStyle(document.documentElement);
+  const vars=['--bg','--fg','--card','--card-fg','--muted','--muted-fg','--primary','--primary-fg','--secondary','--secondary-fg','--border','--input','--destructive','--radius','--bw','--shadow','--ls','--fw','--fs','--title-fs','--font','--font-heading'];
+  let css=':root {\n';
+  vars.forEach(v=>{const val=root.getPropertyValue(v).trim();if(val)css+='  '+v+': '+val+';\n'});
+  css+='}\n';
+  navigator.clipboard.writeText(css).then(()=>{
+    const btn=document.getElementById('export-btn');
+    btn.textContent='Copied!';setTimeout(()=>btn.textContent='Export CSS',2000);
+  });
+}
+
+// ── Sidebar ──
+function buildSidebar(){
+  const sb=document.getElementById('sidebar');
+  const controls=[
+    {title:'Colors',items:[
+      {label:'Primary',v:'--primary',t:'color',d:'#6366f1'},
+      {label:'Background',v:'--bg',t:'color',d:'#ffffff'},
+      {label:'Foreground',v:'--fg',t:'color',d:'#1a1a1a'},
+      {label:'Card',v:'--card',t:'color',d:'#ffffff'},
+      {label:'Muted',v:'--muted',t:'color',d:'#f5f5f5'},
+      {label:'Border',v:'--border',t:'color',d:'#e5e5e5'},
+    ]},
+    {title:'Typography',items:[
+      {label:'Heading Font',v:'--font-heading',t:'font'},
+      {label:'Body Font',v:'--font',t:'font'},
+      {label:'Body Size',v:'--fs',t:'range',min:0.7,max:1.1,step:0.01,def:0.875,u:'rem'},
+      {label:'Title Size',v:'--title-fs',t:'range',min:0.8,max:1.6,step:0.01,def:1,u:'rem'},
+      {label:'Weight',v:'--fw',t:'range',min:300,max:800,step:100,def:500},
+      {label:'Letter Spacing',v:'--ls',t:'range',min:-0.03,max:0.15,step:0.005,def:0,u:'em'},
+    ]},
+    {title:'Shape',items:[
+      {label:'Border Radius',v:'--radius',t:'range',min:0,max:2,step:0.05,def:0.625,u:'rem'},
+      {label:'Border Width',v:'--bw',t:'range',min:0,max:4,step:1,def:1,u:'px'},
+    ]},
+    {title:'Shadow',items:[
+      {label:'Shadow Style',v:'--shadow',t:'select',opts:[
+        {l:'None',val:'none'},{l:'Subtle',val:'0 1px 2px rgba(0,0,0,0.05)'},{l:'Medium',val:'0 4px 12px rgba(0,0,0,0.1)'},
+        {l:'Large',val:'0 8px 30px rgba(0,0,0,0.15)'},{l:'Hard',val:'8px 8px 0 0 rgba(0,0,0,1)'},
+        {l:'Neon',val:'0 0 20px rgba(99,102,241,0.3)'},{l:'Colored',val:'0 4px 16px rgba(99,102,241,0.2)'},
+      ]},
+    ]},
+  ];
+  let h='';
+  controls.forEach(s=>{
+    h+='<div class="panel-title">'+s.title+'</div>';
+    s.items.forEach(i=>{
+      h+='<div class="control"><label>'+i.label+'</label>';
+      if(i.t==='color'){
+        h+='<div class="control-row"><input type="color" class="c-color" value="'+i.d+'" data-v="'+i.v+'"><input type="text" class="c-text" value="'+i.d+'" data-v="'+i.v+'" data-t="color"></div>';
+      }else if(i.t==='range'){
+        h+='<div class="control-row"><input type="range" class="c-range" min="'+i.min+'" max="'+i.max+'" step="'+i.step+'" value="'+i.def+'" data-v="'+i.v+'" data-u="'+(i.u||'')+'"><span class="c-val">'+i.def+(i.u||'')+'</span></div>';
+      }else if(i.t==='font'){
+        h+='<select class="c-select" data-v="'+i.v+'">';
+        ['Inter','DM Sans','Outfit','Space Grotesk','Manrope','Plus Jakarta Sans','Sora','Urbanist','Lexend','Albert Sans','Playfair Display','Lora','DM Serif Display','Crimson Text','EB Garamond','Cormorant Garamond','Bitter','Merriweather','Bebas Neue','Oswald','Righteous','Fredoka','Permanent Marker','Cinzel','Rajdhani','Exo 2','Nunito','Caveat','Dancing Script','Press Start 2P','Orbitron','VT323'].forEach(f=>{
+          h+='<option value="'+f+'"'+(f==='Inter'?' selected':'')+'>'+f+'</option>';
+        });
+        h+='</select>';
+      }else if(i.t==='select'){
+        h+='<select class="c-select" data-v="'+i.v+'">';
+        i.opts.forEach(o=>{h+='<option value="'+o.val+'">'+o.l+'</option>'});
+        h+='</select>';
+      }
+      h+='</div>';
+    });
+  });
+  sb.innerHTML=h;
+  sb.querySelectorAll('.c-color').forEach(el=>el.addEventListener('input',e=>{
+    document.documentElement.style.setProperty(e.target.dataset.v,e.target.value);
+    e.target.parentElement.querySelector('.c-text').value=e.target.value;
+  }));
+  sb.querySelectorAll('.c-text[data-t="color"]').forEach(el=>el.addEventListener('change',e=>{
+    document.documentElement.style.setProperty(e.target.dataset.v,e.target.value);
+    e.target.parentElement.querySelector('.c-color').value=e.target.value;
+  }));
+  sb.querySelectorAll('.c-range').forEach(el=>el.addEventListener('input',e=>{
+    const u=e.target.dataset.u||'';
+    document.documentElement.style.setProperty(e.target.dataset.v,e.target.value+u);
+    e.target.parentElement.querySelector('.c-val').textContent=e.target.value+u;
+  }));
+  sb.querySelectorAll('.c-select').forEach(el=>el.addEventListener('change',e=>{
+    const v=e.target.dataset.v;
+    if(v==='--font'||v==='--font-heading'){
+      document.documentElement.style.setProperty(v,"'"+e.target.value+"',system-ui,sans-serif");
+    }else{
+      document.documentElement.style.setProperty(v,e.target.value);
+    }
+  }));
+}
+
+function updateSidebarValues(){
+  const root=getComputedStyle(document.documentElement);
+  document.querySelectorAll('.c-range').forEach(el=>{
+    const val=root.getPropertyValue(el.dataset.v).trim();
+    const num=parseFloat(val);
+    if(!isNaN(num)){el.value=num;el.parentElement.querySelector('.c-val').textContent=num+(el.dataset.u||'')}
+  });
+}
+
+// ── Init ──
+buildSidebar();
+currentScale=1;
+panX=(canvas.clientWidth-3000)/2;
+panY=20;
+apply();
+
+document.getElementById('surprise-btn').addEventListener('click',surprise);
+document.getElementById('export-btn').addEventListener('click',exportCSS);
+</script>
+</body>
+</html>

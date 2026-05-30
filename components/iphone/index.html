@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>iPhone Component - UnBoring</title>
+    <link rel="canonical" href="https://unboring.openagent.bot/components/iphone/" />
+    <link rel="stylesheet" href="/assets/styles.css?v=20260528a" />
+    <link rel="icon" href="/favicon.svg" />
+    <meta name="description" content="An iPhone device mockup for showcasing mobile apps. Includes anatomy, variants, states, styling tokens, accessibility notes, shadcn implementation guidance, and AI prompts." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="UnBoring" />
+    <meta property="og:title" content="iPhone Component - UnBoring" />
+    <meta property="og:description" content="An iPhone device mockup for showcasing mobile apps. Includes anatomy, variants, states, styling tokens, accessibility notes, shadcn implementation guidance, and AI prompts." />
+    <meta property="og:url" content="https://unboring.openagent.bot/components/iphone/" />
+    <meta property="og:image" content="https://unboring.openagent.bot/og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="iPhone Component - UnBoring" />
+    <meta name="twitter:description" content="An iPhone device mockup for showcasing mobile apps. Includes anatomy, variants, states, styling tokens, accessibility notes, shadcn implementation guidance, and AI prompts." />
+    <meta name="twitter:image" content="https://unboring.openagent.bot/og-image.svg" />
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"iPhone Component","description":"An iPhone device mockup for showcasing mobile apps.","about":["UI component","shadcn","design system"]}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand mono" href="/">UnBoring</a>
+        <div class="nav-links mono">
+          <a href="/motion/">Motion</a><a href="/components/" aria-current="page">Components</a><a href="/interactions/">Interactions</a><a href="/styles/">Styles</a><a href="/effects/">Effects</a>
+        </div>
+      </nav>
+    </header>
+    
+    <main class="page">
+      <section class="hero compact detail-hero component-detail-hero" aria-labelledby="page-title">
+        <div>
+          <div class="hero-meta mono" data-left="// component detail" data-right="Surfaces" aria-hidden="true"><span class="hero-rule"></span></div>
+          <h1 id="page-title">iPhone</h1>
+          <p class="subtitle">An iPhone device mockup for showcasing mobile apps.</p>
+        </div>
+      </section>
+      <section class="dark-section">
+        <div class="detail-layout">
+          <div>
+            <div class="preview detail-preview component-preview" aria-label="iPhone component preview"><div aria-hidden="true"><div class="preview-iphone-mock"><div class="iphone-notch"></div><div class="iphone-screen"></div><div class="iphone-home"></div></div></div></div>
+            <div class="component-meta-panel">
+              <span>Surfaces</span>
+              <span>custom</span>
+              <span>custom Tailwind component</span>
+            </div>
+          </div>
+          <div class="code-grid">
+            
+  <section class="code-block">
+    <header><span>AI Prompt</span><button class="button small" type="button" data-copy="prompt-iphone">Copy prompt</button></header>
+    <pre id="prompt-iphone">Create a iPhone component for an AI-generated interface using shadcn-style composition. Use custom Tailwind component as the implementation base. The component should support default, muted, outline, ghost, destructive variants and default, open, hover, focus-visible, disabled states. Include clear anatomy for Frame, Notch, Screen, Home indicator. Keep the visual language black, white, and gray with subtle borders, practical spacing, accessible focus states, and no decorative noise.</pre>
+  </section>
+            
+  <section class="code-block">
+    <header><span>Negative Prompt</span><button class="button small" type="button" data-copy="negative-iphone">Copy negative</button></header>
+    <pre id="negative-iphone">Do not invent a custom component API when custom Tailwind component already covers the base behavior. Avoid random gradients, oversized radii, unclear disabled states, missing labels, icon-only controls without accessible names, and variants that change layout unexpectedly.</pre>
+  </section>
+            
+  <section class="code-block">
+    <header><span>Implementation Notes</span><button class="button small" type="button" data-copy="implementation-iphone">Copy notes</button></header>
+    <pre id="implementation-iphone">Base: custom Tailwind component
+Primitive: none
+Tailwind: Use shadcn tokens for background, border, ring, muted text, radius, and state variants. Keep component-specific classes local and copyable.
+Dependency: No extra primitive required beyond React and Tailwind.</pre>
+  </section>
+            
+  <section class="code-block">
+    <header><span>Tokens</span><button class="button small" type="button" data-copy="tokens-iphone">Copy tokens</button></header>
+    <pre id="tokens-iphone">{
+  &quot;id&quot;: &quot;iphone&quot;,
+  &quot;category&quot;: &quot;components&quot;,
+  &quot;trigger&quot;: &quot;user interaction&quot;,
+  &quot;target&quot;: &quot;iphone&quot;,
+  &quot;feeling&quot;: [
+    &quot;polished&quot;,
+    &quot;practical&quot;,
+    &quot;precise&quot;
+  ],
+  &quot;palette&quot;: [
+    &quot;black&quot;,
+    &quot;white&quot;,
+    &quot;gray&quot;
+  ],
+  &quot;radius&quot;: &quot;8px or less&quot;,
+  &quot;border&quot;: &quot;1px solid rgba(237, 237, 236, 0.14)&quot;,
+  &quot;background&quot;: &quot;neutral surface with subtle contrast&quot;,
+  &quot;foreground&quot;: &quot;high-contrast text&quot;,
+  &quot;mutedForeground&quot;: &quot;secondary text at 68-74% contrast&quot;,
+  &quot;focusRing&quot;: &quot;2px neutral ring with offset&quot;,
+  &quot;shadow&quot;: &quot;soft elevation only when interaction needs tactility&quot;,
+  &quot;motionDuration&quot;: &quot;120ms-220ms&quot;
+}</pre>
+  </section>
+          </div>
+        </div>
+      </section>
+      <section class="dark-section component-spec-section" aria-labelledby="spec-title">
+        <div class="grid-heading"><div><span class="card-kicker mono">copy-ready details</span><h2 id="spec-title">Component spec</h2></div></div>
+        <div class="component-spec-grid">
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">component</span>
+    <h2>Overview</h2>
+    <p>An iPhone device mockup for showcasing mobile apps. This entry is written as a registry-ready component spec: useful to humans, copyable by AI tools, and easy to map to a future shadcn registry item.</p>
+  </section>
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">structure</span>
+    <h2>Anatomy</h2>
+    <ul class="spec-list"><li>Frame</li><li>Notch</li><li>Screen</li><li>Home indicator</li></ul>
+  </section>
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">visual API</span>
+    <h2>Variants</h2>
+    <ul class="spec-list"><li>default</li><li>muted</li><li>outline</li><li>ghost</li><li>destructive</li></ul>
+  </section>
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">behavior</span>
+    <h2>States</h2>
+    <ul class="spec-list"><li>default</li><li>open</li><li>hover</li><li>focus-visible</li><li>disabled</li></ul>
+  </section>
+        </div>
+      </section>
+      <section class="dark-section">
+        <div class="component-spec-grid">
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">tokens</span>
+    <h2>Styling tokens</h2>
+    
+  <div class="token-table">
+    <div><span class="mono">radius</span><strong>8px or less</strong></div><div><span class="mono">border</span><strong>1px solid rgba(237, 237, 236, 0.14)</strong></div><div><span class="mono">background</span><strong>neutral surface with subtle contrast</strong></div><div><span class="mono">foreground</span><strong>high-contrast text</strong></div><div><span class="mono">mutedForeground</span><strong>secondary text at 68-74% contrast</strong></div><div><span class="mono">focusRing</span><strong>2px neutral ring with offset</strong></div><div><span class="mono">shadow</span><strong>soft elevation only when interaction needs tactility</strong></div><div><span class="mono">motionDuration</span><strong>120ms-220ms</strong></div>
+  </div>
+  </section>
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">a11y</span>
+    <h2>Accessibility notes</h2>
+    <ul class="spec-list"><li>Use semantic HTML or the matching Radix primitive before custom roles.</li><li>Keep focus-visible states obvious without adding decorative glow.</li><li>Ensure icon-only controls have an accessible label.</li><li>Do not rely on color alone for state or validation.</li></ul>
+  </section>
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">custom Tailwind component</span>
+    <h2>shadcn implementation</h2>
+    <p>No extra primitive required beyond React and Tailwind.</p><p>Use shadcn tokens for background, border, ring, muted text, radius, and state variants. Keep component-specific classes local and copyable.</p>
+  </section>
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">optional adapter</span>
+    <h2>HeroUI mapping</h2>
+    <p>iPhone can map to a HeroUI component only as an optional adapter. Keep UnBoring copy and token language framework-neutral.</p>
+  </section>
+        </div>
+      </section>
+      <section class="dark-section seo-section" aria-labelledby="component-faq-title">
+        <div class="grid-heading"><div><h2 id="component-faq-title">Usage notes</h2><p>Short guidance for humans and AI tools before copying the component.</p></div></div>
+        <div class="faq-grid">
+  <div class="seo-accordion" data-accordion>
+    <button class="seo-accordion-head" type="button" aria-expanded="false">What is this component for? <span aria-hidden="true">+</span></button>
+    <div class="seo-accordion-content"><p>iPhone helps teams an iPhone device mockup for showcasing mobile apps. It should feel like a reusable product primitive, not a one-off decoration.</p></div>
+  </div>
+  <div class="seo-accordion" data-accordion>
+    <button class="seo-accordion-head" type="button" aria-expanded="false">How should I implement it? <span aria-hidden="true">+</span></button>
+    <div class="seo-accordion-content"><p>Start from custom Tailwind component. No extra primitive required beyond React and Tailwind. Keep variants token-driven and keep states predictable.</p></div>
+  </div>
+  <div class="seo-accordion" data-accordion>
+    <button class="seo-accordion-head" type="button" aria-expanded="false">What should I avoid? <span aria-hidden="true">+</span></button>
+    <div class="seo-accordion-content"><p>Do not invent a custom component API when custom Tailwind component already covers the base behavior. Avoid random gradients, oversized radii, unclear disabled states, missing labels, icon-only controls without accessible names, and variants that change layout unexpectedly.</p></div>
+  </div></div>
+      </section>
+      <section class="dark-section" aria-labelledby="related-title">
+        <div class="grid-heading"><div><h2 id="related-title">Related surfaces</h2></div></div>
+        <div class="idea-grid related-grid">
+  <a class="idea-card" href="/components/card/">
+    <div class="preview" aria-label="Card preview"><div aria-hidden="true"><div class="sc-card"><div class="sc-card-header"><div class="sc-card-title">Login to your account</div><div class="sc-card-desc">Enter your email below to login</div></div><div class="sc-card-body"><div class="sc-field"><label class="sc-label">Email</label><input class="sc-input" placeholder="m@example.com" readonly /></div><div class="sc-field"><label class="sc-label">Password</label><input class="sc-input" type="password" value="password" readonly /></div></div><div class="sc-card-footer"><button class="sc-btn sc-btn-default sc-btn-full">Login</button></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Components</span>
+      <h3>Card</h3>
+      <p class="purpose">Group related information and action affordances in a scannable surface.</p>
+      <div class="component-card-meta"><span>Surfaces</span><span>card</span><span>ready</span></div>
+    </div>
+  </a>
+  <a class="idea-card" href="/components/command-card/">
+    <div class="preview" aria-label="Command Card preview"><div aria-hidden="true"><div class="hover-card refined-hover-card"><span class="mini-line"></span><span class="mini-line short"></span><span class="refined-corner"></span></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Components</span>
+      <h3>Command Card</h3>
+      <p class="purpose">Make a clickable card behave like a focused command surface.</p>
+      <div class="component-card-meta"><span>Surfaces</span><span>card</span><span>ready</span></div>
+    </div>
+  </a>
+  <a class="idea-card" href="/components/dialog/">
+    <div class="preview" aria-label="Dialog preview"><div aria-hidden="true"><div class="sc-dialog-overlay"><button class="sc-dialog-close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button><div class="sc-dialog-title">Edit profile</div><div class="sc-dialog-desc">Make changes to your profile here. Click save when you're done.</div><div class="sc-field"><label class="sc-label">Name</label><input class="sc-input" value="Pedro Duarte" readonly /></div><div class="sc-field" style="margin-top:10px"><label class="sc-label">Username</label><input class="sc-input" value="@peduarte" readonly /></div><div class="sc-dialog-actions" style="margin-top:16px"><button class="sc-btn sc-btn-outline">Cancel</button><button class="sc-btn sc-btn-default">Save changes</button></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Components</span>
+      <h3>Dialog</h3>
+      <p class="purpose">Interrupt the flow only when a user must make a focused decision.</p>
+      <div class="component-card-meta"><span>Surfaces</span><span>dialog</span><span>ready</span></div>
+    </div>
+  </a></div>
+      </section>
+    </main>
+    
+    <footer class="site-footer">
+      <div class="page footer-grid">
+        <div><h3 class="mono">UnBoring</h3><p>Less boring UI language for humans and agents.</p></div>
+        <div><h3 class="mono">Library</h3><a href="/motion/">Motion</a><a href="/components/" aria-current="page">Components</a><a href="/interactions/">Interactions</a><a href="/styles/">Styles</a><a href="/effects/">Effects</a></div>
+        <div><h3 class="mono">Machine-readable</h3><a href="/agent/">MCP ready</a><a href="/agent/">CLI planned</a></div>
+        <div><h3 class="mono">Open source</h3><a href="/agent/">Contribute ideas</a><a href="/motion/">Browse patterns</a></div>
+      </div>
+    </footer>
+    <script src="/assets/app.js?v=20260528a"></script>
+  </body>
+</html>

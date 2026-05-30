@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Interactions - UnBoring</title>
+    <link rel="canonical" href="https://unboring.openagent.bot/interactions/" />
+    <link rel="stylesheet" href="/assets/styles.css?v=20260528a" />
+    <link rel="icon" href="/favicon.svg" />
+    <meta name="description" content="Interactions ideas for less boring AI-generated interfaces with previews, prompts, negative prompts, and tokens." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="UnBoring" />
+    <meta property="og:title" content="Interactions - UnBoring" />
+    <meta property="og:description" content="Interactions ideas for less boring AI-generated interfaces with previews, prompts, negative prompts, and tokens." />
+    <meta property="og:url" content="https://unboring.openagent.bot/interactions/" />
+    <meta property="og:image" content="https://unboring.openagent.bot/og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Interactions - UnBoring" />
+    <meta name="twitter:description" content="Interactions ideas for less boring AI-generated interfaces with previews, prompts, negative prompts, and tokens." />
+    <meta name="twitter:image" content="https://unboring.openagent.bot/og-image.svg" />
+    
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand mono" href="/">UnBoring</a>
+        <div class="nav-links mono">
+          <a href="/motion/">Motion</a><a href="/components/">Components</a><a href="/interactions/" aria-current="page">Interactions</a><a href="/styles/">Styles</a><a href="/effects/">Effects</a>
+        </div>
+      </nav>
+    </header>
+    
+    <main class="page">
+      <section class="hero compact category-hero" aria-labelledby="page-title">
+        <div>
+          <div class="hero-meta mono" data-left="// category&#10;// interactions" data-right="85 demos" aria-hidden="true"><span class="hero-rule"></span></div>
+          <p class="eyebrow mono">Tiny moments. Real product feel.</p>
+          <h1 id="page-title">Interactions</h1>
+          <p class="subtitle">Small response moments for copy states, empty states, command feedback, focus changes, and progressive disclosure.</p>
+        </div>
+        <div class="category-preview-strip"><div class="preview"><div aria-hidden="true"><div class="sc-copy-demo"><span class="sc-copy-text">npm install shadcn</span><button class="sc-copy-btn sc-copied"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></button></div></div></div><div class="preview"><div aria-hidden="true"><div class="toast-wrap"><div class="toast"><strong>Done</strong><span>Undo Bar</span></div></div></div></div><div class="preview"><div aria-hidden="true"><div class="demo-object demo-pulse"><span>Optimistic Save</span><i></i><i></i><i></i></div></div></div></div>
+      </section>
+      <section class="dark-section" aria-labelledby="library-title">
+        <div class="category-toolbar">
+          <div>
+            <span class="card-kicker mono">20 interaction states</span>
+            <h2 id="library-title">Browse interactions</h2>
+          </div>
+          <p>Open any card for the preview, AI prompt, negative prompt, motion or design tokens, and SEO notes.</p>
+        </div>
+        <div class="idea-grid library-grid">
+          
+  <a class="idea-card" href="/interactions/copy-confirmation/">
+    <div class="preview" aria-label="Copy Confirmation preview"><div aria-hidden="true"><div class="sc-copy-demo"><span class="sc-copy-text">npm install shadcn</span><button class="sc-copy-btn sc-copied"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></button></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Copy Confirmation</h3>
+      <p class="purpose">Confirm copy without interrupting the workflow.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/undo-bar/">
+    <div class="preview" aria-label="Undo Bar preview"><div aria-hidden="true"><div class="toast-wrap"><div class="toast"><strong>Done</strong><span>Undo Bar</span></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Undo Bar</h3>
+      <p class="purpose">Offer a short undo path after a destructive action.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/optimistic-save/">
+    <div class="preview" aria-label="Optimistic Save preview"><div aria-hidden="true"><div class="demo-object demo-pulse"><span>Optimistic Save</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Optimistic Save</h3>
+      <p class="purpose">Show a local saved state before background sync settles.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/inline-validation/">
+    <div class="preview" aria-label="Inline Validation preview"><div aria-hidden="true"><div class="demo-object demo-focus"><span>Inline Validation</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Inline Validation</h3>
+      <p class="purpose">Explain a form problem beside the field.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/command-loading-state/">
+    <div class="preview" aria-label="Command Loading State preview"><div aria-hidden="true"><div class="command-panel refined-command"><div class="command-input"></div><div class="command-row"></div><div class="command-row"></div><div class="command-row compact-row"></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Command Loading State</h3>
+      <p class="purpose">Keep a command surface useful while work runs.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/drag-reorder-cue/">
+    <div class="preview" aria-label="Drag Reorder Cue preview"><div aria-hidden="true"><div class="demo-object demo-list"><span>Drag Reorder Cue</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Drag Reorder Cue</h3>
+      <p class="purpose">Show where an item will land while dragging.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/selection-count-bar/">
+    <div class="preview" aria-label="Selection Count Bar preview"><div aria-hidden="true"><div class="demo-object demo-panel"><span>Selection Count Bar</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Selection Count Bar</h3>
+      <p class="purpose">Reveal batch actions only when selection exists.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/hover-intent-menu/">
+    <div class="preview" aria-label="Hover Intent Menu preview"><div aria-hidden="true"><div class="command-panel refined-command"><div class="command-input"></div><div class="command-row"></div><div class="command-row"></div><div class="command-row compact-row"></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Hover Intent Menu</h3>
+      <p class="purpose">Expose secondary actions after a deliberate hover.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/ai-thinking-dots/">
+    <div class="preview" aria-label="AI Thinking Dots preview"><div aria-hidden="true"><div class="demo-object demo-pulse"><span>AI Thinking Dots</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>AI Thinking Dots</h3>
+      <p class="purpose">Indicate work without pretending to be magic.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/streaming-text-reveal/">
+    <div class="preview" aria-label="Streaming Text Reveal preview"><div aria-hidden="true"><div class="demo-object demo-list"><span>Streaming Text Reveal</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Streaming Text Reveal</h3>
+      <p class="purpose">Show generated text arriving in readable chunks.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/inline-rename/">
+    <div class="preview" aria-label="Inline Rename preview"><div aria-hidden="true"><div class="command-panel refined-command"><div class="command-input"></div><div class="command-row"></div><div class="command-row"></div><div class="command-row compact-row"></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Inline Rename</h3>
+      <p class="purpose">Turn a label into an editable field in place.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/multi-select-tokens/">
+    <div class="preview" aria-label="Multi-select Tokens preview"><div aria-hidden="true"><div class="demo-object demo-chips"><span>Multi-select Tokens</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Multi-select Tokens</h3>
+      <p class="purpose">Turn chosen values into tidy removable chips.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/permission-prompt/">
+    <div class="preview" aria-label="Permission Prompt preview"><div aria-hidden="true"><div class="demo-object demo-panel"><span>Permission Prompt</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Permission Prompt</h3>
+      <p class="purpose">Ask for access with a compact, contextual panel.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/background-task-toast/">
+    <div class="preview" aria-label="Background Task Toast preview"><div aria-hidden="true"><div class="toast-wrap"><div class="toast"><strong>Done</strong><span>Background Task Toast</span></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Background Task Toast</h3>
+      <p class="purpose">Report async completion without stealing focus.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/keyboard-focus-jump/">
+    <div class="preview" aria-label="Keyboard Focus Jump preview"><div aria-hidden="true"><div class="demo-object demo-focus"><span>Keyboard Focus Jump</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Keyboard Focus Jump</h3>
+      <p class="purpose">Move focus between command areas predictably.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/filter-applied-state/">
+    <div class="preview" aria-label="Filter Applied State preview"><div aria-hidden="true"><div class="demo-object demo-chips"><span>Filter Applied State</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Filter Applied State</h3>
+      <p class="purpose">Make active filters visible without clutter.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/error-recovery-row/">
+    <div class="preview" aria-label="Error Recovery Row preview"><div aria-hidden="true"><div class="demo-object demo-table"><span>Error Recovery Row</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Error Recovery Row</h3>
+      <p class="purpose">Attach recovery action to the failed item.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/inline-diff-reveal/">
+    <div class="preview" aria-label="Inline Diff Reveal preview"><div aria-hidden="true"><div class="demo-object demo-split"><span>Inline Diff Reveal</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Inline Diff Reveal</h3>
+      <p class="purpose">Show before and after changes in place.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/autosuggest-list/">
+    <div class="preview" aria-label="Autosuggest List preview"><div aria-hidden="true"><div class="command-panel refined-command"><div class="command-input"></div><div class="command-row"></div><div class="command-row"></div><div class="command-row compact-row"></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Autosuggest List</h3>
+      <p class="purpose">Offer suggestions below a field with calm priority.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/progressive-disclosure/">
+    <div class="preview" aria-label="Progressive Disclosure preview"><div aria-hidden="true"><div class="accordion-demo open"><div class="accordion-head">Details <span>+</span></div><div class="accordion-content"><div class="accordion-body">Reveal only what is needed right now.</div></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Progressive Disclosure</h3>
+      <p class="purpose">Reveal advanced settings only when needed.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/interactive-hover-button/">
+    <div class="preview" aria-label="Interactive Hover Button preview"><div aria-hidden="true"><span class="press-button">Continue</span></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Interactive Hover Button</h3>
+      <p class="purpose">A button whose gradient or glow follows the mouse cursor.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/shimmer-button/">
+    <div class="preview" aria-label="Shimmer Button preview"><div aria-hidden="true"><span class="press-button">Shimmer Button</span></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Shimmer Button</h3>
+      <p class="purpose">A button with a traveling shimmer light effect.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/ripple-button/">
+    <div class="preview" aria-label="Ripple Button preview"><div aria-hidden="true"><span class="press-button">Ripple Button</span></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Ripple Button</h3>
+      <p class="purpose">A button that spawns expanding ripple circles on click.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/pulsating-button/">
+    <div class="preview" aria-label="Pulsating Button preview"><div aria-hidden="true"><span class="press-button">Continue</span></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Pulsating Button</h3>
+      <p class="purpose">A button with a subtle pulsing glow to draw attention.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/swipe-to-dismiss/">
+    <div class="preview" aria-label="Swipe to Dismiss preview"><div aria-hidden="true"><div class="preview-swipe-dismiss"><div class="swipe-card"><div class="swipe-avatar"></div><div class="swipe-text"><div class="swipe-name">Meeting notes</div><div class="swipe-sub">Updated 2 min ago</div></div></div><div class="swipe-action">Delete</div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Swipe to Dismiss</h3>
+      <p class="purpose">Swipe a card sideways to reveal a delete or archive action.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/pull-to-refresh/">
+    <div class="preview" aria-label="Pull to Refresh preview"><div aria-hidden="true"><div class="preview-pull-refresh"><div class="pull-spinner"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>Refreshing...</div><div class="pull-list"><div class="pull-item"></div><div class="pull-item"></div><div class="pull-item"></div></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Pull to Refresh</h3>
+      <p class="purpose">Pull down a list to trigger a content refresh.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/long-press-menu/">
+    <div class="preview" aria-label="Long Press Menu preview"><div aria-hidden="true"><div class="preview-long-press"><div class="lp-item"><div class="lp-avatar"></div><div class="lp-text"><div class="lp-name">Design specs</div><div class="lp-sub">3 files</div></div></div><div class="lp-menu"><div class="lp-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4Z"/></svg>Edit</div><div class="lp-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</div><div class="lp-menu-divider"></div><div class="lp-menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>Delete</div></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Long Press Menu</h3>
+      <p class="purpose">Hold an item to reveal a contextual action menu.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/drag-handle/">
+    <div class="preview" aria-label="Drag Handle preview"><div aria-hidden="true"><div class="preview-drag-handle"><div class="dh-item"><div class="dh-grip"><div class="dh-dot"></div><div class="dh-dot"></div><div class="dh-dot"></div><div class="dh-dot"></div><div class="dh-dot"></div><div class="dh-dot"></div></div><div class="dh-line" style="width:70%"></div></div><div class="dh-item"><div class="dh-grip"><div class="dh-dot"></div><div class="dh-dot"></div><div class="dh-dot"></div><div class="dh-dot"></div><div class="dh-dot"></div><div class="dh-dot"></div></div><div class="dh-line" style="width:55%"></div></div><div class="dh-item"><div class="dh-grip"><div class="dh-dot"></div><div class="dh-dot"></div><div class="dh-dot"></div><div class="dh-dot"></div><div class="dh-dot"></div><div class="dh-dot"></div></div><div class="dh-line" style="width:80%"></div></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Drag Handle</h3>
+      <p class="purpose">A grip icon that signals drag-to-reorder capability.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/infinite-scroll/">
+    <div class="preview" aria-label="Infinite Scroll preview"><div aria-hidden="true"><div class="preview-infinite-scroll"><div class="is-item"></div><div class="is-item"></div><div class="is-item"></div><div class="is-spinner"><div class="is-spinner-dot"></div><div class="is-spinner-dot"></div><div class="is-spinner-dot"></div></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Infinite Scroll</h3>
+      <p class="purpose">Load more content seamlessly as the user scrolls down.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/scroll-progress/">
+    <div class="preview" aria-label="Scroll Progress preview"><div aria-hidden="true"><div class="preview-scroll-progress"><div class="sp-bar"><div class="sp-fill"></div></div><div class="sp-content"><div class="sp-line"></div><div class="sp-line"></div><div class="sp-line"></div></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Scroll Progress</h3>
+      <p class="purpose">A thin bar that fills as the user scrolls through content.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/scroll-snap/">
+    <div class="preview" aria-label="Scroll Snap preview"><div aria-hidden="true"><div class="preview-scroll-snap"><div class="snap-card">Section 1</div><div class="snap-card">Section 2</div><div class="snap-card">Section 3</div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Scroll Snap</h3>
+      <p class="purpose">Snap sections into place for a paginated scroll experience.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/sticky-header/">
+    <div class="preview" aria-label="Sticky Header preview"><div aria-hidden="true"><div class="preview-sticky-header"><div class="sticky-hdr"><span>My App</span><span style="font-size:0.7rem;color:var(--muted-fg)">Menu</span></div><div class="sticky-body"><div class="sticky-line"></div><div class="sticky-line"></div><div class="sticky-line"></div></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Sticky Header</h3>
+      <p class="purpose">Pin navigation to the top as the user scrolls past it.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/back-to-top/">
+    <div class="preview" aria-label="Back to Top preview"><div aria-hidden="true"><div class="preview-back-to-top"><div class="btt-content"><div class="btt-line"></div><div class="btt-line"></div><div class="btt-line"></div></div><div class="btt-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Back to Top</h3>
+      <p class="purpose">A floating button that scrolls the page back to the top.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/inline-field-validation/">
+    <div class="preview" aria-label="Inline Field Validation preview"><div aria-hidden="true"><div class="preview-field-validation"><div class="fv-field"><div class="fv-label">Email</div><div class="fv-input-wrap fv-success"><span class="fv-input-text">alex@example.com</span><svg class="fv-icon fv-success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></div><span class="fv-msg fv-success-msg">Email is valid</span></div><div class="fv-field"><div class="fv-label">Username</div><div class="fv-input-wrap fv-error"><span class="fv-input-text">ab</span><svg class="fv-icon fv-error-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg></div><span class="fv-msg fv-error-msg">Must be at least 3 characters</span></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Inline Field Validation</h3>
+      <p class="purpose">Show success or error state beside a form field in real time.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/character-counter/">
+    <div class="preview" aria-label="Character Counter preview"><div aria-hidden="true"><div class="preview-char-counter"><div class="cc-area">The quick brown fox jumps over the lazy dog.</div><div class="cc-bar"><div class="cc-track"><div class="cc-fill"></div></div><span class="cc-count">182 / 250</span></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Character Counter</h3>
+      <p class="purpose">Show remaining characters as the user types.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/password-strength/">
+    <div class="preview" aria-label="Password Strength preview"><div aria-hidden="true"><div class="preview-password-strength"><div class="ps-input">••••••••</div><div class="ps-meter"><div class="ps-segment ps-active"></div><div class="ps-segment ps-active"></div><div class="ps-segment ps-active"></div><div class="ps-segment"></div></div><span class="ps-label">Strong</span></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Password Strength</h3>
+      <p class="purpose">Indicate password strength with a color-coded meter.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/multi-step-indicator/">
+    <div class="preview" aria-label="Multi-step Indicator preview"><div aria-hidden="true"><div class="preview-multi-step"><div class="ms-step"><div class="ms-dot ms-done"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div><span class="ms-label">Account</span><div class="ms-line ms-done"></div></div><div class="ms-step ms-active"><div class="ms-dot ms-active">2</div><span class="ms-label">Details</span><div class="ms-line"></div></div><div class="ms-step"><div class="ms-dot">3</div><span class="ms-label">Done</span></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Multi-step Indicator</h3>
+      <p class="purpose">Show progress through a multi-step form or wizard.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/autocomplete-dropdown/">
+    <div class="preview" aria-label="Autocomplete Dropdown preview"><div aria-hidden="true"><div class="preview-autocomplete"><div class="ac-input"><svg class="ac-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><span>Re</span></div><div class="ac-dropdown"><div class="ac-item ac-highlighted"><span class="ac-match">Re</span>act</div><div class="ac-item"><span class="ac-match">Re</span>adme</div><div class="ac-item"><span class="ac-match">Re</span>dux</div></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Autocomplete Dropdown</h3>
+      <p class="purpose">Show filtered suggestions below an input as the user types.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/optimistic-toggle/">
+    <div class="preview" aria-label="Optimistic Toggle preview"><div aria-hidden="true"><div class="preview-optimistic-toggle"><div class="ot-row"><span class="ot-label">Dark mode</span><div class="ot-switch"></div></div><div class="ot-row"><span class="ot-label">Notifications</span><div class="ot-switch ot-off"></div></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Optimistic Toggle</h3>
+      <p class="purpose">Toggle a setting immediately while sync happens in background.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/error-with-retry/">
+    <div class="preview" aria-label="Error with Retry preview"><div aria-hidden="true"><div class="preview-error-retry"><div class="er-banner"><svg class="er-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg><div class="er-text"><div class="er-title">Failed to save</div><div class="er-desc">Check your connection and try again.</div></div><button class="er-btn">Retry</button></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Error with Retry</h3>
+      <p class="purpose">Show an error message with a one-tap retry action.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/success-checkmark/">
+    <div class="preview" aria-label="Success Checkmark preview"><div aria-hidden="true"><div class="preview-success-check"><div class="sc-circle"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Success Checkmark</h3>
+      <p class="purpose">Flash a checkmark to confirm a completed action.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/loading-skeleton-pulse/">
+    <div class="preview" aria-label="Loading Skeleton Pulse preview"><div aria-hidden="true"><div class="preview-skeleton-pulse"><div class="sk-row"><div class="sk-avatar"></div><div class="sk-lines"><div class="sk-line"></div><div class="sk-line"></div></div></div><div class="sk-row"><div class="sk-avatar"></div><div class="sk-lines"><div class="sk-line"></div><div class="sk-line"></div></div></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Loading Skeleton Pulse</h3>
+      <p class="purpose">Show placeholder shapes that pulse while content loads.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/context-menu/">
+    <div class="preview" aria-label="Context Menu preview"><div aria-hidden="true"><div class="preview-context-menu"><div class="cm-trigger">Right-click here</div><div class="cm-menu"><div class="cm-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4Z"/></svg>Edit</div><div class="cm-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</div><div class="cm-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Share</div><div class="cm-divider"></div><div class="cm-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>Delete</div></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Context Menu</h3>
+      <p class="purpose">A floating menu that appears on right-click or long-press.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/toast-stacking/">
+    <div class="preview" aria-label="Toast Stacking preview"><div aria-hidden="true"><div class="preview-toast-stack"><div class="ts-toast"><div class="ts-dot ts-success"></div><span>Changes saved</span></div><div class="ts-toast"><div class="ts-dot ts-info"></div><span>New comment</span></div><div class="ts-toast"><div class="ts-dot ts-error"></div><span>Upload failed</span></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Toast Stacking</h3>
+      <p class="purpose">Stack multiple toast notifications with staggered positioning.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/sticky-footer-action/">
+    <div class="preview" aria-label="Sticky Footer Action preview"><div aria-hidden="true"><div class="preview-sticky-footer"><div class="sf-content"><div class="sf-line"></div><div class="sf-line"></div></div><div class="sf-bar"><span class="sf-bar-label">3 items selected</span><button class="sf-bar-btn">Continue</button></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Sticky Footer Action</h3>
+      <p class="purpose">Pin a primary action to the bottom of the viewport.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/animated-beam/">
+    <div class="preview" aria-label="Animated Beam preview"><div aria-hidden="true"><div class="preview-animated-beam" style="width:90%;height:80px;position:relative"><svg width="100%" height="100%" viewBox="0 0 200 80"><circle cx="20" cy="40" r="8" fill="var(--dark-bg)" stroke="var(--border)" stroke-width="1.5"/><circle cx="180" cy="40" r="8" fill="var(--dark-bg)" stroke="var(--border)" stroke-width="1.5"/><path class="beam-path" d="M28 40 C60 20 140 60 172 40" fill="none" stroke="#667eea" stroke-width="2"/></svg></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Animated Beam</h3>
+      <p class="purpose">A light beam that travels along a path between two points.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/border-beam/">
+    <div class="preview" aria-label="Border Beam preview"><div aria-hidden="true"><div class="preview-border-beam" style="width:80%;height:80px;display:grid;place-items:center;background:var(--dark-bg)"><span style="font-size:0.82rem;color:var(--muted-fg)">Hover to see effect</span></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Border Beam</h3>
+      <p class="purpose">An animated beam of light that traces the border of an element.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/shine-border/">
+    <div class="preview" aria-label="Shine Border preview"><div aria-hidden="true"><div class="preview-shine-border" style="width:80%;height:80px;display:grid;place-items:center;background:var(--dark-bg);border:1px solid var(--border)"><span style="font-size:0.82rem;color:var(--muted-fg)">Shine effect</span></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Shine Border</h3>
+      <p class="purpose">A rotating shine that sweeps around element borders.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/glare-hover/">
+    <div class="preview" aria-label="Glare Hover preview"><div aria-hidden="true"><div class="preview-glare-hover" style="width:80%;height:80px;display:grid;place-items:center;background:var(--dark-bg);border:1px solid var(--border)"><span style="font-size:0.82rem;color:var(--muted-fg)">Hover for glare</span></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Glare Hover</h3>
+      <p class="purpose">A glare light effect that follows the cursor across a surface.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/spotlight-card/">
+    <div class="preview" aria-label="Spotlight Card preview"><div aria-hidden="true"><div class="preview-spotlight-card" style="width:80%;height:80px;display:grid;place-items:center"><span style="font-size:0.82rem;color:var(--muted-fg)">Move mouse over</span></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Spotlight Card</h3>
+      <p class="purpose">A card whose border glows following the mouse position.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/magic-card/">
+    <div class="preview" aria-label="Magic Card preview"><div aria-hidden="true"><div class="preview-magic-card" style="width:80%;height:80px;display:grid;place-items:center"><span style="font-size:0.82rem;color:var(--muted-fg)">Animated border</span></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Magic Card</h3>
+      <p class="purpose">A card with a subtle animated gradient border glow.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/glow-effect/">
+    <div class="preview" aria-label="Glow Effect preview"><div aria-hidden="true"><div class="preview-glow-effect" style="width:80%;height:60px;display:grid;place-items:center;background:var(--dark-bg);border:1px solid var(--border);border-radius:8px"><span style="font-size:0.82rem;color:var(--muted-fg)">Pulsing glow</span></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Glow Effect</h3>
+      <p class="purpose">Elements that emit a soft pulsing glow aura.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/smooth-cursor/">
+    <div class="preview" aria-label="Smooth Cursor preview"><div aria-hidden="true"><div class="preview-smooth-cursor" style="width:90%;height:80px;border-radius:8px;background:var(--dark-bg)"><div class="cursor-dot"></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Smooth Cursor</h3>
+      <p class="purpose">A custom cursor that follows mouse movement with smooth easing.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/magnetic-button/">
+    <div class="preview" aria-label="Magnetic Button preview"><div aria-hidden="true"><div class="preview-magnetic-btn" style="padding:12px 24px;background:var(--dark-bg);border:1px solid var(--border);border-radius:8px;cursor:pointer"><span style="font-size:0.82rem;color:var(--fg);font-weight:600">Magnetic</span></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Magnetic Button</h3>
+      <p class="purpose">A button that slightly attracts toward the cursor on hover.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/morphing-button/">
+    <div class="preview" aria-label="Morphing Button preview"><div aria-hidden="true"><div class="preview-morphing-btn" style="padding:12px 24px;background:#667eea;border-radius:8px;cursor:pointer"><span style="font-size:0.82rem;color:#fff;font-weight:600">Morph</span></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Morphing Button</h3>
+      <p class="purpose">A button that smoothly morphs its shape on interaction.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/tool-call-status/">
+    <div class="preview" aria-label="Tool Call Status preview"><div aria-hidden="true"><div class="preview-tool-call"><div class="tc-header"><div class="tc-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><span class="tc-name">Web Search</span><div class="tc-status tc-running">Running</div></div><div class="tc-body"><div class="tc-line"></div><div class="tc-line" style="width:70%"></div></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Tool Call Status</h3>
+      <p class="purpose">Show the status of an AI tool call with clear feedback.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/agent-thinking/">
+    <div class="preview" aria-label="Agent Thinking preview"><div aria-hidden="true"><div class="preview-agent-thinking"><div class="at-dots"><div class="at-dot"></div><div class="at-dot"></div><div class="at-dot"></div></div><span class="at-text">Agent is thinking...</span></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Agent Thinking</h3>
+      <p class="purpose">Indicate an AI agent is processing with a sophisticated animation.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/streaming-text/">
+    <div class="preview" aria-label="Streaming Text preview"><div aria-hidden="true"><div class="preview-streaming-text"><div class="st-line">Analyzing your request...</div><div class="st-line">Based on the data provided,</div><div class="st-line">I recommend the following<span class="st-cursor"></span></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Streaming Text</h3>
+      <p class="purpose">Display AI-generated text arriving in readable chunks.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/context-attachment/">
+    <div class="preview" aria-label="Context Attachment preview"><div aria-hidden="true"><div class="preview-context-attach"><div class="ca-chips"><div class="ca-chip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>report.pdf</div><div class="ca-chip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>data.csv</div></div><div class="ca-input">Summarize the key findings...</div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Context Attachment</h3>
+      <p class="purpose">Attach context files or notes to an AI prompt.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/model-selector/">
+    <div class="preview" aria-label="Model Selector preview"><div aria-hidden="true"><div class="preview-model-selector"><div class="ms-trigger"><span>GPT-4o</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Model Selector</h3>
+      <p class="purpose">Choose between different AI models with a compact selector.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/token-counter/">
+    <div class="preview" aria-label="Token Counter preview"><div aria-hidden="true"><div class="preview-token-counter"><div class="tc-bar"><div class="tc-fill"></div></div><div class="tc-info"><span class="tc-used">1,247 tokens</span><span class="tc-limit">/ 4,096</span></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Token Counter</h3>
+      <p class="purpose">Show token usage with a visual indicator.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/prompt-history/">
+    <div class="preview" aria-label="Prompt History preview"><div aria-hidden="true"><div class="preview-prompt-history"><div class="ph-item"><div class="ph-text">Explain quantum computing</div><div class="ph-time">2h ago</div></div><div class="ph-item"><div class="ph-text">Write a React component</div><div class="ph-time">1d ago</div></div><div class="ph-item"><div class="ph-text">Debug this error</div><div class="ph-time">3d ago</div></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Prompt History</h3>
+      <p class="purpose">Browse previous prompts with a scrollable list.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/output-diff/">
+    <div class="preview" aria-label="Output Diff preview"><div aria-hidden="true"><div class="preview-output-diff"><div class="od-pane"><div class="od-header">Before</div><div class="od-body"><div class="od-line od-removed">- Old implementation</div><div class="od-line">  Same code here</div></div></div><div class="od-pane"><div class="od-header">After</div><div class="od-body"><div class="od-line od-added">+ New implementation</div><div class="od-line">  Same code here</div></div></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Output Diff</h3>
+      <p class="purpose">Show before and after changes in AI-generated content.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/prompt-receipt/">
+    <div class="preview" aria-label="Prompt Receipt preview"><div aria-hidden="true"><div class="demo-object demo-receipt"><span>Prompt Receipt</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Prompt Receipt</h3>
+      <p class="purpose">A generated-output summary that feels like a receipt.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/decision-dial/">
+    <div class="preview" aria-label="Decision Dial preview"><div aria-hidden="true"><div class="demo-object demo-knobs"><span>Decision Dial</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Decision Dial</h3>
+      <p class="purpose">Choose between tradeoffs rather than toggling a setting.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/constraint-board/">
+    <div class="preview" aria-label="Constraint Board preview"><div aria-hidden="true"><div class="demo-object demo-board"><span>Constraint Board</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Constraint Board</h3>
+      <p class="purpose">Shape outputs by moving constraints instead of writing more text.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/command-workbench/">
+    <div class="preview" aria-label="Command Workbench preview"><div aria-hidden="true"><div class="demo-object demo-composer"><span>Command Workbench</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Command Workbench</h3>
+      <p class="purpose">A dense area for prompt, context, tools, and output.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/compare-canvas/">
+    <div class="preview" aria-label="Compare Canvas preview"><div aria-hidden="true"><div class="demo-object demo-split"><span>Compare Canvas</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Compare Canvas</h3>
+      <p class="purpose">Place versions side by side for fast judgment.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/inspector-rail/">
+    <div class="preview" aria-label="Inspector Rail preview"><div aria-hidden="true"><div class="demo-object demo-drawer"><span>Inspector Rail</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Inspector Rail</h3>
+      <p class="purpose">A slim rail for selected-object metadata.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/recipe-sheet/">
+    <div class="preview" aria-label="Recipe Sheet preview"><div aria-hidden="true"><div class="demo-object demo-receipt"><span>Recipe Sheet</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Recipe Sheet</h3>
+      <p class="purpose">A structured surface for reusable prompt recipes.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/agent-run-log/">
+    <div class="preview" aria-label="Agent Run Log preview"><div aria-hidden="true"><div class="demo-object demo-timeline"><span>Agent Run Log</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Agent Run Log</h3>
+      <p class="purpose">A readable timeline for autonomous work.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/context-shelf/">
+    <div class="preview" aria-label="Context Shelf preview"><div aria-hidden="true"><div class="demo-object demo-list"><span>Context Shelf</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Context Shelf</h3>
+      <p class="purpose">A shelf for files, notes, and constraints feeding an AI task.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/output-stack/">
+    <div class="preview" aria-label="Output Stack preview"><div aria-hidden="true"><div class="mini-stack refined-card-stack"><div class="mini-card"><span class="mini-line"></span><span class="mini-line short"></span></div><div class="mini-card"><span class="mini-line"></span><span class="mini-line short"></span></div><div class="mini-card"><span class="mini-line"></span><span class="mini-line short"></span></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Output Stack</h3>
+      <p class="purpose">Layer multiple generated results without chat clutter.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/review-queue/">
+    <div class="preview" aria-label="Review Queue preview"><div aria-hidden="true"><div class="demo-object demo-table"><span>Review Queue</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Review Queue</h3>
+      <p class="purpose">A triage surface for accepting, editing, or rejecting outputs.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/prompt-lab/">
+    <div class="preview" aria-label="Prompt Lab preview"><div aria-hidden="true"><div class="demo-object demo-panel"><span>Prompt Lab</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Prompt Lab</h3>
+      <p class="purpose">A compact lab for testing prompt variations.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/source-binder/">
+    <div class="preview" aria-label="Source Binder preview"><div aria-hidden="true"><div class="demo-object demo-list"><span>Source Binder</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Source Binder</h3>
+      <p class="purpose">A surface for citations, uploads, and evidence.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/tool-belt/">
+    <div class="preview" aria-label="Tool Belt preview"><div aria-hidden="true"><div class="demo-object demo-chips"><span>Tool Belt</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Tool Belt</h3>
+      <p class="purpose">A horizontal set of contextual utility actions.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/brief-builder/">
+    <div class="preview" aria-label="Brief Builder preview"><div aria-hidden="true"><div class="demo-object demo-steps"><span>Brief Builder</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Brief Builder</h3>
+      <p class="purpose">A guided canvas for product/design briefs.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/memory-panel/">
+    <div class="preview" aria-label="Memory Panel preview"><div aria-hidden="true"><div class="demo-object demo-panel"><span>Memory Panel</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Memory Panel</h3>
+      <p class="purpose">A place to view and edit persistent AI memory.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/variant-gallery/">
+    <div class="preview" aria-label="Variant Gallery preview"><div aria-hidden="true"><div class="mini-stack refined-card-stack"><div class="mini-card"><span class="mini-line"></span><span class="mini-line short"></span></div><div class="mini-card"><span class="mini-line"></span><span class="mini-line short"></span></div><div class="mini-card"><span class="mini-line"></span><span class="mini-line short"></span></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Variant Gallery</h3>
+      <p class="purpose">A compact gallery for generated alternatives.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/approval-sheet/">
+    <div class="preview" aria-label="Approval Sheet preview"><div aria-hidden="true"><div class="demo-object demo-receipt"><span>Approval Sheet</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Approval Sheet</h3>
+      <p class="purpose">A lightweight surface for signoff decisions.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/data-mapping-board/">
+    <div class="preview" aria-label="Data Mapping Board preview"><div aria-hidden="true"><div class="demo-object demo-board"><span>Data Mapping Board</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Data Mapping Board</h3>
+      <p class="purpose">A visual mapping between fields and outputs.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/launch-checklist/">
+    <div class="preview" aria-label="Launch Checklist preview"><div aria-hidden="true"><div class="demo-object demo-steps"><span>Launch Checklist</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Launch Checklist</h3>
+      <p class="purpose">A practical surface for final review before ship.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/terminal/">
+    <div class="preview" aria-label="Terminal preview"><div aria-hidden="true"><div class="preview-terminal" style="width:90%"><div class="terminal-header"><div class="terminal-dot"></div><div class="terminal-dot"></div><div class="terminal-dot"></div></div><div class="terminal-body"><div><span class="terminal-prompt">$</span> unboring init</div><div style="color:#a6e3a1">✓ Project created</div><div><span class="terminal-prompt">$</span> unboring add motion<span class="terminal-cursor"></span></div></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Terminal</h3>
+      <p class="purpose">A command-line terminal interface for developer-facing AI tools.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/dock/">
+    <div class="preview" aria-label="Dock preview"><div aria-hidden="true"><div class="preview-dock"><div class="dock-item"></div><div class="dock-item"></div><div class="dock-item"></div><div class="dock-item"></div><div class="dock-item"></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Dock</h3>
+      <p class="purpose">A macOS-style dock bar for quick-access app launching.</p>
+      
+    </div>
+  </a>
+        </div>
+      </section>
+    </main>
+    
+    <footer class="site-footer">
+      <div class="page footer-grid">
+        <div><h3 class="mono">UnBoring</h3><p>Less boring UI language for humans and agents.</p></div>
+        <div><h3 class="mono">Library</h3><a href="/motion/">Motion</a><a href="/components/">Components</a><a href="/interactions/" aria-current="page">Interactions</a><a href="/styles/">Styles</a><a href="/effects/">Effects</a></div>
+        <div><h3 class="mono">Machine-readable</h3><a href="/agent/">MCP ready</a><a href="/agent/">CLI planned</a></div>
+        <div><h3 class="mono">Open source</h3><a href="/agent/">Contribute ideas</a><a href="/motion/">Browse patterns</a></div>
+      </div>
+    </footer>
+    <script src="/assets/app.js?v=20260528a"></script>
+  </body>
+</html>

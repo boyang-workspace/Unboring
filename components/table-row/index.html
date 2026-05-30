@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Table Row Component - UnBoring</title>
+    <link rel="canonical" href="https://unboring.openagent.bot/components/table-row/" />
+    <link rel="stylesheet" href="/assets/styles.css?v=20260528a" />
+    <link rel="icon" href="/favicon.svg" />
+    <meta name="description" content="Make a row scannable, selectable, and action-ready. Includes anatomy, variants, states, styling tokens, accessibility notes, shadcn implementation guidance, and AI prompts." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="UnBoring" />
+    <meta property="og:title" content="Table Row Component - UnBoring" />
+    <meta property="og:description" content="Make a row scannable, selectable, and action-ready. Includes anatomy, variants, states, styling tokens, accessibility notes, shadcn implementation guidance, and AI prompts." />
+    <meta property="og:url" content="https://unboring.openagent.bot/components/table-row/" />
+    <meta property="og:image" content="https://unboring.openagent.bot/og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Table Row Component - UnBoring" />
+    <meta name="twitter:description" content="Make a row scannable, selectable, and action-ready. Includes anatomy, variants, states, styling tokens, accessibility notes, shadcn implementation guidance, and AI prompts." />
+    <meta name="twitter:image" content="https://unboring.openagent.bot/og-image.svg" />
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Table Row Component","description":"Make a row scannable, selectable, and action-ready.","about":["UI component","shadcn","design system"]}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand mono" href="/">UnBoring</a>
+        <div class="nav-links mono">
+          <a href="/motion/">Motion</a><a href="/components/" aria-current="page">Components</a><a href="/interactions/">Interactions</a><a href="/styles/">Styles</a><a href="/effects/">Effects</a>
+        </div>
+      </nav>
+    </header>
+    
+    <main class="page">
+      <section class="hero compact detail-hero component-detail-hero" aria-labelledby="page-title">
+        <div>
+          <div class="hero-meta mono" data-left="// component detail" data-right="Data Display" aria-hidden="true"><span class="hero-rule"></span></div>
+          <h1 id="page-title">Table Row</h1>
+          <p class="subtitle">Make a row scannable, selectable, and action-ready.</p>
+        </div>
+      </section>
+      <section class="dark-section">
+        <div class="detail-layout">
+          <div>
+            <div class="preview detail-preview component-preview" aria-label="Table Row component preview"><div aria-hidden="true"><div class="sc-table"><div class="sc-table-header"><span><div class="sc-table-checkbox" style="display:inline-block;vertical-align:middle;margin-right:6px"></div>Invoice</span><span>Status</span><span>Amount</span></div><div class="sc-table-row"><span><div class="sc-table-checkbox" style="display:inline-block;vertical-align:middle;margin-right:6px"></div>INV001</span><span class="sc-badge" style="background:#dcfce7;color:#16a34a;border-color:#dcfce7">Paid</span><span>$250.00</span></div><div class="sc-table-row"><span><div class="sc-table-checkbox" style="display:inline-block;vertical-align:middle;margin-right:6px"></div>INV002</span><span class="sc-badge sc-badge-outline">Pending</span><span>$150.00</span></div><div class="sc-table-row"><span><div class="sc-table-checkbox" style="display:inline-block;vertical-align:middle;margin-right:6px"></div>INV003</span><span class="sc-badge sc-badge-outline">Pending</span><span>$350.00</span></div></div></div></div>
+            <div class="component-meta-panel">
+              <span>Data Display</span>
+              <span>table</span>
+              <span>shadcn/ui table</span>
+            </div>
+          </div>
+          <div class="code-grid">
+            
+  <section class="code-block">
+    <header><span>AI Prompt</span><button class="button small" type="button" data-copy="prompt-table-row">Copy prompt</button></header>
+    <pre id="prompt-table-row">Create a Table Row component for an AI-generated interface using shadcn-style composition. Use shadcn/ui table as the implementation base. The component should support default, muted, outline, ghost, destructive variants and default, hover, focus-visible, active, disabled, loading states. Include clear anatomy for Table, Header, Row, Cell, Status badge, Row action. Keep the visual language black, white, and gray with subtle borders, practical spacing, accessible focus states, and no decorative noise.</pre>
+  </section>
+            
+  <section class="code-block">
+    <header><span>Negative Prompt</span><button class="button small" type="button" data-copy="negative-table-row">Copy negative</button></header>
+    <pre id="negative-table-row">Do not invent a custom component API when shadcn/ui table already covers the base behavior. Avoid random gradients, oversized radii, unclear disabled states, missing labels, icon-only controls without accessible names, and variants that change layout unexpectedly.</pre>
+  </section>
+            
+  <section class="code-block">
+    <header><span>Implementation Notes</span><button class="button small" type="button" data-copy="implementation-table-row">Copy notes</button></header>
+    <pre id="implementation-table-row">Base: shadcn/ui table
+Primitive: none
+Tailwind: Use shadcn tokens for background, border, ring, muted text, radius, and state variants. Keep component-specific classes local and copyable.
+Dependency: No extra primitive required beyond React and Tailwind.</pre>
+  </section>
+            
+  <section class="code-block">
+    <header><span>Tokens</span><button class="button small" type="button" data-copy="tokens-table-row">Copy tokens</button></header>
+    <pre id="tokens-table-row">{
+  &quot;id&quot;: &quot;table-row&quot;,
+  &quot;category&quot;: &quot;components&quot;,
+  &quot;trigger&quot;: &quot;user interaction&quot;,
+  &quot;target&quot;: &quot;table row&quot;,
+  &quot;feeling&quot;: [
+    &quot;polished&quot;,
+    &quot;practical&quot;,
+    &quot;precise&quot;
+  ],
+  &quot;palette&quot;: [
+    &quot;black&quot;,
+    &quot;white&quot;,
+    &quot;gray&quot;
+  ],
+  &quot;radius&quot;: &quot;8px or less&quot;,
+  &quot;border&quot;: &quot;1px solid rgba(237, 237, 236, 0.14)&quot;,
+  &quot;background&quot;: &quot;neutral surface with subtle contrast&quot;,
+  &quot;foreground&quot;: &quot;high-contrast text&quot;,
+  &quot;mutedForeground&quot;: &quot;secondary text at 68-74% contrast&quot;,
+  &quot;focusRing&quot;: &quot;2px neutral ring with offset&quot;,
+  &quot;shadow&quot;: &quot;soft elevation only when interaction needs tactility&quot;,
+  &quot;motionDuration&quot;: &quot;120ms-220ms&quot;
+}</pre>
+  </section>
+          </div>
+        </div>
+      </section>
+      <section class="dark-section component-spec-section" aria-labelledby="spec-title">
+        <div class="grid-heading"><div><span class="card-kicker mono">copy-ready details</span><h2 id="spec-title">Component spec</h2></div></div>
+        <div class="component-spec-grid">
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">component</span>
+    <h2>Overview</h2>
+    <p>Make a row scannable, selectable, and action-ready. This entry is written as a registry-ready component spec: useful to humans, copyable by AI tools, and easy to map to a future shadcn registry item.</p>
+  </section>
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">structure</span>
+    <h2>Anatomy</h2>
+    <ul class="spec-list"><li>Table</li><li>Header</li><li>Row</li><li>Cell</li><li>Status badge</li><li>Row action</li></ul>
+  </section>
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">visual API</span>
+    <h2>Variants</h2>
+    <ul class="spec-list"><li>default</li><li>muted</li><li>outline</li><li>ghost</li><li>destructive</li></ul>
+  </section>
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">behavior</span>
+    <h2>States</h2>
+    <ul class="spec-list"><li>default</li><li>hover</li><li>focus-visible</li><li>active</li><li>disabled</li><li>loading</li></ul>
+  </section>
+        </div>
+      </section>
+      <section class="dark-section">
+        <div class="component-spec-grid">
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">tokens</span>
+    <h2>Styling tokens</h2>
+    
+  <div class="token-table">
+    <div><span class="mono">radius</span><strong>8px or less</strong></div><div><span class="mono">border</span><strong>1px solid rgba(237, 237, 236, 0.14)</strong></div><div><span class="mono">background</span><strong>neutral surface with subtle contrast</strong></div><div><span class="mono">foreground</span><strong>high-contrast text</strong></div><div><span class="mono">mutedForeground</span><strong>secondary text at 68-74% contrast</strong></div><div><span class="mono">focusRing</span><strong>2px neutral ring with offset</strong></div><div><span class="mono">shadow</span><strong>soft elevation only when interaction needs tactility</strong></div><div><span class="mono">motionDuration</span><strong>120ms-220ms</strong></div>
+  </div>
+  </section>
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">a11y</span>
+    <h2>Accessibility notes</h2>
+    <ul class="spec-list"><li>Use semantic HTML or the matching Radix primitive before custom roles.</li><li>Keep focus-visible states obvious without adding decorative glow.</li><li>Ensure icon-only controls have an accessible label.</li><li>Do not rely on color alone for state or validation.</li></ul>
+  </section>
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">shadcn/ui table</span>
+    <h2>shadcn implementation</h2>
+    <p>No extra primitive required beyond React and Tailwind.</p><p>Use shadcn tokens for background, border, ring, muted text, radius, and state variants. Keep component-specific classes local and copyable.</p>
+  </section>
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">optional adapter</span>
+    <h2>HeroUI mapping</h2>
+    <p>Table Row can map to a HeroUI component only as an optional adapter. Keep UnBoring copy and token language framework-neutral.</p>
+  </section>
+        </div>
+      </section>
+      <section class="dark-section seo-section" aria-labelledby="component-faq-title">
+        <div class="grid-heading"><div><h2 id="component-faq-title">Usage notes</h2><p>Short guidance for humans and AI tools before copying the component.</p></div></div>
+        <div class="faq-grid">
+  <div class="seo-accordion" data-accordion>
+    <button class="seo-accordion-head" type="button" aria-expanded="false">What is this component for? <span aria-hidden="true">+</span></button>
+    <div class="seo-accordion-content"><p>Table Row helps teams make a row scannable, selectable, and action-ready. It should feel like a reusable product primitive, not a one-off decoration.</p></div>
+  </div>
+  <div class="seo-accordion" data-accordion>
+    <button class="seo-accordion-head" type="button" aria-expanded="false">How should I implement it? <span aria-hidden="true">+</span></button>
+    <div class="seo-accordion-content"><p>Start from shadcn/ui table. No extra primitive required beyond React and Tailwind. Keep variants token-driven and keep states predictable.</p></div>
+  </div>
+  <div class="seo-accordion" data-accordion>
+    <button class="seo-accordion-head" type="button" aria-expanded="false">What should I avoid? <span aria-hidden="true">+</span></button>
+    <div class="seo-accordion-content"><p>Do not invent a custom component API when shadcn/ui table already covers the base behavior. Avoid random gradients, oversized radii, unclear disabled states, missing labels, icon-only controls without accessible names, and variants that change layout unexpectedly.</p></div>
+  </div></div>
+      </section>
+      <section class="dark-section" aria-labelledby="related-title">
+        <div class="grid-heading"><div><h2 id="related-title">Related data display</h2></div></div>
+        <div class="idea-grid related-grid">
+  <a class="idea-card" href="/components/badge/">
+    <div class="preview" aria-label="Badge preview"><div aria-hidden="true"><div class="sc-badge-row"><span class="sc-badge">Default</span><span class="sc-badge sc-badge-secondary">Secondary</span><span class="sc-badge sc-badge-outline">Outline</span><span class="sc-badge sc-badge-destructive">Destructive</span></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Components</span>
+      <h3>Badge</h3>
+      <p class="purpose">Label status, category, or metadata without adding visual weight.</p>
+      <div class="component-card-meta"><span>Data Display</span><span>badge</span><span>ready</span></div>
+    </div>
+  </a>
+  <a class="idea-card" href="/components/table/">
+    <div class="preview" aria-label="Table preview"><div aria-hidden="true"><div class="sc-table"><div class="sc-table-header"><span><div class="sc-table-checkbox" style="display:inline-block;vertical-align:middle;margin-right:6px"></div>Invoice</span><span>Status</span><span>Amount</span></div><div class="sc-table-row"><span><div class="sc-table-checkbox" style="display:inline-block;vertical-align:middle;margin-right:6px"></div>INV001</span><span class="sc-badge" style="background:#dcfce7;color:#16a34a;border-color:#dcfce7">Paid</span><span>$250.00</span></div><div class="sc-table-row"><span><div class="sc-table-checkbox" style="display:inline-block;vertical-align:middle;margin-right:6px"></div>INV002</span><span class="sc-badge sc-badge-outline">Pending</span><span>$150.00</span></div><div class="sc-table-row"><span><div class="sc-table-checkbox" style="display:inline-block;vertical-align:middle;margin-right:6px"></div>INV003</span><span class="sc-badge sc-badge-outline">Pending</span><span>$350.00</span></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Components</span>
+      <h3>Table</h3>
+      <p class="purpose">Display dense rows with restrained borders and clear column hierarchy.</p>
+      <div class="component-card-meta"><span>Data Display</span><span>table</span><span>ready</span></div>
+    </div>
+  </a>
+  <a class="idea-card" href="/components/metric-card/">
+    <div class="preview" aria-label="Metric Card preview"><div aria-hidden="true"><div class="sc-metric"><div class="sc-metric-label">Total Revenue</div><div class="sc-metric-value">$45,231.89</div><div class="sc-metric-change sc-up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg>+20.1% from last month</div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Components</span>
+      <h3>Metric Card</h3>
+      <p class="purpose">Show one important number with enough context to interpret it.</p>
+      <div class="component-card-meta"><span>Data Display</span><span>card</span><span>ready</span></div>
+    </div>
+  </a></div>
+      </section>
+    </main>
+    
+    <footer class="site-footer">
+      <div class="page footer-grid">
+        <div><h3 class="mono">UnBoring</h3><p>Less boring UI language for humans and agents.</p></div>
+        <div><h3 class="mono">Library</h3><a href="/motion/">Motion</a><a href="/components/" aria-current="page">Components</a><a href="/interactions/">Interactions</a><a href="/styles/">Styles</a><a href="/effects/">Effects</a></div>
+        <div><h3 class="mono">Machine-readable</h3><a href="/agent/">MCP ready</a><a href="/agent/">CLI planned</a></div>
+        <div><h3 class="mono">Open source</h3><a href="/agent/">Contribute ideas</a><a href="/motion/">Browse patterns</a></div>
+      </div>
+    </footer>
+    <script src="/assets/app.js?v=20260528a"></script>
+  </body>
+</html>

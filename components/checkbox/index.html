@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Checkbox Component - UnBoring</title>
+    <link rel="canonical" href="https://unboring.openagent.bot/components/checkbox/" />
+    <link rel="stylesheet" href="/assets/styles.css?v=20260528a" />
+    <link rel="icon" href="/favicon.svg" />
+    <meta name="description" content="Toggle a single option or select multiple items in a list. Includes anatomy, variants, states, styling tokens, accessibility notes, shadcn implementation guidance, and AI prompts." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="UnBoring" />
+    <meta property="og:title" content="Checkbox Component - UnBoring" />
+    <meta property="og:description" content="Toggle a single option or select multiple items in a list. Includes anatomy, variants, states, styling tokens, accessibility notes, shadcn implementation guidance, and AI prompts." />
+    <meta property="og:url" content="https://unboring.openagent.bot/components/checkbox/" />
+    <meta property="og:image" content="https://unboring.openagent.bot/og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Checkbox Component - UnBoring" />
+    <meta name="twitter:description" content="Toggle a single option or select multiple items in a list. Includes anatomy, variants, states, styling tokens, accessibility notes, shadcn implementation guidance, and AI prompts." />
+    <meta name="twitter:image" content="https://unboring.openagent.bot/og-image.svg" />
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Checkbox Component","description":"Toggle a single option or select multiple items in a list.","about":["UI component","shadcn","design system"]}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand mono" href="/">UnBoring</a>
+        <div class="nav-links mono">
+          <a href="/motion/">Motion</a><a href="/components/" aria-current="page">Components</a><a href="/interactions/">Interactions</a><a href="/styles/">Styles</a><a href="/effects/">Effects</a>
+        </div>
+      </nav>
+    </header>
+    
+    <main class="page">
+      <section class="hero compact detail-hero component-detail-hero" aria-labelledby="page-title">
+        <div>
+          <div class="hero-meta mono" data-left="// component detail" data-right="Inputs" aria-hidden="true"><span class="hero-rule"></span></div>
+          <h1 id="page-title">Checkbox</h1>
+          <p class="subtitle">Toggle a single option or select multiple items in a list.</p>
+        </div>
+      </section>
+      <section class="dark-section">
+        <div class="detail-layout">
+          <div>
+            <div class="preview detail-preview component-preview" aria-label="Checkbox component preview"><div aria-hidden="true"><div class="sc-checkbox-group"><div class="sc-checkbox-row"><div class="sc-checkbox"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div><span>Accept terms and conditions</span></div><div class="sc-checkbox-row"><div class="sc-checkbox-unchecked"></div><span>Subscribe to newsletter</span></div></div></div></div>
+            <div class="component-meta-panel">
+              <span>Inputs</span>
+              <span>checkbox</span>
+              <span>shadcn/ui checkbox</span>
+            </div>
+          </div>
+          <div class="code-grid">
+            
+  <section class="code-block">
+    <header><span>AI Prompt</span><button class="button small" type="button" data-copy="prompt-checkbox">Copy prompt</button></header>
+    <pre id="prompt-checkbox">Create a Checkbox component for an AI-generated interface using shadcn-style composition. Use shadcn/ui checkbox as the implementation base. The component should support default, muted, error, disabled variants and default, hover, focus-visible, disabled, error, filled states. Include clear anatomy for Root, Indicator, Label, Description. Keep the visual language black, white, and gray with subtle borders, practical spacing, accessible focus states, and no decorative noise.</pre>
+  </section>
+            
+  <section class="code-block">
+    <header><span>Negative Prompt</span><button class="button small" type="button" data-copy="negative-checkbox">Copy negative</button></header>
+    <pre id="negative-checkbox">Do not invent a custom component API when shadcn/ui checkbox already covers the base behavior. Avoid random gradients, oversized radii, unclear disabled states, missing labels, icon-only controls without accessible names, and variants that change layout unexpectedly.</pre>
+  </section>
+            
+  <section class="code-block">
+    <header><span>Implementation Notes</span><button class="button small" type="button" data-copy="implementation-checkbox">Copy notes</button></header>
+    <pre id="implementation-checkbox">Base: shadcn/ui checkbox
+Primitive: Radix Checkbox
+Tailwind: Use shadcn tokens for background, border, ring, muted text, radius, and state variants. Keep component-specific classes local and copyable.
+Dependency: Use Radix Checkbox through the matching shadcn component when possible.</pre>
+  </section>
+            
+  <section class="code-block">
+    <header><span>Tokens</span><button class="button small" type="button" data-copy="tokens-checkbox">Copy tokens</button></header>
+    <pre id="tokens-checkbox">{
+  &quot;id&quot;: &quot;checkbox&quot;,
+  &quot;category&quot;: &quot;components&quot;,
+  &quot;trigger&quot;: &quot;user interaction&quot;,
+  &quot;target&quot;: &quot;checkbox&quot;,
+  &quot;feeling&quot;: [
+    &quot;polished&quot;,
+    &quot;practical&quot;,
+    &quot;precise&quot;
+  ],
+  &quot;palette&quot;: [
+    &quot;black&quot;,
+    &quot;white&quot;,
+    &quot;gray&quot;
+  ],
+  &quot;radius&quot;: &quot;8px or less&quot;,
+  &quot;border&quot;: &quot;1px solid rgba(237, 237, 236, 0.14)&quot;,
+  &quot;background&quot;: &quot;neutral surface with subtle contrast&quot;,
+  &quot;foreground&quot;: &quot;high-contrast text&quot;,
+  &quot;mutedForeground&quot;: &quot;secondary text at 68-74% contrast&quot;,
+  &quot;focusRing&quot;: &quot;2px neutral ring with offset&quot;,
+  &quot;shadow&quot;: &quot;soft elevation only when interaction needs tactility&quot;,
+  &quot;motionDuration&quot;: &quot;120ms-220ms&quot;
+}</pre>
+  </section>
+          </div>
+        </div>
+      </section>
+      <section class="dark-section component-spec-section" aria-labelledby="spec-title">
+        <div class="grid-heading"><div><span class="card-kicker mono">copy-ready details</span><h2 id="spec-title">Component spec</h2></div></div>
+        <div class="component-spec-grid">
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">component</span>
+    <h2>Overview</h2>
+    <p>Toggle a single option or select multiple items in a list. This entry is written as a registry-ready component spec: useful to humans, copyable by AI tools, and easy to map to a future shadcn registry item.</p>
+  </section>
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">structure</span>
+    <h2>Anatomy</h2>
+    <ul class="spec-list"><li>Root</li><li>Indicator</li><li>Label</li><li>Description</li></ul>
+  </section>
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">visual API</span>
+    <h2>Variants</h2>
+    <ul class="spec-list"><li>default</li><li>muted</li><li>error</li><li>disabled</li></ul>
+  </section>
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">behavior</span>
+    <h2>States</h2>
+    <ul class="spec-list"><li>default</li><li>hover</li><li>focus-visible</li><li>disabled</li><li>error</li><li>filled</li></ul>
+  </section>
+        </div>
+      </section>
+      <section class="dark-section">
+        <div class="component-spec-grid">
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">tokens</span>
+    <h2>Styling tokens</h2>
+    
+  <div class="token-table">
+    <div><span class="mono">radius</span><strong>8px or less</strong></div><div><span class="mono">border</span><strong>1px solid rgba(237, 237, 236, 0.14)</strong></div><div><span class="mono">background</span><strong>neutral surface with subtle contrast</strong></div><div><span class="mono">foreground</span><strong>high-contrast text</strong></div><div><span class="mono">mutedForeground</span><strong>secondary text at 68-74% contrast</strong></div><div><span class="mono">focusRing</span><strong>2px neutral ring with offset</strong></div><div><span class="mono">shadow</span><strong>soft elevation only when interaction needs tactility</strong></div><div><span class="mono">motionDuration</span><strong>120ms-220ms</strong></div>
+  </div>
+  </section>
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">a11y</span>
+    <h2>Accessibility notes</h2>
+    <ul class="spec-list"><li>Use semantic HTML or the matching Radix primitive before custom roles.</li><li>Keep focus-visible states obvious without adding decorative glow.</li><li>Ensure icon-only controls have an accessible label.</li><li>Do not rely on color alone for state or validation.</li></ul>
+  </section>
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">shadcn/ui checkbox</span>
+    <h2>shadcn implementation</h2>
+    <p>Use Radix Checkbox through the matching shadcn component when possible.</p><p>Use shadcn tokens for background, border, ring, muted text, radius, and state variants. Keep component-specific classes local and copyable.</p>
+  </section>
+          
+  <section class="component-doc-block">
+    <span class="card-kicker mono">optional adapter</span>
+    <h2>HeroUI mapping</h2>
+    <p>Checkbox can map to a HeroUI component only as an optional adapter. Keep UnBoring copy and token language framework-neutral.</p>
+  </section>
+        </div>
+      </section>
+      <section class="dark-section seo-section" aria-labelledby="component-faq-title">
+        <div class="grid-heading"><div><h2 id="component-faq-title">Usage notes</h2><p>Short guidance for humans and AI tools before copying the component.</p></div></div>
+        <div class="faq-grid">
+  <div class="seo-accordion" data-accordion>
+    <button class="seo-accordion-head" type="button" aria-expanded="false">What is this component for? <span aria-hidden="true">+</span></button>
+    <div class="seo-accordion-content"><p>Checkbox helps teams toggle a single option or select multiple items in a list. It should feel like a reusable product primitive, not a one-off decoration.</p></div>
+  </div>
+  <div class="seo-accordion" data-accordion>
+    <button class="seo-accordion-head" type="button" aria-expanded="false">How should I implement it? <span aria-hidden="true">+</span></button>
+    <div class="seo-accordion-content"><p>Start from shadcn/ui checkbox. Use Radix Checkbox through the matching shadcn component when possible. Keep variants token-driven and keep states predictable.</p></div>
+  </div>
+  <div class="seo-accordion" data-accordion>
+    <button class="seo-accordion-head" type="button" aria-expanded="false">What should I avoid? <span aria-hidden="true">+</span></button>
+    <div class="seo-accordion-content"><p>Do not invent a custom component API when shadcn/ui checkbox already covers the base behavior. Avoid random gradients, oversized radii, unclear disabled states, missing labels, icon-only controls without accessible names, and variants that change layout unexpectedly.</p></div>
+  </div></div>
+      </section>
+      <section class="dark-section" aria-labelledby="related-title">
+        <div class="grid-heading"><div><h2 id="related-title">Related inputs</h2></div></div>
+        <div class="idea-grid related-grid">
+  <a class="idea-card" href="/components/search-field/">
+    <div class="preview" aria-label="Search Field preview"><div aria-hidden="true"><div class="sc-field-group"><label class="sc-label">Email</label><input class="sc-input" placeholder="Enter your email..." readonly /><p class="sc-hint">We'll never share your email with anyone.</p></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Components</span>
+      <h3>Search Field</h3>
+      <p class="purpose">Let users filter or find content with a native, calm input.</p>
+      <div class="component-card-meta"><span>Inputs</span><span>input</span><span>ready</span></div>
+    </div>
+  </a>
+  <a class="idea-card" href="/components/text-field/">
+    <div class="preview" aria-label="Text Field preview"><div aria-hidden="true"><div class="sc-field-group"><label class="sc-label">Email</label><input class="sc-input" placeholder="Enter your email..." readonly /><p class="sc-hint">We'll never share your email with anyone.</p></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Components</span>
+      <h3>Text Field</h3>
+      <p class="purpose">Collect short text with label, helper text, and validation affordances.</p>
+      <div class="component-card-meta"><span>Inputs</span><span>input</span><span>ready</span></div>
+    </div>
+  </a>
+  <a class="idea-card" href="/components/prompt-input/">
+    <div class="preview" aria-label="Prompt Input preview"><div aria-hidden="true"><div class="sc-card" style="width:min(300px,88%)"><div style="padding:12px;display:flex;flex-wrap:wrap;gap:6px"><span class="sc-badge sc-badge-outline" style="font-size:0.7rem">📄 report.pdf</span><span class="sc-badge sc-badge-outline" style="font-size:0.7rem">📎 data.csv</span></div><div style="padding:0 12px 8px;font-size:0.82rem;color:#a3a3a3">Summarize the key findings...</div><div style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-top:1px solid #f5f5f4"><span style="font-size:0.82rem;cursor:pointer;color:#a3a3a3">+</span><span style="font-size:0.82rem;cursor:pointer;color:#a3a3a3">📎</span><button class="sc-btn sc-btn-default sc-btn-sm" style="margin-left:auto;height:28px;padding:0 12px;font-size:0.72rem">Send</button></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Components</span>
+      <h3>Prompt Input</h3>
+      <p class="purpose">Compose AI instructions with space for context, actions, and submit state.</p>
+      <div class="component-card-meta"><span>Inputs</span><span>textarea + button</span><span>ready</span></div>
+    </div>
+  </a></div>
+      </section>
+    </main>
+    
+    <footer class="site-footer">
+      <div class="page footer-grid">
+        <div><h3 class="mono">UnBoring</h3><p>Less boring UI language for humans and agents.</p></div>
+        <div><h3 class="mono">Library</h3><a href="/motion/">Motion</a><a href="/components/" aria-current="page">Components</a><a href="/interactions/">Interactions</a><a href="/styles/">Styles</a><a href="/effects/">Effects</a></div>
+        <div><h3 class="mono">Machine-readable</h3><a href="/agent/">MCP ready</a><a href="/agent/">CLI planned</a></div>
+        <div><h3 class="mono">Open source</h3><a href="/agent/">Contribute ideas</a><a href="/motion/">Browse patterns</a></div>
+      </div>
+    </footer>
+    <script src="/assets/app.js?v=20260528a"></script>
+  </body>
+</html>
