@@ -757,6 +757,22 @@ panX=(canvas.clientWidth-3000)/2;
 panY=20;
 apply();
 
+(function(){
+  var brand=document.querySelector('.brand');
+  if(brand){
+    var text=brand.textContent.trim(),fonts=["Playfair Display","DM Serif Display","Bebas Neue","Oswald","Righteous","Fredoka","Permanent Marker","Cinzel","Rajdhani","Exo 2","Caveat","Dancing Script","Pacifico","Satisfy","Great Vibes","Inter","Space Grotesk","Sora"];
+    brand.textContent='';
+    brand.style.display='inline-flex';brand.style.gap='3px';
+    for(var i=0;i<text.length;i++){
+      var ch=text[i];if(ch===' '){brand.appendChild(document.createTextNode(' '));continue;}
+      var span=document.createElement('span');
+      span.textContent=ch;
+      span.style.fontFamily="'"+fonts[Math.floor(Math.random()*fonts.length)]+"',system-ui,sans-serif";
+      brand.appendChild(span);
+    }
+  }
+})();
+
 document.getElementById('surprise-btn').addEventListener('click',surprise);
 document.getElementById('export-btn').addEventListener('click',exportCSS);
 </script>

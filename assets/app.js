@@ -639,7 +639,28 @@ function setupMinimap() {
   window.addEventListener('mouseup', function() { isDown = false; });
 }
 
+// ── Brand font mixing ──
+function randomizeBrandFonts() {
+  var brand = document.querySelector('.brand-text') || document.querySelector('.brand');
+  if (!brand) return;
+  var text = brand.textContent.trim();
+  if (!text || brand.querySelector('span')) return;
+  brand.textContent = '';
+  brand.style.display = 'inline-flex';
+  brand.style.gap = '3px';
+  var pool = [...FONTS_DISPLAY, ...FONTS_SERIF, ...FONTS_HAND, ...FONTS_SANS];
+  for (var i = 0; i < text.length; i++) {
+    var ch = text[i];
+    if (ch === ' ') { brand.appendChild(document.createTextNode(' ')); continue; }
+    var span = document.createElement('span');
+    span.textContent = ch;
+    span.style.fontFamily = "'" + pick(pool) + "',system-ui,sans-serif";
+    brand.appendChild(span);
+  }
+}
+
 // ── Init ──
+randomizeBrandFonts();
 buildPromptSidebar();
 buildMinimap();
 setupMinimap();
