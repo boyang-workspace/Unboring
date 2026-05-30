@@ -1509,7 +1509,7 @@ const homePage = () => {
     title: "UnBoring - UI inspiration for less boring AI interfaces",
     description:
       "UnBoring is a free open-source UI inspiration library with previews, AI prompts, negative prompts, and structured tokens for less boring AI-generated interfaces.",
-    canonical: `${site}/`,
+    canonical: `${site}/inspire/`,
     current: "",
     body: `
     <main class="page">
@@ -1559,7 +1559,7 @@ const write = (file, content) => {
 categories.forEach((category) => fs.rmSync(category.slug, { recursive: true, force: true }));
 fs.rmSync("agent", { recursive: true, force: true });
 
-write("index.html", homePage());
+write("inspire/index.html", homePage());
 write("agent/index.html", agentPage());
 categories.forEach((category) => write(`${category.slug}/index.html`, categoryPage(category)));
 entries.forEach((entry) => write(`${entry.category}/${entry.slug}/index.html`, detailPage(entry)));
