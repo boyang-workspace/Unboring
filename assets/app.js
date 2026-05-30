@@ -170,8 +170,12 @@ function surprise() {
     fw: p.fw, dark: p.dark, bgPattern: bg.img
   });
 
-  // Update sidebar prompt
-  updatePromptBlock();
+  // Update sidebar prompt — re-render sentence with animation
+  if (typeof renderSentence === 'function') {
+    renderSentence({ animate: true });
+  } else {
+    updatePromptBlock();
+  }
 }
 
 // ── Export CSS ──
@@ -198,168 +202,545 @@ document.addEventListener('click', e => {
   if (!menu.contains(e.target) && !btn.contains(e.target)) menu.classList.remove('open');
 });
 
-// ── Prompt Builder Sidebar ──
-function buildPromptSidebar() {
-  const sb = document.getElementById('sidebar');
-  
-  sb.innerHTML = `
-    <div class="theme-strip">
-      <span class="theme-strip-label">Theme</span>
-      <div class="theme-strip-swatches" id="theme-swatches">
-        <div class="ts-swatch" style="background:var(--bg)"></div>
-        <div class="ts-swatch" style="background:var(--fg)"></div>
-        <div class="ts-swatch" style="background:var(--primary)"></div>
-        <div class="ts-swatch" style="background:var(--muted)"></div>
-        <div class="ts-swatch" style="background:var(--card)"></div>
-      </div>
-    </div>
-    <div class="panel-title"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1v2M8 13v2M1 8h2m10 0h2"/><circle cx="8" cy="8" r="3"/></svg>Design Prompt</div>
-    <div class="prompt-block" id="prompt-block">
-      <div class="prompt-line">
-        <div class="prompt-label">Background</div>
-        <div class="prompt-value">
-          <span class="pe-swatch" id="sw-bg"><input type="color" id="color-bg" value="#ffffff"></span>
-          <span class="pe-value" id="val-bg">#ffffff</span>
-        </div>
-      </div>
-      <div class="prompt-line">
-        <div class="prompt-label">Foreground</div>
-        <div class="prompt-value">
-          <span class="pe-swatch" id="sw-fg"><input type="color" id="color-fg" value="#1a1a1a"></span>
-          <span class="pe-value" id="val-fg">#1a1a1a</span>
-        </div>
-      </div>
-      <div class="prompt-line">
-        <div class="prompt-label">Primary</div>
-        <div class="prompt-value">
-          <span class="pe-swatch" id="sw-primary"><input type="color" id="color-primary" value="#6366f1"></span>
-          <span class="pe-value" id="val-primary">#6366f1</span>
-        </div>
-      </div>
-      <div class="prompt-line">
-        <div class="prompt-label">Heading Font</div>
-        <div class="prompt-value">
-          <span class="pe" id="pe-font-heading" style="font-family:var(--font-heading)"><span class="pe-font" id="val-font-heading">Inter</span></span>
-        </div>
-      </div>
-      <div class="prompt-line">
-        <div class="prompt-label">Body Font</div>
-        <div class="prompt-value">
-          <span class="pe" id="pe-font-body" style="font-family:var(--font)"><span class="pe-font" id="val-font-body">Inter</span></span>
-        </div>
-      </div>
-      <div class="prompt-line">
-        <div class="prompt-label">Border Radius</div>
-        <div class="prompt-value">
-          <span class="pe"><span class="pe-value" id="val-radius">0.625rem</span></span>
-        </div>
-      </div>
-      <div class="prompt-line">
-        <div class="prompt-label">Border Width</div>
-        <div class="prompt-value">
-          <span class="pe"><span class="pe-value" id="val-bw">1px</span></span>
-        </div>
-      </div>
-      <div class="prompt-line">
-        <div class="prompt-label">Shadow</div>
-        <div class="prompt-value">
-          <span class="pe"><span class="pe-value" id="val-shadow">subtle</span></span>
-        </div>
-      </div>
-      <div class="prompt-line">
-        <div class="prompt-label">Body Size</div>
-        <div class="prompt-value">
-          <span class="pe"><span class="pe-value" id="val-fs">0.875rem</span></span>
-        </div>
-      </div>
-      <div class="prompt-line">
-        <div class="prompt-label">Title Size</div>
-        <div class="prompt-value">
-          <span class="pe"><span class="pe-value" id="val-tfs">1rem</span></span>
-        </div>
-      </div>
-      <div class="prompt-line">
-        <div class="prompt-label">Letter Spacing</div>
-        <div class="prompt-value">
-          <span class="pe"><span class="pe-value" id="val-ls">0</span></span>
-        </div>
-      </div>
-      <div class="prompt-line">
-        <div class="prompt-label">Weight</div>
-        <div class="prompt-value">
-          <span class="pe"><span class="pe-value" id="val-fw">500</span></span>
-        </div>
-      </div>
-    </div>
-    <button class="copy-btn" id="copy-prompt">Copy prompt</button>
-    <div class="sidebar-footer">based on <a href="https://ui.shadcn.com/" target="_blank" rel="noopener">shadcn/ui</a> · <a href="https://tailwindcss.com/" target="_blank" rel="noopener">Tailwind CSS</a></div>
-  `;
+// ── Game化 Prompt Builder ──
 
-  // Color swatch inputs
-  ['bg','fg','primary'].forEach(key => {
-    const input = document.getElementById('color-' + key);
-    input.addEventListener('input', e => {
-      designState[key] = e.target.value;
-      document.documentElement.style.setProperty('--' + key, e.target.value);
-      if (key === 'bg') document.body.style.backgroundColor = e.target.value;
-      document.getElementById('val-' + key).textContent = e.target.value;
-      updatePromptBlock();
+// Parameter definitions
+const PARAM_DEFS = {
+  bg:        { emoji:'🎨', label:'background',   type:'color',  group:'color' },
+  fg:        { emoji:'✏️', label:'text color',    type:'color',  group:'color' },
+  primary:   { emoji:'🎯', label:'accent color',  type:'color',  group:'color' },
+  fontHeading:{ emoji:'🔤', label:'heading font', type:'font',   group:'typography', fontRole:'heading' },
+  fontBody:  { emoji:'📝', label:'body font',     type:'font',   group:'typography', fontRole:'body' },
+  radius:    { emoji:'📐', label:'border radius',  type:'slider', group:'shape',
+               min:0, max:2, step:0.125, unit:'rem',
+               presets:['0px','4px','8px','0.5rem','1rem','1.5rem','2rem'] },
+  bw:        { emoji:'📏', label:'border width',   type:'slider', group:'shape',
+               min:0, max:4, step:0.5, unit:'px',
+               presets:['0px','0.5px','1px','1.5px','2px','3px'] },
+  shadow:    { emoji:'☁️', label:'shadow',         type:'choice', group:'shape',
+               choices:['none','subtle','medium','hard','neon'] },
+  ls:        { emoji:'↔️', label:'letter spacing', type:'slider', group:'typography',
+               min:-0.05, max:0.1, step:0.01, unit:'em',
+               presets:['-0.03em','-0.01em','0','0.02em','0.05em'] },
+  fw:        { emoji:'🖨️', label:'font weight',    type:'stepper',group:'typography',
+               min:300, max:900, step:50, unit:'',
+               presets:['400','500','600','700'] },
+  fs:        { emoji:'🔠', label:'body size',      type:'slider', group:'typography',
+               min:0.7, max:1.2, step:0.0625, unit:'rem',
+               presets:['0.75rem','0.8125rem','0.875rem','0.9375rem','1rem'] },
+  titleFs:   { emoji:'🔠', label:'heading size',   type:'slider', group:'typography',
+               min:0.8, max:2, step:0.1, unit:'rem',
+               presets:['1rem','1.15rem','1.3rem','1.5rem','1.75rem'] },
+};
+
+// Active parameters (order in sentence)
+let activeParams = ['bg','fg','primary','fontHeading','fontBody','radius','bw','shadow','ls','fw','fs','titleFs'];
+let currentEditPanel = null;
+
+// ── Get display value for a parameter ──
+function getWidgetDisplay(paramId) {
+  const s = designState;
+  const def = PARAM_DEFS[paramId];
+  switch(paramId) {
+    case 'bg':        return { value: s.bg || '#ffffff', hex: tryHex(s.bg || '#ffffff') };
+    case 'fg':        return { value: s.fg || '#1a1a1a', hex: tryHex(s.fg || '#1a1a1a') };
+    case 'primary':   return { value: s.primary || '#6366f1', hex: tryHex(s.primary || '#6366f1') };
+    case 'fontHeading':return { value: s.fontHeading || 'Inter', fontFamily: "'" + (s.fontHeading || 'Inter') + "',sans-serif" };
+    case 'fontBody':  return { value: s.fontBody || 'Inter', fontFamily: "'" + (s.fontBody || 'Inter') + "',sans-serif" };
+    case 'radius':    return { value: s.radius || '0.625rem' };
+    case 'bw':        return { value: s.bw || '1px' };
+    case 'shadow':    return { value: shadowLabel(s.shadow) };
+    case 'ls':        return { value: s.ls || '0' };
+    case 'fw':        return { value: String(s.fw || 500) };
+    case 'fs':        return { value: s.fs || '0.875rem' };
+    case 'titleFs':   return { value: s.titleFs || '1rem' };
+    default:          return { value: '?' };
+  }
+}
+
+function tryHex(color) {
+  try { return oklchToHex(color); } catch(e) { return '#888888'; }
+}
+
+function shadowLabel(shadow) {
+  if (!shadow || shadow === 'none') return 'none';
+  if (shadow.includes('0 0 20px') || shadow.includes('0 0 30px')) return 'neon';
+  if (shadow.includes('8px 8px') || shadow.includes('10px 10px')) return 'hard';
+  if (shadow.includes('4px 16px') || shadow.includes('0 4px 12px') || shadow.includes('0 4px 16px')) return 'medium';
+  return 'subtle';
+}
+
+function shadowValue(label) {
+  const map = {
+    'none': 'none',
+    'subtle': '0 1px 2px rgba(0,0,0,0.05)',
+    'medium': '0 4px 16px rgba(0,0,0,0.1)',
+    'hard': '8px 8px 0 rgba(0,0,0,0.15)',
+    'neon': '0 0 20px rgba(99,102,241,0.4)',
+  };
+  return map[label] || map['subtle'];
+}
+
+// ── Render sentence ──
+function renderSentence(opts) {
+  opts = opts || {};
+  const sb = document.getElementById('sidebar');
+  const animate = opts.animate !== false;
+
+  let html = '<div class="pw-header"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1v2M8 13v2M1 8h2m10 0h2"/><circle cx="8" cy="8" r="3"/></svg>Design Prompt</div>';
+  html += '<div class="pw-sentence" id="pw-sentence">';
+  html += '<div class="pw-sentence-text">';
+  html += '<span class="pw-sentence-prefix">I want a UI with </span>';
+
+  activeParams.forEach(function(pid, i) {
+    const def = PARAM_DEFS[pid];
+    if (!def) return;
+    const d = getWidgetDisplay(pid);
+    const animClass = animate ? ' pw-widget-changing' : '';
+    let widgetContent = '';
+
+    if (def.type === 'color') {
+      widgetContent = '<span class="pw-widget-swatch" style="background:' + d.hex + '"></span>' +
+                       '<span class="pw-widget-value">' + d.hex + '</span>';
+    } else if (def.type === 'font') {
+      widgetContent = '<span class="pw-widget-value" style="font-family:' + d.fontFamily + '">' + d.value + '</span>';
+    } else {
+      widgetContent = '<span class="pw-widget-value">' + d.value + '</span>';
+    }
+
+    html += '<span class="pw-widget' + animClass + '" data-param="' + pid + '" style="animation-delay:' + (i * 30) + 'ms">';
+    html += '<span class="pw-widget-emoji">' + def.emoji + '</span>';
+    html += widgetContent;
+    html += '<span class="pw-widget-label">' + def.label + '</span>';
+    html += '<button class="pw-widget-remove" data-remove="' + pid + '" title="Remove">✕</button>';
+    html += '</span>';
+
+    if (i < activeParams.length - 1) {
+      if (i === activeParams.length - 2) {
+        html += '<span class="pw-comma">, </span><span class="pw-and">and </span>';
+      } else {
+        html += '<span class="pw-comma">, </span>';
+      }
+    }
+  });
+
+  html += '<span class="pw-period">.</span>';
+  html += '</div>';
+
+  // Add parameter row
+  html += '<div class="pw-add-row">';
+  html += '<button class="pw-add-btn" id="pw-add-btn">+ Add parameter</button>';
+  html += '<div class="pw-add-menu" id="pw-add-menu">';
+  Object.keys(PARAM_DEFS).forEach(function(pid) {
+    if (activeParams.indexOf(pid) !== -1) return;
+    const def = PARAM_DEFS[pid];
+    html += '<div class="pw-add-menu-item" data-add="' + pid + '">' + def.emoji + ' ' + def.label + '</div>';
+  });
+  html += '</div>';
+  html += '</div>';
+
+  html += '</div>';
+
+  // Action buttons
+  html += '<div class="pw-actions">';
+  html += '<button class="pw-copy-btn" id="copy-prompt">📋 Copy Prompt</button>';
+  html += '<button class="pw-surprise-btn" id="pw-surprise-btn">🎲 Surprise me</button>';
+  html += '</div>';
+
+  // Edit panel (hidden by default)
+  html += '<div class="pw-edit-panel" id="pw-edit-panel">';
+  html += '<div class="pw-ep-header">';
+  html += '<button class="pw-ep-back" id="pw-ep-back">←</button>';
+  html += '<span class="pw-ep-title" id="pw-ep-title">Edit</span>';
+  html += '<span class="pw-ep-icon" id="pw-ep-icon"></span>';
+  html += '</div>';
+  html += '<div class="pw-ep-body" id="pw-ep-body"></div>';
+  html += '</div>';
+
+  html += '<div class="sidebar-footer">based on <a href="https://ui.shadcn.com/" target="_blank" rel="noopener">shadcn/ui</a> · <a href="https://tailwindcss.com/" target="_blank" rel="noopener">Tailwind CSS</a></div>';
+
+  sb.innerHTML = html;
+
+  // Bind events
+  bindSentenceEvents();
+}
+
+// ── Bind sentence events ──
+function bindSentenceEvents() {
+  // Widget clicks → open edit panel
+  document.querySelectorAll('.pw-widget').forEach(function(w) {
+    w.addEventListener('click', function(e) {
+      if (e.target.closest('.pw-widget-remove')) return;
+      var pid = w.getAttribute('data-param');
+      if (pid) showEditPanel(pid);
     });
   });
 
-  // Font selectors
-  ['heading', 'body'].forEach(role => {
-    const el = document.getElementById('pe-font-' + role);
-    el.addEventListener('click', () => {
-      // Close other selects
-      document.querySelectorAll('.pe-select.open').forEach(s => s.classList.remove('open'));
-      
-      // Create dropdown if not exists
-      let dropdown = el.querySelector('.pe-select');
-      if (!dropdown) {
-        dropdown = document.createElement('div');
-        dropdown.className = 'pe-select';
-        const fonts = role === 'heading' ? [...FONTS_SERIF, ...FONTS_DISPLAY, ...FONTS_SANS] : [...FONTS_SANS, ...FONTS_SERIF];
-        fonts.forEach(f => {
-          const opt = document.createElement('div');
-          opt.className = 'pe-option';
-          opt.textContent = f;
-          opt.style.fontFamily = f + ', sans-serif';
-          opt.addEventListener('click', e => {
-            e.stopPropagation();
-            const varName = role === 'heading' ? '--font-heading' : '--font';
-            document.documentElement.style.setProperty(varName, "'" + f + "',system-ui,sans-serif");
-            designState[role === 'heading' ? 'fontHeading' : 'fontBody'] = f;
-            document.getElementById('val-font-' + role).textContent = f;
-            el.style.fontFamily = "'" + f + "', sans-serif";
-            dropdown.classList.remove('open');
-            updatePromptBlock();
-          });
-          dropdown.appendChild(opt);
-        });
-        el.appendChild(dropdown);
-      }
-      dropdown.classList.toggle('open');
+  // Remove buttons
+  document.querySelectorAll('.pw-widget-remove').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var pid = btn.getAttribute('data-remove');
+      if (pid) removeParameter(pid);
+    });
+  });
+
+  // Add button
+  var addBtn = document.getElementById('pw-add-btn');
+  var addMenu = document.getElementById('pw-add-menu');
+  if (addBtn && addMenu) {
+    addBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      addMenu.classList.toggle('open');
+    });
+    document.addEventListener('click', function() { addMenu.classList.remove('open'); });
+  }
+
+  // Add menu items
+  document.querySelectorAll('.pw-add-menu-item').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var pid = item.getAttribute('data-add');
+      if (pid) addParameter(pid);
+      addMenu.classList.remove('open');
     });
   });
 
   // Copy button
-  document.getElementById('copy-prompt').addEventListener('click', () => {
-    const prompt = generatePrompt();
-    navigator.clipboard.writeText(prompt).then(() => {
-      const btn = document.getElementById('copy-prompt');
-      btn.textContent = 'Copied!';
-      btn.classList.add('copied');
-      setTimeout(() => { btn.textContent = 'Copy prompt'; btn.classList.remove('copied'); }, 2000);
+  var copyBtn = document.getElementById('copy-prompt');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', function() {
+      var prompt = generatePrompt();
+      navigator.clipboard.writeText(prompt).then(function() {
+        copyBtn.textContent = 'Copied! 🎉';
+        copyBtn.classList.add('copied');
+        fireConfetti();
+        setTimeout(function() { copyBtn.textContent = '📋 Copy Prompt'; copyBtn.classList.remove('copied'); }, 2000);
+      });
+    });
+  }
+
+  // Surprise button
+  var surpriseBtn = document.getElementById('pw-surprise-btn');
+  if (surpriseBtn) {
+    surpriseBtn.addEventListener('click', function() { surprise(); });
+  }
+
+  // Edit panel back button
+  var backBtn = document.getElementById('pw-ep-back');
+  if (backBtn) {
+    backBtn.addEventListener('click', function() { hideEditPanel(); });
+  }
+}
+
+// ── Show edit panel ──
+function showEditPanel(paramId) {
+  var def = PARAM_DEFS[paramId];
+  if (!def) return;
+  currentEditPanel = paramId;
+
+  var panel = document.getElementById('pw-edit-panel');
+  var title = document.getElementById('pw-ep-title');
+  var icon = document.getElementById('pw-ep-icon');
+  var body = document.getElementById('pw-ep-body');
+
+  title.textContent = 'Edit: ' + def.label;
+  icon.textContent = def.emoji;
+
+  // Mark active widget
+  document.querySelectorAll('.pw-widget').forEach(function(w) {
+    w.classList.toggle('active', w.getAttribute('data-param') === paramId);
+  });
+
+  // Build panel content based on type
+  if (def.type === 'color') {
+    body.innerHTML = buildColorPanel(paramId);
+    bindColorPanelEvents(paramId);
+  } else if (def.type === 'font') {
+    body.innerHTML = buildFontPanel(paramId);
+    bindFontPanelEvents(paramId);
+  } else if (def.type === 'slider' || def.type === 'stepper') {
+    body.innerHTML = buildSliderPanel(paramId);
+    bindSliderPanelEvents(paramId);
+  } else if (def.type === 'choice') {
+    body.innerHTML = buildChoicePanel(paramId);
+    bindChoicePanelEvents(paramId);
+  }
+
+  panel.classList.add('open');
+}
+
+function hideEditPanel() {
+  var panel = document.getElementById('pw-edit-panel');
+  if (panel) panel.classList.remove('open');
+  document.querySelectorAll('.pw-widget').forEach(function(w) { w.classList.remove('active'); });
+  currentEditPanel = null;
+}
+
+// ── Color panel ──
+function buildColorPanel(paramId) {
+  var d = getWidgetDisplay(paramId);
+  var hex = d.hex;
+  var presets = [
+    '#ffffff','#f8f9fa','#e9ecef','#dee2e6','#ced4da','#adb5bd','#6c757d','#343a40','#212529','#000000',
+    '#fff5f5','#ffe3e3','#ffc9c9','#ffa8a8','#ff8787','#ff6b6b','#fa5252','#f03e3e','#e03131','#c92a2a',
+    '#fff0f6','#fcc2d7','#faa2c1','#f783ac','#e64980','#d6336c','#ae3ec9','#862e9c','#7048e8','#5f3dc4',
+    '#f3f0ff','#d0bfff','#b197fc','#9775fa','#845ef7','#7950f2','#7048e8','#6741d9','#5f3dc4','#4c1d95',
+    '#e7f5ff','#d0ebff','#a5d8ff','#74c0fc','#4dabf7','#339af0','#228be6','#1c7ed6','#1971c2','#1864ab',
+    '#e6fcf5','#c3fae8','#96f2d7','#63e6be','#38d9a9','#20c997','#12b886','#0ca678','#099268','#087f5b',
+    '#fcf4db','#f5d76e','#f7c948','#fab005','#f59f00','#f08c00','#e67700','#d9480f','#c92a2a','#a51d1d',
+  ];
+  var html = '<div class="pw-color-preview" id="pw-color-preview" style="background:' + hex + '">';
+  html += '<div class="pw-color-preview-hex" id="pw-color-hex-label">' + hex + '</div>';
+  html += '</div>';
+  html += '<div class="pw-color-presets">';
+  presets.forEach(function(c) {
+    var active = c === hex ? ' active' : '';
+    html += '<div class="pw-color-preset' + active + '" data-color="' + c + '" style="background:' + c + '"></div>';
+  });
+  html += '</div>';
+  html += '<div class="pw-color-custom">';
+  html += '<label>Custom</label>';
+  html += '<input type="color" id="pw-color-picker" value="' + hex + '">';
+  html += '<input type="text" class="pw-color-hex-input" id="pw-color-hex-input" value="' + hex + '" maxlength="7">';
+  html += '</div>';
+  return html;
+}
+
+function bindColorPanelEvents(paramId) {
+  // Preset clicks
+  document.querySelectorAll('.pw-color-preset').forEach(function(p) {
+    p.addEventListener('click', function() {
+      var c = p.getAttribute('data-color');
+      applyColorValue(paramId, c);
+      document.querySelectorAll('.pw-color-preset').forEach(function(x) { x.classList.remove('active'); });
+      p.classList.add('active');
     });
   });
 
-  // Initial prompt
-  updatePromptBlock();
+  // Color picker
+  var picker = document.getElementById('pw-color-picker');
+  if (picker) {
+    picker.addEventListener('input', function() {
+      applyColorValue(paramId, picker.value);
+      var preview = document.getElementById('pw-color-preview');
+      var label = document.getElementById('pw-color-hex-label');
+      if (preview) preview.style.background = picker.value;
+      if (label) label.textContent = picker.value;
+      var hexInput = document.getElementById('pw-color-hex-input');
+      if (hexInput) hexInput.value = picker.value;
+    });
+  }
+
+  // Hex input
+  var hexInput = document.getElementById('pw-color-hex-input');
+  if (hexInput) {
+    hexInput.addEventListener('change', function() {
+      var v = hexInput.value.trim();
+      if (/^#[0-9a-fA-F]{6}$/.test(v)) {
+        applyColorValue(paramId, v);
+        var preview = document.getElementById('pw-color-preview');
+        var label = document.getElementById('pw-color-hex-label');
+        if (preview) preview.style.background = v;
+        if (label) label.textContent = v;
+        if (picker) picker.value = v;
+      }
+    });
+  }
 }
 
+function applyColorValue(paramId, color) {
+  var cssVar = paramId === 'bg' ? '--bg' : paramId === 'fg' ? '--fg' : '--primary';
+  document.documentElement.style.setProperty(cssVar, color);
+  designState[paramId] = color;
+  if (paramId === 'bg') document.body.style.backgroundColor = color;
+  updateWidgetDisplay(paramId);
+}
+
+// ── Font panel ──
+function buildFontPanel(paramId) {
+  var def = PARAM_DEFS[paramId];
+  var current = paramId === 'fontHeading' ? (designState.fontHeading || 'Inter') : (designState.fontBody || 'Inter');
+  var fonts = def.fontRole === 'heading'
+    ? [...FONTS_DISPLAY, ...FONTS_SERIF, ...FONTS_SANS]
+    : [...FONTS_SANS, ...FONTS_SERIF];
+
+  var html = '<div class="pw-font-list">';
+  fonts.forEach(function(f) {
+    var active = f === current ? ' active' : '';
+    html += '<div class="pw-font-item' + active + '" data-font="' + f + '" style="font-family:\'' + f + '\',sans-serif">';
+    html += f;
+    html += '<span class="pw-font-item-check">✓</span>';
+    html += '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+function bindFontPanelEvents(paramId) {
+  var varName = paramId === 'fontHeading' ? '--font-heading' : '--font';
+  var stateKey = paramId === 'fontHeading' ? 'fontHeading' : 'fontBody';
+
+  document.querySelectorAll('.pw-font-item').forEach(function(item) {
+    item.addEventListener('click', function() {
+      var f = item.getAttribute('data-font');
+      document.documentElement.style.setProperty(varName, "'" + f + "',system-ui,sans-serif");
+      designState[stateKey] = f;
+      document.querySelectorAll('.pw-font-item').forEach(function(x) { x.classList.remove('active'); });
+      item.classList.add('active');
+      updateWidgetDisplay(paramId);
+    });
+  });
+}
+
+// ── Slider panel ──
+function buildSliderPanel(paramId) {
+  var def = PARAM_DEFS[paramId];
+  var current = getWidgetDisplay(paramId).value;
+  var numVal = parseFloat(current) || 0;
+
+  var html = '<div class="pw-slider-current" id="pw-slider-val">' + current + '</div>';
+  html += '<input type="range" class="pw-slider-input" id="pw-slider-input" min="' + def.min + '" max="' + def.max + '" step="' + def.step + '" value="' + numVal + '">';
+  html += '<div class="pw-slider-presets">';
+  def.presets.forEach(function(p) {
+    var active = p === current ? ' active' : '';
+    html += '<button class="pw-slider-preset' + active + '" data-value="' + p + '">' + p + '</button>';
+  });
+  html += '</div>';
+  return html;
+}
+
+function bindSliderPanelEvents(paramId) {
+  var def = PARAM_DEFS[paramId];
+  var stateKey = paramId === 'radius' ? 'radius' : paramId === 'bw' ? 'bw' :
+                 paramId === 'ls' ? 'ls' : paramId === 'fw' ? 'fw' :
+                 paramId === 'fs' ? 'fs' : paramId === 'titleFs' ? 'titleFs' : paramId;
+  var cssVar = paramId === 'radius' ? '--radius' : paramId === 'bw' ? '--bw' :
+               paramId === 'ls' ? '--ls' : paramId === 'fw' ? '--fw' :
+               paramId === 'fs' ? '--fs' : paramId === 'titleFs' ? '--title-fs' : '--' + paramId;
+
+  var slider = document.getElementById('pw-slider-input');
+  var label = document.getElementById('pw-slider-val');
+
+  if (slider) {
+    slider.addEventListener('input', function() {
+      var v = slider.value + def.unit;
+      if (paramId === 'fw') v = parseInt(slider.value);
+      label.textContent = v;
+      document.documentElement.style.setProperty(cssVar, v);
+      designState[stateKey] = v;
+      updateWidgetDisplay(paramId);
+    });
+  }
+
+  document.querySelectorAll('.pw-slider-preset').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var v = btn.getAttribute('data-value');
+      var numV = parseFloat(v);
+      if (slider) slider.value = numV;
+      if (label) label.textContent = v;
+      document.documentElement.style.setProperty(cssVar, v);
+      designState[stateKey] = paramId === 'fw' ? parseInt(v) : v;
+      document.querySelectorAll('.pw-slider-preset').forEach(function(x) { x.classList.remove('active'); });
+      btn.classList.add('active');
+      updateWidgetDisplay(paramId);
+    });
+  });
+}
+
+// ── Choice panel ──
+function buildChoicePanel(paramId) {
+  var def = PARAM_DEFS[paramId];
+  var current = shadowLabel(designState.shadow);
+
+  var html = '<div class="pw-choice-list">';
+  def.choices.forEach(function(c) {
+    var active = c === current ? ' active' : '';
+    var swatchBg = c === 'none' ? 'rgba(255,255,255,0.05)' : c;
+    // Visual preview for shadows
+    var previewStyle = '';
+    if (c === 'none') previewStyle = 'background:rgba(255,255,255,0.05)';
+    else if (c === 'subtle') previewStyle = 'background:rgba(255,255,255,0.1);box-shadow:0 1px 2px rgba(0,0,0,0.05)';
+    else if (c === 'medium') previewStyle = 'background:rgba(255,255,255,0.1);box-shadow:0 4px 16px rgba(0,0,0,0.1)';
+    else if (c === 'hard') previewStyle = 'background:rgba(255,255,255,0.1);box-shadow:8px 8px 0 rgba(0,0,0,0.15)';
+    else if (c === 'neon') previewStyle = 'background:rgba(99,102,241,0.15);box-shadow:0 0 20px rgba(99,102,241,0.4)';
+
+    html += '<div class="pw-choice-item' + active + '" data-choice="' + c + '">';
+    html += '<div class="pw-choice-preview" style="' + previewStyle + '"></div>';
+    html += '<span class="pw-choice-label">' + c + '</span>';
+    html += '<span class="pw-choice-check">✓</span>';
+    html += '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+function bindChoicePanelEvents(paramId) {
+  document.querySelectorAll('.pw-choice-item').forEach(function(item) {
+    item.addEventListener('click', function() {
+      var c = item.getAttribute('data-choice');
+      var val = shadowValue(c);
+      document.documentElement.style.setProperty('--shadow', val);
+      designState.shadow = val;
+      document.querySelectorAll('.pw-choice-item').forEach(function(x) { x.classList.remove('active'); });
+      item.classList.add('active');
+      updateWidgetDisplay(paramId);
+    });
+  });
+}
+
+// ── Update a single widget's display ──
+function updateWidgetDisplay(paramId) {
+  var w = document.querySelector('.pw-widget[data-param="' + paramId + '"]');
+  if (!w) return;
+  var def = PARAM_DEFS[paramId];
+  var d = getWidgetDisplay(paramId);
+
+  // Update value display
+  var valueEl = w.querySelector('.pw-widget-value');
+  if (valueEl) {
+    if (def.type === 'color') {
+      var swatch = w.querySelector('.pw-widget-swatch');
+      if (swatch) swatch.style.background = d.hex;
+      valueEl.textContent = d.hex;
+    } else if (def.type === 'font') {
+      valueEl.style.fontFamily = d.fontFamily;
+      valueEl.textContent = d.value;
+    } else {
+      valueEl.textContent = d.value;
+    }
+  }
+
+  // Flash animation
+  w.classList.remove('pw-widget-flash');
+  void w.offsetWidth; // force reflow
+  w.classList.add('pw-widget-flash');
+}
+
+// ── Update all widgets (called by surprise) ──
+function updateAllWidgets() {
+  activeParams.forEach(function(pid) {
+    updateWidgetDisplay(pid);
+  });
+}
+
+// ── Add/Remove parameters ──
+function addParameter(paramId) {
+  if (activeParams.indexOf(paramId) !== -1) return;
+  activeParams.push(paramId);
+  renderSentence({ animate: true });
+}
+
+function removeParameter(paramId) {
+  var idx = activeParams.indexOf(paramId);
+  if (idx === -1) return;
+  activeParams.splice(idx, 1);
+  renderSentence({ animate: true });
+}
+
+// ── Apply theme (called by surprise) ──
 function applyTheme(p) {
-  const r = document.documentElement.style;
+  var r = document.documentElement.style;
   r.setProperty('--bg', p.bg); r.setProperty('--fg', p.fg);
   r.setProperty('--card', p.card); r.setProperty('--card-fg', p.cardFg);
   r.setProperty('--muted', p.muted); r.setProperty('--muted-fg', p.mutedFg);
@@ -370,100 +751,111 @@ function applyTheme(p) {
   r.setProperty('--radius', p.radius); r.setProperty('--bw', p.bw); r.setProperty('--shadow', p.shadow);
   r.setProperty('--card-bg', 'var(--card)');
   document.body.style.backgroundColor = p.bg;
-  
+
   Object.assign(designState, {
     bg: p.bg, fg: p.fg, card: p.card, primary: p.primary,
     muted: p.muted, border: p.border, destructive: p.destructive,
     radius: p.radius, bw: p.bw, shadow: p.shadow, dark: p.dark
   });
-  
-  // Update swatches
-  try { document.getElementById('color-bg').value = oklchToHex(p.bg); } catch(e) {}
-  try { document.getElementById('color-fg').value = oklchToHex(p.fg); } catch(e) {}
-  try { document.getElementById('color-primary').value = oklchToHex(p.primary); } catch(e) {}
-  document.getElementById('val-bg').textContent = p.bg;
-  document.getElementById('val-fg').textContent = p.fg;
-  document.getElementById('val-primary').textContent = p.primary;
-  document.getElementById('val-radius').textContent = p.radius;
-  document.getElementById('val-bw').textContent = p.bw;
-  document.getElementById('val-shadow').textContent = p.shadow === 'none' ? 'none' : 'custom';
-  updatePromptBlock();
 }
 
 function oklchToHex(oklch) {
-  const div = document.createElement('div');
+  var div = document.createElement('div');
   div.style.color = oklch;
   document.body.appendChild(div);
-  const computed = getComputedStyle(div).color;
+  var computed = getComputedStyle(div).color;
   document.body.removeChild(div);
-  const match = computed.match(/(\d+)/g);
+  var match = computed.match(/(\d+)/g);
   if (!match) return '#000000';
-  return '#' + match.slice(0,3).map(n => parseInt(n).toString(16).padStart(2,'0')).join('');
+  return '#' + match.slice(0,3).map(function(n) { return parseInt(n).toString(16).padStart(2,'0'); }).join('');
 }
 
 function generatePrompt() {
-  const s = designState;
-  return `Design a modern UI component library with these specifications:
-
-Color Palette:
-- Background: ${s.bg || '#ffffff'}
-- Foreground: ${s.fg || '#1a1a1a'}
-- Primary: ${s.primary || '#6366f1'}
-- Muted: ${s.muted || '#f5f5f5'}
-- Border: ${s.border || '#e5e5e5'}
-
-Typography:
-- Heading font: ${s.fontHeading || 'Inter'}
-- Body font: ${s.fontBody || 'Inter'}
-- Body size: ${s.fs || '0.875rem'}
-- Title size: ${s.titleFs || '1rem'}
-- Letter spacing: ${s.ls || '0'}
-- Font weight: ${s.fw || 500}
-
-Shape:
-- Border radius: ${s.radius || '0.625rem'}
-- Border width: ${s.bw || '1px'}
-- Shadow: ${s.shadow || 'none'}
-- Theme: ${s.dark ? 'dark' : 'light'}
-
-Background pattern: ${s.bgPattern === 'none' ? 'none' : 'subtle pattern'}
-
-Generate a complete design system with these values as CSS custom properties. Components should include cards, buttons, inputs, badges, tables, and navigation elements.`;
+  var s = designState;
+  return 'Design a modern UI component library with these specifications:\n\n' +
+    'Color Palette:\n' +
+    '- Background: ' + (s.bg || '#ffffff') + '\n' +
+    '- Foreground: ' + (s.fg || '#1a1a1a') + '\n' +
+    '- Primary: ' + (s.primary || '#6366f1') + '\n' +
+    '- Muted: ' + (s.muted || '#f5f5f5') + '\n' +
+    '- Border: ' + (s.border || '#e5e5e5') + '\n\n' +
+    'Typography:\n' +
+    '- Heading font: ' + (s.fontHeading || 'Inter') + '\n' +
+    '- Body font: ' + (s.fontBody || 'Inter') + '\n' +
+    '- Body size: ' + (s.fs || '0.875rem') + '\n' +
+    '- Title size: ' + (s.titleFs || '1rem') + '\n' +
+    '- Letter spacing: ' + (s.ls || '0') + '\n' +
+    '- Font weight: ' + (s.fw || 500) + '\n\n' +
+    'Shape:\n' +
+    '- Border radius: ' + (s.radius || '0.625rem') + '\n' +
+    '- Border width: ' + (s.bw || '1px') + '\n' +
+    '- Shadow: ' + (s.shadow || 'none') + '\n' +
+    '- Theme: ' + (s.dark ? 'dark' : 'light') + '\n\n' +
+    'Background pattern: ' + (s.bgPattern === 'none' ? 'none' : 'subtle pattern') + '\n\n' +
+    'Generate a complete design system with these values as CSS custom properties. Components should include cards, buttons, inputs, badges, tables, and navigation elements.';
 }
 
 function updatePromptBlock() {
-  const s = designState;
-  
-  // Update displayed values
-  document.getElementById('val-bg').textContent = s.bg || '#ffffff';
-  document.getElementById('val-fg').textContent = s.fg || '#1a1a1a';
-  document.getElementById('val-primary').textContent = s.primary || '#6366f1';
-  document.getElementById('val-radius').textContent = s.radius || '0.625rem';
-  document.getElementById('val-bw').textContent = s.bw || '1px';
-  document.getElementById('val-shadow').textContent = s.shadow === 'none' ? 'none' : (s.shadow?.includes('8px 8px') ? 'hard' : s.shadow?.includes('0 0 20px') ? 'neon' : 'subtle');
-  document.getElementById('val-fs').textContent = s.fs || '0.875rem';
-  document.getElementById('val-tfs').textContent = s.titleFs || '1rem';
-  document.getElementById('val-ls').textContent = s.ls || '0';
-  document.getElementById('val-fw').textContent = String(s.fw || 500);
-  document.getElementById('val-font-heading').textContent = s.fontHeading || 'Inter';
-  document.getElementById('val-font-body').textContent = s.fontBody || 'Inter';
-  
-  // Update swatch colors
-  try { document.getElementById('color-bg').value = oklchToHex(s.bg || '#ffffff'); } catch(e) {}
-  try { document.getElementById('color-fg').value = oklchToHex(s.fg || '#1a1a1a'); } catch(e) {}
-  try { document.getElementById('color-primary').value = oklchToHex(s.primary || '#6366f1'); } catch(e) {}
-  updateThemeStrip();
+  // Now just updates widget displays
+  updateAllWidgets();
 }
 
 function updateThemeStrip() {
-  const swatches = document.getElementById('theme-swatches');
-  if (!swatches) return;
-  const r = getComputedStyle(document.documentElement);
-  const colors = ['bg','fg','primary','muted','card'];
-  const items = swatches.children;
-  colors.forEach((key, i) => {
-    if (items[i]) items[i].style.background = r.getPropertyValue('--' + key).trim() || 'transparent';
-  });
+  // No longer needed (theme strip removed in new design)
+}
+
+// ── Confetti ──
+function fireConfetti() {
+  var canvas = document.createElement('canvas');
+  canvas.className = 'pw-confetti-canvas';
+  document.body.appendChild(canvas);
+  var ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  var colors = ['#ff6b6b','#fbbf24','#34d399','#60a5fa','#a78bfa','#f472b6','#fb923c'];
+  var particles = [];
+  for (var i = 0; i < 80; i++) {
+    particles.push({
+      x: canvas.width / 2 + (Math.random() - 0.5) * 200,
+      y: canvas.height / 2,
+      vx: (Math.random() - 0.5) * 12,
+      vy: Math.random() * -14 - 4,
+      w: Math.random() * 8 + 4,
+      h: Math.random() * 6 + 3,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      rot: Math.random() * 360,
+      rotV: (Math.random() - 0.5) * 12,
+      life: 1,
+    });
+  }
+
+  var running = true;
+  function frame() {
+    if (!running) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var alive = false;
+    particles.forEach(function(p) {
+      p.x += p.vx;
+      p.vy += 0.35;
+      p.y += p.vy;
+      p.rot += p.rotV;
+      p.life -= 0.012;
+      if (p.life <= 0) return;
+      alive = true;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot * Math.PI / 180);
+      ctx.globalAlpha = Math.max(0, p.life);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.restore();
+    });
+    if (alive) requestAnimationFrame(frame);
+    else canvas.remove();
+  }
+  frame();
+  setTimeout(function() { running = false; canvas.remove(); }, 3000);
 }
 
 // ── Drag & Drop (event delegation on .grid) ──
@@ -694,7 +1086,7 @@ function startBrandRoll(letters) {
 
 // ── Init ──
 randomizeBrandFonts();
-buildPromptSidebar();
+renderSentence();
 buildMinimap();
 setupMinimap();
 currentScale = 1;
@@ -704,5 +1096,6 @@ apply();
 
 loadLayout();
 
+// Header surprise button (kept for compatibility)
 document.getElementById('surprise-btn').addEventListener('click', function() { surprise(); });
 document.getElementById('export-btn').addEventListener('click', exportCSS);
