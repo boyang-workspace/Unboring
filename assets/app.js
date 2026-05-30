@@ -81,15 +81,16 @@ const THEME_GROUPS = {
 };
 
 function getRandomTheme() {
-  const lastGroup = window._lastThemeGroup;
-  if (lastGroup && Math.random() < 0.7) {
-    const group = THEME_GROUPS[lastGroup];
-    return { theme: PALETTES[group[Math.floor(Math.random() * group.length)]], group: lastGroup };
+  let theme, group;
+  for (let attempt = 0; attempt < 5; attempt++) {
+    const groups = Object.keys(THEME_GROUPS);
+    group = groups[Math.floor(Math.random() * groups.length)];
+    const indices = THEME_GROUPS[group];
+    theme = PALETTES[indices[Math.floor(Math.random() * indices.length)]];
+    if (theme.name !== window._lastThemeName) break;
   }
-  const groups = Object.keys(THEME_GROUPS);
-  const group = groups[Math.floor(Math.random() * groups.length)];
-  const idx = THEME_GROUPS[group][Math.floor(Math.random() * THEME_GROUPS[group].length)];
-  return { theme: PALETTES[idx], group };
+  window._lastThemeName = theme.name;
+  return { theme, group };
 }
 
 // ── Current design state (for prompt generation) ──
@@ -118,28 +119,39 @@ function surprise() {
   r.setProperty('--border', p.border); r.setProperty('--input', p.input);
   r.setProperty('--ring', p.primary); r.setProperty('--destructive', p.destructive);
 
-  // Shape
-  r.setProperty('--radius', p.radius); r.setProperty('--bw', p.bw); r.setProperty('--shadow', p.shadow);
+  // Shape — also randomize radius, border-width, shadow beyond palette
+  var allRadii = ['0px','2px','4px','6px','8px','0.5rem','0.625rem','0.75rem','1rem','1.25rem','1.5rem','2rem'];
+  var allBW = ['0px','0.5px','1px','1.5px','2px','3px'];
+  var allShadows = ['none','0 1px 2px rgba(0,0,0,0.05)','0 2px 8px rgba(0,0,0,0.08)','0 4px 16px rgba(0,0,0,0.1)','0 8px 30px rgba(0,0,0,0.12)','0 0 0 1px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.08)','0 0 20px rgba(0,0,0,0.15)','0 20px 60px rgba(0,0,0,0.2)'];
+  r.setProperty('--radius', Math.random() < 0.5 ? p.radius : pick(allRadii));
+  r.setProperty('--bw', Math.random() < 0.5 ? p.bw : pick(allBW));
+  r.setProperty('--shadow', Math.random() < 0.5 ? p.shadow : pick(allShadows));
   r.setProperty('--btn-shadow', p.btnShadow || 'none');
   r.setProperty('--btn-shadow-active', p.btnShadowActive || 'none');
   r.setProperty('--btn-press-y', p.btnPressY || '0');
 
-  // Typography
-  const pair = pick(FONT_PAIRINGS);
-  r.setProperty('--ls', typeof p.ls === 'number' ? p.ls + 'em' : p.ls);
-  r.setProperty('--fw', p.fw); r.setProperty('--fs', p.fs); r.setProperty('--title-fs', p.tfs);
-  r.setProperty('--font', "'" + pair.body + "',system-ui,sans-serif");
-  r.setProperty('--font-heading', "'" + pair.heading + "',system-ui,sans-serif");
+  // Typography — pick from ALL_FONTS for heading, avoid common pairings to maximize variety
+  var headingFonts = [...FONTS_SERIF, ...FONTS_DISPLAY, ...FONTS_HAND, ...FONTS_SANS];
+  var bodyFonts = [...FONTS_SANS, ...FONTS_SERIF];
+  var hf = pick(headingFonts);
+  var bf = pick(bodyFonts.filter(function(f) { return f !== hf || Math.random() < 0.2; }));
+  if (!bf) bf = pick(FONTS_SANS);
+  r.setProperty('--ls', Math.random() < 0.3 ? (Math.random() < 0.5 ? '-0.03em' : '0.05em') : (typeof p.ls === 'number' ? p.ls + 'em' : p.ls || '0'));
+  r.setProperty('--fw', pick([400,450,500,550,600,650,700]));
+  r.setProperty('--fs', pick(['0.75rem','0.8125rem','0.875rem','0.9375rem','1rem']));
+  r.setProperty('--title-fs', pick(['1rem','1.15rem','1.3rem','1.5rem','1.75rem']));
+  r.setProperty('--font', "'" + bf + "',system-ui,sans-serif");
+  r.setProperty('--font-heading', "'" + hf + "',system-ui,sans-serif");
   r.setProperty('--text-shadow', p.textShadow || 'none');
-  document.body.style.fontFamily = "'" + pair.body + "',system-ui,sans-serif";
+  document.body.style.fontFamily = "'" + bf + "',system-ui,sans-serif";
 
-  // Background pattern
-  const patterns = p.dark ? PATTERNS.dark : PATTERNS.light;
-  const bg = pick(patterns);
+  // Background pattern — pick from ALL patterns, not just current theme's
+  var allPatterns = PATTERNS.light.concat(PATTERNS.dark);
+  var bg = pick(allPatterns);
   r.setProperty('--bg-pattern', bg.img);
   r.setProperty('--bg-pattern-size', bg.size);
-  r.setProperty('--card-bg-pattern', bg.card);
-  r.setProperty('--card-bg-pattern-size', bg.cardSize);
+  r.setProperty('--card-bg-pattern', bg.card || bg.img);
+  r.setProperty('--card-bg-pattern-size', bg.cardSize || bg.size);
   document.body.style.backgroundColor = p.bg;
   document.body.style.backgroundImage = bg.img;
   document.body.style.backgroundSize = bg.size;
@@ -152,7 +164,7 @@ function surprise() {
     secondary: p.secondary, secondaryFg: p.secondaryFg,
     border: p.border, input: p.input, destructive: p.destructive,
     radius: p.radius, bw: p.bw, shadow: p.shadow,
-    fontHeading: pair.heading, fontBody: pair.body,
+    fontHeading: hf, fontBody: bf,
     fs: p.fs, titleFs: p.tfs,
     ls: typeof p.ls === 'number' ? p.ls + 'em' : p.ls,
     fw: p.fw, dark: p.dark, bgPattern: bg.img
@@ -280,7 +292,8 @@ function buildPromptSidebar() {
       </div>
     </div>
     <button class="copy-btn" id="copy-prompt">Copy prompt</button>
-    <div style="margin-top:12px">
+    <div class="sidebar-divider"></div>
+    <div>
       <div class="panel-title"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 8h8"/><path d="M10 4l4 4-4 4"/></svg>Quick Actions</div>
       <div style="display:flex;flex-direction:column;gap:6px">
         <button class="h-btn" style="width:100%;text-align:left" id="btn-random-bg">Random background</button>
