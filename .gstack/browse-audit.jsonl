@@ -1624,3 +1624,6 @@
 {"ts":"2026-05-30T05:59:46.083Z","cmd":"goto","args":"http://localhost:4173/","origin":"http://localhost:4173/","durationMs":1356,"status":"ok","hasCookies":false,"mode":"launched"}
 {"ts":"2026-05-30T05:59:49.689Z","cmd":"screenshot","args":"/tmp/ed-sidebar.png","origin":"http://localhost:4173/","durationMs":3464,"status":"ok","hasCookies":false,"mode":"launched"}
 {"ts":"2026-05-30T05:59:49.865Z","cmd":"snapshot","args":"-i -c -s #sidebar","origin":"http://localhost:4173/","durationMs":57,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-05-30T06:06:36.881Z","cmd":"goto","args":"https://unboring.openagent.bot/","origin":"https://unboring.openagent.bot/","durationMs":7037,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-05-30T06:06:37.008Z","cmd":"screenshot","args":"/tmp/unboring-prod.png","origin":"https://unboring.openagent.bot/","durationMs":59,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-05-30T06:06:37.084Z","cmd":"snapshot","args":"-i -c -s #sidebar","origin":"https://unboring.openagent.bot/","durationMs":28,"status":"ok","hasCookies":false,"mode":"launched"}
