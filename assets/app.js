@@ -15,7 +15,7 @@ function clampPan() {
   panX = Math.min(PADDING, Math.max(cw - (gw * currentScale + PADDING), panX));
   panY = Math.min(PADDING, Math.max(ch - (gh * currentScale + PADDING), panY));
 }
-function apply() { clampPan(); content.style.transform = 'translate(' + panX + 'px,' + panY + 'px) scale(' + currentScale + ')'; }
+function apply() { clampPan(); content.style.transform = 'translate(' + panX + 'px,' + panY + 'px) scale(' + currentScale + ')'; updateMinimap(); }
 
 canvas.addEventListener('mousedown', e => { if (e.button) return; if (e.target.closest('.cn-card')) return; isDragging = true; startX = e.clientX; startY = e.clientY; startPanX = panX; startPanY = panY; document.body.classList.add('dragging'); });
 window.addEventListener('mousemove', e => { if (!isDragging) return; panX = startPanX + (e.clientX - startX) / currentScale; panY = startPanY + (e.clientY - startY) / currentScale; apply(); });
@@ -292,15 +292,7 @@ function buildPromptSidebar() {
       </div>
     </div>
     <button class="copy-btn" id="copy-prompt">Copy prompt</button>
-    <div class="sidebar-divider"></div>
-    <div>
-      <div class="panel-title"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 8h8"/><path d="M10 4l4 4-4 4"/></svg>Quick Actions</div>
-      <div style="display:flex;flex-direction:column;gap:6px">
-        <button class="h-btn" style="width:100%;text-align:left" id="btn-random-bg">Random background</button>
-        <button class="h-btn" style="width:100%;text-align:left" id="btn-random-font">Random font pair</button>
-        <button class="h-btn" style="width:100%;text-align:left" id="btn-random-radius">Random radius</button>
-      </div>
-    </div>
+    <div class="sidebar-footer">based on <a href="https://ui.shadcn.com/" target="_blank" rel="noopener">shadcn/ui</a> · <a href="https://tailwindcss.com/" target="_blank" rel="noopener">Tailwind CSS</a></div>
   `;
 
   // Color swatch inputs
@@ -360,32 +352,6 @@ function buildPromptSidebar() {
       btn.classList.add('copied');
       setTimeout(() => { btn.textContent = 'Copy prompt'; btn.classList.remove('copied'); }, 2000);
     });
-  });
-
-  // Quick action buttons
-  document.getElementById('btn-random-bg').addEventListener('click', () => {
-    const p = pick(PALETTES);
-    applyTheme(p);
-  });
-  document.getElementById('btn-random-font').addEventListener('click', () => {
-    const pair = pick(FONT_PAIRINGS);
-    document.documentElement.style.setProperty('--font', "'" + pair.body + "',system-ui,sans-serif");
-    document.documentElement.style.setProperty('--font-heading', "'" + pair.heading + "',system-ui,sans-serif");
-    designState.fontBody = pair.body;
-    designState.fontHeading = pair.heading;
-    document.getElementById('val-font-heading').textContent = pair.heading;
-    document.getElementById('val-font-body').textContent = pair.body;
-    document.getElementById('pe-font-heading').style.fontFamily = "'" + pair.heading + "', sans-serif";
-    document.getElementById('pe-font-body').style.fontFamily = "'" + pair.body + "', sans-serif";
-    updatePromptBlock();
-  });
-  document.getElementById('btn-random-radius').addEventListener('click', () => {
-    const radii = ['0px','2px','4px','6px','8px','0.5rem','0.625rem','0.75rem','1rem','1.5rem','2rem'];
-    const r = pick(radii);
-    document.documentElement.style.setProperty('--radius', r);
-    designState.radius = r;
-    document.getElementById('val-radius').textContent = r;
-    updatePromptBlock();
   });
 
   // Initial prompt
@@ -519,6 +485,7 @@ grid.addEventListener('dragend', e => {
   document.querySelectorAll('.cn-card').forEach(c => c.classList.remove('drag-over'));
   draggedCard = null;
   saveLayout();
+  updateMinimap();
 });
 
 grid.addEventListener('dragover', e => {
@@ -550,6 +517,7 @@ grid.addEventListener('click', e => {
   card.setAttribute('data-width', newW);
   btn.textContent = newW === 1 ? '2x' : '1x';
   saveLayout();
+  updateMinimap();
 });
 
 // ── Layout Save/Load ──
@@ -564,7 +532,7 @@ function saveLayout() {
 function loadLayout() {
   try {
     const data = JSON.parse(localStorage.getItem('unboring-layout'));
-    if (!data) return;
+    if (!data) { setTimeout(updateMinimap, 50); return; }
     const { order, widths } = data;
     order.forEach(id => {
       const card = grid.querySelector('[data-id="' + id + '"]');
@@ -578,6 +546,7 @@ function loadLayout() {
         grid.appendChild(card);
       }
     });
+    setTimeout(updateMinimap, 50);
   } catch(e) {}
 }
 
@@ -594,8 +563,86 @@ document.querySelectorAll('.cn-card').forEach(card => {
   tag.addEventListener('mouseleave', hide);
 });
 
+// ── Minimap ──
+function buildMinimap() {
+  var el = document.createElement('div');
+  el.id = 'minimap';
+  el.innerHTML = '<div id="minimap-content"></div>';
+  document.body.appendChild(el);
+  return el;
+}
+function updateMinimap() {
+  var mm = document.getElementById('minimap');
+  if (!mm) return;
+  var grid = document.querySelector('.grid');
+  if (!grid) return;
+  var gridBounds = grid.getBoundingClientRect();
+  var mmc = document.getElementById('minimap-content');
+  var mmW = mmc.clientWidth, mmH = mmc.clientHeight;
+  if (mmW === 0) return;
+  var scaleX = mmW / gridBounds.width, scaleY = mmH / gridBounds.height;
+  var s = Math.min(scaleX, scaleY) * 0.95;
+  var ox = (mmW - gridBounds.width * s) / 2, oy = (mmH - gridBounds.height * s) / 2;
+  var html = '';
+  document.querySelectorAll('.cn-card').forEach(function(card) {
+    var r = card.getBoundingClientRect();
+    var x = (r.left - gridBounds.left) * s + ox;
+    var y = (r.top - gridBounds.top) * s + oy;
+    var w = r.width * s, h = r.height * s;
+    html += '<div class="mm-card" style="left:' + x + 'px;top:' + y + 'px;width:' + Math.max(w,2) + 'px;height:' + Math.max(h,2) + 'px"></div>';
+  });
+  var cv = document.getElementById('canvas');
+  var vpL = (cv.getBoundingClientRect().left - gridBounds.left) * s + ox;
+  var vpT = (cv.getBoundingClientRect().top - gridBounds.top) * s + oy;
+  var vpW = cv.clientWidth * s, vpH = cv.clientHeight * s;
+  html += '<div class="mm-viewport" style="left:' + vpL + 'px;top:' + vpT + 'px;width:' + Math.max(vpW,3) + 'px;height:' + Math.max(vpH,3) + 'px"></div>';
+  mmc.innerHTML = html;
+}
+function setupMinimap() {
+  var mm = document.getElementById('minimap');
+  var isDown = false;
+  mm.addEventListener('mousedown', function(e) {
+    isDown = true;
+    var mmBounds = mm.getBoundingClientRect();
+    var cv = document.getElementById('canvas');
+    var grid = document.querySelector('.grid');
+    var gridBounds = grid.getBoundingClientRect();
+    var mmc = document.getElementById('minimap-content');
+    var mmW = mmc.clientWidth, mmH = mmc.clientHeight;
+    var scaleX = mmW / gridBounds.width, scaleY = mmH / gridBounds.height;
+    var s = Math.min(scaleX, scaleY) * 0.95;
+    var ox = (mmW - gridBounds.width * s) / 2, oy = (mmH - gridBounds.height * s) / 2;
+    var gridX = ((e.clientX - mmBounds.left - 6 - ox) / s);
+    var gridY = ((e.clientY - mmBounds.top - 6 - oy) / s);
+    panX = -(gridX - cv.clientWidth / (2 * currentScale));
+    panY = -(gridY - cv.clientHeight / (2 * currentScale));
+    apply();
+  });
+  window.addEventListener('mousemove', function(e) {
+    if (!isDown) return;
+    var mmBounds = mm.getBoundingClientRect();
+    var cv = document.getElementById('canvas');
+    var grid = document.querySelector('.grid');
+    if (!grid) return;
+    var gridBounds = grid.getBoundingClientRect();
+    var mmc = document.getElementById('minimap-content');
+    var mmW = mmc.clientWidth, mmH = mmc.clientHeight;
+    var scaleX = mmW / gridBounds.width, scaleY = mmH / gridBounds.height;
+    var s = Math.min(scaleX, scaleY) * 0.95;
+    var ox = (mmW - gridBounds.width * s) / 2, oy = (mmH - gridBounds.height * s) / 2;
+    var gridX = ((e.clientX - mmBounds.left - 6 - ox) / s);
+    var gridY = ((e.clientY - mmBounds.top - 6 - oy) / s);
+    panX = -(gridX - cv.clientWidth / (2 * currentScale));
+    panY = -(gridY - cv.clientHeight / (2 * currentScale));
+    apply();
+  });
+  window.addEventListener('mouseup', function() { isDown = false; });
+}
+
 // ── Init ──
 buildPromptSidebar();
+buildMinimap();
+setupMinimap();
 currentScale = 1;
 panX = 0;
 panY = 0;
@@ -603,7 +650,5 @@ apply();
 
 loadLayout();
 
-document.getElementById('surprise-btn').addEventListener('click', () => {
-  surprise();
-});
+document.getElementById('surprise-btn').addEventListener('click', function() { surprise(); });
 document.getElementById('export-btn').addEventListener('click', exportCSS);

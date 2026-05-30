@@ -8,15 +8,15 @@
 
 /* ── Button ── */
 .cn-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;border-radius:var(--radius);font-size:0.875rem;font-weight:500;height:36px;padding:0 16px;border:var(--bw) solid transparent;cursor:pointer;transition:all 0.15s cubic-bezier(.16,1,.3,1);font-family:var(--font);outline:none;position:relative}
-.cn-btn-default{background:var(--primary);color:var(--primary-fg);box-shadow:var(--btn-shadow,0 2px 8px color-mix(in oklab,var(--primary)20%,transparent));transform:translateY(0)}
-.cn-btn-default:hover{box-shadow:0 4px 16px color-mix(in oklab,var(--primary)35%,transparent);transform:translateY(-1px)}
-.cn-btn-default:active{transform:translateY(var(--btn-press-y,0));box-shadow:var(--btn-shadow-active,0 1px 4px color-mix(in oklab,var(--primary)20%,transparent))}
+.cn-btn-default{background:var(--primary);color:var(--primary-fg);box-shadow:var(--btn-shadow,0 3px 16px color-mix(in oklab,var(--primary)35%,transparent)),inset 0 1px 0 color-mix(in oklab,var(--primary-fg)12%,transparent);transform:translateY(0)}
+.cn-btn-default:hover{box-shadow:0 6px 28px color-mix(in oklab,var(--primary)50%,transparent),0 0 0 1px color-mix(in oklab,var(--primary)10%,transparent),inset 0 1px 0 color-mix(in oklab,var(--primary-fg)18%,transparent);transform:translateY(-1px)}
+.cn-btn-default:active{transform:translateY(var(--btn-press-y,0));box-shadow:var(--btn-shadow-active,0 1px 4px color-mix(in oklab,var(--primary)25%,transparent)),inset 0 1px 0 color-mix(in oklab,var(--primary-fg)6%,transparent)}
 .cn-btn-outline{background:transparent;color:var(--fg);border-color:var(--border)}
-.cn-btn-outline:hover{background:color-mix(in oklab,var(--fg)4%,transparent);border-color:color-mix(in oklab,var(--fg)30%,transparent);box-shadow:0 2px 8px color-mix(in oklab,var(--fg)10%,transparent)}
+.cn-btn-outline:hover{background:color-mix(in oklab,var(--fg)4%,transparent);border-color:color-mix(in oklab,var(--fg)30%,transparent);box-shadow:0 2px 12px color-mix(in oklab,var(--fg)15%,transparent)}
 .cn-btn-ghost{background:transparent;color:var(--fg);border-color:transparent}
 .cn-btn-ghost:hover{background:color-mix(in oklab,var(--fg)6%,transparent)}
-.cn-btn-destructive{background:var(--destructive);color:#fff;box-shadow:0 2px 8px color-mix(in oklab,var(--destructive)25%,transparent)}
-.cn-btn-destructive:hover{box-shadow:0 4px 16px color-mix(in oklab,var(--destructive)40%,transparent);transform:translateY(-1px)}
+.cn-btn-destructive{background:var(--destructive);color:#fff;box-shadow:0 3px 16px color-mix(in oklab,var(--destructive)35%,transparent),inset 0 1px 0 color-mix(in oklab,#fff 12%,transparent)}
+.cn-btn-destructive:hover{box-shadow:0 6px 28px color-mix(in oklab,var(--destructive)50%,transparent),inset 0 1px 0 color-mix(in oklab,#fff 18%,transparent);transform:translateY(-1px)}
 .cn-btn-sm{height:30px;padding:0 12px;font-size:0.8rem}
 .cn-btn svg{width:16px;height:16px;flex-shrink:0}
 
