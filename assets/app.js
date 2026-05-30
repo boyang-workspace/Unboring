@@ -665,16 +665,31 @@ function randomizeBrandFonts() {
 }
 function startBrandRoll(letters) {
   function roll() {
-    letters.forEach(function(sp, i) {
-      setTimeout(function() {
-        sp.classList.add('bl-rolling');
-        setTimeout(function() { sp.style.fontFamily = "'" + pick(_brandPool) + "',system-ui,sans-serif"; }, 200);
-        setTimeout(function() { sp.classList.remove('bl-rolling'); }, 500);
-      }, i * 70);
+    var next = letters.map(function() { return pick(_brandPool); });
+    var pending = next.length;
+    function check() { if (--pending > 0) return; go(); }
+    next.forEach(function(font) {
+      var tmp = document.createElement('span');
+      tmp.style.fontFamily = "'" + font + "',system-ui,sans-serif";
+      tmp.style.position = 'fixed'; tmp.style.top = '-999px'; tmp.style.opacity = '0';
+      tmp.style.pointerEvents = 'none'; tmp.textContent = 'U';
+      document.body.appendChild(tmp);
+      if (document.fonts && document.fonts.load) {
+        document.fonts.load('1em "' + font + '"', 'U').then(function() { tmp.remove(); check(); });
+      } else { tmp.remove(); check(); }
     });
+    function go() {
+      letters.forEach(function(sp, i) {
+        setTimeout(function() {
+          sp.classList.add('bl-rolling');
+          setTimeout(function() { sp.style.fontFamily = "'" + next[i] + "',system-ui,sans-serif"; }, 200);
+          setTimeout(function() { sp.classList.remove('bl-rolling'); }, 500);
+        }, i * 70);
+      });
+    }
   }
   roll();
-  setInterval(roll, 5000);
+  setInterval(roll, 10000);
 }
 
 // ── Init ──

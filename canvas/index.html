@@ -770,15 +770,30 @@ apply();
     brand.appendChild(span);letters.push(span);
   }
   function roll(){
-    letters.forEach(function(sp,i){
-      setTimeout(function(){
-        sp.classList.add('bl-rolling');
-        setTimeout(function(){sp.style.fontFamily="'"+fonts[Math.floor(Math.random()*fonts.length)]+"',system-ui,sans-serif"},200);
-        setTimeout(function(){sp.classList.remove('bl-rolling')},500);
-      },i*70);
+    var next=letters.map(function(){return fonts[Math.floor(Math.random()*fonts.length)]});
+    var pending=next.length;
+    function check(){if(--pending>0)return;go();}
+    next.forEach(function(f){
+      var tmp=document.createElement('span');
+      tmp.style.fontFamily="'"+f+"',system-ui,sans-serif";
+      tmp.style.position='fixed';tmp.style.top='-999px';tmp.style.opacity='0';
+      tmp.style.pointerEvents='none';tmp.textContent='U';
+      document.body.appendChild(tmp);
+      if(document.fonts&&document.fonts.load){
+        document.fonts.load('1em "'+f+'"','U').then(function(){tmp.remove();check();});
+      }else{tmp.remove();check();}
     });
+    function go(){
+      letters.forEach(function(sp,i){
+        setTimeout(function(){
+          sp.classList.add('bl-rolling');
+          setTimeout(function(){sp.style.fontFamily="'"+next[i]+"',system-ui,sans-serif"},200);
+          setTimeout(function(){sp.classList.remove('bl-rolling')},500);
+        },i*70);
+      });
+    }
   }
-  roll();setInterval(roll,5000);
+  roll();setInterval(roll,10000);
 })();
 
 document.getElementById('surprise-btn').addEventListener('click',surprise);
