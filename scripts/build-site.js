@@ -78,6 +78,18 @@ const rawEntries = {
     ["Marquee", "Scroll content continuously in a horizontal or vertical stream.", "marquee", "flowing", "on load"],
     ["Blur Fade", "Fade elements in with a soft blur-to-sharp transition.", "blur-fade", "soft", "on load or scroll"],
     ["Animated List", "Reveal list items with staggered entrance animations.", "list", "organized", "items added"],
+    ["Scroll Reveal", "Fade and translate elements into view as the user scrolls, with scrub for direct scroll-to-animation mapping.", "scroll-reveal", "revealing", "scroll into view"],
+    ["Parallax Scroll", "Move layers at different scroll speeds to create depth and immersion.", "parallax-scroll", "layered", "scroll"],
+    ["Pin Section", "Pin a section in place while content animates behind or in front of it.", "pin-section", "dramatic", "scroll into pin zone"],
+    ["Char Reveal", "Reveal text character by character with staggered entrance for a refined editorial feel.", "char-reveal", "refined", "on load or scroll into view"],
+    ["Word Slide Up", "Slide words up with a clip reveal for clean, editorial text entrance.", "word-slide", "editorial", "scroll into view"],
+    ["Line Reveal", "Reveal lines of text sequentially with a smooth wipe transition.", "line-reveal", "clean", "scroll into view"],
+    ["SVG Path Draw", "Draw SVG paths progressively for a hand-crafted reveal effect.", "svg-draw", "precise", "on load or scroll into view"],
+    ["Shape Morph", "Morph one shape smoothly into another with interpolated path transitions.", "shape-morph", "fluid", "toggle or click"],
+    ["Layout Transition", "Animate elements smoothly between layout states for seamless reflow.", "layout-morph", "seamless", "layout change"],
+    ["Timeline Sequence", "Orchestrate a precise multi-step animation sequence with controlled timing.", "timeline-seq", "orchestrated", "on load"],
+    ["Magnetic Hover", "Attract an element toward the cursor with a magnetic pull effect on hover.", "magnetic", "tactile", "hover"],
+    ["Motion Path", "Animate an element along a custom curved path for guided movement.", "motion-path", "guided", "on load or trigger"],
   ],
   interactions: [
     ["Copy Confirmation", "Confirm copy without interrupting the workflow.", "toast", "quick", "copy"],
@@ -707,6 +719,44 @@ const previewMarkup = (entry) => {
   }
   if (type === "blur-fade") {
     return decorative(`<div class="preview-blur-fade"><div class="blur-fade-item" style="width:100%"></div><div class="blur-fade-item"></div><div class="blur-fade-item"></div></div>`);
+  }
+
+  // ── GSAP-powered Motion previews ──
+  if (type === "scroll-reveal") {
+    return decorative(`<div class="sm-scroll-reveal" style="width:min(280px,84%);height:180px;position:relative;overflow:hidden;border-radius:12px;background:var(--dark-bg);border:1px solid var(--border)"><div class="sm-sr-track"><div class="sm-sr-card"><div class="sm-sr-dot"></div><div><div class="sm-sr-line" style="width:80px"></div><div class="sm-sr-line" style="width:50px;margin-top:4px"></div></div></div><div class="sm-sr-card"><div class="sm-sr-dot"></div><div><div class="sm-sr-line" style="width:70px"></div><div class="sm-sr-line" style="width:40px;margin-top:4px"></div></div></div><div class="sm-sr-card"><div class="sm-sr-dot"></div><div><div class="sm-sr-line" style="width:90px"></div><div class="sm-sr-line" style="width:60px;margin-top:4px"></div></div></div></div><div class="sm-sr-scrubber"></div></div>`);
+  }
+  if (type === "parallax-scroll") {
+    return decorative(`<div class="sm-parallax" style="width:min(280px,84%);height:160px;position:relative;overflow:hidden;border-radius:12px;background:var(--dark-bg);border:1px solid var(--border)"><div class="sm-para-bg"></div><div class="sm-para-mid"><div class="sm-para-card"></div><div class="sm-para-card"></div></div><div class="sm-para-fg"><div class="sm-para-label">Depth</div></div><div class="sm-para-scrubber"></div></div>`);
+  }
+  if (type === "pin-section") {
+    return decorative(`<div class="sm-pin-section" style="width:min(280px,84%);height:160px;position:relative;overflow:hidden;border-radius:12px;background:var(--dark-bg);border:1px solid var(--border)"><div class="sm-pin-track"><div class="sm-pin-block"><div class="sm-pin-badge">Pinned</div><div style="font-size:0.82rem;font-weight:600;color:var(--fg);margin-top:8px">Section stays</div><div style="font-size:0.72rem;color:var(--muted-fg);margin-top:4px">Content animates through</div></div><div class="sm-pin-block"><div class="sm-pin-badge" style="background:var(--card-bg);color:var(--fg)">Layer 2</div><div style="font-size:0.82rem;font-weight:600;color:var(--fg);margin-top:8px">Slides over</div></div></div><div class="sm-para-scrubber"></div></div>`);
+  }
+  if (type === "char-reveal") {
+    return decorative(`<div class="sm-char-reveal" style="width:min(280px,84%);height:120px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:12px;background:var(--dark-bg);border:1px solid var(--border)"><div class="sm-char-word"><span class="sm-char-c">M</span><span class="sm-char-c">O</span><span class="sm-char-c">T</span><span class="sm-char-c">I</span><span class="sm-char-c">O</span><span class="sm-char-c">N</span></div></div>`);
+  }
+  if (type === "word-slide") {
+    return decorative(`<div class="sm-word-slide" style="width:min(280px,84%);height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;overflow:hidden;border-radius:12px;background:var(--dark-bg);border:1px solid var(--border)"><div class="sm-ws-word"><span>Less</span></div><div class="sm-ws-word"><span>boring</span></div><div class="sm-ws-word"><span>interfaces</span></div></div>`);
+  }
+  if (type === "line-reveal") {
+    return decorative(`<div class="sm-line-reveal" style="width:min(280px,84%);height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;overflow:hidden;border-radius:12px;background:var(--dark-bg);border:1px solid var(--border)"><div class="sm-lr-line"><span>GSAP makes animation</span></div><div class="sm-lr-line"><span>silky smooth across</span></div><div class="sm-lr-line"><span>every browser</span></div></div>`);
+  }
+  if (type === "svg-draw") {
+    return decorative(`<div class="sm-svg-draw" style="width:min(200px,60%);height:120px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:12px;background:var(--dark-bg);border:1px solid var(--border)"><svg width="120" height="80" viewBox="0 0 120 80" fill="none" stroke="var(--fg)" stroke-width="2" stroke-linecap="round"><path class="sm-svg-path" d="M10 40 Q30 10 50 40 T90 40 T110 20"/><circle class="sm-svg-dot" cx="110" cy="20" r="4" fill="var(--fg)" stroke="none"/></svg></div>`);
+  }
+  if (type === "shape-morph") {
+    return decorative(`<div class="sm-shape-morph" style="width:min(200px,60%);height:120px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:12px;background:var(--dark-bg);border:1px solid var(--border)"><div class="sm-morph-shape"><svg width="60" height="60" viewBox="0 0 60 60"><rect class="sm-morph-rect" x="0" y="0" width="60" height="60" rx="8" fill="none" stroke="var(--fg)" stroke-width="2"/><circle class="sm-morph-circle" cx="30" cy="30" r="26" fill="none" stroke="var(--fg)" stroke-width="2" opacity="0"/></svg></div></div>`);
+  }
+  if (type === "layout-morph") {
+    return decorative(`<div class="sm-layout-morph" style="width:min(280px,84%);height:150px;position:relative;overflow:hidden;border-radius:12px;background:var(--dark-bg);border:1px solid var(--border)"><div class="sm-lm-grid"><div class="sm-lm-card"></div><div class="sm-lm-card"></div><div class="sm-lm-card"></div><div class="sm-lm-card"></div></div></div>`);
+  }
+  if (type === "timeline-seq") {
+    return decorative(`<div class="sm-timeline-seq" style="width:min(280px,84%);height:160px;position:relative;overflow:hidden;border-radius:12px;background:var(--dark-bg);border:1px solid var(--border);padding:16px"><div class="sm-ts-track"><div class="sm-ts-dot fill">1</div><div class="sm-ts-line"></div><div class="sm-ts-dot">2</div><div class="sm-ts-line"></div><div class="sm-ts-dot">3</div></div><div class="sm-ts-label">Choreographed sequence</div></div>`);
+  }
+  if (type === "magnetic") {
+    return decorative(`<div class="sm-magnetic" style="width:min(200px,60%);height:100px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:12px;background:var(--dark-bg);border:1px solid var(--border);cursor:pointer"><div class="sm-mag-btn"><span>Hover me</span></div></div>`);
+  }
+  if (type === "motion-path") {
+    return decorative(`<div class="sm-motion-path" style="width:min(260px,78%);height:130px;position:relative;overflow:hidden;border-radius:12px;background:var(--dark-bg);border:1px solid var(--border)"><svg class="sm-mp-svg" width="100%" height="100%" viewBox="0 0 260 130"><path class="sm-mp-path" d="M20 100 Q80 10 140 70 T240 30" fill="none" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4 4"/><circle class="sm-mp-dot" r="6" fill="var(--fg)"><animateMotion dur="3s" repeatCount="indefinite" path="M20 100 Q80 10 140 70 T240 30"/></circle></svg></div>`);
   }
 
   // ── Text Effects previews ──

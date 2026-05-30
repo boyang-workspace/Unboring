@@ -1,696 +1,337 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>UnBoring — UI Design Tool</title>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7DE4CTB1CH"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-7DE4CTB1CH');
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@400;500;600;700&family=Urbanist:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&family=Albert+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Lora:wght@400;500;600;700&family=DM+Serif+Display&family=Crimson+Text:wght@400;600;700&family=Libre+Baskerville:wght@400;700&family=EB+Garamond:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Caveat:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Pacifico&family=Satisfy&family=Great+Vibes&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Righteous&family=Fredoka:wght@400;500;600;700&family=Permanent+Marker&family=Bitter:wght@400;500;600;700&family=Merriweather:wght@400;700&family=Noto+Serif:wght@400;700&family=PT+Serif:wght@400;700&family=Press+Start+2P&family=Orbitron:wght@400;500;600;700&family=VT323&family=Cinzel:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@400;500;600;700&family=Creepster&family=Special+Elite&family=Nunito:wght@400;500;600;700&family=Bangers&family=Patrick+Hand&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css">
-<link rel="stylesheet" href="/assets/components.css">
-</head>
-<body>
-<div id="header">
-  <div class="brand">
-    <svg class="brand-icon" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0L9.5 5.5L15 7L9.5 8.5L8 14L6.5 8.5L1 7L6.5 5.5L8 0Z"/></svg>
-    <span class="brand-text">UnBoring</span>
-  </div>
-  <div class="actions">
-    <button class="h-btn h-btn-primary" id="surprise-btn">Surprise me!</button>
-    <button class="h-btn" id="export-btn">Export CSS</button>
-    <button class="h-btn h-btn-icon" id="menu-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-    </button>
-  </div>
-</div>
-<div id="menu">
-  <a href="/motion/">Motion (24)</a>
-  <a href="/components/">Components (51)</a>
-  <a href="/interactions/">Interactions (85)</a>
-  <a href="/styles/">Styles (27)</a>
-  <a href="/effects/">Effects (63)</a>
-  <a href="/agent/">MCP / CLI</a>
-</div>
-<div id="sidebar"></div>
-<div id="canvas">
-  <div id="canvas-content">
-<div class="grid">
-<div class="cn-card" data-id="45" data-width="2" draggable="true" data-name="Features">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#45 · Features</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Features</div><div class="cn-card-desc">Everything you need to build modern apps.</div></div><div class="cn-card-content"><div class="cn-features"><div class="cn-feature"><div class="cn-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="cn-feature-title">Lightning Fast</div><div class="cn-feature-desc">Sub-second response times globally.</div></div><div class="cn-feature"><div class="cn-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg></div><div class="cn-feature-title">Secure</div><div class="cn-feature-desc">Enterprise-grade security built in.</div></div><div class="cn-feature"><div class="cn-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><div class="cn-feature-title">Modular</div><div class="cn-feature-desc">Use only what you need.</div></div><div class="cn-feature"><div class="cn-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div><div class="cn-feature-title">Customizable</div><div class="cn-feature-desc">Tailor everything to your needs.</div></div></div></div>
-</div>
-<div class="cn-card" data-id="04" data-width="2" draggable="true" data-name="Table">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#04 · Table</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-card-content" style="padding:0"><table class="cn-table"><thead><tr><th>Merchant</th><th>Category</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead><tbody><tr><td>Blue Bottle Coffee</td><td>Food & Drink</td><td>-$6.50</td><td>Today</td><td><span class="cn-badge cn-badge-default">Completed</span></td></tr><tr><td>Whole Foods Market</td><td>Groceries</td><td>-$142.30</td><td>Yesterday</td><td><span class="cn-badge cn-badge-default">Completed</span></td></tr><tr><td>Stripe Payout</td><td>Income</td><td>+$4,200.00</td><td>Mar 15</td><td><span class="cn-badge cn-badge-secondary">Pending</span></td></tr><tr><td>Amazon</td><td>Shopping</td><td>-$89.99</td><td>Mar 14</td><td><span class="cn-badge cn-badge-default">Completed</span></td></tr><tr><td>Netflix</td><td>Entertainment</td><td>-$15.99</td><td>Mar 13</td><td><span class="cn-badge cn-badge-default">Completed</span></td></tr></tbody></table></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="21" data-name="Ship products">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#21 · Ship products</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-hero-left"><span class="cn-hero-badge">New</span><div class="cn-hero-title">Ship products<br>10x faster</div><div class="cn-hero-desc">Automate your workflow with AI-powered tools that handle the boring stuff.</div><div class="cn-hero-actions"><button class="cn-btn cn-btn-default">Start Free</button><button class="cn-btn cn-btn-ghost">See how →</button></div></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="12" data-name="API-first">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#12 · API-first</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-hero-left"><span class="cn-hero-eyebrow">For developers</span><div class="cn-hero-title" style="font-size:1.1rem">API-first<br>by design</div><div class="cn-hero-desc" style="font-size:0.78rem">RESTful API, webhooks, SDKs in every language. Build anything.</div><div class="cn-hero-actions"><button class="cn-btn cn-btn-outline cn-btn-sm">Read Docs →</button></div></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="80" data-name="Stop juggling tools.">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#80 · Stop juggling tools.</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-hero-left"><div class="cn-hero-title" style="font-size:1rem">Stop juggling tools.<br>Start shipping.</div><div class="cn-hero-desc" style="font-size:0.78rem">One platform for issues, docs, and deploys. Replaces Jira, Notion, and Vercel.</div><div class="cn-hero-actions"><button class="cn-btn cn-btn-default cn-btn-sm">Migrate now</button></div></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="14" data-name="The AI copilot for">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#14 · The AI copilot for</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-hero"><span class="cn-hero-badge">Beta</span><div class="cn-hero-title" style="font-size:1rem">The AI copilot for<br>your entire stack</div><div class="cn-hero-desc" style="font-size:0.78rem">Ask questions in natural language. Get answers from your codebase.</div><div class="cn-hero-actions"><button class="cn-btn cn-btn-default cn-btn-sm">Join Waitlist</button></div><div class="cn-hero-proof"><span>Backed by</span><span>Y Combinator</span></div></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="06" data-name="Deploy in seconds">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#06 · Deploy in seconds</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-hero-split"><div class="cn-hero-split-text"><div class="cn-hero-title" style="font-size:0.95rem">Deploy in seconds</div><div class="cn-hero-desc" style="font-size:0.78rem">Push to main. We handle the rest. Zero-downtime deploys to the edge.</div><button class="cn-btn cn-btn-default cn-btn-sm" style="margin-top:4px">Try it →</button></div><div class="cn-hero-split-visual"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="66" data-name="Compare Plans">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#66 · Compare Plans</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Compare Plans</div></div><div class="cn-card-content" style="padding:0"><table class="cn-compare"><thead><tr><th>Feature</th><th>Free</th><th>Pro</th></tr></thead><tbody><tr><td>Projects</td><td>3</td><td>Unlimited</td></tr><tr><td>Storage</td><td>1GB</td><td>100GB</td></tr><tr><td>Members</td><td>1</td><td>Unlimited</td></tr><tr><td>API Access</td><td class="x">✕</td><td class="check">✓</td></tr><tr><td>Priority Support</td><td class="x">✕</td><td class="check">✓</td></tr></table></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="10" data-name="One more thing…">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#10 · One more thing…</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-hero"><div class="cn-hero-title" style="font-size:1rem">One more thing…</div><div class="cn-hero-desc" style="font-size:0.78rem">We just shipped dark mode, real-time collab, and 40+ new integrations.</div><div class="cn-hero-features"><div class="cn-hero-feature"><div class="cn-hero-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div><div class="cn-hero-feature-label">Dark Mode</div></div><div class="cn-hero-feature"><div class="cn-hero-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="cn-hero-feature-label">Real-time</div></div><div class="cn-hero-feature"><div class="cn-hero-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div><div class="cn-hero-feature-label">40+ Apps</div></div></div></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="37" data-name="Build in public." style="padding:0">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#37 · Build in public.</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-hero-dark"><span class="cn-hero-badge">Open Source</span><div class="cn-hero-title" style="font-size:0.95rem">Build in public.<br>Ship in private.</div><div class="cn-hero-desc" style="font-size:0.78rem">Core is MIT licensed. Self-host or use our cloud. Your choice.</div><div class="cn-hero-actions"><button class="cn-btn">Star on GitHub</button></div></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="54" data-name="Think less.">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#54 · Think less.</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-hero-minimal"><div class="cn-hero-title" style="font-size:1.3rem">Think less.<br>Build more.</div><div class="cn-hero-desc">Zero config. Zero boilerplate. Just code.</div><div class="cn-hero-actions"><button class="cn-btn cn-btn-default">npm install</button></div></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="30" data-name="Made for">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#30 · Made for</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-hero"><div class="cn-hero-title" style="font-size:1rem">Made for<br>startups & enterprises</div><div class="cn-hero-desc" style="font-size:0.78rem">From solo founders to Fortune 500 teams. Scale as you grow.</div><div class="cn-hero-features"><div class="cn-hero-feature"><div class="cn-hero-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><div class="cn-hero-feature-label">Fast Setup</div></div><div class="cn-hero-feature"><div class="cn-hero-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg></div><div class="cn-hero-feature-label">Secure</div></div><div class="cn-hero-feature"><div class="cn-hero-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><div class="cn-hero-feature-label">Scalable</div></div></div></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="72" data-name="Everything you need.">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#72 · Everything you need.</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-hero"><span class="cn-hero-eyebrow">Introducing v2.0</span><div class="cn-hero-title">Everything you need.<br>Nothing you don't.</div><div class="cn-hero-desc">The most flexible platform for modern teams. Built for speed, designed for clarity.</div><div class="cn-hero-actions"><button class="cn-btn cn-btn-default">Try it free</button></div><div class="cn-hero-proof"><span>Trusted by</span><span>10K+</span><span>teams</span></div></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="36" data-name="Launching March 2026">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#36 · Launching March 2026</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-hero" style="padding:24px 16px"><div class="cn-hero-title" style="font-size:1.1rem">Launching March 2026</div><div class="cn-hero-countdown"><div class="cn-hero-countdown-item"><div class="cn-hero-countdown-num">42</div><div class="cn-hero-countdown-label">Days</div></div><div class="cn-hero-countdown-item"><div class="cn-hero-countdown-num">08</div><div class="cn-hero-countdown-label">Hours</div></div><div class="cn-hero-countdown-item"><div class="cn-hero-countdown-num">23</div><div class="cn-hero-countdown-label">Min</div></div></div><div class="cn-hero-actions"><button class="cn-btn cn-btn-outline cn-btn-sm">Get Notified</button></div></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="22" data-name="Simple, transparent pricing">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#22 · Simple, transparent pricing</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-hero"><div class="cn-hero-title" style="font-size:0.95rem">Simple, transparent pricing</div><div class="cn-hero-desc" style="font-size:0.78rem">No hidden fees. No surprises. Cancel anytime.</div></div><div class="cn-card-content" style="padding-top:0"><div style="display:flex;gap:8px"><div style="flex:1;text-align:center;padding:12px 8px;background:var(--muted);border-radius:var(--radius)"><div style="font-size:0.72rem;color:var(--muted-fg);margin-bottom:4px">Starter</div><div style="font-size:1.2rem;font-weight:700;color:var(--fg)">$9</div><div style="font-size:0.65rem;color:var(--muted-fg)">/mo</div></div><div style="flex:1;text-align:center;padding:12px 8px;background:var(--primary);border-radius:var(--radius);color:var(--primary-fg)"><div style="font-size:0.72rem;opacity:0.8;margin-bottom:4px">Pro</div><div style="font-size:1.2rem;font-weight:700">$29</div><div style="font-size:0.65rem;opacity:0.8">/mo</div></div><div style="flex:1;text-align:center;padding:12px 8px;background:var(--muted);border-radius:var(--radius)"><div style="font-size:0.72rem;color:var(--muted-fg);margin-bottom:4px">Team</div><div style="font-size:1.2rem;font-weight:700;color:var(--fg)">$79</div><div style="font-size:0.65rem;color:var(--muted-fg)">/mo</div></div></div></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="38" data-name="Stay in the loop">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#38 · Stay in the loop</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-newsletter"><div class="cn-newsletter-title">Stay in the loop</div><div class="cn-newsletter-desc">Get the latest updates delivered to your inbox.</div><div class="cn-newsletter-form"><input class="cn-input" placeholder="you@example.com" style="flex:1"><button class="cn-btn cn-btn-default">Subscribe</button></div></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="74" data-name="Hero">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#74 · Hero</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-card-content"><div class="cn-hero-bento"><div class="cn-hero-bento-item"><div class="cn-hero-bento-label">Uptime</div><div class="cn-hero-bento-value">99.99%</div></div><div class="cn-hero-bento-item"><div class="cn-hero-bento-label">Latency</div><div class="cn-hero-bento-value">&lt;50ms</div></div><div class="cn-hero-bento-item"><div class="cn-hero-bento-label">Regions</div><div class="cn-hero-bento-value">32</div></div><div class="cn-hero-bento-item"><div class="cn-hero-bento-label">Deploys/day</div><div class="cn-hero-bento-value">10K+</div></div></div></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="09" data-name="Build faster.">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#09 · Build faster.</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-hero"><div class="cn-hero-title">Build faster.<br>Ship smarter.</div><div class="cn-hero-desc">The modern development platform for teams who move fast and build things that matter.</div><div class="cn-hero-actions"><button class="cn-btn cn-btn-default">Get Started</button><button class="cn-btn cn-btn-outline">Learn More</button></div></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="17" data-name="Recent Transactions">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#17 · Recent Transactions</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Recent Transactions</div><div class="cn-card-desc">Your latest account activity.</div></div><div class="cn-card-content" style="padding:0"><table class="cn-table"><thead><tr><th>Merchant</th><th>Category</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead><tbody><tr><td>Blue Bottle Coffee</td><td>Food & Drink</td><td>-$6.50</td><td>Today</td><td><span class="cn-badge cn-badge-default">Completed</span></td></tr><tr><td>Whole Foods Market</td><td>Groceries</td><td>-$142.30</td><td>Yesterday</td><td><span class="cn-badge cn-badge-default">Completed</span></td></tr><tr><td>Stripe Payout</td><td>Income</td><td>+$4,200.00</td><td>Mar 15</td><td><span class="cn-badge cn-badge-secondary">Pending</span></td></tr><tr><td>Amazon</td><td>Shopping</td><td>-$89.99</td><td>Mar 14</td><td><span class="cn-badge cn-badge-default">Completed</span></td></tr><tr><td>Netflix</td><td>Entertainment</td><td>-$15.99</td><td>Mar 13</td><td><span class="cn-badge cn-badge-default">Completed</span></td></tr></tbody></table></div><div class="cn-card-footer"><button class="cn-btn cn-btn-ghost cn-btn-sm">View All</button></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="28" data-name="Welcome to the" style="padding:0">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#28 · Welcome to the</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-hero-dark"><div class="cn-hero-title">Welcome to the<br>future of work</div><div class="cn-hero-desc">One platform to manage everything. No more context switching.</div><div class="cn-hero-actions"><button class="cn-btn">Get Early Access</button></div></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="59" data-name="Trusted by the best">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#59 · Trusted by the best</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-hero-stats"><div class="cn-hero-title">Trusted by the best</div><div class="cn-stats"><div class="cn-stat"><div class="cn-stat-value">10K+</div><div class="cn-stat-label">Teams</div></div><div class="cn-stat"><div class="cn-stat-value">99.9%</div><div class="cn-stat-label">Uptime</div></div><div class="cn-stat"><div class="cn-stat-value">50M+</div><div class="cn-stat-label">API calls/day</div></div></div><div class="cn-hero-actions"><button class="cn-btn cn-btn-outline">Read Case Studies</button></div></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="56" data-name="Error 404">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#56 · Error 404</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-error"><div class="cn-error-code">404</div><div class="cn-error-msg">Page not found</div><div class="cn-hero-desc">The page you're looking for doesn't exist or has been moved.</div><button class="cn-btn cn-btn-outline cn-btn-sm">Go Home</button></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="18" data-name="Why choose us?">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#18 · Why choose us?</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Why choose us?</div></div><div class="cn-card-content"><div class="cn-features"><div class="cn-feature"><div class="cn-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg></div><div class="cn-feature-title">Easy to use</div><div class="cn-feature-desc">Intuitive interface anyone can learn.</div></div><div class="cn-feature"><div class="cn-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="cn-feature-title">Affordable</div><div class="cn-feature-desc">Plans for every budget.</div></div><div class="cn-feature"><div class="cn-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="cn-feature-title">Fast</div><div class="cn-feature-desc">Blazing fast performance.</div></div><div class="cn-feature"><div class="cn-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="cn-feature-title">Team-first</div><div class="cn-feature-desc">Built for collaboration.</div></div></div></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="29" data-name="Integrations">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#29 · Integrations</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Integrations</div><div class="cn-card-desc">Connect your favorite tools.</div></div><div class="cn-card-content"><div class="cn-integrations"><div class="cn-integration">GitHub</div><div class="cn-integration">Slack</div><div class="cn-integration">Notion</div><div class="cn-integration">Figma</div><div class="cn-integration">Linear</div><div class="cn-integration">Jira</div></div></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="16" data-name="Join the waitlist">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#16 · Join the waitlist</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-waitlist"><div class="cn-hero-title" style="font-size:1.1rem">Join the waitlist</div><div class="cn-hero-desc" style="font-size:0.82rem">Be the first to know when we launch.</div><div class="cn-waitlist-count"><strong>2,847</strong> people waiting</div><div class="cn-newsletter-form"><input class="cn-input" placeholder="you@example.com" style="flex:1"><button class="cn-btn cn-btn-default">Join</button></div></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="71" data-name="Get updates">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#71 · Get updates</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-newsletter"><div class="cn-newsletter-title">Get updates</div><div class="cn-newsletter-desc">No spam, just the good stuff.</div><div class="cn-newsletter-form"><input class="cn-input" placeholder="your@email.com" style="flex:1"><button class="cn-btn cn-btn-default">Join</button></div><div style="font-size:0.68rem;color:var(--muted-fg);margin-top:4px">Join 5,000+ subscribers</div></div>
-</div>
-<div class="cn-card" data-width="2" draggable="true" data-id="79" data-name="Your workspace." style="padding:0">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#79 · Your workspace.</span>
-  <button class="width-toggle">1x</button>
-</div>
-<div class="cn-hero-gradient"><div class="cn-hero-title">Your workspace.<br>Your rules.</div><div class="cn-hero-desc">Customize everything from themes to workflows. Make it yours.</div><div class="cn-hero-actions"><button class="cn-btn">Customize Now</button></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="01" data-name="Contribution History">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#01 · Contribution History</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Contribution History</div><div class="cn-card-desc">Last 6 months of activity</div></div><div class="cn-card-content"><div class="cn-chart"><div class="cn-bars"><div class="cn-bar" style="height:30%"></div><div class="cn-bar" style="height:55%"></div><div class="cn-bar" style="height:45%"></div><div class="cn-bar" style="height:70%"></div><div class="cn-bar" style="height:60%"></div><div class="cn-bar" style="height:85%"></div></div></div><div class="flex justify-between mt-2" style="padding:0 4px"><span class="text-xs text-muted">Jan</span><span class="text-xs text-muted">Feb</span><span class="text-xs text-muted">Mar</span><span class="text-xs text-muted">Apr</span><span class="text-xs text-muted">May</span><span class="text-xs text-muted">Jun</span></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-outline cn-btn-sm w-full">View Full Report</button></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="11" data-name="Payout Threshold">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#11 · Payout Threshold</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Payout Threshold</div><div class="cn-card-desc">Set the minimum balance required before a payout is triggered.</div></div><div class="cn-card-content"><div class="cn-field"><div class="flex justify-between"><label class="cn-label">Minimum Balance</label><span class="text-sm text-muted">$50.00</span></div><div class="cn-slider" style="margin-top:8px"><div class="cn-slider-track"><div class="cn-slider-range" style="width:50%"></div><div class="cn-slider-thumb" style="left:50%"></div></div></div></div><div class="cn-field mt-2"><label class="cn-label">Currency</label><select class="cn-select"><option selected>USD — US Dollar</option><option>EUR — Euro</option><option>GBP — British Pound</option></select></div><div class="cn-field mt-2"><label class="cn-label">Notes</label><textarea class="cn-textarea" placeholder="Optional payout notes…" style="min-height:60px"></textarea></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-default cn-btn-sm">Save Threshold</button></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="31" data-name="FAQ">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#31 · FAQ</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">FAQ</div></div><div class="cn-card-content"><div class="cn-faq"><div class="cn-faq-item"><div class="cn-faq-q open"><span>How does the free trial work?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div><div class="cn-faq-a">Start using all features free for 14 days. No credit card required. Cancel anytime.</div></div><div class="cn-faq-item"><div class="cn-faq-q"><span>Can I change plans later?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div></div><div class="cn-faq-item"><div class="cn-faq-q"><span>What payment methods do you accept?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div></div></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="02" data-name="No recent activity">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#02 · No recent activity</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-content"><div class="cn-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg><div class="cn-empty-title">No recent activity</div><div class="cn-empty-desc">Your recent transactions will appear here once you start making purchases.</div></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-ghost cn-btn-sm">View History</button></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="46" data-name="Set a new milestone">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#46 · Set a new milestone</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Set a new milestone</div><div class="cn-card-desc">Define your financial target and we'll help you pace your savings.</div></div><div class="cn-card-content"><div class="cn-field"><label class="cn-label">Target Name</label><input class="cn-input" placeholder="e.g., New Laptop"></div><div class="cn-field mt-2"><label class="cn-label">Target Amount</label><input class="cn-input" placeholder="$0.00"></div><div class="cn-field mt-2"><label class="cn-label">Target Date</label><input class="cn-input" placeholder="Select date"></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-default cn-btn-sm">Create Milestone</button><button class="cn-btn cn-btn-ghost cn-btn-sm">Cancel</button></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="27" data-name="Stats">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#27 · Stats</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-content"><div class="cn-stats"><div class="cn-stat"><div class="cn-stat-value">150+</div><div class="cn-stat-label">Countries</div></div><div class="cn-stat"><div class="cn-stat-value">24/7</div><div class="cn-stat-label">Support</div></div><div class="cn-stat"><div class="cn-stat-value">< 50ms</div><div class="cn-stat-label">Latency</div></div></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="07" data-name="Common Questions">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#07 · Common Questions</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Common Questions</div></div><div class="cn-card-content"><div class="cn-faq"><div class="cn-faq-item"><div class="cn-faq-q open"><span>Is there a free plan?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div><div class="cn-faq-a">Yes! Our free plan includes 3 projects and 1GB storage. No credit card needed.</div></div><div class="cn-faq-item"><div class="cn-faq-q"><span>Do you offer refunds?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div></div><div class="cn-faq-item"><div class="cn-faq-q"><span>How do I contact support?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div></div></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="44" data-name="Trust Badges">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#44 · Trust Badges</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-content"><div class="cn-trust"><div class="cn-trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>SSL Secured</div><div class="cn-trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>99.9% Uptime</div><div class="cn-trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>10K+ Users</div><div class="cn-trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>4.9 Rating</div></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="51" data-name="Changelog">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#51 · Changelog</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Changelog</div></div><div class="cn-card-content"><div class="cn-changelog"><div class="cn-changelog-item"><div class="cn-changelog-date">v2.4.0</div><div class="cn-changelog-content"><div class="cn-changelog-title">New dashboard</div><div class="cn-changelog-desc">Completely redesigned dashboard with real-time analytics.</div></div></div><div class="cn-changelog-item"><div class="cn-changelog-date">v2.3.2</div><div class="cn-changelog-content"><div class="cn-changelog-title">Bug fixes</div><div class="cn-changelog-desc">Fixed login issue on Safari and improved performance.</div></div></div><div class="cn-changelog-item"><div class="cn-changelog-date">v2.3.0</div><div class="cn-changelog-content"><div class="cn-changelog-title">API v3</div><div class="cn-changelog-desc">New REST API with GraphQL support.</div></div></div></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="08" data-name="Our Process">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#08 · Our Process</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Our Process</div></div><div class="cn-card-content"><div class="cn-process"><div class="cn-process-item"><div class="cn-process-line"><div class="cn-process-dot"></div><div class="cn-process-connector"></div></div><div class="cn-process-content"><div class="cn-process-title">Discovery</div><div class="cn-process-desc">Understanding your needs and goals.</div></div></div><div class="cn-process-item"><div class="cn-process-line"><div class="cn-process-dot"></div><div class="cn-process-connector"></div></div><div class="cn-process-content"><div class="cn-process-title">Design</div><div class="cn-process-desc">Crafting the perfect solution.</div></div></div><div class="cn-process-item"><div class="cn-process-line"><div class="cn-process-dot"></div><div class="cn-process-connector"></div></div><div class="cn-process-content"><div class="cn-process-title">Develop</div><div class="cn-process-desc">Building with precision and care.</div></div></div><div class="cn-process-item"><div class="cn-process-line"><div class="cn-process-dot"></div></div><div class="cn-process-content"><div class="cn-process-title">Deploy</div><div class="cn-process-desc">Ship it to the world.</div></div></div></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="19" data-name="Badges">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#19 · Badges</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-content"><div class="cn-item"><div class="cn-item-media"><div style="width:36px;height:36px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:600;color:var(--fg)">VOO</div></div><div class="cn-item-content"><div class="cn-item-title">Vanguard S&P 500 ETF</div><div class="cn-item-desc">112 Shares · Jan 2021</div></div><span class="cn-badge cn-badge-outline">ETF</span></div><div class="cn-item"><div class="cn-item-media"><div style="width:36px;height:36px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:600;color:var(--fg)">VIG</div></div><div class="cn-item-content"><div class="cn-item-title">Vanguard Dividend Appreciation</div><div class="cn-item-desc">450 Shares · Mar 2022</div></div><span class="cn-badge cn-badge-outline">ETF</span></div><div class="cn-item"><div class="cn-item-media"><div style="width:36px;height:36px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:600;color:var(--fg)">AAPL</div></div><div class="cn-item-content"><div class="cn-item-title">Apple Inc.</div><div class="cn-item-desc">85 Shares · Nov 2020</div></div><span class="cn-badge cn-badge-secondary">Stock</span></div><div class="cn-item"><div class="cn-item-media"><div style="width:36px;height:36px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:600;color:var(--fg)">O</div></div><div class="cn-item-content"><div class="cn-item-title">Realty Income Corp</div><div class="cn-item-desc">320 Shares · Jun 2023</div></div><span class="cn-badge cn-badge-outline">REIT</span></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-outline cn-btn-sm">View All Holdings</button></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="42" data-name="Device Manager">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#42 · Device Manager</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Device Manager</div></div><div class="cn-card-content"><input class="cn-input" placeholder="Search devices…" style="margin-bottom:12px"><div class="cn-item"><div class="cn-item-media"><div style="width:32px;height:32px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div></div><div class="cn-item-content"><div class="cn-item-title">Thermostat</div><div class="cn-item-desc">Living Room · 72°F</div></div><span class="cn-badge cn-badge-outline">Active</span></div><div class="cn-item"><div class="cn-item-media"><div style="width:32px;height:32px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v8"/><path d="m4.93 10.93 1.41 1.41"/><path d="M2 18h2"/><path d="M20 18h2"/><path d="m19.07 10.93-1.41 1.41"/><path d="M22 22H2"/><path d="m8 22 4-10 4 10"/></svg></div></div><div class="cn-item-content"><div class="cn-item-title">Smart Bulb</div><div class="cn-item-desc">Bedroom · 40%</div></div><span class="cn-badge cn-badge-outline">Active</span></div><div class="cn-item"><div class="cn-item-media"><div style="width:32px;height:32px;border-radius:8px;background:var(--muted);display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></div></div><div class="cn-item-content"><div class="cn-item-title">Camera</div><div class="cn-item-desc">Porch · Recording</div></div><span class="cn-badge cn-badge-destructive">Alert</span></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="40" data-name="No watchlist items">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#40 · No watchlist items</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-content"><div class="cn-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><div class="cn-empty-title">No watchlist items</div><div class="cn-empty-desc">Add stocks to your watchlist to track their performance.</div></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="60" data-name="Try it free for 14 days" style="background:var(--muted)">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#60 · Try it free for 14 days</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-cta"><div class="cn-cta-title">Try it free for 14 days</div><div class="cn-cta-desc">No credit card required. Setup takes 2 minutes.</div><div style="display:flex;gap:8px"><button class="cn-btn cn-btn-default">Start Trial</button><button class="cn-btn cn-btn-outline">Watch Demo</button></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="03" data-name="Ready to get started?" style="background:var(--primary);color:var(--primary-fg)">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#03 · Ready to get started?</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-cta"><div class="cn-cta-title" style="color:var(--primary-fg)">Ready to get started?</div><div class="cn-cta-desc" style="color:var(--primary-fg);opacity:0.8">Join thousands of teams already using our platform.</div><button class="cn-btn" style="background:var(--primary-fg);color:var(--primary)">Start Free Trial</button></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="58" data-name="Skeleton">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#58 · Skeleton</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-content"><div style="height:128px;background:var(--muted);border-radius:8px;animation:pulse 2s ease-in-out infinite"></div><div style="display:flex;flex-direction:column;gap:8px;margin-top:12px"><div style="height:12px;background:var(--muted);border-radius:4px;animation:pulse 2s ease-in-out infinite"></div><div style="height:12px;background:var(--muted);border-radius:4px;width:75%;animation:pulse 2s ease-in-out infinite"></div><div style="height:12px;background:var(--muted);border-radius:4px;width:50%;animation:pulse 2s ease-in-out infinite"></div></div><div style="display:flex;gap:8px;margin-top:12px"><div style="height:32px;flex:1;background:var(--muted);border-radius:6px;animation:pulse 2s ease-in-out infinite"></div><div style="height:32px;flex:1;background:var(--muted);border-radius:6px;animation:pulse 2s ease-in-out infinite"></div></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="64" data-name="How it works">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#64 · How it works</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">How it works</div></div><div class="cn-card-content"><div class="cn-steps"><div class="cn-step"><div class="cn-step-num">1</div><div class="cn-step-content"><div class="cn-step-title">Sign up</div><div class="cn-step-desc">Create your free account in seconds.</div></div></div><div class="cn-step"><div class="cn-step-num">2</div><div class="cn-step-content"><div class="cn-step-title">Connect</div><div class="cn-step-desc">Link your existing tools and services.</div></div></div><div class="cn-step"><div class="cn-step-num">3</div><div class="cn-step-content"><div class="cn-step-title">Deploy</div><div class="cn-step-desc">Push your code and we handle the rest.</div></div></div></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="63" data-name="Receiving Method">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#63 · Receiving Method</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Receiving Method</div><div class="cn-card-desc">Payout Preferences</div></div><div class="cn-card-content"><div class="cn-field"><label class="cn-label">Bank Name</label><input class="cn-input" value="Chase Bank"></div><div class="cn-field mt-2"><label class="cn-label">Account Number</label><input class="cn-input" value="····4521"></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-default cn-btn-sm">Save</button><button class="cn-btn cn-btn-ghost cn-btn-sm">Remove</button></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="52" data-name="Q2 Dividend Income">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#52 · Q2 Dividend Income</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Q2 Dividend Income</div><div class="cn-card-desc">Quarterly dividend payouts across your portfolio holdings.</div></div><div class="cn-card-content"><div class="cn-chart" style="height:160px"><div class="cn-bars"><div class="cn-bar" style="height:40%"></div><div class="cn-bar" style="height:65%"></div><div class="cn-bar" style="height:55%"></div><div class="cn-bar" style="height:80%"></div><div class="cn-bar" style="height:45%"></div><div class="cn-bar" style="height:70%"></div></div></div><div class="flex justify-between mt-2" style="padding:0 4px"><span class="text-xs text-muted">Jan</span><span class="text-xs text-muted">Feb</span><span class="text-xs text-muted">Mar</span><span class="text-xs text-muted">Apr</span><span class="text-xs text-muted">May</span><span class="text-xs text-muted">Jun</span></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-outline cn-btn-sm w-full">View Details</button></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="61" data-name="Scan to connect your mobile de">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#61 · Scan to connect your mobile de</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Scan to connect your mobile device</div><div class="cn-card-desc">Open the Ledger mobile app and scan this code to link your device.</div></div><div class="cn-card-content flex justify-center"><div style="background:#fff;border-radius:14px;padding:16px;border:1px solid var(--border)"><div class="cn-qr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/></svg></div></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-ghost cn-btn-sm w-full">Show Pairing Code</button></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="57" data-name="Savings Targets">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#57 · Savings Targets</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Savings Targets</div><div class="cn-card-desc">Active milestones for 2024</div></div><div class="cn-card-content"><div class="cn-item"><div class="cn-item-content"><div class="cn-item-title">Emergency Fund</div><div class="cn-progress" style="margin-top:4px"><div class="cn-progress-bar"><div class="cn-progress-fill" style="width:80%"></div></div></div></div><span class="text-xs text-muted">$12k/$15k</span></div><div class="cn-item"><div class="cn-item-content"><div class="cn-item-title">Vacation</div><div class="cn-progress" style="margin-top:4px"><div class="cn-progress-bar"><div class="cn-progress-fill" style="width:64%"></div></div></div></div><span class="text-xs text-muted">$3.2k/$5k</span></div><div class="cn-item"><div class="cn-item-content"><div class="cn-item-title">New Car</div><div class="cn-progress" style="margin-top:4px"><div class="cn-progress-bar"><div class="cn-progress-fill" style="width:28%"></div></div></div></div><span class="text-xs text-muted">$8.5k/$30k</span></div><div class="cn-item"><div class="cn-item-content"><div class="cn-item-title">Home Down Payment</div><div class="cn-progress" style="margin-top:4px"><div class="cn-progress-bar"><div class="cn-progress-fill" style="width:52%"></div></div></div></div><span class="text-xs text-muted">$42k/$80k</span></div><div class="cn-item"><div class="cn-item-content"><div class="cn-item-title">Wedding</div><div class="cn-progress" style="margin-top:4px"><div class="cn-progress-bar"><div class="cn-progress-fill" style="width:60%"></div></div></div></div><span class="text-xs text-muted">$15k/$25k</span></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-outline cn-btn-sm">View All Targets</button></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="26" data-name="Blog">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#26 · Blog</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Blog</div></div><div class="cn-card-content"><div class="cn-blog"><div class="cn-blog-image" style="background:linear-gradient(135deg,var(--muted),var(--primary))"></div><div class="cn-blog-meta"><span class="cn-blog-tag">Engineering</span><span class="cn-blog-date">May 28, 2026</span></div><div class="cn-blog-title">How we scaled to 10M requests per day</div><div class="cn-blog-excerpt">A deep dive into our architecture decisions and the lessons we learned along the way.</div></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="33" data-name="Living Room">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#33 · Living Room</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Living Room</div><div class="cn-card-desc">Roller Shades</div></div><div class="cn-card-content"><div class="cn-field"><div class="flex justify-between"><label class="cn-label">Position</label><span class="text-sm text-muted">65%</span></div><div class="cn-slider" style="margin-top:8px"><div class="cn-slider-track"><div class="cn-slider-range" style="width:65%"></div><div class="cn-slider-thumb" style="left:65%"></div></div></div></div><div class="flex justify-between items-center mt-2" style="padding:8px 0"><span class="text-sm">Auto Schedule</span><div class="cn-switch on"></div></div><div class="cn-toggle-group" style="margin-top:8px"><button class="cn-toggle on">Open</button><button class="cn-toggle">Half</button><button class="cn-toggle">Close</button></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="32" data-name="Getting Started">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#32 · Getting Started</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Getting Started</div></div><div class="cn-card-content"><div class="cn-onboard"><div class="cn-onboard-item"><div class="cn-onboard-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div class="cn-onboard-text">Create your account</div></div><div class="cn-onboard-item"><div class="cn-onboard-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div class="cn-onboard-text">Set up your workspace</div></div><div class="cn-onboard-item"><div class="cn-onboard-pending"></div><div class="cn-onboard-text">Connect your first integration</div></div><div class="cn-onboard-item"><div class="cn-onboard-pending"></div><div class="cn-onboard-text">Invite your team</div></div><div class="cn-onboard-item"><div class="cn-onboard-pending"></div><div class="cn-onboard-text">Deploy your first project</div></div></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="48" data-name="1 Apr">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#48 · 1 Apr</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">1 Apr</div><div class="cn-card-desc">Payment Due</div></div><div class="cn-card-content"><div class="flex justify-between"><span class="text-sm text-muted">Minimum Due</span><span class="text-sm font-medium">$25.00</span></div><div class="flex justify-between mt-1"><span class="text-sm text-muted">Statement Balance</span><span class="text-sm font-medium">$12.94</span></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-default cn-btn-sm">Pay Now</button></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="68" data-name="Card" style="padding:0">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#68 · Card</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div style="padding:12px 0"><div style="padding:0 16px;margin-bottom:8px"><span class="text-xs font-semibold text-muted" style="text-transform:uppercase;letter-spacing:0.05em">Overview</span></div><div style="display:flex;flex-direction:column;gap:1px"><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;background:var(--muted);color:var(--fg);font-weight:500"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>Dashboard</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Transactions</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Investments</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Accounts</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>Spending</div></div><div style="padding:0 16px;margin-top:16px;margin-bottom:8px"><span class="text-xs font-semibold text-muted" style="text-transform:uppercase;letter-spacing:0.05em">Planning</span></div><div style="display:flex;flex-direction:column;gap:1px"><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Goals</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>Budget</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>Reports</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg>Documents</div></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="20" data-name="System Status">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#20 · System Status</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">System Status</div></div><div class="cn-card-content"><div class="cn-status"><div class="cn-status-row"><div class="cn-status-dot green"></div><div class="cn-status-name">API</div><div class="cn-status-label">Operational</div></div><div class="cn-status-row"><div class="cn-status-dot green"></div><div class="cn-status-name">Dashboard</div><div class="cn-status-label">Operational</div></div><div class="cn-status-row"><div class="cn-status-dot yellow"></div><div class="cn-status-name">Webhooks</div><div class="cn-status-label">Degraded</div></div><div class="cn-status-row"><div class="cn-status-dot green"></div><div class="cn-status-name">CDN</div><div class="cn-status-label">Operational</div></div></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="65" data-name="Upcoming Payments">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#65 · Upcoming Payments</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Upcoming Payments</div><div class="cn-card-desc">Select a date to view scheduled payments.</div></div><div class="cn-card-content"><div class="cn-calendar"><div class="cn-calendar-header"><button><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><span>March 2025</span><button><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button></div><div class="cn-calendar-grid"><span class="day-name">Su</span><span class="day-name">Mo</span><span class="day-name">Tu</span><span class="day-name">We</span><span class="day-name">Th</span><span class="day-name">Fr</span><span class="day-name">Sa</span><span class="day" style="color:var(--muted-fg)">25</span><span class="day" style="color:var(--muted-fg)">26</span><span class="day" style="color:var(--muted-fg)">27</span><span class="day" style="color:var(--muted-fg)">28</span><span class="day">1</span><span class="day">2</span><span class="day">3</span><span class="day">4</span><span class="day">5</span><span class="day">6</span><span class="day">7</span><span class="day">8</span><span class="day">9</span><span class="day">10</span><span class="day today">11</span><span class="day">12</span><span class="day">13</span><span class="day selected">14</span><span class="day">15</span><span class="day">16</span><span class="day">17</span><span class="day">18</span><span class="day">19</span><span class="day">20</span><span class="day">21</span><span class="day">22</span><span class="day">23</span><span class="day">24</span><span class="day">25</span><span class="day">26</span><span class="day">27</span><span class="day">28</span><span class="day">29</span><span class="day">30</span><span class="day">31</span></div></div><div class="cn-sep"></div><div class="cn-item"><div class="cn-item-content"><div class="cn-item-title">Rent</div><div class="cn-item-desc">Mar 14 · Auto-pay</div></div><span class="text-sm font-medium">$1,200</span></div><div class="cn-item"><div class="cn-item-content"><div class="cn-item-title">Internet</div><div class="cn-item-desc">Mar 14 · Auto-pay</div></div><span class="text-sm font-medium">$79.99</span></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="47" data-name="Trust Badges">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#47 · Trust Badges</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-content"><div class="cn-trust"><div class="cn-trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>SOC 2</div><div class="cn-trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>GDPR</div><div class="cn-trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>ISO 27001</div><div class="cn-trust-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>HIPAA</div></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="05" data-name="Pro Pricing">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#05 · Pro Pricing</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-pricing"><span class="cn-pricing-badge">Most Popular</span><div class="cn-pricing-name">Pro</div><div class="cn-pricing-price">$49<span class="cn-pricing-period">/mo</span></div><div class="cn-pricing-features"><div class="cn-pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Unlimited projects</div><div class="cn-pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Priority support</div><div class="cn-pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Advanced analytics</div><div class="cn-pricing-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Custom domains</div></div><button class="cn-btn cn-btn-default w-full">Start Free Trial</button></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="34" data-name="Preferences">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#34 · Preferences</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Preferences</div><div class="cn-card-desc">Manage your account settings and notifications.</div></div><div class="cn-card-content"><div class="flex justify-between items-center" style="padding:8px 0"><span class="text-sm">Email Notifications</span><div class="cn-switch on"></div></div><div class="flex justify-between items-center" style="padding:8px 0"><span class="text-sm">Push Notifications</span><div class="cn-switch"></div></div><div class="flex justify-between items-center" style="padding:8px 0"><span class="text-sm">Auto-Reinvest</span><div class="cn-switch on"></div></div><div class="flex justify-between items-center" style="padding:8px 0"><span class="text-sm">Two-Factor Auth</span><div class="cn-switch on"></div></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-default cn-btn-sm">Save Preferences</button></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="53" data-name="Dollar-Cost Averaging">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#53 · Dollar-Cost Averaging</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Dollar-Cost Averaging</div><div class="cn-card-desc">A strategy for building wealth over time.</div></div><div class="cn-card-content"><p class="text-sm text-muted" style="line-height:1.6">By investing a fixed amount regularly, you buy more shares when prices are low and fewer when prices are high. Over time, this smooths out the average cost of your investments.</p></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="43" data-name="Transfer Funds">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#43 · Transfer Funds</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Transfer Funds</div><div class="cn-card-desc">Move money between your connected accounts.</div></div><div class="cn-card-content"><div class="cn-field"><label class="cn-label">From</label><select class="cn-select"><option selected>Checking ···4521</option><option>Savings ···7892</option></select></div><div class="cn-field mt-2"><label class="cn-label">To</label><select class="cn-select"><option>Savings ···7892</option><option selected>Investment ···3210</option></select></div><div class="cn-field mt-2"><label class="cn-label">Amount</label><input class="cn-input" placeholder="$0.00" value="$500.00"></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-default cn-btn-sm">Transfer</button></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="50" data-name="Chart">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#50 · Chart</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-content"><div class="cn-chart" style="height:200px"><div class="cn-bars"><div class="cn-bar" style="height:40%"></div><div class="cn-bar" style="height:65%"></div><div class="cn-bar" style="height:50%"></div><div class="cn-bar" style="height:75%"></div><div class="cn-bar" style="height:55%"></div></div></div><div class="flex justify-between mt-1" style="padding:0 4px"><span class="text-xs text-muted">Mon</span><span class="text-xs text-muted">Tue</span><span class="text-xs text-muted">Wed</span><span class="text-xs text-muted">Thu</span><span class="text-xs text-muted">Fri</span></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="41" data-name="Testimonial">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#41 · Testimonial</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-testimonial"><div class="cn-testimonial-quote">"This tool completely transformed our workflow. We shipped 3x faster in the first month."</div><div class="cn-testimonial-author"><div class="cn-testimonial-avatar">JD</div><div><div class="cn-testimonial-name">Jane Doe</div><div class="cn-testimonial-role">CTO, Acme Inc</div></div></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="13" data-name="Logo Cloud">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#13 · Logo Cloud</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-content"><div class="cn-logos"><span class="cn-logo">Vercel</span><span class="cn-logo">Linear</span><span class="cn-logo">Stripe</span><span class="cn-logo">Notion</span><span class="cn-logo">Figma</span><span class="cn-logo">GitHub</span></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="55" data-name="Chart">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#55 · Chart</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-content"><div class="cn-chart" style="height:180px"><div class="cn-bars"><div class="cn-bar" style="height:35%"></div><div class="cn-bar" style="height:60%"></div><div class="cn-bar" style="height:45%"></div><div class="cn-bar" style="height:70%"></div><div class="cn-bar" style="height:80%"></div><div class="cn-bar" style="height:50%"></div></div></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="35" data-name="Card" style="padding:0">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#35 · Card</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div style="padding:12px 0"><div style="padding:0 16px;margin-bottom:8px"><span class="text-xs font-semibold text-muted" style="text-transform:uppercase;letter-spacing:0.05em">Account</span></div><div style="display:flex;flex-direction:column;gap:1px"><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>Profile</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>Billing</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;background:var(--muted);color:var(--fg);font-weight:500"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>Notifications</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>Security</div><div style="display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;font-size:0.875rem;color:var(--muted-fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>Appearance</div></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="49" data-name="Social Links">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#49 · Social Links</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Social Links</div></div><div class="cn-card-content"><div class="cn-field"><label class="cn-label">Twitter</label><input class="cn-input" placeholder="https://twitter.com/..." value="https://twitter.com/alex"></div><div class="cn-field mt-2"><label class="cn-label">GitHub</label><input class="cn-input" placeholder="https://github.com/..." value="https://github.com/alex"></div><div class="cn-field mt-2"><label class="cn-label">LinkedIn</label><input class="cn-input" placeholder="https://linkedin.com/in/..."></div><div class="cn-field mt-2"><label class="cn-label">Website</label><input class="cn-input" placeholder="https://..."></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-default cn-btn-sm">Save Links</button><button class="cn-btn cn-btn-ghost cn-btn-sm">Cancel</button></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="73" data-name="Investment Guide">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#73 · Investment Guide</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Investment Guide</div></div><div class="cn-card-content"><div class="cn-tabs"><div class="cn-tab-list"><button class="cn-tab-item active">Overview</button><button class="cn-tab-item">Strategy</button><button class="cn-tab-item">Risk</button></div></div><div class="cn-accordion"><div class="cn-accordion-item"><button class="cn-accordion-trigger open"><span>What is compound interest?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button><div class="cn-accordion-content">Compound interest is interest on interest. It makes your money grow faster because you earn returns not just on your original investment, but on the accumulated interest as well.</div></div><div class="cn-accordion-item"><button class="cn-accordion-trigger"><span>How do I diversify?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button></div><div class="cn-accordion-item"><button class="cn-accordion-trigger"><span>When should I rebalance?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button></div></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="25" data-name="$0.00">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#25 · $0.00</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">$0.00</div><div class="cn-card-desc">Claimable Balance</div></div><div class="cn-card-content"><div class="cn-item"><div class="cn-item-content"><div class="cn-item-title">Net Royalties</div></div><span class="text-sm text-muted">$0.00</span></div><div class="cn-item"><div class="cn-item-content"><div class="cn-item-title">Processing Fee</div></div><span class="text-sm text-muted">-$0.00</span></div><div class="cn-sep"></div><div class="flex justify-between" style="padding:0 16px"><span class="text-sm font-medium">Total Ready to Claim</span><span class="text-sm font-medium">$0.00 USD</span></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-outline cn-btn-sm">Claim Now</button><button class="cn-btn cn-btn-ghost cn-btn-sm">History</button></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="69" data-name="Front Door">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#69 · Front Door</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Front Door</div><div class="cn-card-desc">Smart Lock Pro</div></div><div class="cn-card-content"><div class="cn-lock"><div class="cn-lock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div class="cn-lock-info"><div class="cn-lock-title">Unlocked</div><div class="cn-lock-desc">Last opened 2 min ago</div></div><span class="cn-badge cn-badge-default">Online</span></div><div class="cn-sep"></div><div class="flex justify-between items-center" style="padding:4px 0"><span class="text-sm">Auto-Lock</span><div class="cn-switch on"></div></div><div class="flex justify-between items-center" style="padding:4px 0"><span class="text-sm">Notifications</span><div class="cn-switch on"></div></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="76" data-name="Stock Performance">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#76 · Stock Performance</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Stock Performance</div><div class="cn-card-desc">6-month price history.</div></div><div class="cn-card-content"><div class="cn-chart" style="height:180px"><div class="cn-bars"><div class="cn-bar" style="height:45%"></div><div class="cn-bar" style="height:55%"></div><div class="cn-bar" style="height:65%"></div><div class="cn-bar" style="height:75%"></div><div class="cn-bar" style="height:85%"></div><div class="cn-bar" style="height:70%"></div></div></div><div class="flex justify-between mt-1" style="padding:0 4px"><span class="text-xs text-muted">Sep</span><span class="text-xs text-muted">Oct</span><span class="text-xs text-muted">Nov</span><span class="text-xs text-muted">Dec</span><span class="text-xs text-muted">Jan</span><span class="text-xs text-muted">Feb</span></div><div class="flex gap-3 mt-2"><div class="cn-field" style="flex:1"><label class="cn-label">Symbol</label><input class="cn-input" value="AAPL"></div><div class="cn-field" style="flex:1"><label class="cn-label">Period</label><select class="cn-select"><option>1M</option><option>3M</option><option selected>6M</option><option>1Y</option></select></div></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-outline cn-btn-sm">View Analysis</button></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="78" data-name="Notifications">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#78 · Notifications</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Notifications</div><div class="cn-card-desc">Choose what you want to be notified about.</div></div><div class="cn-card-content"><div class="flex items-center gap-3" style="padding:8px 0"><div class="cn-checkbox checked"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span class="text-sm">Everything</span></div><div class="flex items-center gap-3" style="padding:8px 0"><div class="cn-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span class="text-sm">Available</span></div><div class="flex items-center gap-3" style="padding:8px 0"><div class="cn-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span class="text-sm">Important</span></div><div class="flex items-center gap-3" style="padding:8px 0"><div class="cn-checkbox checked"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span class="text-sm">Mentions</span></div><div class="cn-sep"></div><div class="flex items-center gap-3" style="padding:8px 0"><div class="cn-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span class="text-sm">Security Alerts</span></div><div class="flex items-center gap-3" style="padding:8px 0"><div class="cn-checkbox checked"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span class="text-sm">Payment Reminders</span></div><div class="flex items-center gap-3" style="padding:8px 0"><div class="cn-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span class="text-sm">Weekly Summary</span></div><div class="flex items-center gap-3" style="padding:8px 0"><div class="cn-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><span class="text-sm">Marketing</span></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-default cn-btn-sm">Save Preferences</button></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="77" data-name="Account Access">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#77 · Account Access</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Account Access</div><div class="cn-card-desc">Update your credentials or re-authenticate.</div></div><div class="cn-card-content"><div class="cn-field"><label class="cn-label">Email</label><input class="cn-input" value="alex@example.com"></div><div class="cn-field mt-2"><label class="cn-label">Current Password</label><input class="cn-input" type="password" value="password123"></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-default cn-btn-sm">Update Credentials</button></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="67" data-name="US$12.94">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#67 · US$12.94</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title" style="font-size:1.5rem">US$12.94</div><div class="cn-card-desc">Card Balance</div></div><div class="cn-card-content"><div class="flex justify-between"><span class="text-sm text-muted">Available Credit</span><span class="text-sm font-medium">$3,987.06</span></div><div class="flex justify-between mt-1"><span class="text-sm text-muted">Pending</span><span class="text-sm font-medium">$0.00</span></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="39" data-name="Card">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#39 · Card</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-desc">Minimum 3000 × 3000px, JPEG or PNG only</div></div><div class="cn-card-content"><span class="text-xs text-muted" style="display:block;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;font-weight:500">Cover Art</span><div style="aspect-ratio:1;border:2px dashed var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:var(--muted)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--muted-fg)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-outline cn-btn-sm">Upload</button></div>
-</div>
- <div class="cn-card" data-width="1" draggable="true" data-id="24" data-name="Testimonial">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#24 · Testimonial</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-content"><div class="cn-testimonial" style="padding-bottom:12px"><div class="cn-testimonial-quote">"The best tool we've ever used. Our team's productivity increased by 40%."</div><div class="cn-testimonial-author"><div class="cn-testimonial-avatar">SK</div><div><div class="cn-testimonial-name">Sarah Kim</div><div class="cn-testimonial-role">VP Engineering, TechCorp</div></div></div></div><div class="cn-sep"></div><div class="cn-testimonial" style="padding-top:12px"><div class="cn-testimonial-quote">"Game changer for our startup. We couldn't imagine going back."</div><div class="cn-testimonial-author"><div class="cn-testimonial-avatar">MR</div><div><div class="cn-testimonial-name">Mike Ross</div><div class="cn-testimonial-role">Founder, StartupXYZ</div></div></div></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="75" data-name="Buy Investment">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#75 · Buy Investment</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Buy Investment</div><div class="cn-card-desc">Trades are typically executed within minutes during market hours.</div></div><div class="cn-card-content"><div class="flex gap-3"><div class="cn-field" style="flex:1"><label class="cn-label">Symbol</label><input class="cn-input" placeholder="AAPL" value="AAPL"></div><div class="cn-field" style="flex:1"><label class="cn-label">Amount</label><input class="cn-input" placeholder="$0.00" value="$1,000.00"></div></div><div class="flex gap-3 mt-2"><div class="cn-field" style="flex:1"><label class="cn-label">Order Type</label><select class="cn-select"><option selected>Market</option><option>Limit</option><option>Stop</option></select></div><div class="cn-field" style="flex:1"><label class="cn-label">Duration</label><select class="cn-select"><option selected>Day</option><option>GTC</option></select></div></div></div><div class="cn-card-footer"><button class="cn-btn cn-btn-default cn-btn-sm">Review Order</button></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="15" data-name="Stats">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#15 · Stats</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-content"><div class="cn-stats"><div class="cn-stat"><div class="cn-stat-value">10K+</div><div class="cn-stat-label">Teams</div></div><div class="cn-stat"><div class="cn-stat-value">99.9%</div><div class="cn-stat-label">Uptime</div></div><div class="cn-stat"><div class="cn-stat-value">50M+</div><div class="cn-stat-label">Requests/day</div></div><div class="cn-stat"><div class="cn-stat-value">4.9★</div><div class="cn-stat-label">Rating</div></div></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="70" data-name="Power Usage">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#70 · Power Usage</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Power Usage</div><div class="cn-card-desc">Whole Home</div></div><div class="cn-card-content"><div class="cn-chart" style="height:180px"><div class="cn-bars"><div class="cn-bar" style="height:30%"></div><div class="cn-bar" style="height:45%"></div><div class="cn-bar" style="height:60%"></div><div class="cn-bar" style="height:55%"></div><div class="cn-bar" style="height:70%"></div><div class="cn-bar" style="height:65%"></div><div class="cn-bar" style="height:50%"></div><div class="cn-bar" style="height:80%"></div><div class="cn-bar" style="height:75%"></div><div class="cn-bar" style="height:40%"></div><div class="cn-bar" style="height:55%"></div><div class="cn-bar" style="height:60%"></div></div></div><div class="flex justify-between mt-1" style="padding:0 4px"><span class="text-xs text-muted">Jan</span><span class="text-xs text-muted">Feb</span><span class="text-xs text-muted">Mar</span><span class="text-xs text-muted">Apr</span><span class="text-xs text-muted">May</span><span class="text-xs text-muted">Jun</span><span class="text-xs text-muted">Jul</span><span class="text-xs text-muted">Aug</span><span class="text-xs text-muted">Sep</span><span class="text-xs text-muted">Oct</span><span class="text-xs text-muted">Nov</span><span class="text-xs text-muted">Dec</span></div><div class="cn-sep"></div><div class="flex justify-between items-center"><span class="text-sm">This Month</span><span class="text-sm font-medium">342 kWh</span></div><div class="cn-progress" style="margin-top:8px"><div class="cn-progress-bar"><div class="cn-progress-fill" style="width:68%"></div></div></div><div class="flex justify-between mt-1"><span class="text-xs text-muted">68% of budget</span><span class="text-xs text-muted">500 kWh</span></div></div>
-</div>
-<div class="cn-card" data-width="1" draggable="true" data-id="62" data-name="Yearly Activity">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#62 · Yearly Activity</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Yearly Activity</div></div><div class="cn-card-content"><div class="cn-heatmap"><div class="cn-heat-cell" style="background:var(--primary);opacity:0.1"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.2"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.3"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.5"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.7"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.4"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.2"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.6"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.8"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.3"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.5"></div><div class="cn-heat-cell" style="background:var(--primary);opacity:0.9"></div></div><span class="cn-badge cn-badge-secondary mt-2">+12% from last year</span></div>
-</div>
-<div class="cn-card" data-id="23" data-width="1" draggable="true" data-name="Kitchen Island">
-<div class="cn-card-tag">
-  <span class="drag-handle">⠿</span>
-  <span class="card-id-label">#23 · Kitchen Island</span>
-  <button class="width-toggle">2x</button>
-</div>
-<div class="cn-card-header"><div class="cn-card-title">Kitchen Island</div><div class="cn-card-desc">Hue Color Ambient</div></div><div class="cn-card-content"><div class="flex justify-between items-center" style="padding:8px 0"><span class="text-sm">Power</span><div class="cn-switch on"></div></div><div class="cn-field mt-2"><div class="flex justify-between"><label class="cn-label">Brightness</label><span class="text-sm text-muted">80%</span></div><div class="cn-slider" style="margin-top:8px"><div class="cn-slider-track"><div class="cn-slider-range" style="width:80%"></div><div class="cn-slider-thumb" style="left:80%"></div></div></div></div><div class="flex justify-between items-center mt-2" style="padding:8px 0"><span class="text-sm">Adaptive Lighting</span><div class="cn-switch"></div></div><div class="cn-sep"></div><span class="text-sm text-muted" style="display:block;margin-bottom:8px">Scenes</span><div class="cn-toggle-group"><button class="cn-toggle on">Cooking</button><button class="cn-toggle">Dining</button><button class="cn-toggle">Nightlight</button><button class="cn-toggle">Focus</button></div></div>
-</div>
-</div>
-
-<script>
-// Data
-const PALETTES = [{"bg":"oklch(1 0 0)","fg":"oklch(0.145 0 0)","card":"oklch(1 0 0)","cardFg":"oklch(0.145 0 0)","muted":"oklch(0.97 0 0)","mutedFg":"oklch(0.556 0 0)","primary":"oklch(0.205 0 0)","primaryFg":"oklch(0.985 0 0)","secondary":"oklch(0.97 0 0)","secondaryFg":"oklch(0.205 0 0)","border":"oklch(0.922 0 0)","input":"oklch(0.922 0 0)","destructive":"oklch(0.577 0.245 27.3)","radius":"0.625rem","bw":"1px","shadow":"0 1px 2px rgba(0,0,0,0.05)","ls":0,"fw":500,"fs":"0.875rem","tfs":"1rem","dark":false,"name":"Minimal"},{"bg":"oklch(0.08 0.005 260)","fg":"oklch(0.97 0.005 260)","card":"oklch(0.11 0.008 260)","cardFg":"oklch(0.97 0.005 260)","muted":"oklch(0.18 0.01 260)","mutedFg":"oklch(0.55 0.01 260)","primary":"oklch(0.6 0.15 270)","primaryFg":"oklch(0.98 0 0)","secondary":"oklch(0.18 0.01 260)","secondaryFg":"oklch(0.6 0.15 270)","border":"oklch(0.22 0.015 260)","input":"oklch(0.22 0.015 260)","destructive":"oklch(0.6 0.2 25)","radius":"6px","bw":"1px","shadow":"0px 2px 4px rgba(0,0,0,0.1), 0px 4px 24px rgba(0,0,0,0.2)","ls":"-0.02em","fw":510,"fs":"0.9375rem","tfs":"1.3rem","dark":true,"name":"Linear"},{"bg":"oklch(0.96 0.01 65)","fg":"oklch(0.18 0.01 30)","card":"oklch(0.98 0.006 65)","cardFg":"oklch(0.18 0.01 30)","muted":"oklch(0.92 0.015 65)","mutedFg":"oklch(0.45 0.01 40)","primary":"oklch(0.45 0.12 30)","primaryFg":"oklch(0.98 0.006 65)","secondary":"oklch(0.92 0.015 65)","secondaryFg":"oklch(0.45 0.12 30)","border":"oklch(0.85 0.02 60)","input":"oklch(0.85 0.02 60)","destructive":"oklch(0.55 0.2 25)","radius":"0.75rem","bw":"1px","shadow":"0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03)","ls":"-0.01em","fw":400,"fs":"0.95rem","tfs":"1.35rem","dark":false,"name":"Floema"},{"bg":"oklch(0.12 0.02 60)","fg":"oklch(0.92 0.08 80)","card":"oklch(0.16 0.025 60)","cardFg":"oklch(0.92 0.08 80)","muted":"oklch(0.22 0.04 60)","mutedFg":"oklch(0.6 0.06 70)","primary":"oklch(0.78 0.14 85)","primaryFg":"oklch(0.12 0.02 60)","secondary":"oklch(0.22 0.04 60)","secondaryFg":"oklch(0.78 0.14 85)","border":"oklch(0.78 0.14 85)","input":"oklch(0.78 0.14 85)","destructive":"oklch(0.6 0.25 20)","radius":"0px","bw":"2px","shadow":"inset 0 0 0 1px oklch(0.78 0.14 85 / 0.3), 0 0 30px oklch(0.78 0.14 85 / 0.15)","ls":"0.12em","fw":600,"fs":"0.85rem","tfs":"1.2rem","dark":true,"name":"Art Deco"},{"bg":"oklch(0.96 0.02 350)","fg":"oklch(0.12 0.03 350)","card":"oklch(1 0.012 350)","cardFg":"oklch(0.12 0.03 350)","muted":"oklch(0.92 0.025 350)","mutedFg":"oklch(0.4 0.02 350)","primary":"oklch(0.55 0.25 355)","primaryFg":"oklch(1 0 0)","secondary":"oklch(0.92 0.025 350)","secondaryFg":"oklch(0.55 0.25 355)","border":"oklch(0.12 0.03 350)","input":"oklch(0.12 0.03 350)","destructive":"oklch(0.5 0.28 25)","radius":"1.5rem","bw":"4px","shadow":"8px 8px 0 0 oklch(0.55 0.25 355), -4px -4px 0 0 oklch(0.7 0.2 60)","ls":0,"fw":800,"fs":"1rem","tfs":"1.4rem","dark":false,"name":"Bubblegum"},{"bg":"oklch(0.1 0.03 280)","fg":"oklch(0.95 0.02 330)","card":"oklch(0.14 0.04 280)","cardFg":"oklch(0.95 0.02 330)","muted":"oklch(0.2 0.05 280)","mutedFg":"oklch(0.6 0.04 310)","primary":"oklch(0.75 0.22 340)","primaryFg":"oklch(0.1 0.03 280)","secondary":"oklch(0.2 0.05 280)","secondaryFg":"oklch(0.75 0.22 340)","border":"oklch(0.5 0.2 340)","input":"oklch(0.5 0.2 340)","destructive":"oklch(0.7 0.22 30)","radius":"0.5rem","bw":"2px","shadow":"0 0 20px oklch(0.75 0.22 340 / 0.4), 0 0 60px oklch(0.7 0.2 280 / 0.15)","ls":"0.06em","fw":600,"fs":"0.85rem","tfs":"1.1rem","dark":true,"name":"Synthwave"},{"bg":"oklch(0.98 0 0)","fg":"oklch(0.09 0 0)","card":"oklch(1 0 0)","cardFg":"oklch(0.09 0 0)","muted":"oklch(0.97 0 0)","mutedFg":"oklch(0.7 0 0)","primary":"oklch(0.55 0.15 155)","primaryFg":"oklch(0.98 0 0)","secondary":"oklch(0.97 0 0)","secondaryFg":"oklch(0.55 0.15 155)","border":"oklch(0.875 0 0)","input":"oklch(0.875 0 0)","destructive":"oklch(0.6 0.22 25)","radius":"8px","bw":"1px","shadow":"0 1px 3px rgba(0,0,0,0.06)","ls":0,"fw":400,"fs":"0.875rem","tfs":"1.1rem","dark":false,"name":"Supabase"},{"bg":"oklch(0.06 0 0)","fg":"oklch(0.98 0 0)","card":"oklch(0.1 0 0)","cardFg":"oklch(0.98 0 0)","muted":"oklch(0.16 0 0)","mutedFg":"oklch(0.55 0 0)","primary":"oklch(0.98 0 0)","primaryFg":"oklch(0.06 0 0)","secondary":"oklch(0.16 0 0)","secondaryFg":"oklch(0.98 0 0)","border":"oklch(0.25 0 0)","input":"oklch(0.25 0 0)","destructive":"oklch(0.65 0.25 25)","radius":"0px","bw":"2px","shadow":"none","ls":"0.08em","fw":600,"fs":"0.85rem","tfs":"1.1rem","dark":true,"name":"Obys"},{"bg":"oklch(0.94 0.012 70)","fg":"oklch(0.2 0.015 50)","card":"oklch(0.96 0.01 70)","cardFg":"oklch(0.2 0.015 50)","muted":"oklch(0.9 0.015 70)","mutedFg":"oklch(0.45 0.015 50)","primary":"oklch(0.45 0.08 50)","primaryFg":"oklch(0.96 0.01 70)","secondary":"oklch(0.9 0.015 70)","secondaryFg":"oklch(0.45 0.08 50)","border":"oklch(0.8 0.02 50)","input":"oklch(0.8 0.02 50)","destructive":"oklch(0.5 0.15 25)","radius":"0.25rem","bw":"1px","shadow":"2px 2px 0 0 oklch(0.8 0.02 50)","ls":"0.02em","fw":400,"fs":"0.95rem","tfs":"1.05rem","dark":false,"name":"Wabi-Sabi"},{"bg":"oklch(0.08 0.01 10)","fg":"oklch(0.88 0.02 10)","card":"oklch(0.12 0.015 10)","cardFg":"oklch(0.88 0.02 10)","muted":"oklch(0.18 0.02 10)","mutedFg":"oklch(0.55 0.02 10)","primary":"oklch(0.55 0.22 15)","primaryFg":"oklch(0.95 0 0)","secondary":"oklch(0.18 0.02 10)","secondaryFg":"oklch(0.55 0.22 15)","border":"oklch(0.35 0.04 10)","input":"oklch(0.35 0.04 10)","destructive":"oklch(0.65 0.28 20)","radius":"0.25rem","bw":"2px","shadow":"0 6px 20px rgba(0,0,0,0.6)","ls":"0.06em","fw":600,"fs":"0.9rem","tfs":"1.25rem","dark":true,"name":"Gothic"},{"bg":"oklch(0.97 0.005 60)","fg":"oklch(0.08 0 0)","card":"oklch(1 0.005 60)","cardFg":"oklch(0.08 0 0)","muted":"oklch(0.94 0.01 60)","mutedFg":"oklch(0.3 0 0)","primary":"oklch(0.55 0.25 25)","primaryFg":"oklch(1 0 0)","secondary":"oklch(0.94 0.01 60)","secondaryFg":"oklch(0.55 0.25 25)","border":"oklch(0.08 0 0)","input":"oklch(0.08 0 0)","destructive":"oklch(0.55 0.25 25)","radius":"0px","bw":"4px","shadow":"none","ls":0,"fw":700,"fs":"0.9rem","tfs":"1.2rem","dark":false,"name":"Mondrian"},{"bg":"oklch(0.97 0.015 70)","fg":"oklch(0.25 0.035 50)","card":"oklch(0.99 0.008 70)","cardFg":"oklch(0.25 0.035 50)","muted":"oklch(0.93 0.015 70)","mutedFg":"oklch(0.45 0.03 50)","primary":"oklch(0.5 0.15 30)","primaryFg":"oklch(0.98 0 0)","secondary":"oklch(0.93 0.015 70)","secondaryFg":"oklch(0.5 0.15 30)","border":"oklch(0.85 0.025 60)","input":"oklch(0.85 0.025 60)","destructive":"oklch(0.55 0.2 25)","radius":"1.25rem","bw":"1px","shadow":"0 4px 16px rgba(120,80,50,0.08), 0 8px 32px rgba(120,80,50,0.04)","ls":"0.03em","fw":500,"fs":"0.95rem","tfs":"1.2rem","dark":false,"name":"Storybook"},{"bg":"oklch(0.9 0.06 230)","fg":"oklch(0.2 0.02 250)","card":"oklch(1 0 0)","cardFg":"oklch(0.2 0.02 250)","muted":"oklch(0.93 0.03 230)","mutedFg":"oklch(0.45 0.03 250)","primary":"oklch(0.55 0.25 25)","primaryFg":"oklch(1 0 0)","secondary":"oklch(0.93 0.03 230)","secondaryFg":"oklch(0.55 0.25 25)","border":"oklch(0.6 0.18 240)","input":"oklch(0.6 0.18 240)","destructive":"oklch(0.5 0.25 25)","radius":"1.5rem","bw":"3px","shadow":"6px 6px 0 0 oklch(0.2 0.02 250 / 0.1)","ls":0,"fw":700,"fs":"0.9rem","tfs":"1.3rem","dark":false,"name":"Playground"},{"bg":"oklch(0.92 0.025 80)","fg":"oklch(0.15 0.01 30)","card":"oklch(0.98 0.01 80)","cardFg":"oklch(0.15 0.01 30)","muted":"oklch(0.9 0.02 75)","mutedFg":"oklch(0.4 0.03 50)","primary":"oklch(0.55 0.18 250)","primaryFg":"oklch(0.98 0 0)","secondary":"oklch(0.9 0.02 75)","secondaryFg":"oklch(0.55 0.18 250)","border":"oklch(0.3 0.04 50)","input":"oklch(0.3 0.04 50)","destructive":"oklch(0.55 0.2 25)","radius":"0.25rem","bw":"4px","shadow":"4px 4px 0 0 oklch(0.3 0.04 50 / 0.15)","ls":"0.05em","fw":700,"fs":"0.9rem","tfs":"1.25rem","dark":false,"name":"Crayon"},{"bg":"oklch(0.1 0.02 260)","fg":"oklch(0.95 0.01 70)","card":"oklch(0.15 0.02 260)","cardFg":"oklch(0.95 0.01 70)","muted":"oklch(0.2 0.02 260)","mutedFg":"oklch(0.6 0.01 270)","primary":"oklch(0.7 0.12 80)","primaryFg":"oklch(0.1 0.02 260)","secondary":"oklch(0.2 0.02 260)","secondaryFg":"oklch(0.7 0.12 80)","border":"oklch(0.7 0.12 80)","input":"oklch(0.7 0.12 80)","destructive":"oklch(0.6 0.22 25)","radius":"1rem","bw":"2px","shadow":"0 4px 20px rgba(0,0,0,0.4)","ls":"0.02em","fw":500,"fs":"0.9rem","tfs":"1.15rem","dark":true,"name":"Bedtime"},{"bg":"oklch(0.965 0.03 140)","fg":"oklch(0.12 0.03 130)","card":"oklch(1 0 0)","cardFg":"oklch(0.12 0.03 130)","muted":"oklch(0.92 0.05 140)","mutedFg":"oklch(0.45 0.05 140)","primary":"oklch(0.65 0.22 145)","primaryFg":"oklch(1 0 0)","secondary":"oklch(0.92 0.05 140)","secondaryFg":"oklch(0.65 0.22 145)","border":"oklch(0.53 0.18 145)","input":"oklch(0.92 0.05 140)","destructive":"oklch(0.58 0.25 25)","radius":"1rem","bw":"3px","shadow":"0 6px 0 oklch(0.53 0.18 145), 0 8px 24px oklch(0 0 0 / 0.1)","btnShadow":"0 calc(var(--bw)*2) 0 color-mix(in oklab, var(--primary) 55%, black)","btnShadowActive":"0 calc(var(--bw)*0.5px) 0 color-mix(in oklab, var(--primary) 55%, black)","btnPressY":"calc(var(--bw)*1.5px)","ls":"0.02em","fw":700,"fs":"0.95rem","tfs":"1.35rem","dark":false,"name":"Duo Green"},{"bg":"oklch(0.965 0.04 0)","fg":"oklch(0.12 0.03 350)","card":"oklch(1 0 0)","cardFg":"oklch(0.12 0.03 350)","muted":"oklch(0.92 0.06 0)","mutedFg":"oklch(0.45 0.06 350)","primary":"oklch(0.62 0.26 5)","primaryFg":"oklch(1 0 0)","secondary":"oklch(0.92 0.06 0)","secondaryFg":"oklch(0.62 0.26 5)","border":"oklch(0.5 0.22 5)","input":"oklch(0.92 0.06 0)","destructive":"oklch(0.58 0.25 25)","radius":"0.875rem","bw":"3px","shadow":"0 6px 0 oklch(0.5 0.22 5), 0 8px 24px oklch(0 0 0 / 0.1)","btnShadow":"0 calc(var(--bw)*2) 0 color-mix(in oklab, var(--primary) 55%, black)","btnShadowActive":"0 calc(var(--bw)*0.5px) 0 color-mix(in oklab, var(--primary) 55%, black)","btnPressY":"calc(var(--bw)*1.5px)","ls":"0.02em","fw":700,"fs":"0.95rem","tfs":"1.3rem","dark":false,"name":"Candy Pink"},{"bg":"oklch(0.97 0.04 90)","fg":"oklch(0.12 0.03 80)","card":"oklch(1 0 0)","cardFg":"oklch(0.12 0.03 80)","muted":"oklch(0.93 0.05 90)","mutedFg":"oklch(0.45 0.05 85)","primary":"oklch(0.7 0.2 85)","primaryFg":"oklch(0.12 0.03 80)","secondary":"oklch(0.93 0.05 90)","secondaryFg":"oklch(0.7 0.2 85)","border":"oklch(0.58 0.18 85)","input":"oklch(0.93 0.05 90)","destructive":"oklch(0.58 0.25 25)","radius":"1rem","bw":"3px","shadow":"0 6px 0 oklch(0.58 0.18 85), 0 8px 24px oklch(0 0 0 / 0.1)","ls":"0.03em","fw":700,"fs":"0.95rem","tfs":"1.3rem","dark":false,"name":"Sunny Yellow"},{"bg":"oklch(0.96 0.03 230)","fg":"oklch(0.12 0.02 240)","card":"oklch(1 0 0)","cardFg":"oklch(0.12 0.02 240)","muted":"oklch(0.92 0.04 230)","mutedFg":"oklch(0.45 0.04 240)","primary":"oklch(0.6 0.2 255)","primaryFg":"oklch(1 0 0)","secondary":"oklch(0.92 0.04 230)","secondaryFg":"oklch(0.6 0.2 255)","border":"oklch(0.48 0.18 255)","input":"oklch(0.92 0.04 230)","destructive":"oklch(0.58 0.25 25)","radius":"1rem","bw":"3px","shadow":"0 6px 0 oklch(0.48 0.18 255), 0 8px 24px oklch(0 0 0 / 0.1)","btnShadow":"0 calc(var(--bw)*2) 0 color-mix(in oklab, var(--primary) 55%, black)","btnShadowActive":"0 calc(var(--bw)*0.5px) 0 color-mix(in oklab, var(--primary) 55%, black)","btnPressY":"calc(var(--bw)*1.5px)","ls":"0em","fw":700,"fs":"0.95rem","tfs":"1.3rem","dark":false,"name":"Ocean Blue"},{"bg":"oklch(0.96 0.04 50)","fg":"oklch(0.12 0.03 40)","card":"oklch(1 0 0)","cardFg":"oklch(0.12 0.03 40)","muted":"oklch(0.92 0.05 50)","mutedFg":"oklch(0.45 0.05 45)","primary":"oklch(0.65 0.22 45)","primaryFg":"oklch(1 0 0)","secondary":"oklch(0.92 0.05 50)","secondaryFg":"oklch(0.65 0.22 45)","border":"oklch(0.53 0.18 45)","input":"oklch(0.92 0.05 50)","destructive":"oklch(0.58 0.25 25)","radius":"0.875rem","bw":"3px","shadow":"0 6px 0 oklch(0.53 0.18 45), 0 8px 24px oklch(0 0 0 / 0.1)","btnShadow":"0 calc(var(--bw)*2) 0 color-mix(in oklab, var(--primary) 55%, black)","btnShadowActive":"0 calc(var(--bw)*0.5px) 0 color-mix(in oklab, var(--primary) 55%, black)","btnPressY":"calc(var(--bw)*1.5px)","ls":"0.02em","fw":700,"fs":"0.95rem","tfs":"1.3rem","dark":false,"name":"Lava Orange"},{"bg":"oklch(0.96 0.04 300)","fg":"oklch(0.12 0.03 310)","card":"oklch(1 0 0)","cardFg":"oklch(0.12 0.03 310)","muted":"oklch(0.92 0.05 300)","mutedFg":"oklch(0.45 0.05 310)","primary":"oklch(0.6 0.22 310)","primaryFg":"oklch(1 0 0)","secondary":"oklch(0.92 0.05 300)","secondaryFg":"oklch(0.6 0.22 310)","border":"oklch(0.48 0.18 310)","input":"oklch(0.92 0.05 300)","destructive":"oklch(0.58 0.25 25)","radius":"1rem","bw":"3px","shadow":"0 6px 0 oklch(0.48 0.18 310), 0 8px 24px oklch(0 0 0 / 0.1)","btnShadow":"0 calc(var(--bw)*2) 0 color-mix(in oklab, var(--primary) 55%, black)","btnShadowActive":"0 calc(var(--bw)*0.5px) 0 color-mix(in oklab, var(--primary) 55%, black)","btnPressY":"calc(var(--bw)*1.5px)","ls":"0.02em","fw":700,"fs":"0.95rem","tfs":"1.3rem","dark":false,"name":"Berry Purple"},{"bg":"oklch(0.965 0.03 170)","fg":"oklch(0.12 0.03 165)","card":"oklch(1 0 0)","cardFg":"oklch(0.12 0.03 165)","muted":"oklch(0.93 0.04 170)","mutedFg":"oklch(0.45 0.04 165)","primary":"oklch(0.65 0.18 175)","primaryFg":"oklch(1 0 0)","secondary":"oklch(0.93 0.04 170)","secondaryFg":"oklch(0.65 0.18 175)","border":"oklch(0.53 0.16 175)","input":"oklch(0.93 0.04 170)","destructive":"oklch(0.58 0.25 25)","radius":"1rem","bw":"3px","shadow":"0 6px 0 oklch(0.53 0.16 175), 0 8px 24px oklch(0 0 0 / 0.1)","ls":"0.02em","fw":700,"fs":"0.95rem","tfs":"1.3rem","dark":false,"name":"Mint Fresh"},{"bg":"oklch(0.965 0.04 20)","fg":"oklch(0.12 0.03 15)","card":"oklch(1 0 0)","cardFg":"oklch(0.12 0.03 15)","muted":"oklch(0.92 0.05 20)","mutedFg":"oklch(0.45 0.05 15)","primary":"oklch(0.62 0.24 25)","primaryFg":"oklch(1 0 0)","secondary":"oklch(0.92 0.05 20)","secondaryFg":"oklch(0.62 0.24 25)","border":"oklch(0.5 0.2 25)","input":"oklch(0.92 0.05 20)","destructive":"oklch(0.58 0.25 25)","radius":"0.875rem","bw":"3px","shadow":"0 6px 0 oklch(0.5 0.2 25), 0 8px 24px oklch(0 0 0 / 0.1)","ls":"0.02em","fw":700,"fs":"0.95rem","tfs":"1.3rem","dark":false,"name":"Coral Reef"},{"bg":"oklch(0.97 0.04 75)","fg":"oklch(0.12 0.03 70)","card":"oklch(1 0 0)","cardFg":"oklch(0.12 0.03 70)","muted":"oklch(0.93 0.05 75)","mutedFg":"oklch(0.45 0.05 70)","primary":"oklch(0.7 0.2 75)","primaryFg":"oklch(0.12 0.03 70)","secondary":"oklch(0.93 0.05 75)","secondaryFg":"oklch(0.7 0.2 75)","border":"oklch(0.58 0.18 75)","input":"oklch(0.93 0.05 75)","destructive":"oklch(0.58 0.25 25)","radius":"0.875rem","bw":"3px","shadow":"0 6px 0 oklch(0.58 0.18 75), 0 8px 24px oklch(0 0 0 / 0.1)","ls":"0.03em","fw":700,"fs":"0.95rem","tfs":"1.35rem","dark":false,"name":"Gold Medal"},{"bg":"oklch(0.965 0.04 290)","fg":"oklch(0.12 0.03 280)","card":"oklch(1 0 0)","cardFg":"oklch(0.12 0.03 280)","muted":"oklch(0.92 0.05 290)","mutedFg":"oklch(0.45 0.05 280)","primary":"oklch(0.6 0.22 280)","primaryFg":"oklch(1 0 0)","secondary":"oklch(0.92 0.05 290)","secondaryFg":"oklch(0.6 0.22 280)","border":"oklch(0.48 0.18 280)","input":"oklch(0.92 0.05 290)","destructive":"oklch(0.58 0.25 25)","radius":"1rem","bw":"4px","shadow":"0 8px 0 oklch(0.48 0.18 280), 0 10px 28px oklch(0 0 0 / 0.1)","btnShadow":"0 calc(var(--bw)*2) 0 color-mix(in oklab, var(--primary) 55%, black)","btnShadowActive":"0 calc(var(--bw)*0.5px) 0 color-mix(in oklab, var(--primary) 55%, black)","btnPressY":"calc(var(--bw)*1.5px)","ls":"0.02em","fw":700,"fs":"0.95rem","tfs":"1.3rem","dark":false,"name":"Rainbow Magic"}];
-const PATTERNS = {"light":[{"img":"none","size":"auto","card":"none","cardSize":"auto"},{"img":"radial-gradient(circle, rgba(0,0,0,0.08) 1px, transparent 1px)","size":"20px 20px","card":"radial-gradient(circle, rgba(0,0,0,0.04) 1px, transparent 1px)","cardSize":"20px 20px"},{"img":"radial-gradient(circle, rgba(0,0,0,0.06) 1.5px, transparent 1.5px)","size":"32px 32px","card":"radial-gradient(circle, rgba(0,0,0,0.03) 1.5px, transparent 1.5px)","cardSize":"32px 32px"},{"img":"radial-gradient(circle, rgba(0,0,0,0.05) 2px, transparent 2px)","size":"48px 48px","card":"radial-gradient(circle, rgba(0,0,0,0.025) 2px, transparent 2px)","cardSize":"48px 48px"},{"img":"repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(0,0,0,0.05) 19px, rgba(0,0,0,0.05) 20px)","size":"auto","card":"repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(0,0,0,0.025) 19px, rgba(0,0,0,0.025) 20px)","cardSize":"auto"},{"img":"repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(0,0,0,0.05) 19px, rgba(0,0,0,0.05) 20px)","size":"auto","card":"repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(0,0,0,0.025) 19px, rgba(0,0,0,0.025) 20px)","cardSize":"auto"},{"img":"repeating-linear-gradient(45deg, transparent, transparent 9px, rgba(0,0,0,0.04) 9px, rgba(0,0,0,0.04) 10px)","size":"auto","card":"repeating-linear-gradient(45deg, transparent, transparent 9px, rgba(0,0,0,0.02) 9px, rgba(0,0,0,0.02) 10px)","cardSize":"auto"},{"img":"linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)","size":"40px 40px","card":"linear-gradient(rgba(0,0,0,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.015) 1px, transparent 1px)","cardSize":"40px 40px"},{"img":"linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px)","size":"20px 20px","card":"linear-gradient(rgba(0,0,0,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.025) 1px, transparent 1px)","cardSize":"20px 20px"},{"img":"conic-gradient(rgba(0,0,0,0.03) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.03) 75%)","size":"20px 20px","card":"conic-gradient(rgba(0,0,0,0.015) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.015) 75%)","cardSize":"20px 20px"},{"img":"linear-gradient(135deg, rgba(0,0,0,0.03) 25%, transparent 25%), linear-gradient(225deg, rgba(0,0,0,0.03) 25%, transparent 25%)","size":"20px 20px","card":"linear-gradient(135deg, rgba(0,0,0,0.015) 25%, transparent 25%), linear-gradient(225deg, rgba(0,0,0,0.015) 25%, transparent 25%)","cardSize":"20px 20px"},{"img":"radial-gradient(circle, transparent 30%, rgba(0,0,0,0.03) 30%, rgba(0,0,0,0.03) 31%, transparent 31%)","size":"60px 60px","card":"radial-gradient(circle, transparent 30%, rgba(0,0,0,0.015) 30%, rgba(0,0,0,0.015) 31%, transparent 31%)","cardSize":"60px 60px"},{"img":"repeating-linear-gradient(45deg, transparent, transparent 19px, rgba(0,0,0,0.06) 19px, rgba(0,0,0,0.06) 20px)","size":"auto","card":"repeating-linear-gradient(45deg, transparent, transparent 19px, rgba(0,0,0,0.03) 19px, rgba(0,0,0,0.03) 20px)","cardSize":"auto"},{"img":"radial-gradient(at 20% 80%, rgba(168,85,247,0.08) 0%, transparent 50%), radial-gradient(at 80% 20%, rgba(99,102,241,0.08) 0%, transparent 50%)","size":"auto","card":"radial-gradient(at 20% 80%, rgba(168,85,247,0.04) 0%, transparent 50%), radial-gradient(at 80% 20%, rgba(99,102,241,0.04) 0%, transparent 50%)","cardSize":"auto"},{"img":"radial-gradient(circle at 25% 25%, rgba(99,102,241,0.06) 0%, transparent 40%), radial-gradient(circle at 75% 75%, rgba(168,85,247,0.05) 0%, transparent 40%)","size":"auto","card":"radial-gradient(circle at 25% 25%, rgba(99,102,241,0.03) 0%, transparent 40%), radial-gradient(circle at 75% 75%, rgba(168,85,247,0.025) 0%, transparent 40%)","cardSize":"auto"},{"img":"linear-gradient(45deg, rgba(0,0,0,0.03) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.03) 75%), linear-gradient(45deg, rgba(0,0,0,0.03) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.03) 75%)","size":"10px 10px","card":"linear-gradient(45deg, rgba(0,0,0,0.015) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.015) 75%), linear-gradient(45deg, rgba(0,0,0,0.015) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.015) 75%)","cardSize":"10px 10px"},{"img":"radial-gradient(circle, rgba(99,102,241,0.12) 2px, transparent 2px)","size":"24px 24px","card":"radial-gradient(circle, rgba(99,102,241,0.06) 2px, transparent 2px)","cardSize":"24px 24px"},{"img":"radial-gradient(circle, rgba(0,0,0,0.04) 1px, transparent 1px), radial-gradient(circle, rgba(0,0,0,0.03) 1px, transparent 1px)","size":"20px 20px","card":"radial-gradient(circle, rgba(0,0,0,0.02) 1px, transparent 1px)","cardSize":"20px 20px"}],"dark":[{"img":"none","size":"auto","card":"none","cardSize":"auto"},{"img":"radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px)","size":"24px 24px","card":"radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)","cardSize":"24px 24px"},{"img":"radial-gradient(circle, rgba(255,255,255,0.06) 1.5px, transparent 1.5px)","size":"32px 32px","card":"radial-gradient(circle, rgba(255,255,255,0.03) 1.5px, transparent 1.5px)","cardSize":"32px 32px"},{"img":"radial-gradient(circle, rgba(255,255,255,0.05) 2px, transparent 2px)","size":"48px 48px","card":"radial-gradient(circle, rgba(255,255,255,0.025) 2px, transparent 2px)","cardSize":"48px 48px"},{"img":"repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(255,255,255,0.06) 19px, rgba(255,255,255,0.06) 20px)","size":"auto","card":"repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(255,255,255,0.03) 19px, rgba(255,255,255,0.03) 20px)","cardSize":"auto"},{"img":"repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(255,255,255,0.06) 19px, rgba(255,255,255,0.06) 20px)","size":"auto","card":"repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(255,255,255,0.03) 19px, rgba(255,255,255,0.03) 20px)","cardSize":"auto"},{"img":"repeating-linear-gradient(45deg, transparent, transparent 9px, rgba(255,255,255,0.04) 9px, rgba(255,255,255,0.04) 10px)","size":"auto","card":"repeating-linear-gradient(45deg, transparent, transparent 9px, rgba(255,255,255,0.02) 9px, rgba(255,255,255,0.02) 10px)","cardSize":"auto"},{"img":"linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)","size":"40px 40px","card":"linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)","cardSize":"40px 40px"},{"img":"linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)","size":"20px 20px","card":"linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)","cardSize":"20px 20px"},{"img":"conic-gradient(rgba(255,255,255,0.04) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.04) 75%)","size":"20px 20px","card":"conic-gradient(rgba(255,255,255,0.02) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.02) 75%)","cardSize":"20px 20px"},{"img":"linear-gradient(135deg, rgba(255,255,255,0.04) 25%, transparent 25%), linear-gradient(225deg, rgba(255,255,255,0.04) 25%, transparent 25%)","size":"20px 20px","card":"linear-gradient(135deg, rgba(255,255,255,0.02) 25%, transparent 25%), linear-gradient(225deg, rgba(255,255,255,0.02) 25%, transparent 25%)","cardSize":"20px 20px"},{"img":"radial-gradient(circle, transparent 30%, rgba(255,255,255,0.04) 30%, rgba(255,255,255,0.04) 31%, transparent 31%)","size":"60px 60px","card":"radial-gradient(circle, transparent 30%, rgba(255,255,255,0.02) 30%, rgba(255,255,255,0.02) 31%, transparent 31%)","cardSize":"60px 60px"},{"img":"repeating-linear-gradient(45deg, transparent, transparent 19px, rgba(255,255,255,0.06) 19px, rgba(255,255,255,0.06) 20px)","size":"auto","card":"repeating-linear-gradient(45deg, transparent, transparent 19px, rgba(255,255,255,0.03) 19px, rgba(255,255,255,0.03) 20px)","cardSize":"auto"},{"img":"radial-gradient(at 20% 80%, rgba(168,85,247,0.12) 0%, transparent 50%), radial-gradient(at 80% 20%, rgba(99,102,241,0.12) 0%, transparent 50%)","size":"auto","card":"radial-gradient(at 20% 80%, rgba(168,85,247,0.06) 0%, transparent 50%), radial-gradient(at 80% 20%, rgba(99,102,241,0.06) 0%, transparent 50%)","cardSize":"auto"},{"img":"radial-gradient(circle at 25% 25%, rgba(99,102,241,0.1) 0%, transparent 40%), radial-gradient(circle at 75% 75%, rgba(168,85,247,0.08) 0%, transparent 40%)","size":"auto","card":"radial-gradient(circle at 25% 25%, rgba(99,102,241,0.05) 0%, transparent 40%), radial-gradient(circle at 75% 75%, rgba(168,85,247,0.04) 0%, transparent 40%)","cardSize":"auto"},{"img":"linear-gradient(45deg, rgba(255,255,255,0.04) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.04) 75%), linear-gradient(45deg, rgba(255,255,255,0.04) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.04) 75%)","size":"10px 10px","card":"linear-gradient(45deg, rgba(255,255,255,0.02) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.02) 75%), linear-gradient(45deg, rgba(255,255,255,0.02) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.02) 75%)","cardSize":"10px 10px"},{"img":"radial-gradient(circle, rgba(168,85,247,0.15) 2px, transparent 2px)","size":"24px 24px","card":"radial-gradient(circle, rgba(168,85,247,0.08) 2px, transparent 2px)","cardSize":"24px 24px"},{"img":"radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px), radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)","size":"20px 20px","card":"radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px)","cardSize":"20px 20px"},{"img":"repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(255,255,255,0.03) 4px, rgba(255,255,255,0.03) 5px)","size":"auto","card":"repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(255,255,255,0.015) 4px, rgba(255,255,255,0.015) 5px)","cardSize":"auto"},{"img":"linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)","size":"60px 60px","card":"linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)","cardSize":"60px 60px"}]};
-</script>
-<script src="/assets/app.js?v=2"></script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UnBoring - UI inspiration for less boring AI interfaces</title>
+    <link rel="canonical" href="https://unboring.openagent.bot/" />
+    <link rel="stylesheet" href="/assets/styles.css?v=20260528a" />
+    <link rel="icon" href="/favicon.svg" />
+    <meta name="description" content="UnBoring is a free open-source UI inspiration library with previews, AI prompts, negative prompts, and structured tokens for less boring AI-generated interfaces." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="UnBoring" />
+    <meta property="og:title" content="UnBoring - UI inspiration for less boring AI interfaces" />
+    <meta property="og:description" content="UnBoring is a free open-source UI inspiration library with previews, AI prompts, negative prompts, and structured tokens for less boring AI-generated interfaces." />
+    <meta property="og:url" content="https://unboring.openagent.bot/" />
+    <meta property="og:image" content="https://unboring.openagent.bot/og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="UnBoring - UI inspiration for less boring AI interfaces" />
+    <meta name="twitter:description" content="UnBoring is a free open-source UI inspiration library with previews, AI prompts, negative prompts, and structured tokens for less boring AI-generated interfaces." />
+    <meta name="twitter:image" content="https://unboring.openagent.bot/og-image.svg" />
+    
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand mono" href="/">UnBoring</a>
+        <div class="nav-links mono">
+          <a href="/motion/">Motion</a><a href="/components/">Components</a><a href="/interactions/">Interactions</a><a href="/styles/">Styles</a><a href="/effects/">Effects</a>
+        </div>
+      </nav>
+    </header>
+    
+    <main class="page">
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <div class="hero-meta mono" data-left="// unboring.openagent.bot&#10;// open source ui inspiration" data-right="mcp / cli ready" aria-hidden="true"><span class="hero-rule"></span></div>
+          <p class="eyebrow mono">AI-generated UI is too boring. Give it better taste vocabulary.</p>
+          <h1 id="page-title">UnBoring</h1>
+          <p class="subtitle">A browseable library of UI ideas, motion details, component patterns, interaction moments, AI prompts, negative prompts, and structured tokens.</p>
+          <div class="actions" aria-label="Page actions"><a class="button primary" href="#browse">Start browsing</a><a class="button" href="/agent/">MCP / CLI plan</a></div>
+        </div>
+      </section>
+      <section class="dark-section" aria-labelledby="why-title">
+        <div class="intro"><h2 id="why-title">Steal the idea. Keep the taste.</h2><p>UnBoring turns visual taste into reusable design language. Browse small UI ideas first. Open details when you want the exact prompt, negative prompt, and tokens to recreate the behavior without generic template sludge.</p></div>
+      </section>
+      <section class="dark-section" aria-labelledby="shelves-title">
+        <div class="grid-heading"><div><h2 id="shelves-title">Browse by shelf</h2><p>Lightweight categories. The feed below is where the library starts to feel explorable.</p></div></div>
+        <div class="category-strip"><a class="category-chip mono" href="/motion/">Motion<span>35 demos</span></a><a class="category-chip mono" href="/components/">Components<span>51 demos</span></a><a class="category-chip mono" href="/interactions/">Interactions<span>85 demos</span></a><a class="category-chip mono" href="/styles/">Styles<span>27 demos</span></a><a class="category-chip mono" href="/effects/">Effects<span>63 demos</span></a><a class="category-chip mono" href="/agent/">Agent-ready<span>format</span></a></div>
+      </section>
+      <section class="dark-section" id="browse" aria-labelledby="feed-title">
+        <div class="grid-heading"><div><h2 id="feed-title">Idea feed</h2><p>A masonry-style feed for wandering. Every card opens a full prompt and token detail page.</p></div></div>
+        <div class="masonry-grid">
+  <a class="idea-card" href="/motion/calm-staggered-fade-up/">
+    <div class="preview" aria-label="Calm Staggered Fade Up preview"><div aria-hidden="true"><div class="sm-stagger"><div class="sm-stagger-card"><div class="sm-stagger-title">Dashboard loaded</div><div class="sm-stagger-desc">3 new updates since your last visit</div><div class="sm-stagger-bar"><div class="sm-stagger-bar-fill"></div></div></div><div class="sm-stagger-card"><div class="sm-stagger-title">Projects synced</div><div class="sm-stagger-desc">All team workspaces are up to date</div><div class="sm-stagger-bar"><div class="sm-stagger-bar-fill"></div></div></div><div class="sm-stagger-card"><div class="sm-stagger-title">Notifications</div><div class="sm-stagger-desc">2 items need your attention</div><div class="sm-stagger-bar"><div class="sm-stagger-bar-fill"></div></div></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Motion</span>
+      <h3>Calm Staggered Fade Up</h3>
+      <p class="purpose">Reveal grouped content with a quiet, structured rhythm.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/components/button/">
+    <div class="preview" aria-label="Button preview"><div aria-hidden="true"><div class="sc-row"><button class="sc-btn sc-btn-default">Button</button><button class="sc-btn sc-btn-outline">Outline</button><button class="sc-btn sc-btn-ghost">Ghost</button><button class="sc-btn sc-btn-destructive">Destructive</button></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Components</span>
+      <h3>Button</h3>
+      <p class="purpose">Trigger a primary or secondary action with a clear hierarchy.</p>
+      <div class="component-card-meta"><span>Actions</span><span>button</span><span>ready</span></div>
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/copy-confirmation/">
+    <div class="preview" aria-label="Copy Confirmation preview"><div aria-hidden="true"><div class="sc-copy-demo"><span class="sc-copy-text">npm install shadcn</span><button class="sc-copy-btn sc-copied"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></button></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Copy Confirmation</h3>
+      <p class="purpose">Confirm copy without interrupting the workflow.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/styles/editorial-utility/">
+    <div class="preview" aria-label="Editorial Utility preview"><div aria-hidden="true"><div class="demo-object demo-style"><span>Editorial Utility</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Styles</span>
+      <h3>Editorial Utility</h3>
+      <p class="purpose">Dense app layouts with quieter typography and strong hierarchy.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/effects/border-beam/">
+    <div class="preview" aria-label="Border Beam preview"><div aria-hidden="true"><div class="preview-border-beam" style="width:80%;height:80px;display:grid;place-items:center;background:var(--dark-bg)"><span style="font-size:0.82rem;color:var(--muted-fg)">Hover to see effect</span></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Effects</span>
+      <h3>Border Beam</h3>
+      <p class="purpose">An animated beam of light that traces the border of an element.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/motion/soft-hover-lift/">
+    <div class="preview" aria-label="Soft Hover Lift preview"><div aria-hidden="true"><div class="sm-hover-lift"><div class="sm-lift-card"><div class="sm-lift-card-title">Design Review</div><div class="sm-lift-card-desc">Finalize the component library and update design tokens</div><div class="sm-lift-card-meta"><span>3 comments</span><span>Updated 2h ago</span></div></div><div class="sm-lift-card"><div class="sm-lift-card-title">API Integration</div><div class="sm-lift-card-desc">Connect the new endpoints and test error handling</div><div class="sm-lift-card-meta"><span>In progress</span><span>Due tomorrow</span></div></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Motion</span>
+      <h3>Soft Hover Lift</h3>
+      <p class="purpose">Make clickable cards feel tactile without becoming flashy.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/components/icon-button/">
+    <div class="preview" aria-label="Icon Button preview"><div aria-hidden="true"><div class="sc-row"><button class="sc-btn sc-btn-outline" style="width:36px;padding:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg></button><button class="sc-btn sc-btn-outline" style="width:36px;padding:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button><button class="sc-btn sc-btn-outline" style="width:36px;padding:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Components</span>
+      <h3>Icon Button</h3>
+      <p class="purpose">Compress a frequent action into a square target with an accessible label.</p>
+      <div class="component-card-meta"><span>Actions</span><span>button</span><span>ready</span></div>
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/undo-bar/">
+    <div class="preview" aria-label="Undo Bar preview"><div aria-hidden="true"><div class="toast-wrap"><div class="toast"><strong>Done</strong><span>Undo Bar</span></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Undo Bar</h3>
+      <p class="purpose">Offer a short undo path after a destructive action.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/styles/mono-workbench/">
+    <div class="preview" aria-label="Mono Workbench preview"><div aria-hidden="true"><div class="demo-object demo-code"><span>Mono Workbench</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Styles</span>
+      <h3>Mono Workbench</h3>
+      <p class="purpose">Developer surfaces that feel technical without terminal cosplay.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/effects/shine-border/">
+    <div class="preview" aria-label="Shine Border preview"><div aria-hidden="true"><div class="preview-shine-border" style="width:80%;height:80px;display:grid;place-items:center;background:var(--dark-bg);border:1px solid var(--border)"><span style="font-size:0.82rem;color:var(--muted-fg)">Shine effect</span></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Effects</span>
+      <h3>Shine Border</h3>
+      <p class="purpose">A rotating shine that sweeps around element borders.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/motion/snappy-button-press/">
+    <div class="preview" aria-label="Snappy Button Press preview"><div aria-hidden="true"><div class="sm-press"><button class="sm-press-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>Save changes</button><div class="sm-press-hint">Click to feel the press</div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Motion</span>
+      <h3>Snappy Button Press</h3>
+      <p class="purpose">Give commands immediate physical feedback.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/components/split-button/">
+    <div class="preview" aria-label="Split Button preview"><div aria-hidden="true"><div class="sc-row"><div style="display:flex"><button class="sc-btn sc-btn-default" style="border-radius:6px 0 0 6px">Save</button><button class="sc-btn sc-btn-default" style="border-radius:0 6px 6px 0;border-left:1px solid rgba(255,255,255,0.2);padding:0 8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Components</span>
+      <h3>Split Button</h3>
+      <p class="purpose">Pair a default action with a secondary menu without crowding the toolbar.</p>
+      <div class="component-card-meta"><span>Actions</span><span>button + dropdown-menu</span><span>ready</span></div>
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/optimistic-save/">
+    <div class="preview" aria-label="Optimistic Save preview"><div aria-hidden="true"><div class="demo-object demo-pulse"><span>Optimistic Save</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Optimistic Save</h3>
+      <p class="purpose">Show a local saved state before background sync settles.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/styles/warm-minimal/">
+    <div class="preview" aria-label="Warm Minimal preview"><div aria-hidden="true"><div class="demo-object demo-style"><span>Warm Minimal</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Styles</span>
+      <h3>Warm Minimal</h3>
+      <p class="purpose">Neutral product screens with soft contrast and precise spacing.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/effects/animated-beam/">
+    <div class="preview" aria-label="Animated Beam preview"><div aria-hidden="true"><div class="preview-animated-beam" style="width:90%;height:80px;position:relative"><svg width="100%" height="100%" viewBox="0 0 200 80"><circle cx="20" cy="40" r="8" fill="var(--dark-bg)" stroke="var(--border)" stroke-width="1.5"/><circle cx="180" cy="40" r="8" fill="var(--dark-bg)" stroke="var(--border)" stroke-width="1.5"/><path class="beam-path" d="M28 40 C60 20 140 60 172 40" fill="none" stroke="#667eea" stroke-width="2"/></svg></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Effects</span>
+      <h3>Animated Beam</h3>
+      <p class="purpose">A light beam that travels along a path between two points.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/motion/command-menu-reveal/">
+    <div class="preview" aria-label="Command Menu Reveal preview"><div aria-hidden="true"><div class="sm-cmd-reveal"><div class="sm-cmd-bar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><span>Search commands...</span></div><div class="sm-cmd-items"><div class="sm-cmd-row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>Calendar<kbd>⌘J</kbd></div><div class="sm-cmd-row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Search Users<kbd>⌘K</kbd></div><div class="sm-cmd-row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Calculator<kbd>⌘L</kbd></div></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Motion</span>
+      <h3>Command Menu Reveal</h3>
+      <p class="purpose">Open command surfaces with fast, centered focus.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/components/command-button/">
+    <div class="preview" aria-label="Command Button preview"><div aria-hidden="true"><div class="sc-row"><button class="sc-btn sc-btn-outline"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>Open Command</button></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Components</span>
+      <h3>Command Button</h3>
+      <p class="purpose">Open an action or command with a label that feels deliberate and system-like.</p>
+      <div class="component-card-meta"><span>Actions</span><span>button</span><span>ready</span></div>
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/inline-validation/">
+    <div class="preview" aria-label="Inline Validation preview"><div aria-hidden="true"><div class="demo-object demo-focus"><span>Inline Validation</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Inline Validation</h3>
+      <p class="purpose">Explain a form problem beside the field.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/styles/sharp-monochrome/">
+    <div class="preview" aria-label="Sharp Monochrome preview"><div aria-hidden="true"><div class="demo-object demo-style"><span>Sharp Monochrome</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Styles</span>
+      <h3>Sharp Monochrome</h3>
+      <p class="purpose">Black, white, and gray layouts with clear weight shifts.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/effects/orbiting-circles/">
+    <div class="preview" aria-label="Orbiting Circles preview"><div aria-hidden="true"><div class="preview-orbiting-circles" style="width:80px;height:80px;position:relative"><div style="position:absolute;top:50%;left:50%;width:12px;height:12px;margin:-6px;border-radius:50%;background:var(--fg);opacity:0.3"></div><div class="orbit-item"></div><div class="orbit-item"></div><div class="orbit-item"></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Effects</span>
+      <h3>Orbiting Circles</h3>
+      <p class="purpose">Circles that orbit around a center point in a solar-system pattern.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/motion/accordion-expand/">
+    <div class="preview" aria-label="Accordion Expand preview"><div aria-hidden="true"><div class="sm-accordion"><div class="sm-acc-item sm-open"><button class="sm-acc-trigger"><span>Shipping details</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button><div class="sm-acc-content"><p class="sm-acc-text">Free shipping on orders over $50. Standard delivery takes 3-5 business days. Express shipping available at checkout.</p></div></div><div class="sm-acc-item"><button class="sm-acc-trigger"><span>Return policy</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button><div class="sm-acc-content"><p class="sm-acc-text">Returns accepted within 30 days of purchase. Items must be unused and in original packaging.</p></div></div><div class="sm-acc-item"><button class="sm-acc-trigger"><span>Warranty</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button><div class="sm-acc-content"><p class="sm-acc-text">All products come with a 2-year manufacturer warranty covering defects.</p></div></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Motion</span>
+      <h3>Accordion Expand</h3>
+      <p class="purpose">Reveal hidden content without a jarring layout jump.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/components/card/">
+    <div class="preview" aria-label="Card preview"><div aria-hidden="true"><div class="sc-card"><div class="sc-card-header"><div class="sc-card-title">Login to your account</div><div class="sc-card-desc">Enter your email below to login</div></div><div class="sc-card-body"><div class="sc-field"><label class="sc-label">Email</label><input class="sc-input" placeholder="m@example.com" readonly /></div><div class="sc-field"><label class="sc-label">Password</label><input class="sc-input" type="password" value="password" readonly /></div></div><div class="sc-card-footer"><button class="sc-btn sc-btn-default sc-btn-full">Login</button></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Components</span>
+      <h3>Card</h3>
+      <p class="purpose">Group related information and action affordances in a scannable surface.</p>
+      <div class="component-card-meta"><span>Surfaces</span><span>card</span><span>ready</span></div>
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/command-loading-state/">
+    <div class="preview" aria-label="Command Loading State preview"><div aria-hidden="true"><div class="command-panel refined-command"><div class="command-input"></div><div class="command-row"></div><div class="command-row"></div><div class="command-row compact-row"></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Command Loading State</h3>
+      <p class="purpose">Keep a command surface useful while work runs.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/styles/quiet-dashboard/">
+    <div class="preview" aria-label="Quiet Dashboard preview"><div aria-hidden="true"><div class="demo-object demo-table"><span>Quiet Dashboard</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Styles</span>
+      <h3>Quiet Dashboard</h3>
+      <p class="purpose">Operational UI that favors scanning over decoration.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/effects/particles/">
+    <div class="preview" aria-label="Particles preview"><div aria-hidden="true"><div class="preview-particles" style="width:90%;height:100px;border-radius:8px;background:var(--dark-bg)"><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Effects</span>
+      <h3>Particles</h3>
+      <p class="purpose">Floating particles that drift gently across the background.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/motion/toast-slide-in/">
+    <div class="preview" aria-label="Toast Slide In preview"><div aria-hidden="true"><div class="sm-toast-wrap"><div class="sm-toast"><div class="sm-toast-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg></div><div class="sm-toast-body"><div class="sm-toast-title">Changes saved</div><div class="sm-toast-desc">Your profile has been updated successfully.</div></div><div class="sm-toast-close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Motion</span>
+      <h3>Toast Slide In</h3>
+      <p class="purpose">Show feedback without interrupting the main task.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/components/command-card/">
+    <div class="preview" aria-label="Command Card preview"><div aria-hidden="true"><div class="hover-card refined-hover-card"><span class="mini-line"></span><span class="mini-line short"></span><span class="refined-corner"></span></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Components</span>
+      <h3>Command Card</h3>
+      <p class="purpose">Make a clickable card behave like a focused command surface.</p>
+      <div class="component-card-meta"><span>Surfaces</span><span>card</span><span>ready</span></div>
+    </div>
+  </a>
+  <a class="idea-card" href="/interactions/drag-reorder-cue/">
+    <div class="preview" aria-label="Drag Reorder Cue preview"><div aria-hidden="true"><div class="demo-object demo-list"><span>Drag Reorder Cue</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Interactions</span>
+      <h3>Drag Reorder Cue</h3>
+      <p class="purpose">Show where an item will land while dragging.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/styles/document-native/">
+    <div class="preview" aria-label="Document Native preview"><div aria-hidden="true"><div class="demo-object demo-receipt"><span>Document Native</span><i></i><i></i><i></i></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Styles</span>
+      <h3>Document Native</h3>
+      <p class="purpose">Interfaces that borrow restraint from docs and notes.</p>
+      
+    </div>
+  </a>
+  <a class="idea-card" href="/effects/confetti/">
+    <div class="preview" aria-label="Confetti preview"><div aria-hidden="true"><div class="preview-confetti" style="width:90%;height:100px;border-radius:8px;background:var(--dark-bg)"><div class="confetti-piece"></div><div class="confetti-piece"></div><div class="confetti-piece"></div><div class="confetti-piece"></div></div></div></div>
+    <div class="card-copy">
+      <span class="card-kicker mono">Effects</span>
+      <h3>Confetti</h3>
+      <p class="purpose">Celebration confetti that bursts and falls with physics.</p>
+      
+    </div>
+  </a></div>
+      </section>
+      <section class="callout" aria-labelledby="agents-title"><div><h2 id="agents-title">Built for humans. Ready for agents.</h2><p>The visible site is for browsing. The structure is for later export: stable ids, categories, prompts, negative prompts, and JSON tokens that can become an MCP resource, CLI search result, or prompt pack.</p></div><a class="button" href="/agent/">MCP / CLI plan</a></section>
+    </main>
+    
+    <footer class="site-footer">
+      <div class="page footer-grid">
+        <div><h3 class="mono">UnBoring</h3><p>Less boring UI language for humans and agents.</p></div>
+        <div><h3 class="mono">Library</h3><a href="/motion/">Motion</a><a href="/components/">Components</a><a href="/interactions/">Interactions</a><a href="/styles/">Styles</a><a href="/effects/">Effects</a></div>
+        <div><h3 class="mono">Machine-readable</h3><a href="/agent/">MCP ready</a><a href="/agent/">CLI planned</a></div>
+        <div><h3 class="mono">Open source</h3><a href="/agent/">Contribute ideas</a><a href="/motion/">Browse patterns</a></div>
+      </div>
+    </footer>
+    <script src="/assets/app.js?v=20260528a"></script>
+  </body>
 </html>
