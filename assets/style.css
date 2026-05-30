@@ -149,8 +149,6 @@ body.dragging *{pointer-events:none}
 .sidebar-footer a:hover{color:var(--ui-text)}
 
 /* ── Game化 Prompt Builder ── */
-.pw-header{font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--ui-text-dim);margin-bottom:8px;display:flex;align-items:center;gap:6px}
-.pw-header::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--ui-border),transparent)}
 .pw-sentence{font-size:0.88rem;line-height:2;color:var(--ui-text);padding:16px;background:linear-gradient(135deg,var(--ui-bg) 0%,color-mix(in srgb,var(--ui-surface)50%,var(--ui-bg)) 100%);border:1px solid rgba(255,255,255,0.06);border-radius:12px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.04)}
 .pw-sentence-text{white-space:normal;word-break:break-word}
 .pw-sentence-prefix{color:var(--ui-text-dim);font-style:italic}

@@ -1,0 +1,9 @@
+{
+  "pid": 35500,
+  "port": 40889,
+  "token": "9c27cd62-0722-46ab-8af6-6a2ef715c3d4",
+  "startedAt": "2026-05-30T05:59:44.620Z",
+  "serverPath": "/Users/boyangxie/.claude/skills/gstack/browse/src/server.ts",
+  "mode": "launched",
+  "configHash": "303a7eeccc03078b"
+}

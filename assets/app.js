@@ -287,8 +287,7 @@ function renderSentence(opts) {
   const sb = document.getElementById('sidebar');
   const animate = opts.animate !== false;
 
-  let html = '<div class="pw-header"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1v2M8 13v2M1 8h2m10 0h2"/><circle cx="8" cy="8" r="3"/></svg>Design Prompt</div>';
-  html += '<div class="pw-sentence" id="pw-sentence">';
+  let html = '<div class="pw-sentence" id="pw-sentence">';
   html += '<div class="pw-sentence-text">';
   html += '<span class="pw-sentence-prefix">I want a UI with </span>';
 
@@ -317,7 +316,11 @@ function renderSentence(opts) {
 
     if (i < activeParams.length - 1) {
       if (i === activeParams.length - 2) {
-        html += '<span class="pw-comma">, </span><span class="pw-and">and </span>';
+        if (activeParams.length === 2) {
+          html += '<span class="pw-and"> and </span>';
+        } else {
+          html += '<span class="pw-comma">, </span><span class="pw-and">and </span>';
+        }
       } else {
         html += '<span class="pw-comma">, </span>';
       }
