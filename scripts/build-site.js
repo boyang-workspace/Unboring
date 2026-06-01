@@ -4,7 +4,7 @@ const path = require("node:path");
 const site = "https://unboring.openagent.bot";
 const assetVersion = "20260601d";
 const lastmod = "2026-06-01";
-const socialImage = `${site}/og-image.svg`;
+const socialImage = `${site}/og-image.png`;
 
 const categories = [
   {
@@ -1226,6 +1226,8 @@ const shell = ({ title, description, canonical, current, body, scripts = true, j
     <meta property="og:description" content="${escapeHtml(description)}" />
     <meta property="og:url" content="${canonical}" />
     <meta property="og:image" content="${socialImage}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="675" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(title)}" />
     <meta name="twitter:description" content="${escapeHtml(description)}" />
