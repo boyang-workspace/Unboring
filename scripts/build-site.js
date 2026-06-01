@@ -2,7 +2,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const site = "https://unboring.openagent.bot";
-const assetVersion = "20260601d";
+const assetVersion = "20260601e";
 const lastmod = "2026-06-01";
 const socialImage = `${site}/og-image.png`;
 
