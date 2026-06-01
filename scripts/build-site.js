@@ -2,7 +2,8 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const site = "https://unboring.openagent.bot";
-const assetVersion = "20260528a";
+const assetVersion = "20260601a";
+const lastmod = "2026-06-01";
 const socialImage = `${site}/og-image.svg`;
 
 const categories = [
@@ -1207,10 +1208,16 @@ const shell = ({ title, description, canonical, current, body, scripts = true, j
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>${escapeHtml(title)}</title>
     <link rel="canonical" href="${canonical}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Bebas+Neue&family=Caveat:wght@400;700&family=DM+Serif+Display&family=Fredoka:wght@400;600;700&family=Orbitron:wght@400;700&family=Oswald:wght@400;700&family=Permanent+Marker&family=Playfair+Display:wght@400;700&family=Press+Start+2P&family=Righteous&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/assets/styles.css?v=${assetVersion}" />
     <link rel="icon" href="/favicon.svg" />
     <meta name="description" content="${escapeHtml(description)}" />
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#c8ff3d" />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="UnBoring" />
     <meta property="og:title" content="${escapeHtml(title)}" />
     <meta property="og:description" content="${escapeHtml(description)}" />
@@ -1220,6 +1227,18 @@ const shell = ({ title, description, canonical, current, body, scripts = true, j
     <meta name="twitter:title" content="${escapeHtml(title)}" />
     <meta name="twitter:description" content="${escapeHtml(description)}" />
     <meta name="twitter:image" content="${socialImage}" />
+    <script type="application/ld+json">${JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: title,
+      description,
+      url: canonical,
+      isPartOf: {
+        "@type": "WebSite",
+        name: "UnBoring",
+        url: site,
+      },
+    })}</script>
     ${jsonLd}
   </head>
   <body>
@@ -1508,7 +1527,7 @@ const homePage = () => {
   return shell({
     title: "UnBoring - UI inspiration for less boring AI interfaces",
     description:
-      "UnBoring is a free open-source UI inspiration library with previews, AI prompts, negative prompts, and structured tokens for less boring AI-generated interfaces.",
+      "UnBoring is a free open-source UI inspiration library with previews, AI prompts, negative prompts, and structured tokens for AI-generated interfaces.",
     canonical: `${site}/inspire/`,
     current: "",
     body: `
@@ -1557,6 +1576,7 @@ const write = (file, content) => {
 };
 
 categories.forEach((category) => fs.rmSync(category.slug, { recursive: true, force: true }));
+["surfaces", "text-effects", "backgrounds", "canvas"].forEach((slug) => fs.rmSync(slug, { recursive: true, force: true }));
 fs.rmSync("agent", { recursive: true, force: true });
 
 write("inspire/index.html", homePage());
@@ -1574,10 +1594,19 @@ const urls = [
 write(
   "sitemap.xml",
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls
-    .map((url) => `  <url>\n    <loc>${url}</loc>\n    <lastmod>2026-05-26</lastmod>\n  </url>`)
+    .map((url) => `  <url>\n    <loc>${url}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`)
     .join("\n")}\n</urlset>\n`,
 );
 
 write("robots.txt", `User-agent: *\nAllow: /\n\nSitemap: ${site}/sitemap.xml\n`);
+write("_redirects", `/surfaces/ /interactions/ 301
+/surfaces/* /interactions/ 301
+/text-effects/ /effects/ 301
+/text-effects/* /effects/ 301
+/backgrounds/ /effects/ 301
+/backgrounds/* /effects/ 301
+/canvas/ / 301
+/canvas/* / 301
+`);
 
 console.log(`Generated ${entries.length} entries across ${categories.length} categories.`);

@@ -60,6 +60,8 @@ body.dragging *{pointer-events:none}
 #header .brand-icon{width:18px;height:18px;color:rgba(255,255,255,0.5);transition:transform 0.4s cubic-bezier(.16,1,.3,1)}
 #header:hover .brand-icon{transform:rotate(180deg) scale(1.1)}
 #header .brand-text{font-weight:700;font-size:1.1rem;letter-spacing:-0.02em;color:var(--ui-text);font-family:'Fredoka','Inter',system-ui,sans-serif}
+#header .brand-text .bl,
+.brand .bl{display:inline-block;min-width:.42em;text-align:center;transform-origin:50% 50%;will-change:transform,font-family}
 #header .actions{display:flex;gap:8px;align-items:center}
 .h-btn{height:32px;padding:0 16px;border-radius:100px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:var(--ui-text);font-size:0.75rem;font-weight:600;font-family:'Inter',system-ui,sans-serif;cursor:pointer;transition:all 0.2s;white-space:nowrap;letter-spacing:0.01em}
 .h-btn:hover{border-color:rgba(255,255,255,0.25);background:rgba(255,255,255,0.08);color:#fff;transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,0.2)}
@@ -195,6 +197,24 @@ body.dragging *{pointer-events:none}
 .pw-surprise-btn{padding:10px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.06);color:var(--ui-text);font-size:0.82rem;font-weight:600;font-family:inherit;cursor:pointer;transition:all 0.2s}
 .pw-surprise-btn:hover{background:rgba(255,200,50,0.12);border-color:rgba(255,200,50,0.3);color:#fbbf24;transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,0.2)}
 .pw-surprise-btn:active{transform:translateY(0)}
+
+/* ── Natural-language Prompt Builder ── */
+.nl-builder{display:flex;flex-direction:column;gap:12px;color:var(--ui-text)}
+.nl-builder-fresh{animation:pw-pop .35s cubic-bezier(.34,1.56,.64,1)}
+.nl-sentence{padding:14px;border:1px solid rgba(255,255,255,0.08);border-radius:12px;background:linear-gradient(135deg,var(--ui-bg),color-mix(in srgb,var(--ui-surface) 62%,var(--ui-bg)));box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);font-size:.9rem;line-height:1.7}
+.nl-sentence p{margin:0 0 10px;color:var(--ui-text-dim)}
+.nl-sentence p:last-child{margin-bottom:0}
+.nl-blank,.nl-color-blank{display:inline-flex;align-items:center;gap:6px;max-width:100%;vertical-align:middle}
+.nl-blank select,.nl-color-blank select{max-width:100%;min-height:28px;border:1px solid rgba(255,255,255,.12);border-radius:8px;background:rgba(255,255,255,.07);color:var(--ui-text);padding:3px 24px 3px 8px;font:700 .76rem/1.1 'Inter',system-ui,sans-serif;outline:none}
+.nl-blank select:focus,.nl-color-blank select:focus{border-color:rgba(200,255,61,.56);box-shadow:0 0 0 2px rgba(200,255,61,.16)}
+.nl-color-blank input[type=color]{width:28px;height:28px;border-radius:8px;background:transparent;overflow:hidden;cursor:pointer}
+.nl-color-blank input[type=color]::-webkit-color-swatch-wrapper{padding:0}
+.nl-color-blank input[type=color]::-webkit-color-swatch{border:1px solid rgba(255,255,255,.18);border-radius:8px}
+.nl-actions{margin-top:0}
+.nl-actions .pw-surprise-btn,.nl-actions .pw-copy-btn{min-width:0}
+.nl-preview-label{font-size:.64rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--ui-text-dim)}
+.nl-prompt-preview{width:100%;min-height:190px;resize:vertical;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(0,0,0,.26);color:rgba(229,229,229,.82);padding:12px;font:.72rem/1.55 var(--mono,'SF Mono',monospace);outline:none}
+.nl-prompt-preview:focus{border-color:rgba(255,255,255,.18)}
 
 /* ── Edit Panel (side-slide) ── */
 .pw-edit-panel{position:absolute;top:0;left:0;right:0;bottom:0;background:var(--ui-surface);z-index:110;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.3s cubic-bezier(.16,1,.3,1);overflow:hidden}

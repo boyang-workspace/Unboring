@@ -1,60 +1,77 @@
 # UnBoring
 
-A design tool for generating UI component styles. Click **Surprise me!** to randomize colors, fonts, spacing, shadows, and border styles across 80 shadcn-inspired components. Export the result as CSS custom properties.
+UnBoring is a free, static UI inspiration tool for vibe coders and AI agents. The homepage helps users turn a natural-language design brief into visual tokens and a copyable prompt. The library pages collect motion patterns, components, interactions, visual styles, and effects that can be reused as design references.
 
-## What it does
+Live site: https://unboring.openagent.bot
 
-- 80 UI components on an infinite canvas (cards, forms, tables, charts, heroes, etc.)
-- **Surprise me!** randomizes the entire design system in one click
-- **Export CSS** copies the current theme as CSS custom properties
-- Sidebar controls for fine-tuning colors, fonts, spacing, radius, shadows
-- 10 font families (sans-serif, serif, display, handwritten)
-- 11 color palettes + background patterns
-- Pan/zoom canvas with mouse drag and scroll wheel
+## What It Does
 
-## Design inspiration
+- Natural-language prompt builder on the homepage.
+- Interactive canvas with 80 UI components and randomized visual systems.
+- Library pages for motion, components, interactions, styles, and effects.
+- Detail pages with previews, AI prompts, negative prompts, and tokens.
+- Static deployment with Cloudflare Pages. No backend or account system.
 
-Component layouts are inspired by [shadcn/ui](https://ui.shadcn.com/create). Design patterns are researched from [Awwwards](https://www.awwwards.com/) award-winning sites and [SaaS Landing Page](https://saaslandingpage.com/) gallery.
-
-## Run locally
+## Local Development
 
 ```bash
-# Serve with any static file server
-python3 -m http.server 4173
-# or
-npx serve .
+npm install
+npm run build
+npm run dev
 ```
 
-Then open http://localhost:4173
+Open http://localhost:4173.
 
 ## Deploy
 
 ```bash
-# Cloudflare Pages
+npm run build
 npm run deploy
-
-# Or any static hosting (Vercel, Netlify, GitHub Pages)
-# Just upload the root directory
 ```
 
-## Project structure
+The deploy command publishes the repository root to Cloudflare Pages project `unboring`.
 
+## Project Structure
+
+```text
+index.html              Homepage tool and canvas
+assets/style.css        Homepage chrome and prompt builder styles
+assets/components.css   Canvas component styles
+assets/app.js           Homepage canvas, prompt builder, copy, FAQ, logo motion
+assets/styles.css       Generated library/detail page styles
+scripts/build-site.js   Static page generator and sitemap/redirect builder
+data/                   Structured source data used by build scripts
+motion/                 Generated motion pages
+components/             Generated component pages
+interactions/           Generated interaction pages
+styles/                 Generated style recipe pages
+effects/                Generated visual effect pages
+agent/                  Generated agent-readiness page
+docs/                   Handover notes and project documentation
 ```
-/
-├── index.html          # Designer tool (main page)
-├── canvas/             # Canvas page (same as index)
-├── motion/             # Animation demos
-├── components/         # Component patterns
-├── interactions/       # Interaction patterns
-├── styles/             # Visual themes
-├── effects/            # Visual effects
-├── surfaces/           # UI surface patterns
-├── agent/              # MCP/CLI documentation
-├── assets/             # Shared styles
-├── scripts/            # Build scripts
-├── LICENSE             # MIT
-└── README.md
-```
+
+Generated pages are committed so the site can be deployed as plain static files. When changing templates, metadata, redirects, or source entries, run `npm run build` before deploying.
+
+## SEO And Redirects
+
+- `scripts/build-site.js` generates `sitemap.xml`, `robots.txt`, and `_redirects`.
+- Current canonical domain is `https://unboring.openagent.bot`.
+- Legacy sections such as `/surfaces/`, `/text-effects/`, `/backgrounds/`, and `/canvas/` redirect to current pages.
+
+## Open Source
+
+The project uses the MIT License and is designed to welcome design-system, motion, prompt, and agent-workflow contributions.
+
+Good first contributions include:
+
+- New component, effect, motion, or interaction entries.
+- Better prompt and negative-prompt wording for existing entries.
+- More diverse visual systems for the homepage canvas.
+- Accessibility, responsive layout, and SEO improvements.
+
+Do not copy source assets, code, or proprietary visual identity from Awwwards, GSAP Showcase, or other inspiration sites. Extract reusable design principles instead.
+
+See `AGENTS.md` for agent handoff notes and `CONTRIBUTING.md` for contribution rules.
 
 ## License
 

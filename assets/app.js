@@ -3,6 +3,7 @@
 
 const canvas = document.getElementById('canvas');
 const content = document.getElementById('canvas-content');
+const HAS_CANVAS_APP = !!(canvas && content);
 let panX = 0, panY = 0, currentScale = 1, isDragging = false, startX, startY, startPanX, startPanY;
 const PADDING = 200;
 
@@ -17,14 +18,16 @@ function clampPan() {
 }
 function apply() { clampPan(); content.style.transform = 'translate(' + panX + 'px,' + panY + 'px) scale(' + currentScale + ')'; updateMinimap(); }
 
-canvas.addEventListener('mousedown', e => { if (e.button) return; if (e.target.closest('.cn-card')) return; isDragging = true; startX = e.clientX; startY = e.clientY; startPanX = panX; startPanY = panY; document.body.classList.add('dragging'); });
-window.addEventListener('mousemove', e => { if (!isDragging) return; panX = startPanX + (e.clientX - startX) / currentScale; panY = startPanY + (e.clientY - startY) / currentScale; apply(); });
-window.addEventListener('mouseup', () => { isDragging = false; document.body.classList.remove('dragging'); });
-canvas.addEventListener('touchstart', e => { if (e.touches.length === 2) { e.preventDefault(); isDragging = true; startX = (e.touches[0].clientX + e.touches[1].clientX) / 2; startY = (e.touches[0].clientY + e.touches[1].clientY) / 2; startPanX = panX; startPanY = panY; document.body.classList.add('dragging'); } }, { passive: false });
-canvas.addEventListener('touchmove', e => { if (isDragging && e.touches.length === 2) { e.preventDefault(); const cx = (e.touches[0].clientX + e.touches[1].clientX) / 2; const cy = (e.touches[0].clientY + e.touches[1].clientY) / 2; panX = startPanX + (cx - startX) / currentScale; panY = startPanY + (cy - startY) / currentScale; apply(); } }, { passive: false });
-canvas.addEventListener('touchend', e => { if (e.touches.length < 2) { isDragging = false; document.body.classList.remove('dragging'); } });
-canvas.addEventListener('wheel', e => { e.preventDefault(); panX -= e.deltaX / currentScale; panY -= e.deltaY / currentScale; apply(); }, { passive: false });
-document.addEventListener('keydown', e => { if (e.key === 'f' || e.key === 'F') { e.preventDefault(); fitAll(); } });
+if (HAS_CANVAS_APP) {
+  canvas.addEventListener('mousedown', e => { if (e.button) return; if (e.target.closest('.cn-card')) return; isDragging = true; startX = e.clientX; startY = e.clientY; startPanX = panX; startPanY = panY; document.body.classList.add('dragging'); });
+  window.addEventListener('mousemove', e => { if (!isDragging) return; panX = startPanX + (e.clientX - startX) / currentScale; panY = startPanY + (e.clientY - startY) / currentScale; apply(); });
+  window.addEventListener('mouseup', () => { isDragging = false; document.body.classList.remove('dragging'); });
+  canvas.addEventListener('touchstart', e => { if (e.touches.length === 2) { e.preventDefault(); isDragging = true; startX = (e.touches[0].clientX + e.touches[1].clientX) / 2; startY = (e.touches[0].clientY + e.touches[1].clientY) / 2; startPanX = panX; startPanY = panY; document.body.classList.add('dragging'); } }, { passive: false });
+  canvas.addEventListener('touchmove', e => { if (isDragging && e.touches.length === 2) { e.preventDefault(); const cx = (e.touches[0].clientX + e.touches[1].clientX) / 2; const cy = (e.touches[0].clientY + e.touches[1].clientY) / 2; panX = startPanX + (cx - startX) / currentScale; panY = startPanY + (cy - startY) / currentScale; apply(); } }, { passive: false });
+  canvas.addEventListener('touchend', e => { if (e.touches.length < 2) { isDragging = false; document.body.classList.remove('dragging'); } });
+  canvas.addEventListener('wheel', e => { e.preventDefault(); panX -= e.deltaX / currentScale; panY -= e.deltaY / currentScale; apply(); }, { passive: false });
+  document.addEventListener('keydown', e => { if (e.key === 'f' || e.key === 'F') { e.preventDefault(); fitAll(); } });
+}
 
 function fitAll() {
   const grid = document.querySelector('.grid');
@@ -85,7 +88,9 @@ function getRandomTheme() {
   for (let attempt = 0; attempt < 5; attempt++) {
     const groups = Object.keys(THEME_GROUPS);
     group = groups[Math.floor(Math.random() * groups.length)];
-    const indices = THEME_GROUPS[group];
+    const indices = Math.random() < 0.58
+      ? THEME_GROUPS[group]
+      : PALETTES.map(function(_, i) { return i; });
     theme = PALETTES[indices[Math.floor(Math.random() * indices.length)]];
     if (theme.name !== window._lastThemeName) break;
   }
@@ -110,25 +115,57 @@ function surprise() {
   const r = document.documentElement.style;
 
   // Colors
-  r.setProperty('--bg', p.bg); r.setProperty('--fg', p.fg);
-  r.setProperty('--card', p.card); r.setProperty('--card-fg', p.cardFg);
-  r.setProperty('--card-bg', 'var(--card)');
-  r.setProperty('--muted', p.muted); r.setProperty('--muted-fg', p.mutedFg);
-  r.setProperty('--primary', p.primary); r.setProperty('--primary-fg', p.primaryFg);
-  r.setProperty('--secondary', p.secondary); r.setProperty('--secondary-fg', p.secondaryFg);
-  r.setProperty('--border', p.border); r.setProperty('--input', p.input);
-  r.setProperty('--ring', p.primary); r.setProperty('--destructive', p.destructive);
+  const surfaceMixes = [
+    p.card,
+    'color-mix(in oklab,' + p.card + ' 92%, ' + p.bg + ')',
+    'color-mix(in oklab,' + p.card + ' 86%, ' + p.secondary + ')',
+    'color-mix(in oklab,' + p.card + ' 88%, white)',
+    'color-mix(in oklab,' + p.card + ' 90%, ' + p.primary + ' 10%)'
+  ];
+  const mutedMixes = [
+    p.muted,
+    'color-mix(in oklab,' + p.muted + ' 78%, ' + p.card + ')',
+    'color-mix(in oklab,' + p.secondary + ' 36%, ' + p.card + ')'
+  ];
+  const selected = {
+    bg: p.bg,
+    fg: p.fg,
+    card: p.card,
+    cardFg: p.cardFg,
+    cardBg: pick(surfaceMixes),
+    muted: pick(mutedMixes),
+    mutedFg: p.mutedFg,
+    primary: p.primary,
+    primaryFg: p.primaryFg,
+    secondary: p.secondary,
+    secondaryFg: p.secondaryFg,
+    border: Math.random() < 0.6 ? p.border : 'color-mix(in oklab,' + p.fg + ' 18%, transparent)',
+    input: Math.random() < 0.6 ? p.input : 'color-mix(in oklab,' + p.fg + ' 14%, transparent)',
+    destructive: p.destructive
+  };
+
+  r.setProperty('--bg', selected.bg); r.setProperty('--fg', selected.fg);
+  r.setProperty('--card', selected.card); r.setProperty('--card-fg', selected.cardFg);
+  r.setProperty('--card-bg', selected.cardBg);
+  r.setProperty('--muted', selected.muted); r.setProperty('--muted-fg', selected.mutedFg);
+  r.setProperty('--primary', selected.primary); r.setProperty('--primary-fg', selected.primaryFg);
+  r.setProperty('--secondary', selected.secondary); r.setProperty('--secondary-fg', selected.secondaryFg);
+  r.setProperty('--border', selected.border); r.setProperty('--input', selected.input);
+  r.setProperty('--ring', selected.primary); r.setProperty('--destructive', selected.destructive);
 
   // Shape — also randomize radius, border-width, shadow beyond palette
   var allRadii = ['0px','2px','4px','6px','8px','0.5rem','0.625rem','0.75rem','1rem','1.25rem','1.5rem','2rem'];
   var allBW = ['0px','0.5px','1px','1.5px','2px','3px'];
   var allShadows = ['none','0 1px 2px rgba(0,0,0,0.05)','0 2px 8px rgba(0,0,0,0.08)','0 4px 16px rgba(0,0,0,0.1)','0 8px 30px rgba(0,0,0,0.12)','0 0 0 1px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.08)','0 0 20px rgba(0,0,0,0.15)','0 20px 60px rgba(0,0,0,0.2)'];
-  r.setProperty('--radius', Math.random() < 0.5 ? p.radius : pick(allRadii));
-  r.setProperty('--bw', Math.random() < 0.5 ? p.bw : pick(allBW));
-  r.setProperty('--shadow', Math.random() < 0.5 ? p.shadow : pick(allShadows));
-  r.setProperty('--btn-shadow', p.btnShadow || 'none');
+  const selectedRadius = Math.random() < 0.42 ? p.radius : pick(allRadii);
+  const selectedBw = Math.random() < 0.42 ? p.bw : pick(allBW);
+  const selectedShadow = Math.random() < 0.42 ? p.shadow : pick(allShadows);
+  r.setProperty('--radius', selectedRadius);
+  r.setProperty('--bw', selectedBw);
+  r.setProperty('--shadow', selectedShadow);
+  r.setProperty('--btn-shadow', Math.random() < 0.55 ? (p.btnShadow || 'none') : pick(allShadows));
   r.setProperty('--btn-shadow-active', p.btnShadowActive || 'none');
-  r.setProperty('--btn-press-y', p.btnPressY || '0');
+  r.setProperty('--btn-press-y', p.btnPressY || (selectedBw === '0px' ? '0' : '1px'));
 
   // Typography — pick from ALL_FONTS for heading, avoid common pairings to maximize variety
   var headingFonts = [...FONTS_SERIF, ...FONTS_DISPLAY, ...FONTS_HAND, ...FONTS_SANS];
@@ -136,10 +173,14 @@ function surprise() {
   var hf = pick(headingFonts);
   var bf = pick(bodyFonts.filter(function(f) { return f !== hf || Math.random() < 0.2; }));
   if (!bf) bf = pick(FONTS_SANS);
-  r.setProperty('--ls', Math.random() < 0.3 ? (Math.random() < 0.5 ? '-0.03em' : '0.05em') : (typeof p.ls === 'number' ? p.ls + 'em' : p.ls || '0'));
-  r.setProperty('--fw', pick([400,450,500,550,600,650,700]));
-  r.setProperty('--fs', pick(['0.75rem','0.8125rem','0.875rem','0.9375rem','1rem']));
-  r.setProperty('--title-fs', pick(['1rem','1.15rem','1.3rem','1.5rem','1.75rem']));
+  const selectedLs = Math.random() < 0.36 ? pick(['-0.03em','-0.015em','0','0.025em','0.05em','0.08em']) : (typeof p.ls === 'number' ? p.ls + 'em' : p.ls || '0');
+  const selectedFw = pick([400,450,500,550,600,650,700,760]);
+  const selectedFs = pick(['0.75rem','0.8125rem','0.875rem','0.9375rem','1rem']);
+  const selectedTitleFs = pick(['1rem','1.08rem','1.15rem','1.3rem','1.5rem','1.75rem']);
+  r.setProperty('--ls', selectedLs);
+  r.setProperty('--fw', selectedFw);
+  r.setProperty('--fs', selectedFs);
+  r.setProperty('--title-fs', selectedTitleFs);
   r.setProperty('--font', "'" + bf + "',system-ui,sans-serif");
   r.setProperty('--font-heading', "'" + hf + "',system-ui,sans-serif");
   r.setProperty('--text-shadow', p.textShadow || 'none');
@@ -158,16 +199,16 @@ function surprise() {
 
   // Update design state
   Object.assign(designState, {
-    bg: p.bg, fg: p.fg, card: p.card, cardFg: p.cardFg,
-    muted: p.muted, mutedFg: p.mutedFg,
-    primary: p.primary, primaryFg: p.primaryFg,
-    secondary: p.secondary, secondaryFg: p.secondaryFg,
-    border: p.border, input: p.input, destructive: p.destructive,
-    radius: p.radius, bw: p.bw, shadow: p.shadow,
+    bg: selected.bg, fg: selected.fg, card: selected.card, cardFg: selected.cardFg,
+    muted: selected.muted, mutedFg: selected.mutedFg,
+    primary: selected.primary, primaryFg: selected.primaryFg,
+    secondary: selected.secondary, secondaryFg: selected.secondaryFg,
+    border: selected.border, input: selected.input, destructive: selected.destructive,
+    radius: selectedRadius, bw: selectedBw, shadow: selectedShadow,
     fontHeading: hf, fontBody: bf,
-    fs: p.fs, titleFs: p.tfs,
-    ls: typeof p.ls === 'number' ? p.ls + 'em' : p.ls,
-    fw: p.fw, dark: p.dark, bgPattern: bg.img
+    fs: selectedFs, titleFs: selectedTitleFs,
+    ls: selectedLs,
+    fw: selectedFw, dark: p.dark, bgPattern: bg.img
   });
 
   // Update sidebar prompt — re-render sentence with animation
@@ -187,20 +228,23 @@ function exportCSS() {
   css += '}\n';
   navigator.clipboard.writeText(css).then(() => {
     const btn = document.getElementById('export-btn');
+    if (!btn) return;
     btn.textContent = 'Copied!';
     setTimeout(() => btn.textContent = 'Export CSS', 2000);
   });
 }
 
 // ── Hamburger Menu ──
-document.getElementById('menu-btn').addEventListener('click', () => {
-  document.getElementById('menu').classList.toggle('open');
-});
-document.addEventListener('click', e => {
-  const menu = document.getElementById('menu');
-  const btn = document.getElementById('menu-btn');
-  if (!menu.contains(e.target) && !btn.contains(e.target)) menu.classList.remove('open');
-});
+const menuBtn = document.getElementById('menu-btn');
+const menu = document.getElementById('menu');
+if (menuBtn && menu) {
+  menuBtn.addEventListener('click', () => {
+    menu.classList.toggle('open');
+  });
+  document.addEventListener('click', e => {
+    if (!menu.contains(e.target) && !menuBtn.contains(e.target)) menu.classList.remove('open');
+  });
+}
 
 // ── Game化 Prompt Builder ──
 
@@ -236,6 +280,116 @@ const PARAM_DEFS = {
 // Active parameters (order in sentence)
 let activeParams = ['bg','fg','primary','fontHeading','fontBody','radius','bw','shadow','ls','fw','fs','titleFs'];
 let currentEditPanel = null;
+
+const COLOR_PRESETS = [
+  { label: 'red', value: '#ef4444' },
+  { label: 'acid green', value: '#c8ff3d' },
+  { label: 'electric blue', value: '#3662ff' },
+  { label: 'warm orange', value: '#ff7a1a' },
+  { label: 'soft pink', value: '#f472b6' },
+  { label: 'deep violet', value: '#7c3aed' },
+  { label: 'medical teal', value: '#14b8a6' },
+  { label: 'school yellow', value: '#facc15' },
+  { label: 'game purple', value: '#a855f7' },
+  { label: 'graphite', value: '#171717' },
+];
+
+const BRIEF_CHOICES = {
+  projectType: [
+    'SaaS landing page',
+    'AI agent product',
+    'portfolio site',
+    'game launch page',
+    'kids learning app',
+    'education platform',
+    'medical product page',
+    'data report',
+    'creative studio site',
+    'developer tool',
+    'community homepage',
+    'ecommerce product page',
+  ],
+  mood: [
+    'delicate',
+    'playful',
+    'editorial',
+    'premium',
+    'technical',
+    'cartoonish',
+    'calm',
+    'cinematic',
+    'warm',
+    'weird but usable',
+  ],
+  detailStyle: [
+    'fine lines and pale shadows',
+    'soft glass panels and quiet depth',
+    'chunky cartoon panels',
+    'editorial whitespace and sharp type',
+    'dense product UI with precise borders',
+    '3D stage objects and spatial layers',
+    'paper texture and hand-drawn accents',
+    'neon edges with controlled darkness',
+    'medical-clean cards and calm spacing',
+    'sticker-like modules with playful offsets',
+  ],
+  motion: [
+    'quiet scroll reveals',
+    'kinetic headline flips',
+    'cursor-responsive fields',
+    'pinned product cutaway',
+    'agent timeline pulses',
+    'slow editorial fades',
+    'playful hover squish',
+    'data gradually appearing',
+    '3D object drift',
+    'minimal state transitions',
+  ],
+  layout: [
+    'full landing page with hero, proof, features, and CTA',
+    'single-page story with scroll chapters',
+    'product demo stage with side annotations',
+    'editorial page with oversized rhythm',
+    'dashboard-like landing page with real UI panels',
+    'gallery-led page with modular cards',
+  ],
+};
+
+const briefState = {
+  projectType: 'SaaS landing page',
+  brandColorName: 'red',
+  brandColor: '#ef4444',
+  mood: 'delicate',
+  detailStyle: 'fine lines and pale shadows',
+  motion: 'quiet scroll reveals',
+  layout: 'full landing page with hero, proof, features, and CTA',
+};
+
+const DETAIL_TOKEN_PRESETS = {
+  'fine lines and pale shadows': { radius: '12px', bw: '0.5px', shadow: '0 12px 34px rgba(31,27,22,0.08)', ls: '0', fw: 470 },
+  'soft glass panels and quiet depth': { radius: '18px', bw: '1px', shadow: '0 18px 50px rgba(60,72,88,0.14)', ls: '-0.01em', fw: 500 },
+  'chunky cartoon panels': { radius: '18px', bw: '3px', shadow: '6px 6px 0 rgba(23,23,23,0.22)', ls: '0.01em', fw: 740 },
+  'editorial whitespace and sharp type': { radius: '2px', bw: '1px', shadow: 'none', ls: '-0.03em', fw: 560 },
+  'dense product UI with precise borders': { radius: '7px', bw: '1px', shadow: '0 6px 18px rgba(20,20,20,0.08)', ls: '0', fw: 520 },
+  '3D stage objects and spatial layers': { radius: '24px', bw: '1px', shadow: '0 26px 70px rgba(31,27,22,0.18)', ls: '-0.02em', fw: 620 },
+  'paper texture and hand-drawn accents': { radius: '6px', bw: '2px', shadow: '3px 3px 0 rgba(31,27,22,0.18)', ls: '0.02em', fw: 560 },
+  'neon edges with controlled darkness': { radius: '8px', bw: '1px', shadow: '0 0 24px rgba(99,102,241,0.28)', ls: '0.06em', fw: 620 },
+  'medical-clean cards and calm spacing': { radius: '14px', bw: '1px', shadow: '0 12px 34px rgba(30,92,86,0.10)', ls: '0', fw: 500 },
+  'sticker-like modules with playful offsets': { radius: '20px', bw: '2px', shadow: '8px 8px 0 rgba(23,23,23,0.16)', ls: '0', fw: 680 },
+};
+
+const MOOD_FONT_PRESETS = {
+  delicate: { heading: 'Cormorant Garamond', body: 'Inter' },
+  playful: { heading: 'Fredoka', body: 'Nunito' },
+  editorial: { heading: 'Playfair Display', body: 'DM Sans' },
+  premium: { heading: 'DM Serif Display', body: 'Manrope' },
+  technical: { heading: 'Space Grotesk', body: 'Inter' },
+  cartoonish: { heading: 'Bangers', body: 'Fredoka' },
+  calm: { heading: 'Sora', body: 'Inter' },
+  cinematic: { heading: 'Bebas Neue', body: 'Sora' },
+  warm: { heading: 'Lora', body: 'DM Sans' },
+  'weird but usable': { heading: 'Righteous', body: 'Space Grotesk' },
+};
 
 // ── Get display value for a parameter ──
 function getWidgetDisplay(paramId) {
@@ -281,86 +435,116 @@ function shadowValue(label) {
   return map[label] || map['subtle'];
 }
 
+function escapeHtmlText(value) {
+  return String(value).replace(/[&<>"']/g, function(ch) {
+    return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch];
+  });
+}
+
+function briefSelect(key) {
+  var choices = BRIEF_CHOICES[key] || [];
+  var current = briefState[key];
+  var html = '<span class="nl-blank"><select data-brief="' + key + '" aria-label="' + key + '">';
+  choices.forEach(function(choice) {
+    html += '<option value="' + escapeHtmlText(choice) + '"' + (choice === current ? ' selected' : '') + '>' + escapeHtmlText(choice) + '</option>';
+  });
+  html += '</select></span>';
+  return html;
+}
+
+function briefColorControls() {
+  var html = '<span class="nl-color-blank">';
+  html += '<input type="color" data-brief="brandColor" value="' + escapeHtmlText(briefState.brandColor) + '" aria-label="brand color">';
+  html += '<select data-brief="brandColorName" aria-label="brand color name">';
+  COLOR_PRESETS.forEach(function(color) {
+    html += '<option value="' + escapeHtmlText(color.label) + '"' + (color.label === briefState.brandColorName ? ' selected' : '') + '>' + escapeHtmlText(color.label) + '</option>';
+  });
+  if (!COLOR_PRESETS.some(function(color) { return color.label === briefState.brandColorName; })) {
+    html += '<option value="' + escapeHtmlText(briefState.brandColorName) + '" selected>' + escapeHtmlText(briefState.brandColorName) + '</option>';
+  }
+  html += '</select></span>';
+  return html;
+}
+
+function randomizeBrief() {
+  function pickChoice(key) { return pick(BRIEF_CHOICES[key]); }
+  var color = pick(COLOR_PRESETS);
+  briefState.projectType = pickChoice('projectType');
+  briefState.brandColorName = color.label;
+  briefState.brandColor = color.value;
+  briefState.mood = pickChoice('mood');
+  briefState.detailStyle = pickChoice('detailStyle');
+  briefState.motion = pickChoice('motion');
+  briefState.layout = pickChoice('layout');
+}
+
+function readableTextOn(hex) {
+  var clean = String(hex || '').replace('#', '');
+  if (clean.length !== 6) return '#ffffff';
+  var r = parseInt(clean.slice(0, 2), 16) / 255;
+  var g = parseInt(clean.slice(2, 4), 16) / 255;
+  var b = parseInt(clean.slice(4, 6), 16) / 255;
+  var lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  return lum > 0.62 ? '#171717' : '#ffffff';
+}
+
+function applyBriefToDesign() {
+  var r = document.documentElement.style;
+  var tokenPreset = DETAIL_TOKEN_PRESETS[briefState.detailStyle] || DETAIL_TOKEN_PRESETS['fine lines and pale shadows'];
+  var fontPreset = MOOD_FONT_PRESETS[briefState.mood] || MOOD_FONT_PRESETS.delicate;
+  r.setProperty('--primary', briefState.brandColor);
+  r.setProperty('--primary-fg', readableTextOn(briefState.brandColor));
+  r.setProperty('--ring', briefState.brandColor);
+  r.setProperty('--radius', tokenPreset.radius);
+  r.setProperty('--bw', tokenPreset.bw);
+  r.setProperty('--shadow', tokenPreset.shadow);
+  r.setProperty('--ls', tokenPreset.ls);
+  r.setProperty('--fw', tokenPreset.fw);
+  r.setProperty('--font-heading', "'" + fontPreset.heading + "',system-ui,sans-serif");
+  r.setProperty('--font', "'" + fontPreset.body + "',system-ui,sans-serif");
+  Object.assign(designState, {
+    primary: briefState.brandColor,
+    primaryFg: readableTextOn(briefState.brandColor),
+    radius: tokenPreset.radius,
+    bw: tokenPreset.bw,
+    shadow: tokenPreset.shadow,
+    ls: tokenPreset.ls,
+    fw: tokenPreset.fw,
+    fontHeading: fontPreset.heading,
+    fontBody: fontPreset.body,
+  });
+}
+
+function runPromptSurprise() {
+  surprise();
+  randomizeBrief();
+  applyBriefToDesign();
+  renderSentence({ animate: true });
+}
+
 // ── Render sentence ──
 function renderSentence(opts) {
   opts = opts || {};
   const sb = document.getElementById('sidebar');
+  if (!sb) return;
   const animate = opts.animate !== false;
 
-  let html = '<div class="pw-sentence" id="pw-sentence">';
-  html += '<div class="pw-sentence-text">';
-  html += '<span class="pw-sentence-prefix">I want a UI with </span>';
-
-  activeParams.forEach(function(pid, i) {
-    const def = PARAM_DEFS[pid];
-    if (!def) return;
-    const d = getWidgetDisplay(pid);
-    const animClass = animate ? ' pw-widget-changing' : '';
-    let widgetContent = '';
-
-    if (def.type === 'color') {
-      widgetContent = '<span class="pw-widget-swatch" style="background:' + d.hex + '"></span>' +
-                       '<span class="pw-widget-value">' + d.hex + '</span>';
-    } else if (def.type === 'font') {
-      widgetContent = '<span class="pw-widget-value" style="font-family:' + d.fontFamily + '">' + d.value + '</span>';
-    } else {
-      widgetContent = '<span class="pw-widget-value">' + d.value + '</span>';
-    }
-
-    html += '<span class="pw-widget' + animClass + '" data-param="' + pid + '" style="animation-delay:' + (i * 30) + 'ms">';
-    html += '<span class="pw-widget-emoji">' + def.emoji + '</span>';
-    html += widgetContent;
-    html += '<span class="pw-widget-label">' + def.label + '</span>';
-    html += '<button class="pw-widget-remove" data-remove="' + pid + '" title="Remove">✕</button>';
-    html += '</span>';
-
-    if (i < activeParams.length - 1) {
-      if (i === activeParams.length - 2) {
-        if (activeParams.length === 2) {
-          html += '<span class="pw-and"> and </span>';
-        } else {
-          html += '<span class="pw-comma">, </span><span class="pw-and">and </span>';
-        }
-      } else {
-        html += '<span class="pw-comma">, </span>';
-      }
-    }
-  });
-
-  html += '<span class="pw-period">.</span>';
+  let html = '<div class="nl-builder' + (animate ? ' nl-builder-fresh' : '') + '" id="prompt-builder">';
+  html += '<div class="panel-title">Prompt Builder</div>';
+  html += '<div class="nl-sentence">';
+  html += '<p>I want to design a ' + briefSelect('projectType') + '</p>';
+  html += '<p>My brand color is ' + briefColorControls() + '</p>';
+  html += '<p>I want it to feel ' + briefSelect('mood') + ', with ' + briefSelect('detailStyle') + '</p>';
+  html += '<p>The page should use ' + briefSelect('motion') + ' and become a ' + briefSelect('layout') + '</p>';
   html += '</div>';
-
-  // Add parameter row
-  html += '<div class="pw-add-row">';
-  html += '<button class="pw-add-btn" id="pw-add-btn">+ Add parameter</button>';
-  html += '<div class="pw-add-menu" id="pw-add-menu">';
-  Object.keys(PARAM_DEFS).forEach(function(pid) {
-    if (activeParams.indexOf(pid) !== -1) return;
-    const def = PARAM_DEFS[pid];
-    html += '<div class="pw-add-menu-item" data-add="' + pid + '">' + def.emoji + ' ' + def.label + '</div>';
-  });
+  html += '<div class="pw-actions nl-actions">';
+  html += '<button class="pw-surprise-btn" id="pw-surprise-btn">Surprise me</button>';
+  html += '<button class="pw-copy-btn" id="copy-prompt">Copy Prompt</button>';
   html += '</div>';
+  html += '<div class="nl-preview-label">Generated prompt</div>';
+  html += '<textarea class="nl-prompt-preview" id="prompt-preview" readonly>' + escapeHtmlText(generatePrompt()) + '</textarea>';
+  html += '<div class="sidebar-footer">Fill the sentence first. The CSS tokens follow the brief.</div>';
   html += '</div>';
-
-  html += '</div>';
-
-  // Action buttons
-  html += '<div class="pw-actions">';
-  html += '<button class="pw-copy-btn" id="copy-prompt">📋 Copy Prompt</button>';
-  html += '<button class="pw-surprise-btn" id="pw-surprise-btn">🎲 Surprise me</button>';
-  html += '</div>';
-
-  // Edit panel (hidden by default)
-  html += '<div class="pw-edit-panel" id="pw-edit-panel">';
-  html += '<div class="pw-ep-header">';
-  html += '<button class="pw-ep-back" id="pw-ep-back">←</button>';
-  html += '<span class="pw-ep-title" id="pw-ep-title">Edit</span>';
-  html += '<span class="pw-ep-icon" id="pw-ep-icon"></span>';
-  html += '</div>';
-  html += '<div class="pw-ep-body" id="pw-ep-body"></div>';
-  html += '</div>';
-
-  html += '<div class="sidebar-footer">based on <a href="https://ui.shadcn.com/" target="_blank" rel="noopener">shadcn/ui</a> · <a href="https://tailwindcss.com/" target="_blank" rel="noopener">Tailwind CSS</a></div>';
 
   sb.innerHTML = html;
 
@@ -370,69 +554,43 @@ function renderSentence(opts) {
 
 // ── Bind sentence events ──
 function bindSentenceEvents() {
-  // Widget clicks → open edit panel
-  document.querySelectorAll('.pw-widget').forEach(function(w) {
-    w.addEventListener('click', function(e) {
-      if (e.target.closest('.pw-widget-remove')) return;
-      var pid = w.getAttribute('data-param');
-      if (pid) showEditPanel(pid);
+  document.querySelectorAll('[data-brief]').forEach(function(control) {
+    control.addEventListener('change', function() {
+      var key = control.getAttribute('data-brief');
+      if (!key) return;
+      if (key === 'brandColorName') {
+        var preset = COLOR_PRESETS.find(function(item) { return item.label === control.value; });
+        if (preset) {
+          briefState.brandColorName = preset.label;
+          briefState.brandColor = preset.value;
+        }
+      } else if (key === 'brandColor') {
+        briefState.brandColor = control.value;
+        briefState.brandColorName = 'custom ' + control.value;
+      } else {
+        briefState[key] = control.value;
+      }
+      applyBriefToDesign();
+      renderSentence({ animate: false });
     });
   });
 
-  // Remove buttons
-  document.querySelectorAll('.pw-widget-remove').forEach(function(btn) {
-    btn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      var pid = btn.getAttribute('data-remove');
-      if (pid) removeParameter(pid);
-    });
-  });
-
-  // Add button
-  var addBtn = document.getElementById('pw-add-btn');
-  var addMenu = document.getElementById('pw-add-menu');
-  if (addBtn && addMenu) {
-    addBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      addMenu.classList.toggle('open');
-    });
-    document.addEventListener('click', function() { addMenu.classList.remove('open'); });
-  }
-
-  // Add menu items
-  document.querySelectorAll('.pw-add-menu-item').forEach(function(item) {
-    item.addEventListener('click', function(e) {
-      e.stopPropagation();
-      var pid = item.getAttribute('data-add');
-      if (pid) addParameter(pid);
-      addMenu.classList.remove('open');
-    });
-  });
-
-  // Copy button
   var copyBtn = document.getElementById('copy-prompt');
   if (copyBtn) {
     copyBtn.addEventListener('click', function() {
       var prompt = generatePrompt();
       navigator.clipboard.writeText(prompt).then(function() {
-        copyBtn.textContent = 'Copied! 🎉';
+        copyBtn.textContent = 'Copied';
         copyBtn.classList.add('copied');
         fireConfetti();
-        setTimeout(function() { copyBtn.textContent = '📋 Copy Prompt'; copyBtn.classList.remove('copied'); }, 2000);
+        setTimeout(function() { copyBtn.textContent = 'Copy Prompt'; copyBtn.classList.remove('copied'); }, 1600);
       });
     });
   }
 
-  // Surprise button
   var surpriseBtn = document.getElementById('pw-surprise-btn');
   if (surpriseBtn) {
-    surpriseBtn.addEventListener('click', function() { surprise(); });
-  }
-
-  // Edit panel back button
-  var backBtn = document.getElementById('pw-ep-back');
-  if (backBtn) {
-    backBtn.addEventListener('click', function() { hideEditPanel(); });
+    surpriseBtn.addEventListener('click', runPromptSurprise);
   }
 }
 
@@ -775,32 +933,34 @@ function oklchToHex(oklch) {
 
 function generatePrompt() {
   var s = designState;
-  return 'Design a modern UI component library with these specifications:\n\n' +
-    'Color Palette:\n' +
+  return 'Design a ' + briefState.projectType + ' for a real product, not a generic template.\n\n' +
+    'Natural language brief:\n' +
+    '- Brand color: ' + briefState.brandColorName + ' (' + briefState.brandColor + ')\n' +
+    '- Desired feeling: ' + briefState.mood + '\n' +
+    '- Visual detail: ' + briefState.detailStyle + '\n' +
+    '- Motion language: ' + briefState.motion + '\n' +
+    '- Page structure: ' + briefState.layout + '\n\n' +
+    'Design direction:\n' +
+    '- Build a complete first-screen-to-CTA landing page, not just a hero section.\n' +
+    '- Include real page sections: hero, product proof, feature explanation, visual demo area, trust/social proof, and final CTA.\n' +
+    '- Use distinctive typography, meaningful spacing, and visual hierarchy tailored to the project type.\n' +
+    '- Make interactions feel intentional: hover states, subtle transitions, and one memorable motion idea.\n\n' +
+    'Current system tokens:\n' +
     '- Background: ' + (s.bg || '#ffffff') + '\n' +
     '- Foreground: ' + (s.fg || '#1a1a1a') + '\n' +
-    '- Primary: ' + (s.primary || '#6366f1') + '\n' +
-    '- Muted: ' + (s.muted || '#f5f5f5') + '\n' +
-    '- Border: ' + (s.border || '#e5e5e5') + '\n\n' +
-    'Typography:\n' +
+    '- Primary: ' + (s.primary || briefState.brandColor) + '\n' +
     '- Heading font: ' + (s.fontHeading || 'Inter') + '\n' +
     '- Body font: ' + (s.fontBody || 'Inter') + '\n' +
-    '- Body size: ' + (s.fs || '0.875rem') + '\n' +
-    '- Title size: ' + (s.titleFs || '1rem') + '\n' +
-    '- Letter spacing: ' + (s.ls || '0') + '\n' +
-    '- Font weight: ' + (s.fw || 500) + '\n\n' +
-    'Shape:\n' +
     '- Border radius: ' + (s.radius || '0.625rem') + '\n' +
     '- Border width: ' + (s.bw || '1px') + '\n' +
-    '- Shadow: ' + (s.shadow || 'none') + '\n' +
-    '- Theme: ' + (s.dark ? 'dark' : 'light') + '\n\n' +
-    'Background pattern: ' + (s.bgPattern === 'none' ? 'none' : 'subtle pattern') + '\n\n' +
-    'Generate a complete design system with these values as CSS custom properties. Components should include cards, buttons, inputs, badges, tables, and navigation elements.';
+    '- Shadow: ' + (s.shadow || 'none') + '\n\n' +
+    'Avoid:\n' +
+    '- Default shadcn card stacks, meaningless bento grids, generic purple-blue gradients, oversized SaaS slogans, and decoration that does not explain the product.';
 }
 
 function updatePromptBlock() {
-  // Now just updates widget displays
-  updateAllWidgets();
+  var preview = document.getElementById('prompt-preview');
+  if (preview) preview.value = generatePrompt();
 }
 
 function updateThemeStrip() {
@@ -865,55 +1025,57 @@ function fireConfetti() {
 let draggedCard = null;
 const grid = document.querySelector('.grid');
 
-grid.addEventListener('dragstart', e => {
-  const card = e.target.closest('.cn-card');
-  if (!card) return;
-  draggedCard = card;
-  card.classList.add('dragging');
-  e.dataTransfer.effectAllowed = 'move';
-});
+if (grid) {
+  grid.addEventListener('dragstart', e => {
+    const card = e.target.closest('.cn-card');
+    if (!card) return;
+    draggedCard = card;
+    card.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+  });
 
-grid.addEventListener('dragend', e => {
-  const card = e.target.closest('.cn-card');
-  if (!card) return;
-  card.classList.remove('dragging');
-  document.querySelectorAll('.cn-card').forEach(c => c.classList.remove('drag-over'));
-  draggedCard = null;
-  saveLayout();
-  updateMinimap();
-});
-
-grid.addEventListener('dragover', e => {
-  e.preventDefault();
-  e.dataTransfer.dropEffect = 'move';
-  document.querySelectorAll('.cn-card').forEach(c => c.classList.remove('drag-over'));
-  const card = e.target.closest('.cn-card');
-  if (card && card !== draggedCard) card.classList.add('drag-over');
-});
-
-grid.addEventListener('drop', e => {
-  e.preventDefault();
-  document.querySelectorAll('.cn-card').forEach(c => c.classList.remove('drag-over'));
-  const target = e.target.closest('.cn-card');
-  if (draggedCard && target && draggedCard !== target) {
-    grid.insertBefore(draggedCard, target);
+  grid.addEventListener('dragend', e => {
+    const card = e.target.closest('.cn-card');
+    if (!card) return;
+    card.classList.remove('dragging');
+    document.querySelectorAll('.cn-card').forEach(c => c.classList.remove('drag-over'));
+    draggedCard = null;
     saveLayout();
-  }
-});
+    updateMinimap();
+  });
 
-// ── Width Toggle (event delegation) ──
-grid.addEventListener('click', e => {
-  const btn = e.target.closest('.width-toggle');
-  if (!btn) return;
-  e.stopPropagation();
-  const card = btn.closest('.cn-card');
-  const w = parseInt(card.getAttribute('data-width') || '1');
-  const newW = w === 1 ? 2 : 1;
-  card.setAttribute('data-width', newW);
-  btn.textContent = newW === 1 ? '2x' : '1x';
-  saveLayout();
-  updateMinimap();
-});
+  grid.addEventListener('dragover', e => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    document.querySelectorAll('.cn-card').forEach(c => c.classList.remove('drag-over'));
+    const card = e.target.closest('.cn-card');
+    if (card && card !== draggedCard) card.classList.add('drag-over');
+  });
+
+  grid.addEventListener('drop', e => {
+    e.preventDefault();
+    document.querySelectorAll('.cn-card').forEach(c => c.classList.remove('drag-over'));
+    const target = e.target.closest('.cn-card');
+    if (draggedCard && target && draggedCard !== target) {
+      grid.insertBefore(draggedCard, target);
+      saveLayout();
+    }
+  });
+
+  // ── Width Toggle (event delegation) ──
+  grid.addEventListener('click', e => {
+    const btn = e.target.closest('.width-toggle');
+    if (!btn) return;
+    e.stopPropagation();
+    const card = btn.closest('.cn-card');
+    const w = parseInt(card.getAttribute('data-width') || '1');
+    const newW = w === 1 ? 2 : 1;
+    card.setAttribute('data-width', newW);
+    btn.textContent = newW === 1 ? '2x' : '1x';
+    saveLayout();
+    updateMinimap();
+  });
+}
 
 // ── Layout Save/Load ──
 function saveLayout() {
@@ -925,6 +1087,7 @@ function saveLayout() {
 }
 
 function loadLayout() {
+  if (!grid) return;
   try {
     const data = JSON.parse(localStorage.getItem('unboring-layout'));
     if (!data) { setTimeout(updateMinimap, 50); return; }
@@ -987,6 +1150,7 @@ function updateMinimap() {
     html += '<div class="mm-card" style="left:' + x + 'px;top:' + y + 'px;width:' + Math.max(w,2) + 'px;height:' + Math.max(h,2) + 'px"></div>';
   });
   var cv = document.getElementById('canvas');
+  if (!cv) return;
   var vpL = (cv.getBoundingClientRect().left - gridBounds.left) * s + ox;
   var vpT = (cv.getBoundingClientRect().top - gridBounds.top) * s + oy;
   var vpW = cv.clientWidth * s, vpH = cv.clientHeight * s;
@@ -995,12 +1159,14 @@ function updateMinimap() {
 }
 function setupMinimap() {
   var mm = document.getElementById('minimap');
+  if (!mm) return;
   var isDown = false;
   mm.addEventListener('mousedown', function(e) {
     isDown = true;
     var mmBounds = mm.getBoundingClientRect();
     var cv = document.getElementById('canvas');
     var grid = document.querySelector('.grid');
+    if (!cv || !grid) return;
     var gridBounds = grid.getBoundingClientRect();
     var mmc = document.getElementById('minimap-content');
     var mmW = mmc.clientWidth, mmH = mmc.clientHeight;
@@ -1018,7 +1184,7 @@ function setupMinimap() {
     var mmBounds = mm.getBoundingClientRect();
     var cv = document.getElementById('canvas');
     var grid = document.querySelector('.grid');
-    if (!grid) return;
+    if (!cv || !grid) return;
     var gridBounds = grid.getBoundingClientRect();
     var mmc = document.getElementById('minimap-content');
     var mmW = mmc.clientWidth, mmH = mmc.clientHeight;
@@ -1084,21 +1250,50 @@ function startBrandRoll(letters) {
     }
   }
   roll();
-  setInterval(roll, 10000);
+  setInterval(roll, 15000);
 }
 
 // ── Init ──
 randomizeBrandFonts();
-renderSentence();
-buildMinimap();
-setupMinimap();
-currentScale = 1;
-panX = 0;
-panY = 0;
-apply();
 
-loadLayout();
+if (HAS_CANVAS_APP) {
+  applyBriefToDesign();
+  renderSentence();
+  buildMinimap();
+  setupMinimap();
+  currentScale = 1;
+  panX = 0;
+  panY = 0;
+  apply();
 
-// Header surprise button (kept for compatibility)
-document.getElementById('surprise-btn').addEventListener('click', function() { surprise(); });
-document.getElementById('export-btn').addEventListener('click', exportCSS);
+  loadLayout();
+}
+
+// Surprise buttons can live in the header or the canvas toolbar depending on layout.
+document.querySelectorAll('#surprise-btn, #canvas-surprise-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() { surprise(); });
+});
+const exportBtn = document.getElementById('export-btn');
+if (exportBtn) exportBtn.addEventListener('click', exportCSS);
+
+document.querySelectorAll('[data-copy]').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var id = btn.getAttribute('data-copy');
+    var source = id ? document.getElementById(id) : null;
+    if (!source) return;
+    navigator.clipboard.writeText(source.textContent || '').then(function() {
+      var original = btn.textContent;
+      btn.textContent = 'Copied';
+      setTimeout(function() { btn.textContent = original; }, 1400);
+    });
+  });
+});
+
+document.querySelectorAll('[data-accordion]').forEach(function(item) {
+  var head = item.querySelector('.seo-accordion-head');
+  if (!head) return;
+  head.addEventListener('click', function() {
+    var open = item.classList.toggle('open');
+    head.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});

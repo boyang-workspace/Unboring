@@ -1,0 +1,10 @@
+.DS_Store
+.env
+.env.*
+.wrangler/
+.gstack/
+.playwright-mcp/
+node_modules/
+*.local
+*.tmp
+unboring-home-*.png

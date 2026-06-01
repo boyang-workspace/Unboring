@@ -1,0 +1,8 @@
+/surfaces/ /interactions/ 301
+/surfaces/* /interactions/ 301
+/text-effects/ /effects/ 301
+/text-effects/* /effects/ 301
+/backgrounds/ /effects/ 301
+/backgrounds/* /effects/ 301
+/canvas/ / 301
+/canvas/* / 301

@@ -2,9 +2,18 @@
   "name": "unboring",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
+  "homepage": "https://unboring.openagent.bot",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/boyang-workspace/Unboring.git"
+  },
+  "bugs": {
+    "url": "https://github.com/boyang-workspace/Unboring/issues"
+  },
   "scripts": {
     "dev": "python3 -m http.server 4173",
-    "build": "node scripts/build-site.js && node -e \"const fs=require('node:fs'); for (const p of ['index.html','motion/index.html','components/index.html','interactions/index.html','surfaces/index.html','styles/index.html','agent/index.html','assets/styles.css','assets/app.js','sitemap.xml','robots.txt','og-image.svg']) fs.accessSync(p); console.log('static build ok')\"",
+    "build": "node scripts/build-site.js && node -e \"const fs=require('node:fs'); for (const p of ['index.html','motion/index.html','components/index.html','interactions/index.html','styles/index.html','effects/index.html','agent/index.html','assets/styles.css','assets/app.js','sitemap.xml','robots.txt','_redirects','og-image.svg']) fs.accessSync(p); console.log('static build ok')\"",
     "deploy": "wrangler pages deploy . --project-name unboring"
   },
   "devDependencies": {
