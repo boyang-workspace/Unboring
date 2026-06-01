@@ -20,6 +20,7 @@ npm run deploy
 
 - `index.html`: hand-authored homepage and canvas markup.
 - `assets/app.js`: homepage behavior, natural-language prompt builder, canvas controls, copy buttons, FAQ accordions, and logo font rolling.
+- `assets/creative-recipes.js`: homepage creative recipe registry. Add new design directions here before wiring heavier UI changes.
 - `assets/style.css`: homepage-specific CSS.
 - `assets/components.css`: styles for cards inside the homepage canvas.
 - `assets/styles.css`: shared CSS for generated library and detail pages.
@@ -42,6 +43,8 @@ npm run deploy
 ## Style Direction
 
 The homepage defines the product chrome: warm paper background, 12px viewport margins, 56px floating header, green tilted logo icon, 8-12px radii, restrained shadows, and black/cream utility panels. Generated pages should feel like the same product, not a separate dark portfolio site.
+
+The homepage canvas is a sampler. It may include motion preview cards to show how a direction feels, but `/motion/` remains the canonical motion knowledge library with full prompt, negative prompt, tokens, and usage guidance.
 
 ## Do Not Commit
 

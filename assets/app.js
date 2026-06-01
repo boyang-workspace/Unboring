@@ -48,6 +48,7 @@ const FONTS_DISPLAY = ["Bebas Neue","Oswald","Righteous","Fredoka","Permanent Ma
 const FONTS_HAND = ["Caveat","Dancing Script","Pacifico","Satisfy","Great Vibes","Nunito","Patrick Hand"];
 const ALL_FONTS = [...FONTS_SANS, ...FONTS_SERIF, ...FONTS_DISPLAY, ...FONTS_HAND];
 const pick = a => a[Math.floor(Math.random() * a.length)];
+const CREATIVE_RECIPES = window.UNBORING_RECIPES || [];
 
 // ── Font Pairings ──
 const FONT_PAIRINGS = [
@@ -107,6 +108,8 @@ const designState = {
   fontHeading: '', fontBody: '', fs: '', titleFs: '', ls: '', fw: 500,
   dark: false, bgPattern: ''
 };
+
+let currentRecipeState = CREATIVE_RECIPES[0] || null;
 
 // ── Surprise Me! ──
 function surprise() {
@@ -223,7 +226,7 @@ function surprise() {
 function exportCSS() {
   const root = getComputedStyle(document.documentElement);
   const vars = ['--bg','--fg','--card','--card-fg','--muted','--muted-fg','--primary','--primary-fg','--secondary','--secondary-fg','--border','--input','--destructive','--radius','--bw','--shadow','--ls','--fw','--fs','--title-fs','--font','--font-heading'];
-  let css = ':root {\n';
+  let css = '/* UnBoring: ' + ((currentRecipeState && currentRecipeState.title) || 'Custom Direction') + ' */\n:root {\n';
   vars.forEach(v => { const val = root.getPropertyValue(v).trim(); if (val) css += '  ' + v + ': ' + val + ';\n'; });
   css += '}\n';
   navigator.clipboard.writeText(css).then(() => {
@@ -309,6 +312,18 @@ const BRIEF_CHOICES = {
     'community homepage',
     'ecommerce product page',
   ],
+  audience: [
+    'solo founders and vibe coders',
+    'product teams',
+    'design-conscious engineers',
+    'parents and kids',
+    'teachers and students',
+    'clinicians and patients',
+    'game fans',
+    'creative directors',
+    'data analysts',
+    'developers',
+  ],
   mood: [
     'delicate',
     'playful',
@@ -353,16 +368,28 @@ const BRIEF_CHOICES = {
     'dashboard-like landing page with real UI panels',
     'gallery-led page with modular cards',
   ],
+  avoid: [
+    'default shadcn card stacks',
+    'generic purple-blue gradients',
+    'meaningless bento grids',
+    'oversized SaaS slogans',
+    'decorative blobs without purpose',
+    'fake dashboard filler',
+    'stock-like landing page sections',
+    'over-animated portfolio tricks',
+  ],
 };
 
 const briefState = {
   projectType: 'SaaS landing page',
+  audience: 'solo founders and vibe coders',
   brandColorName: 'red',
   brandColor: '#ef4444',
   mood: 'delicate',
   detailStyle: 'fine lines and pale shadows',
   motion: 'quiet scroll reveals',
   layout: 'full landing page with hero, proof, features, and CTA',
+  avoid: 'default shadcn card stacks',
 };
 
 const DETAIL_TOKEN_PRESETS = {
@@ -448,6 +475,9 @@ function briefSelect(key) {
   choices.forEach(function(choice) {
     html += '<option value="' + escapeHtmlText(choice) + '"' + (choice === current ? ' selected' : '') + '>' + escapeHtmlText(choice) + '</option>';
   });
+  if (current && choices.indexOf(current) === -1) {
+    html += '<option value="' + escapeHtmlText(current) + '" selected>' + escapeHtmlText(current) + '</option>';
+  }
   html += '</select></span>';
   return html;
 }
@@ -470,12 +500,14 @@ function randomizeBrief() {
   function pickChoice(key) { return pick(BRIEF_CHOICES[key]); }
   var color = pick(COLOR_PRESETS);
   briefState.projectType = pickChoice('projectType');
+  briefState.audience = pickChoice('audience');
   briefState.brandColorName = color.label;
   briefState.brandColor = color.value;
   briefState.mood = pickChoice('mood');
   briefState.detailStyle = pickChoice('detailStyle');
   briefState.motion = pickChoice('motion');
   briefState.layout = pickChoice('layout');
+  briefState.avoid = pickChoice('avoid');
 }
 
 function readableTextOn(hex) {
@@ -492,22 +524,43 @@ function applyBriefToDesign() {
   var r = document.documentElement.style;
   var tokenPreset = DETAIL_TOKEN_PRESETS[briefState.detailStyle] || DETAIL_TOKEN_PRESETS['fine lines and pale shadows'];
   var fontPreset = MOOD_FONT_PRESETS[briefState.mood] || MOOD_FONT_PRESETS.delicate;
-  r.setProperty('--primary', briefState.brandColor);
-  r.setProperty('--primary-fg', readableTextOn(briefState.brandColor));
-  r.setProperty('--ring', briefState.brandColor);
+  var recipeTokens = currentRecipeState && currentRecipeState.tokenHints ? currentRecipeState.tokenHints : {};
+  var primary = briefState.brandColor || recipeTokens.primary || '#ef4444';
+  var bg = recipeTokens.bg;
+  var fg = recipeTokens.fg;
+  var surface = recipeTokens.surface;
+  r.setProperty('--primary', primary);
+  r.setProperty('--primary-fg', readableTextOn(primary));
+  r.setProperty('--ring', primary);
+  if (bg) {
+    r.setProperty('--bg', bg);
+    document.body.style.backgroundColor = bg;
+    designState.bg = bg;
+  }
+  if (fg) {
+    r.setProperty('--fg', fg);
+    designState.fg = fg;
+  }
+  if (surface) {
+    r.setProperty('--card', surface);
+    r.setProperty('--card-bg', surface);
+    designState.card = surface;
+  }
   r.setProperty('--radius', tokenPreset.radius);
   r.setProperty('--bw', tokenPreset.bw);
   r.setProperty('--shadow', tokenPreset.shadow);
+  if (recipeTokens.radius) r.setProperty('--radius', recipeTokens.radius);
+  if (recipeTokens.shadow) r.setProperty('--shadow', recipeTokens.shadow);
   r.setProperty('--ls', tokenPreset.ls);
   r.setProperty('--fw', tokenPreset.fw);
   r.setProperty('--font-heading', "'" + fontPreset.heading + "',system-ui,sans-serif");
   r.setProperty('--font', "'" + fontPreset.body + "',system-ui,sans-serif");
   Object.assign(designState, {
-    primary: briefState.brandColor,
-    primaryFg: readableTextOn(briefState.brandColor),
-    radius: tokenPreset.radius,
+    primary: primary,
+    primaryFg: readableTextOn(primary),
+    radius: recipeTokens.radius || tokenPreset.radius,
     bw: tokenPreset.bw,
-    shadow: tokenPreset.shadow,
+    shadow: recipeTokens.shadow || tokenPreset.shadow,
     ls: tokenPreset.ls,
     fw: tokenPreset.fw,
     fontHeading: fontPreset.heading,
@@ -515,11 +568,50 @@ function applyBriefToDesign() {
   });
 }
 
+function recipeMatchesBrief(recipe) {
+  if (!recipe) return false;
+  var projectMatch = (recipe.projectTypes || []).some(function(type) {
+    return type === briefState.projectType;
+  });
+  var moodMatch = (recipe.mood || []).some(function(mood) {
+    return mood === briefState.mood;
+  });
+  return projectMatch || moodMatch;
+}
+
+function pickRecipeForBrief() {
+  if (!CREATIVE_RECIPES.length) return null;
+  var matches = CREATIVE_RECIPES.filter(recipeMatchesBrief);
+  var pool = matches.length ? matches : CREATIVE_RECIPES;
+  var recipe = pick(pool);
+  if (pool.length > 1) {
+    var guard = 0;
+    while (recipe && currentRecipeState && recipe.id === currentRecipeState.id && guard < 8) {
+      recipe = pick(pool);
+      guard += 1;
+    }
+  }
+  return recipe;
+}
+
+function applyRecipeToBrief(recipe) {
+  if (!recipe) return;
+  currentRecipeState = recipe;
+  if (recipe.projectTypes && recipe.projectTypes.length) briefState.projectType = pick(recipe.projectTypes);
+  if (recipe.mood && recipe.mood.length) briefState.mood = pick(recipe.mood);
+  if (recipe.motionPrinciples && recipe.motionPrinciples.length) briefState.motion = recipe.motionPrinciples[0];
+  if (recipe.layoutDirection) briefState.layout = recipe.layoutDirection;
+  if (recipe.avoid && recipe.avoid.length) briefState.avoid = recipe.avoid[0];
+}
+
 function runPromptSurprise() {
   surprise();
   randomizeBrief();
+  applyRecipeToBrief(pickRecipeForBrief());
   applyBriefToDesign();
   renderSentence({ animate: true });
+  renderOutputPanel();
+  updateCanvasToolbar();
 }
 
 // ── Render sentence ──
@@ -533,9 +625,11 @@ function renderSentence(opts) {
   html += '<div class="panel-title">Prompt Builder</div>';
   html += '<div class="nl-sentence">';
   html += '<p>I want to design a ' + briefSelect('projectType') + '</p>';
+  html += '<p>For ' + briefSelect('audience') + '</p>';
   html += '<p>My brand color is ' + briefColorControls() + '</p>';
   html += '<p>I want it to feel ' + briefSelect('mood') + ', with ' + briefSelect('detailStyle') + '</p>';
   html += '<p>The page should use ' + briefSelect('motion') + ' and become a ' + briefSelect('layout') + '</p>';
+  html += '<p>Avoid ' + briefSelect('avoid') + '</p>';
   html += '</div>';
   html += '<div class="pw-actions nl-actions">';
   html += '<button class="pw-surprise-btn" id="pw-surprise-btn">Surprise me</button>';
@@ -571,6 +665,8 @@ function bindSentenceEvents() {
         briefState[key] = control.value;
       }
       applyBriefToDesign();
+      renderOutputPanel();
+      updateCanvasToolbar();
       renderSentence({ animate: false });
     });
   });
@@ -933,18 +1029,21 @@ function oklchToHex(oklch) {
 
 function generatePrompt() {
   var s = designState;
+  var recipe = currentRecipeState || {};
   return 'Design a ' + briefState.projectType + ' for a real product, not a generic template.\n\n' +
     'Natural language brief:\n' +
+    '- Audience: ' + briefState.audience + '\n' +
     '- Brand color: ' + briefState.brandColorName + ' (' + briefState.brandColor + ')\n' +
     '- Desired feeling: ' + briefState.mood + '\n' +
     '- Visual detail: ' + briefState.detailStyle + '\n' +
     '- Motion language: ' + briefState.motion + '\n' +
     '- Page structure: ' + briefState.layout + '\n\n' +
-    'Design direction:\n' +
-    '- Build a complete first-screen-to-CTA landing page, not just a hero section.\n' +
-    '- Include real page sections: hero, product proof, feature explanation, visual demo area, trust/social proof, and final CTA.\n' +
-    '- Use distinctive typography, meaningful spacing, and visual hierarchy tailored to the project type.\n' +
-    '- Make interactions feel intentional: hover states, subtle transitions, and one memorable motion idea.\n\n' +
+    'UnBoring direction: ' + (recipe.title || 'Custom Direction') + '\n' +
+    '- ' + (recipe.prompt || 'Build a complete first-screen-to-CTA landing page, not just a hero section.') + '\n' +
+    '- Visual principles: ' + ((recipe.visualPrinciples || []).join(', ') || 'distinctive typography, meaningful spacing, tailored hierarchy') + '\n' +
+    '- Motion principles: ' + ((recipe.motionPrinciples || []).join(', ') || briefState.motion) + '\n' +
+    '- Layout direction: ' + (recipe.layoutDirection || briefState.layout) + '\n' +
+    '- Recommended components: ' + ((recipe.recommendedComponents || []).join(', ') || 'hero, proof, features, visual demo, CTA') + '\n\n' +
     'Current system tokens:\n' +
     '- Background: ' + (s.bg || '#ffffff') + '\n' +
     '- Foreground: ' + (s.fg || '#1a1a1a') + '\n' +
@@ -955,12 +1054,134 @@ function generatePrompt() {
     '- Border width: ' + (s.bw || '1px') + '\n' +
     '- Shadow: ' + (s.shadow || 'none') + '\n\n' +
     'Avoid:\n' +
-    '- Default shadcn card stacks, meaningless bento grids, generic purple-blue gradients, oversized SaaS slogans, and decoration that does not explain the product.';
+    '- ' + generateAvoidText();
 }
 
 function updatePromptBlock() {
   var preview = document.getElementById('prompt-preview');
   if (preview) preview.value = generatePrompt();
+}
+
+function generateAvoidText() {
+  var recipe = currentRecipeState || {};
+  var list = [];
+  if (recipe.negativePrompt) list.push(recipe.negativePrompt);
+  if (briefState.avoid) list.push(briefState.avoid);
+  (recipe.avoid || []).forEach(function(item) { if (list.indexOf(item) === -1) list.push(item); });
+  list.push('default shadcn card stacks');
+  list.push('meaningless bento grids');
+  list.push('generic purple-blue gradients');
+  return list.filter(Boolean).join('; ');
+}
+
+function generateCssTokens() {
+  var root = getComputedStyle(document.documentElement);
+  var vars = ['--bg','--fg','--card','--card-fg','--primary','--primary-fg','--muted','--muted-fg','--border','--radius','--bw','--shadow','--font','--font-heading','--ls','--fw'];
+  var css = '/* UnBoring: ' + ((currentRecipeState && currentRecipeState.title) || 'Custom Direction') + ' */\n:root {\n';
+  vars.forEach(function(v) {
+    var val = root.getPropertyValue(v).trim();
+    if (val) css += '  ' + v + ': ' + val + ';\n';
+  });
+  return css + '}';
+}
+
+function generateAgentJson() {
+  var recipe = currentRecipeState || {};
+  return JSON.stringify({
+    source: 'UnBoring',
+    recipeId: recipe.id || 'custom',
+    title: recipe.title || 'Custom Direction',
+    projectType: briefState.projectType,
+    audience: briefState.audience,
+    brandColor: { name: briefState.brandColorName, value: briefState.brandColor },
+    mood: briefState.mood,
+    visualDetail: briefState.detailStyle,
+    motionLanguage: briefState.motion,
+    layoutDirection: recipe.layoutDirection || briefState.layout,
+    visualPrinciples: recipe.visualPrinciples || [],
+    motionPrinciples: recipe.motionPrinciples || [],
+    recommendedComponents: recipe.recommendedComponents || [],
+    recommendedMotionCards: recipe.recommendedMotionCards || [],
+    tokens: {
+      background: designState.bg || '',
+      foreground: designState.fg || '',
+      primary: designState.primary || briefState.brandColor,
+      radius: designState.radius || '',
+      borderWidth: designState.bw || '',
+      shadow: designState.shadow || '',
+      headingFont: designState.fontHeading || '',
+      bodyFont: designState.fontBody || ''
+    },
+    prompt: generatePrompt(),
+    negativePrompt: generateAvoidText()
+  }, null, 2);
+}
+
+function copyTextFromButton(btn, text) {
+  if (!btn || !navigator.clipboard) return;
+  var original = btn.textContent;
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copied';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = original;
+      btn.classList.remove('copied');
+    }, 1400);
+  });
+}
+
+function renderOutputPanel() {
+  var panel = document.getElementById('right-panel');
+  if (!panel) return;
+  var recipe = currentRecipeState || {};
+  var title = recipe.title || 'Custom Direction';
+  var visual = (recipe.visualPrinciples || []).join(', ') || briefState.detailStyle;
+  var motion = (recipe.motionPrinciples || []).join(', ') || briefState.motion;
+  var css = generateCssTokens();
+  var agent = generateAgentJson();
+  var avoid = generateAvoidText();
+  panel.innerHTML =
+    '<div class="right-card output-hero">' +
+      '<div class="right-kicker">Design Direction</div>' +
+      '<h2>' + escapeHtmlText(title) + '</h2>' +
+      '<p>' + escapeHtmlText(recipe.layoutDirection || briefState.layout) + '</p>' +
+      '<div class="output-pills"><span>' + escapeHtmlText(briefState.projectType) + '</span><span>' + escapeHtmlText(briefState.mood) + '</span></div>' +
+    '</div>' +
+    outputBlock('Direction', 'Copy direction', title + '\\n' + (recipe.layoutDirection || briefState.layout) + '\\nVisual: ' + visual + '\\nMotion: ' + motion,
+      '<p><strong>Visual:</strong> ' + escapeHtmlText(visual) + '</p><p><strong>Motion:</strong> ' + escapeHtmlText(motion) + '</p><p><strong>Components:</strong> ' + escapeHtmlText((recipe.recommendedComponents || []).join(', ') || 'hero, proof, features, CTA') + '</p>') +
+    outputBlock('Prompt', 'Copy prompt', generatePrompt(), '<pre>' + escapeHtmlText(generatePrompt()) + '</pre>') +
+    outputBlock('CSS Tokens', 'Copy CSS', css, '<pre>' + escapeHtmlText(css) + '</pre>') +
+    outputBlock('Agent JSON', 'Copy JSON', agent, '<pre>' + escapeHtmlText(agent) + '</pre>') +
+    outputBlock('Avoid', 'Copy avoid', avoid, '<p>' + escapeHtmlText(avoid) + '</p>') +
+    '<div class="right-card"><div class="right-kicker">Library</div><div class="right-links">' +
+      '<a href="motion/">Motion <span>35</span></a>' +
+      '<a href="components/">Components <span>51</span></a>' +
+      '<a href="interactions/">Interactions <span>85</span></a>' +
+      '<a href="styles/">Styles <span>27</span></a>' +
+      '<a href="effects/">Effects <span>63</span></a>' +
+      '<a href="about/">About <span>→</span></a>' +
+      '<a href="agent/">MCP / CLI <span>→</span></a>' +
+    '</div></div>';
+
+  panel.querySelectorAll('[data-copy-value]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      copyTextFromButton(btn, btn.getAttribute('data-copy-value') || '');
+    });
+  });
+}
+
+function outputBlock(kicker, copyLabel, value, body) {
+  return '<div class="right-card output-block">' +
+    '<div class="output-head"><div class="right-kicker">' + escapeHtmlText(kicker) + '</div><button type="button" data-copy-value="' + escapeHtmlText(value) + '">' + escapeHtmlText(copyLabel) + '</button></div>' +
+    body +
+    '</div>';
+}
+
+function updateCanvasToolbar() {
+  var toolbar = document.getElementById('canvas-toolbar');
+  if (!toolbar) return;
+  var recipe = currentRecipeState || {};
+  toolbar.innerHTML = '<span>Canvas Preview</span><span>' + escapeHtmlText(recipe.title || 'Custom Direction') + ' · ' + escapeHtmlText(briefState.projectType) + ' · ' + escapeHtmlText(briefState.motion) + '</span>';
 }
 
 function updateThemeStrip() {
@@ -1259,6 +1480,8 @@ randomizeBrandFonts();
 if (HAS_CANVAS_APP) {
   applyBriefToDesign();
   renderSentence();
+  renderOutputPanel();
+  updateCanvasToolbar();
   buildMinimap();
   setupMinimap();
   currentScale = 1;

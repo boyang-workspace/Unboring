@@ -21,7 +21,9 @@ UnBoring should reduce that waste by giving humans and agents concrete design vo
 
 ## Product Shape
 
-The homepage is the tool: a prompt builder plus a live canvas for exploring visual systems. The library pages collect motion, components, interactions, styles, effects, and future templates. Each entry should be useful to both humans and agents: preview, prompt, negative prompt, tokens, and implementation notes.
+The homepage is the tool: a prompt builder plus a live canvas for exploring visual systems. It should generate a current design direction, prompt, negative prompt, CSS tokens, and agent-readable JSON from creative recipes. The library pages collect motion, components, interactions, styles, effects, and future templates. Each entry should be useful to both humans and agents: preview, prompt, negative prompt, tokens, and implementation notes.
+
+The canvas can include motion sampler cards so users quickly feel how a direction moves. Those cards should stay lightweight and link back to `/motion/` or related detail pages. `/motion/` remains the canonical motion knowledge library.
 
 Future exports may include MCP resources, JSON prompt packs, CLI search, or direct agent integrations.
 

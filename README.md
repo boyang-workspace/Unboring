@@ -14,7 +14,8 @@ UnBoring exists to give AI and humans better design vocabulary. Instead of askin
 
 - Helps users explore product and website UI design directions.
 - Provides a natural-language prompt builder on the homepage.
-- Offers an interactive canvas with 80 UI components and randomized visual systems.
+- Offers an interactive canvas with 80 UI components, 12 motion sampler cards, and randomized visual systems.
+- Generates recipe-driven design directions with prompts, CSS tokens, Avoid guidance, and agent-ready JSON.
 - Collects motion patterns, components, interactions, styles, effects, and templates as reusable design references.
 - Gives each idea a preview, AI prompt, negative prompt, and tokens.
 - Plans to expose design ideas through MCP, JSON packs, or other agent-readable formats.
@@ -53,6 +54,8 @@ index.html              Homepage tool and canvas
 assets/style.css        Homepage chrome and prompt builder styles
 assets/components.css   Canvas component styles
 assets/app.js           Homepage canvas, prompt builder, copy, FAQ, logo motion
+assets/creative-recipes.js
+                        Homepage creative recipe registry
 assets/styles.css       Generated library/detail page styles
 scripts/build-site.js   Static page generator and sitemap/redirect builder
 data/                   Structured source data used by build scripts
@@ -81,12 +84,15 @@ The project uses the MIT License and is designed to welcome designers, developer
 Good first contributions include:
 
 - New component, effect, motion, or interaction entries.
+- New creative recipes for the homepage generator.
 - Better prompt and negative-prompt wording for existing entries.
 - More diverse visual systems for the homepage canvas.
 - Templates or design directions for real project types such as SaaS, education, healthcare, games, portfolios, data reports, and creative tools.
 - Accessibility, responsive layout, and SEO improvements.
 
 Do not copy source assets, code, or proprietary visual identity from Awwwards, GSAP Showcase, or other inspiration sites. Extract reusable design principles instead.
+
+Creative recipes should describe original reusable methods: project context, visual principles, motion principles, recommended components, token hints, prompt, negative prompt, Avoid guidance, and agent-readable structure.
 
 See `docs/PROJECT_BRIEF.md` for the product thesis, `AGENTS.md` for agent handoff notes, and `CONTRIBUTING.md` for contribution rules.
 
