@@ -620,9 +620,7 @@ function renderSentence(opts) {
   html += '<button class="pw-surprise-btn" id="pw-surprise-btn">Surprise me</button>';
   html += '<button class="pw-copy-btn" id="copy-prompt">Copy Prompt</button>';
   html += '</div>';
-  html += '<div class="nl-preview-label">Generated prompt</div>';
-  html += '<textarea class="nl-prompt-preview" id="prompt-preview" readonly>' + escapeHtmlText(generatePrompt()) + '</textarea>';
-  html += '<div class="sidebar-footer">Fill the sentence first. The CSS tokens follow the brief.</div>';
+  html += '<div class="sidebar-footer">Tune the brief here. Copy the full prompt, CSS, and Agent JSON from the result panel.</div>';
   html += '</div>';
 
   sb.innerHTML = html;
@@ -1137,16 +1135,7 @@ function renderOutputPanel() {
     outputBlock('Prompt', 'Copy prompt', generatePrompt(), '<pre>' + escapeHtmlText(generatePrompt()) + '</pre>') +
     outputBlock('CSS Tokens', 'Copy CSS', css, '<pre>' + escapeHtmlText(css) + '</pre>') +
     outputBlock('Agent JSON', 'Copy JSON', agent, '<pre>' + escapeHtmlText(agent) + '</pre>') +
-    outputBlock('Avoid', 'Copy avoid', avoid, '<p>' + escapeHtmlText(avoid) + '</p>') +
-    '<div class="right-card"><div class="right-kicker">Library</div><div class="right-links">' +
-      '<a href="motion/">Motion <span>35</span></a>' +
-      '<a href="components/">Components <span>51</span></a>' +
-      '<a href="interactions/">Interactions <span>85</span></a>' +
-      '<a href="styles/">Styles <span>27</span></a>' +
-      '<a href="effects/">Effects <span>63</span></a>' +
-      '<a href="about/">About <span>→</span></a>' +
-      '<a href="agent/">MCP / CLI <span>→</span></a>' +
-    '</div></div>';
+    outputBlock('Avoid', 'Copy avoid', avoid, '<p>' + escapeHtmlText(avoid) + '</p>');
 
   panel.querySelectorAll('[data-copy-value]').forEach(function(btn) {
     btn.addEventListener('click', function() {

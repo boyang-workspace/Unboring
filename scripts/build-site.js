@@ -2,7 +2,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const site = "https://unboring.openagent.bot";
-const assetVersion = "20260601b";
+const assetVersion = "20260601d";
 const lastmod = "2026-06-01";
 const socialImage = `${site}/og-image.svg`;
 
@@ -438,8 +438,10 @@ const componentEntries = componentRows.map(([name, group, description, preview, 
 const categoryBySlug = Object.fromEntries(categories.map((category) => [category.slug, category]));
 const navFor = (current) =>
   [
+    `<a href="/"${current === "creator" ? ' aria-current="page"' : ""}>Creator</a>`,
     ...categories.map((category) => `<a href="/${category.slug}/"${category.slug === current ? ' aria-current="page"' : ""}>${category.nav}</a>`),
     `<a href="/about/"${current === "about" ? ' aria-current="page"' : ""}>About</a>`,
+    `<a href="/agent/"${current === "agent" ? ' aria-current="page"' : ""}>Agent</a>`,
   ].join("");
 
 function slugify(value) {
@@ -1530,7 +1532,7 @@ const homePage = () => {
     description:
       "UnBoring is a free open-source UI inspiration library with previews, AI prompts, negative prompts, and structured tokens for AI-generated interfaces.",
     canonical: `${site}/inspire/`,
-    current: "",
+    current: "creator",
     body: `
     <main class="page">
       <section class="hero" aria-labelledby="page-title">
@@ -1563,7 +1565,7 @@ const agentPage = () =>
     title: "Agent-ready - UnBoring",
     description: "How UnBoring will support MCP, CLI, JSON packs, and agent-readable UI inspiration.",
     canonical: `${site}/agent/`,
-    current: "",
+    current: "agent",
     body: `
     <main class="page">
       <section class="hero compact"><div><div class="hero-meta mono" data-left="// machine readable&#10;// mcp / cli planned" data-right="structured tokens" aria-hidden="true"><span class="hero-rule"></span></div><p class="eyebrow mono">The page is for humans. The shape is for agents.</p><h1>Agent-ready</h1><p class="subtitle">Every UnBoring entry is designed to become a stable resource: id, category, preview, AI prompt, negative prompt, and tokens.</p></div></section>
@@ -1571,35 +1573,70 @@ const agentPage = () =>
     </main>`,
   });
 
-const aboutPage = () =>
-  shell({
+const aboutPage = () => {
+  const aboutFaq = [
+    [
+      "What is UnBoring?",
+      "UnBoring is an open-source design inspiration tool that gives vibe coders concrete UI directions, prompts, CSS tokens, and agent-readable design structure.",
+    ],
+    [
+      "Who is UnBoring for?",
+      "It is for engineers, product managers, indie hackers, designers, and AI agents that need better product and website interface ideas without starting from generic templates.",
+    ],
+    [
+      "Can designers contribute?",
+      "Yes. The project is built for contributions: visual styles, motion patterns, component ideas, templates, prompts, negative prompts, and future demo pages.",
+    ],
+  ];
+
+  return shell({
     title: "About - UnBoring",
     description:
-      "UnBoring helps vibe coders, engineers, product managers, designers, and AI agents find less boring UI design directions, prompts, CSS tokens, and creative interface references.",
+      "UnBoring is an open-source UI design inspiration tool for vibe coders, engineers, product managers, designers, and AI agents that need less boring interface directions, prompts, CSS tokens, and creative references.",
     canonical: `${site}/about/`,
     current: "about",
+    jsonLd: `<script type="application/ld+json">${JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: aboutFaq.map(([name, text]) => ({
+        "@type": "Question",
+        name,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text,
+        },
+      })),
+    })}</script>`,
     body: `
     <main class="page">
       <section class="hero compact" aria-labelledby="page-title">
         <div>
           <div class="hero-meta mono" data-left="// product thesis&#10;// open-source design library" data-right="for humans + agents" aria-hidden="true"><span class="hero-rule"></span></div>
-          <p class="eyebrow mono">AI-generated UI is too boring. Give it better taste vocabulary.</p>
+          <p class="eyebrow mono">A design vocabulary layer for vibe coding.</p>
           <h1 id="page-title">About UnBoring</h1>
-          <p class="subtitle">UnBoring helps vibe coders find product and website UI directions they can copy into prompts, CSS, or future agent workflows.</p>
+          <p class="subtitle">UnBoring helps builders find product and website UI directions they can copy into prompts, CSS, JSON briefs, or future agent workflows.</p>
         </div>
       </section>
       <section class="dark-section" aria-labelledby="mission-title">
         <div class="intro">
-          <h2 id="mission-title">The mission</h2>
-          <p>UnBoring is for people who can build but do not always know how a product should look or move. It turns design inspiration into usable directions: visual styles, motion patterns, interaction ideas, templates, prompts, negative prompts, and structured tokens.</p>
+          <h2 id="mission-title">Why it exists</h2>
+          <p>AI can produce UI quickly, but too much of it collapses into the same SaaS card stacks, default component libraries, oversized headlines, and predictable gradients. UnBoring gives humans and agents a richer starting point: visual methods, interaction ideas, prompts, negative prompts, and reusable tokens.</p>
         </div>
       </section>
-      <section class="dark-section" aria-labelledby="pain-title">
-        <div class="grid-heading"><div><h2 id="pain-title">The pain it solves</h2><p>Vibe coders often spend too many tokens exploring UI ideas and still end up with generic Tailwind, shadcn, oversized hero text, card stacks, and predictable gradients.</p></div></div>
+      <section class="dark-section" aria-labelledby="audience-title">
+        <div class="grid-heading"><div><h2 id="audience-title">Who it helps</h2><p>UnBoring is for people who can build the product, but need sharper design direction before asking an AI or agent to implement the interface.</p></div></div>
         <div class="category-grid">
-          <div class="category-card"><span class="card-kicker mono">01</span><h3>Less token waste</h3><p>Start from concrete design directions instead of asking AI to invent taste from vague adjectives.</p></div>
-          <div class="category-card"><span class="card-kicker mono">02</span><h3>Less template gravity</h3><p>Push AI away from default SaaS dashboards and toward styles that fit the project, audience, and mood.</p></div>
-          <div class="category-card"><span class="card-kicker mono">03</span><h3>More agent-ready structure</h3><p>Keep every idea copyable by humans and readable by agents through prompts, negative prompts, and tokens.</p></div>
+          <div class="category-card"><span class="card-kicker mono">01</span><h3>Vibe coders</h3><p>Find a direction before burning tokens on vague prompts like make it beautiful or less boring.</p></div>
+          <div class="category-card"><span class="card-kicker mono">02</span><h3>Product teams</h3><p>Turn audience, mood, brand color, and interaction intent into a brief that an AI can actually follow.</p></div>
+          <div class="category-card"><span class="card-kicker mono">03</span><h3>Design contributors</h3><p>Contribute reusable styles, motion patterns, demo pages, and design methods without copying proprietary assets.</p></div>
+        </div>
+      </section>
+      <section class="dark-section" aria-labelledby="output-title">
+        <div class="grid-heading"><div><h2 id="output-title">What it produces</h2><p>The homepage creator and the library pages are designed to produce artifacts that are useful to both people and agents.</p></div></div>
+        <div class="category-grid">
+          <div class="category-card"><span class="card-kicker mono">Direction</span><h3>Design direction</h3><p>A project-aware visual stance: layout rhythm, type mood, color behavior, material feel, and motion language.</p></div>
+          <div class="category-card"><span class="card-kicker mono">Prompt</span><h3>Copyable prompt</h3><p>A concrete instruction that tells an AI what to build, what to emphasize, and what boring defaults to avoid.</p></div>
+          <div class="category-card"><span class="card-kicker mono">Agent</span><h3>Structured brief</h3><p>CSS tokens and JSON-shaped output that can evolve into MCP resources, CLI search, and agent-callable design packs.</p></div>
         </div>
       </section>
       <section class="dark-section" aria-labelledby="open-title">
@@ -1607,7 +1644,11 @@ const aboutPage = () =>
           <h2 id="open-title">Why open source</h2>
           <p>Good design taste should not be locked inside one generator. UnBoring is open source so designers and builders can contribute styles, motion patterns, templates, and design skills that help AI-generated interfaces become more beautiful, diverse, practical, and human.</p>
         </div>
-        <div class="actions" aria-label="About actions"><a class="button primary" href="https://github.com/boyang-workspace/Unboring">Contribute on GitHub</a><a class="button" href="/inspire/">Browse the library</a></div>
+        <div class="actions" aria-label="About actions"><a class="button primary" href="https://github.com/boyang-workspace/Unboring">Contribute on GitHub</a><a class="button" href="/">Open Creator</a></div>
+      </section>
+      <section class="dark-section" aria-labelledby="faq-title">
+        <div class="grid-heading"><div><h2 id="faq-title">FAQ</h2><p>Plain answers for search engines, contributors, and the next agent reading this project.</p></div></div>
+        ${aboutFaq.map(([name, text]) => faq(name, text)).join("")}
       </section>
       <section class="callout" aria-labelledby="agent-title">
         <div><h2 id="agent-title">Built for future agents.</h2><p>The public site is the human interface. The underlying shape is meant to become MCP resources, JSON prompt packs, CLI search, and direct agent-callable design references.</p></div>
@@ -1615,6 +1656,7 @@ const aboutPage = () =>
       </section>
     </main>`,
   });
+};
 
 const write = (file, content) => {
   fs.mkdirSync(path.dirname(file), { recursive: true });

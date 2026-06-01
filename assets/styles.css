@@ -58,7 +58,7 @@ a {
 
 .page {
   width: calc(100% - 24px);
-  max-width: 1440px;
+  max-width: 1240px;
   margin: 0 auto;
 }
 
@@ -74,7 +74,7 @@ a {
   z-index: 20;
   top: 12px;
   width: calc(100% - 24px);
-  max-width: 1440px;
+  max-width: 1240px;
   margin: 12px auto 0;
   background: rgba(255, 250, 240, 0.78);
   border: 1px solid var(--chrome-line);
@@ -144,7 +144,7 @@ a {
 .nav-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
   color: inherit;
   font-size: 0.72rem;
   justify-content: flex-end;
@@ -156,8 +156,10 @@ a {
   min-height: 38px;
   display: inline-flex;
   align-items: center;
-  padding: 0 13px;
+  padding: 0 11px;
   border-radius: 8px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
 }
 
 .nav-links a:hover,
@@ -427,7 +429,7 @@ h2 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 56px 22px 22px;
+  padding: 44px 20px 20px;
 }
 
 .idea-card {
