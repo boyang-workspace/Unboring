@@ -2,6 +2,12 @@
 
 This repo is a static site. Prefer small, explicit changes and run the generator before testing or deploying.
 
+## Core Product Brief
+
+UnBoring helps vibe coders, engineers, product managers, and AI agents find less boring UI design directions for products and websites. The project exists because AI-generated UI often burns tokens while still producing generic Tailwind/shadcn-style screens. UnBoring should provide concrete visual styles, motion patterns, templates, prompts, negative prompts, CSS tokens, and eventually MCP/JSON resources that agents can call directly.
+
+Before making product, content, or IA changes, read `docs/PROJECT_BRIEF.md`.
+
 ## Commands
 
 ```bash
@@ -19,6 +25,7 @@ npm run deploy
 - `assets/styles.css`: shared CSS for generated library and detail pages.
 - `scripts/build-site.js`: source of truth for generated pages, sitemap, robots, and redirects.
 - `data/`: structured source data used by older scripts and research.
+- `docs/PROJECT_BRIEF.md`: product thesis and handoff context for future agents.
 
 ## Workflow
 
