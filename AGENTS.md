@@ -44,7 +44,7 @@ npm run deploy
 
 The homepage defines the product chrome: warm paper background, 12px viewport margins, 56px floating header, green tilted logo icon, 8-12px radii, restrained shadows, and black/cream utility panels. Generated pages should feel like the same product, not a separate dark portfolio site.
 
-The homepage canvas is a sampler. It may include motion preview cards to show how a direction feels, but `/motion/` remains the canonical motion knowledge library with full prompt, negative prompt, tokens, and usage guidance.
+The homepage canvas is a page-composition sampler. Prefer header, hero, section, and product cards arranged in a simple vertical flow. `/motion/` remains the canonical motion knowledge library with full prompt, negative prompt, tokens, and usage guidance.
 
 ## Do Not Commit
 

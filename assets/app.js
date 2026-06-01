@@ -7,38 +7,21 @@ const HAS_CANVAS_APP = !!(canvas && content);
 let panX = 0, panY = 0, currentScale = 1, isDragging = false, startX, startY, startPanX, startPanY;
 const PADDING = 200;
 
-// ── Canvas Pan/Zoom ──
+// ── Canvas scroll layout ──
 function clampPan() {
-  const cw = canvas.clientWidth, ch = canvas.clientHeight;
-  const grid = document.querySelector('.grid');
-  const gw = grid ? grid.scrollWidth : 3120;
-  const gh = grid ? grid.scrollHeight : 2400;
-  panX = Math.min(PADDING, Math.max(cw - (gw * currentScale + PADDING), panX));
-  panY = Math.min(PADDING, Math.max(ch - (gh * currentScale + PADDING), panY));
+  panX = 0;
+  panY = 0;
+  currentScale = 1;
 }
-function apply() { clampPan(); content.style.transform = 'translate(' + panX + 'px,' + panY + 'px) scale(' + currentScale + ')'; updateMinimap(); }
+function apply() { if (content) content.style.transform = ''; }
 
 if (HAS_CANVAS_APP) {
-  canvas.addEventListener('mousedown', e => { if (e.button) return; if (e.target.closest('.cn-card')) return; isDragging = true; startX = e.clientX; startY = e.clientY; startPanX = panX; startPanY = panY; document.body.classList.add('dragging'); });
-  window.addEventListener('mousemove', e => { if (!isDragging) return; panX = startPanX + (e.clientX - startX) / currentScale; panY = startPanY + (e.clientY - startY) / currentScale; apply(); });
-  window.addEventListener('mouseup', () => { isDragging = false; document.body.classList.remove('dragging'); });
-  canvas.addEventListener('touchstart', e => { if (e.touches.length === 2) { e.preventDefault(); isDragging = true; startX = (e.touches[0].clientX + e.touches[1].clientX) / 2; startY = (e.touches[0].clientY + e.touches[1].clientY) / 2; startPanX = panX; startPanY = panY; document.body.classList.add('dragging'); } }, { passive: false });
-  canvas.addEventListener('touchmove', e => { if (isDragging && e.touches.length === 2) { e.preventDefault(); const cx = (e.touches[0].clientX + e.touches[1].clientX) / 2; const cy = (e.touches[0].clientY + e.touches[1].clientY) / 2; panX = startPanX + (cx - startX) / currentScale; panY = startPanY + (cy - startY) / currentScale; apply(); } }, { passive: false });
-  canvas.addEventListener('touchend', e => { if (e.touches.length < 2) { isDragging = false; document.body.classList.remove('dragging'); } });
-  canvas.addEventListener('wheel', e => { e.preventDefault(); panX -= e.deltaX / currentScale; panY -= e.deltaY / currentScale; apply(); }, { passive: false });
   document.addEventListener('keydown', e => { if (e.key === 'f' || e.key === 'F') { e.preventDefault(); fitAll(); } });
 }
 
 function fitAll() {
-  const grid = document.querySelector('.grid');
-  if (!grid) return;
-  const cw = canvas.clientWidth, ch = canvas.clientHeight;
-  const gw = grid.offsetWidth, gh = grid.offsetHeight;
-  const sx = cw / (gw + PADDING * 2), sy = ch / (gh + PADDING * 2);
-  currentScale = Math.min(sx, sy, 1.5);
-  panX = (cw - gw * currentScale) / 2;
-  panY = (ch - gh * currentScale) / 2;
   apply();
+  if (content) content.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ── Fonts ──
@@ -544,7 +527,9 @@ function applyBriefToDesign() {
   if (surface) {
     r.setProperty('--card', surface);
     r.setProperty('--card-bg', surface);
+    if (fg) r.setProperty('--card-fg', fg);
     designState.card = surface;
+    if (fg) designState.cardFg = fg;
   }
   r.setProperty('--radius', tokenPreset.radius);
   r.setProperty('--bw', tokenPreset.bw);
@@ -1262,7 +1247,6 @@ if (grid) {
     document.querySelectorAll('.cn-card').forEach(c => c.classList.remove('drag-over'));
     draggedCard = null;
     saveLayout();
-    updateMinimap();
   });
 
   grid.addEventListener('dragover', e => {
@@ -1294,7 +1278,6 @@ if (grid) {
     card.setAttribute('data-width', newW);
     btn.textContent = newW === 1 ? '2x' : '1x';
     saveLayout();
-    updateMinimap();
   });
 }
 
@@ -1311,7 +1294,7 @@ function loadLayout() {
   if (!grid) return;
   try {
     const data = JSON.parse(localStorage.getItem('unboring-layout'));
-    if (!data) { setTimeout(updateMinimap, 50); return; }
+    if (!data) return;
     const { order, widths } = data;
     order.forEach(id => {
       const card = grid.querySelector('[data-id="' + id + '"]');
@@ -1325,7 +1308,6 @@ function loadLayout() {
         grid.appendChild(card);
       }
     });
-    setTimeout(updateMinimap, 50);
   } catch(e) {}
 }
 
@@ -1341,85 +1323,6 @@ document.querySelectorAll('.cn-card').forEach(card => {
   card.addEventListener('mouseleave', hide);
   tag.addEventListener('mouseleave', hide);
 });
-
-// ── Minimap ──
-function buildMinimap() {
-  var el = document.createElement('div');
-  el.id = 'minimap';
-  el.innerHTML = '<div id="minimap-content"></div>';
-  document.body.appendChild(el);
-  return el;
-}
-function updateMinimap() {
-  var mm = document.getElementById('minimap');
-  if (!mm) return;
-  var grid = document.querySelector('.grid');
-  if (!grid) return;
-  var gridBounds = grid.getBoundingClientRect();
-  var mmc = document.getElementById('minimap-content');
-  var mmW = mmc.clientWidth, mmH = mmc.clientHeight;
-  if (mmW === 0) return;
-  var scaleX = mmW / gridBounds.width, scaleY = mmH / gridBounds.height;
-  var s = Math.min(scaleX, scaleY) * 0.95;
-  var ox = (mmW - gridBounds.width * s) / 2, oy = (mmH - gridBounds.height * s) / 2;
-  var html = '';
-  document.querySelectorAll('.cn-card').forEach(function(card) {
-    var r = card.getBoundingClientRect();
-    var x = (r.left - gridBounds.left) * s + ox;
-    var y = (r.top - gridBounds.top) * s + oy;
-    var w = r.width * s, h = r.height * s;
-    html += '<div class="mm-card" style="left:' + x + 'px;top:' + y + 'px;width:' + Math.max(w,2) + 'px;height:' + Math.max(h,2) + 'px"></div>';
-  });
-  var cv = document.getElementById('canvas');
-  if (!cv) return;
-  var vpL = (cv.getBoundingClientRect().left - gridBounds.left) * s + ox;
-  var vpT = (cv.getBoundingClientRect().top - gridBounds.top) * s + oy;
-  var vpW = cv.clientWidth * s, vpH = cv.clientHeight * s;
-  html += '<div class="mm-viewport" style="left:' + vpL + 'px;top:' + vpT + 'px;width:' + Math.max(vpW,3) + 'px;height:' + Math.max(vpH,3) + 'px"></div>';
-  mmc.innerHTML = html;
-}
-function setupMinimap() {
-  var mm = document.getElementById('minimap');
-  if (!mm) return;
-  var isDown = false;
-  mm.addEventListener('mousedown', function(e) {
-    isDown = true;
-    var mmBounds = mm.getBoundingClientRect();
-    var cv = document.getElementById('canvas');
-    var grid = document.querySelector('.grid');
-    if (!cv || !grid) return;
-    var gridBounds = grid.getBoundingClientRect();
-    var mmc = document.getElementById('minimap-content');
-    var mmW = mmc.clientWidth, mmH = mmc.clientHeight;
-    var scaleX = mmW / gridBounds.width, scaleY = mmH / gridBounds.height;
-    var s = Math.min(scaleX, scaleY) * 0.95;
-    var ox = (mmW - gridBounds.width * s) / 2, oy = (mmH - gridBounds.height * s) / 2;
-    var gridX = ((e.clientX - mmBounds.left - 6 - ox) / s);
-    var gridY = ((e.clientY - mmBounds.top - 6 - oy) / s);
-    panX = -(gridX - cv.clientWidth / (2 * currentScale));
-    panY = -(gridY - cv.clientHeight / (2 * currentScale));
-    apply();
-  });
-  window.addEventListener('mousemove', function(e) {
-    if (!isDown) return;
-    var mmBounds = mm.getBoundingClientRect();
-    var cv = document.getElementById('canvas');
-    var grid = document.querySelector('.grid');
-    if (!cv || !grid) return;
-    var gridBounds = grid.getBoundingClientRect();
-    var mmc = document.getElementById('minimap-content');
-    var mmW = mmc.clientWidth, mmH = mmc.clientHeight;
-    var scaleX = mmW / gridBounds.width, scaleY = mmH / gridBounds.height;
-    var s = Math.min(scaleX, scaleY) * 0.95;
-    var ox = (mmW - gridBounds.width * s) / 2, oy = (mmH - gridBounds.height * s) / 2;
-    var gridX = ((e.clientX - mmBounds.left - 6 - ox) / s);
-    var gridY = ((e.clientY - mmBounds.top - 6 - oy) / s);
-    panX = -(gridX - cv.clientWidth / (2 * currentScale));
-    panY = -(gridY - cv.clientHeight / (2 * currentScale));
-    apply();
-  });
-  window.addEventListener('mouseup', function() { isDown = false; });
-}
 
 // ── Brand font mixing ──
 var _brandPool = [];
@@ -1482,8 +1385,6 @@ if (HAS_CANVAS_APP) {
   renderSentence();
   renderOutputPanel();
   updateCanvasToolbar();
-  buildMinimap();
-  setupMinimap();
   currentScale = 1;
   panX = 0;
   panY = 0;

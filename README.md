@@ -14,7 +14,7 @@ UnBoring exists to give AI and humans better design vocabulary. Instead of askin
 
 - Helps users explore product and website UI design directions.
 - Provides a natural-language prompt builder on the homepage.
-- Offers an interactive canvas with 80 UI components, 12 motion sampler cards, and randomized visual systems.
+- Offers an interactive canvas with UI components, header patterns, and randomized visual systems.
 - Generates recipe-driven design directions with prompts, CSS tokens, Avoid guidance, and agent-ready JSON.
 - Collects motion patterns, components, interactions, styles, effects, and templates as reusable design references.
 - Gives each idea a preview, AI prompt, negative prompt, and tokens.

@@ -58,7 +58,9 @@ body{background:
 #sidebar{left:12px;width:260px;background:rgba(20,20,20,.9);border-right:1px solid #1f1b1622;padding:14px 12px;overflow-y:auto}
 #canvas{left:282px;right:322px;background:rgba(23,23,23,.08);z-index:1}
 #canvas-toolbar{position:absolute;left:10px;right:10px;top:10px;z-index:4;min-height:34px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 12px;border-radius:9px;background:rgba(17,17,17,.72);backdrop-filter:blur(14px);color:#fff;font:700 11px "IBM Plex Mono","SF Mono",monospace;text-transform:uppercase;letter-spacing:.08em}
-#canvas-content{top:46px}
+#canvas-content{top:46px;left:0;right:0;bottom:0;overflow-y:auto;overflow-x:hidden;transform:none!important;min-width:0;width:auto;scroll-behavior:smooth}
+.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;padding:24px;width:100%;max-width:1180px;margin:0 auto}
+.cn-card[data-width="2"]{grid-column:span 2}
 #right-panel{position:fixed;right:12px;width:300px;background:rgba(255,250,240,.76);z-index:100;padding:12px;overflow-y:auto;font-family:Inter,system-ui,sans-serif;color:#171717}
 .right-card{border:1px solid #1f1b1622;border-radius:10px;background:rgba(255,250,240,.72);padding:12px;margin-bottom:10px}
 .right-kicker{font-family:"IBM Plex Mono","SF Mono",monospace;text-transform:uppercase;font-size:10px;letter-spacing:.08em;font-weight:800;color:#756b60;margin-bottom:8px}
@@ -77,41 +79,25 @@ body{background:
 .right-links a:hover{background:#171717;color:#fff}
 .right-note{margin-top:10px;border-radius:8px;background:#171717;color:#fff;padding:12px;font-size:12px;line-height:1.45}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.motion-card{min-height:220px}
-.motion-demo{position:relative;min-height:155px;overflow:hidden;border-radius:calc(var(--radius) + 4px);border:var(--bw) solid var(--border);background:linear-gradient(135deg,var(--card),var(--muted));padding:16px;color:var(--card-fg)}
-.motion-demo a{position:absolute;inset:auto 12px 10px auto;color:var(--muted-fg);font:800 10px "IBM Plex Mono","SF Mono",monospace;text-transform:uppercase;text-decoration:none}
-.motion-demo .md-title{font-family:var(--font-heading);font-size:var(--title-fs);font-weight:var(--fw);letter-spacing:var(--ls);line-height:1.05}
-.motion-demo .md-line{height:8px;border-radius:999px;background:var(--primary);opacity:.18;margin-top:10px}
-.motion-scroll .md-line{animation:md-rise 2.8s infinite cubic-bezier(.22,1,.36,1);transform-origin:left}
-.motion-scroll .md-line:nth-child(3){animation-delay:.22s;width:72%}.motion-scroll .md-line:nth-child(4){animation-delay:.44s;width:54%}
-.motion-agent .dot{width:10px;height:10px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 0 color-mix(in oklab,var(--primary) 45%,transparent);animation:md-pulse 1.6s infinite}
-.motion-agent .run{display:grid;grid-template-columns:14px 1fr;gap:8px;align-items:center;margin:12px 0}
-.motion-agent .run span{height:9px;border-radius:999px;background:color-mix(in oklab,var(--fg) 18%,transparent)}
-.motion-kinetic .word{display:inline-block;margin-right:6px;animation:md-flip 2.6s infinite}.motion-kinetic .word:nth-child(2){animation-delay:.16s}.motion-kinetic .word:nth-child(3){animation-delay:.32s}
-.motion-cursor:before{content:"";position:absolute;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,var(--primary),transparent 68%);filter:blur(8px);opacity:.45;animation:md-orbit 4s infinite linear}
-.motion-cutaway .layer{position:absolute;left:36px;right:36px;height:30px;border:1px solid var(--border);background:color-mix(in oklab,var(--card) 88%,var(--primary));transform:skewY(-7deg);animation:md-cut 3s infinite}
-.motion-cutaway .layer:nth-child(2){top:38px}.motion-cutaway .layer:nth-child(3){top:76px;animation-delay:.18s}.motion-cutaway .layer:nth-child(4){top:114px;animation-delay:.36s}
-.motion-data .bar{position:absolute;bottom:42px;width:20px;border-radius:7px 7px 0 0;background:var(--primary);animation:md-grow 2.4s infinite cubic-bezier(.22,1,.36,1)}
-.motion-data .bar:nth-child(2){left:38px;height:44px}.motion-data .bar:nth-child(3){left:72px;height:76px;animation-delay:.1s}.motion-data .bar:nth-child(4){left:106px;height:58px;animation-delay:.2s}.motion-data .bar:nth-child(5){left:140px;height:96px;animation-delay:.3s}
-.motion-magnetic .magnet{position:absolute;left:26px;top:58px;border-radius:999px;background:var(--primary);color:var(--primary-fg);padding:14px 22px;font-weight:900;animation:md-magnet 2s infinite}
-.motion-state .panel{position:absolute;inset:26px;border-radius:14px;background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);animation:md-swap 3s infinite}
-.motion-loading .skeleton{height:12px;border-radius:999px;background:linear-gradient(90deg,transparent,color-mix(in oklab,var(--primary) 30%,transparent),transparent);background-size:220% 100%;animation:md-shimmer 1.3s infinite;margin:14px 0}
-.motion-gallery .tile{position:absolute;width:78px;height:78px;border-radius:14px;background:var(--primary);box-shadow:var(--shadow);animation:md-depth 3s infinite}.motion-gallery .tile:nth-child(2){left:28px;top:32px}.motion-gallery .tile:nth-child(3){left:86px;top:54px;animation-delay:.16s}.motion-gallery .tile:nth-child(4){left:144px;top:28px;animation-delay:.32s}
-.motion-stepper .step{display:flex;align-items:center;gap:8px;margin:12px 0}.motion-stepper .step i{width:22px;height:22px;border-radius:50%;background:var(--primary);display:block;animation:md-step 2.8s infinite}.motion-stepper .step:nth-child(3) i{animation-delay:.2s}.motion-stepper .step:nth-child(4) i{animation-delay:.4s}
-.motion-badge .badge-loop{display:inline-flex;border-radius:999px;background:var(--primary);color:var(--primary-fg);padding:8px 12px;font-weight:900;animation:md-badge 1.9s infinite}.motion-badge .orb{position:absolute;width:52px;height:52px;border-radius:50%;background:var(--primary);opacity:.18;animation:md-orbit 5s infinite linear}
-@keyframes md-rise{0%,100%{transform:translateY(18px) scaleX(.7);opacity:.18}40%{transform:translateY(0) scaleX(1);opacity:.58}}
-@keyframes md-pulse{70%{box-shadow:0 0 0 16px transparent}100%{box-shadow:0 0 0 0 transparent}}
-@keyframes md-flip{0%,100%{transform:translateY(0) rotateX(0)}45%{transform:translateY(-8px) rotateX(75deg)}}
-@keyframes md-orbit{0%{transform:translate(10px,20px)}50%{transform:translate(150px,58px)}100%{transform:translate(10px,20px)}}
-@keyframes md-cut{0%,100%{transform:translateX(0) skewY(-7deg)}50%{transform:translateX(20px) skewY(-7deg)}}
-@keyframes md-grow{0%,100%{transform:scaleY(.35);opacity:.45}45%{transform:scaleY(1);opacity:1}}
-@keyframes md-magnet{0%,100%{transform:translate(0,0)}50%{transform:translate(18px,-10px) rotate(-2deg)}}
-@keyframes md-swap{0%,100%{clip-path:inset(0 0 0 0);transform:translateY(0)}50%{clip-path:inset(0 0 42% 0);transform:translateY(-4px)}}
-@keyframes md-shimmer{to{background-position:-220% 0}}
-@keyframes md-depth{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-12px) rotate(-3deg)}}
-@keyframes md-step{0%,100%{transform:scale(.8);opacity:.45}45%{transform:scale(1.12);opacity:1}}
-@keyframes md-badge{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-5px) rotate(-2deg)}}
-@media (prefers-reduced-motion: reduce){.motion-demo *{animation:none!important;transition:none!important}}
+.cn-header-preview{min-height:210px;border-radius:calc(var(--radius) + 8px);border:var(--bw) solid var(--border);background:var(--card);color:var(--card-fg);box-shadow:var(--shadow);overflow:hidden}
+.cn-header-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:var(--bw) solid var(--border)}
+.cn-header-logo{display:inline-flex;align-items:center;gap:8px;font-weight:900;letter-spacing:var(--ls)}
+.cn-header-logo i{width:18px;height:18px;border-radius:6px;background:var(--primary);box-shadow:3px 3px 0 color-mix(in oklab,var(--fg) 18%,transparent)}
+.cn-header-nav{display:flex;align-items:center;gap:12px;color:var(--muted-fg);font-size:.78rem;font-weight:700}
+.cn-header-preview .cn-btn{white-space:nowrap}
+.cn-header-body{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(220px,.9fr);gap:18px;align-items:center;padding:22px}
+.cn-header-body h3{margin:0 0 10px;font-family:var(--font-heading);font-size:clamp(1.5rem,3vw,2.8rem);line-height:1.02;letter-spacing:var(--ls)}
+.cn-header-body p{margin:0;color:var(--muted-fg);font-size:.92rem;line-height:1.55;max-width:54ch}
+.cn-header-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.cn-header-visual{min-height:150px;border-radius:calc(var(--radius) + 4px);border:var(--bw) solid var(--border);background:linear-gradient(135deg,color-mix(in oklab,var(--primary) 18%,var(--card)),var(--muted));position:relative;overflow:hidden}
+.cn-header-visual:before,.cn-header-visual:after{content:"";position:absolute;border-radius:999px;background:var(--primary);opacity:.24}
+.cn-header-visual:before{width:120px;height:120px;right:22px;top:18px}.cn-header-visual:after{width:72px;height:72px;left:28px;bottom:20px}
+.cn-header-visual .panel{position:absolute;left:22px;right:22px;bottom:22px;height:48px;border-radius:calc(var(--radius) + 2px);background:color-mix(in oklab,var(--card) 86%,white);border:var(--bw) solid var(--border);box-shadow:var(--shadow)}
+.cn-header-slim .cn-header-body{grid-template-columns:1fr;padding:18px}.cn-header-slim .cn-header-visual{display:none}
+.cn-header-editorial .cn-header-top{border-bottom:none}.cn-header-editorial .cn-header-body{grid-template-columns:1fr;padding:18px 22px 26px}.cn-header-editorial h3{font-size:clamp(2rem,4vw,4rem)}
+.cn-header-product .cn-header-visual{background:radial-gradient(circle at 72% 28%,var(--primary),transparent 32%),linear-gradient(135deg,var(--muted),var(--card))}
+.cn-header-console .cn-header-visual{background:repeating-linear-gradient(0deg,color-mix(in oklab,var(--fg) 9%,transparent),color-mix(in oklab,var(--fg) 9%,transparent) 1px,transparent 1px,transparent 18px),var(--card)}
+@media(max-width:760px){.grid{grid-template-columns:1fr;padding:14px}.cn-card[data-width="2"]{grid-column:span 1}.cn-header-body{grid-template-columns:1fr}.cn-header-nav{display:none}}
 @media(max-width:1120px){
   #right-panel{display:none}
   #canvas{right:12px}
@@ -142,7 +128,7 @@ body{background:
 </div>
 <h1 class="sr-only">UnBoring UI Design Tool</h1>
 <div id="menu">
-  <a href="motion/">Motion (24)</a>
+  <a href="motion/">Motion (35)</a>
   <a href="components/">Components (51)</a>
   <a href="interactions/">Interactions (85)</a>
   <a href="styles/">Styles (27)</a>
@@ -156,53 +142,35 @@ body{background:
   </div>
 <div id="canvas-content">
 <div class="grid">
-<div class="cn-card motion-card" data-width="1" draggable="true" data-id="M01" data-name="Scroll Reveal">
-<div class="cn-card-tag"><span class="drag-handle">⠿</span><span class="card-id-label">#M01 · Scroll Reveal</span><button class="width-toggle">2x</button></div>
-<div class="cn-card-header"><div class="cn-card-title">Scroll Reveal Stack</div><div class="cn-card-desc">Chapter cards enter with calm stagger.</div></div><div class="cn-card-content"><div class="motion-demo motion-scroll"><div class="md-title">Chapter reveal</div><div class="md-line"></div><div class="md-line"></div><div class="md-line"></div><a href="motion/scroll-reveal/">/motion</a></div></div>
+<div class="cn-card" data-id="H01" data-width="2" draggable="true" data-name="Agent Header">
+<div class="cn-card-tag"><span class="drag-handle">⠿</span><span class="card-id-label">#H01 · Agent Header</span><button class="width-toggle">1x</button></div>
+<div class="cn-card-header"><div class="cn-card-title">Agent Product Header</div><div class="cn-card-desc">A cockpit-style first screen with real product proof.</div></div>
+<div class="cn-card-content"><div class="cn-header-preview cn-header-console"><div class="cn-header-top"><span class="cn-header-logo"><i></i>FlowPilot</span><nav class="cn-header-nav"><span>Runs</span><span>Memory</span><span>Pricing</span></nav><button class="cn-btn cn-btn-default cn-btn-sm">Start run</button></div><div class="cn-header-body"><div><h3>Agents that show their work.</h3><p>Turn tool calls, approvals, and confidence into a landing page that feels transparent instead of magical.</p><div class="cn-header-actions"><button class="cn-btn cn-btn-default">Try the cockpit</button><button class="cn-btn cn-btn-outline">View trace</button></div></div><div class="cn-header-visual"><span class="panel"></span></div></div></div></div>
 </div>
-<div class="cn-card motion-card" data-width="1" draggable="true" data-id="M02" data-name="Agent Timeline">
-<div class="cn-card-tag"><span class="drag-handle">⠿</span><span class="card-id-label">#M02 · Agent Timeline</span><button class="width-toggle">2x</button></div>
-<div class="cn-card-header"><div class="cn-card-title">Agent Run Timeline</div><div class="cn-card-desc">Tool calls pulse as work advances.</div></div><div class="cn-card-content"><div class="motion-demo motion-agent"><div class="md-title">Run log</div><div class="run"><i class="dot"></i><span></span></div><div class="run"><i class="dot"></i><span></span></div><div class="run"><i class="dot"></i><span></span></div><a href="motion/timeline-sequence/">/motion</a></div></div>
+<div class="cn-card" data-id="H02" data-width="1" draggable="true" data-name="Editorial Header">
+<div class="cn-card-tag"><span class="drag-handle">⠿</span><span class="card-id-label">#H02 · Editorial Header</span><button class="width-toggle">2x</button></div>
+<div class="cn-card-header"><div class="cn-card-title">Editorial Header</div><div class="cn-card-desc">Sharp type, quiet navigation, and confident whitespace.</div></div>
+<div class="cn-card-content"><div class="cn-header-preview cn-header-slim cn-header-editorial"><div class="cn-header-top"><span class="cn-header-logo"><i></i>Atelier</span><button class="cn-btn cn-btn-outline cn-btn-sm">Index</button></div><div class="cn-header-body"><h3>Work that keeps its nerve.</h3><p>A refined opening for portfolios, studios, and premium product stories.</p></div></div></div>
 </div>
-<div class="cn-card motion-card" data-width="1" draggable="true" data-id="M03" data-name="Kinetic Headline">
-<div class="cn-card-tag"><span class="drag-handle">⠿</span><span class="card-id-label">#M03 · Kinetic Headline</span><button class="width-toggle">2x</button></div>
-<div class="cn-card-header"><div class="cn-card-title">Kinetic Headline</div><div class="cn-card-desc">Words flip in a tight rhythm.</div></div><div class="cn-card-content"><div class="motion-demo motion-kinetic"><div class="md-title"><span class="word">Ship</span><span class="word">less</span><span class="word">boring</span></div><div class="md-line" style="width:64%"></div><a href="effects/kinetic-text/">/effects</a></div></div>
+<div class="cn-card" data-id="H03" data-width="1" draggable="true" data-name="Kids Header">
+<div class="cn-card-tag"><span class="drag-handle">⠿</span><span class="card-id-label">#H03 · Kids Header</span><button class="width-toggle">2x</button></div>
+<div class="cn-card-header"><div class="cn-card-title">Learning Header</div><div class="cn-card-desc">Playful without becoming chaotic.</div></div>
+<div class="cn-card-content"><div class="cn-header-preview cn-header-slim"><div class="cn-header-top"><span class="cn-header-logo"><i></i>Sprout</span><button class="cn-btn cn-btn-default cn-btn-sm">Join class</button></div><div class="cn-header-body"><h3>Tiny lessons, big confidence.</h3><p>Sticker-like progress, parent trust, and soft learning cues for kids education.</p></div></div></div>
 </div>
-<div class="cn-card motion-card" data-width="1" draggable="true" data-id="M04" data-name="Cursor Field">
-<div class="cn-card-tag"><span class="drag-handle">⠿</span><span class="card-id-label">#M04 · Cursor Field</span><button class="width-toggle">2x</button></div>
-<div class="cn-card-header"><div class="cn-card-title">Cursor Field</div><div class="cn-card-desc">A local field responds to intent.</div></div><div class="cn-card-content"><div class="motion-demo motion-cursor"><div class="md-title">Responsive field</div><div class="md-line" style="width:70%"></div><a href="interactions/smooth-cursor/">/interaction</a></div></div>
+<div class="cn-card" data-id="H04" data-width="2" draggable="true" data-name="Product Header">
+<div class="cn-card-tag"><span class="drag-handle">⠿</span><span class="card-id-label">#H04 · Product Header</span><button class="width-toggle">1x</button></div>
+<div class="cn-card-header"><div class="cn-card-title">Product Stage Header</div><div class="cn-card-desc">A tactile product opening for commerce or hardware.</div></div>
+<div class="cn-card-content"><div class="cn-header-preview cn-header-product"><div class="cn-header-top"><span class="cn-header-logo"><i></i>MonoPod</span><nav class="cn-header-nav"><span>Design</span><span>Specs</span><span>Reviews</span></nav><button class="cn-btn cn-btn-default cn-btn-sm">Preorder</button></div><div class="cn-header-body"><div><h3>The object is the interface.</h3><p>Use material closeups, cutaway details, and a checkout path that feels considered.</p><div class="cn-header-actions"><button class="cn-btn cn-btn-default">Reserve one</button><button class="cn-btn cn-btn-outline">See details</button></div></div><div class="cn-header-visual"><span class="panel"></span></div></div></div></div>
 </div>
-<div class="cn-card motion-card" data-width="1" draggable="true" data-id="M05" data-name="Product Cutaway">
-<div class="cn-card-tag"><span class="drag-handle">⠿</span><span class="card-id-label">#M05 · Product Cutaway</span><button class="width-toggle">2x</button></div>
-<div class="cn-card-header"><div class="cn-card-title">Product Cutaway</div><div class="cn-card-desc">Layers separate to explain structure.</div></div><div class="cn-card-content"><div class="motion-demo motion-cutaway"><div class="layer"></div><div class="layer"></div><div class="layer"></div><a href="motion/pin-section/">/motion</a></div></div>
+<div class="cn-card" data-id="H05" data-width="1" draggable="true" data-name="Medical Header">
+<div class="cn-card-tag"><span class="drag-handle">⠿</span><span class="card-id-label">#H05 · Medical Header</span><button class="width-toggle">2x</button></div>
+<div class="cn-card-header"><div class="cn-card-title">Clinical Header</div><div class="cn-card-desc">Trust-first and calm, not sterile.</div></div>
+<div class="cn-card-content"><div class="cn-header-preview cn-header-slim"><div class="cn-header-top"><span class="cn-header-logo"><i></i>CareOS</span><button class="cn-btn cn-btn-outline cn-btn-sm">Security</button></div><div class="cn-header-body"><h3>Care teams need less noise.</h3><p>Clinical spacing, safe language, and clear proof for healthcare products.</p></div></div></div>
 </div>
-<div class="cn-card motion-card" data-width="1" draggable="true" data-id="M06" data-name="Data Reveal">
-<div class="cn-card-tag"><span class="drag-handle">⠿</span><span class="card-id-label">#M06 · Data Reveal</span><button class="width-toggle">2x</button></div>
-<div class="cn-card-header"><div class="cn-card-title">Data Reveal Chart</div><div class="cn-card-desc">Values grow into a story beat.</div></div><div class="cn-card-content"><div class="motion-demo motion-data"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><a href="motion/number-count-nudge/">/motion</a></div></div>
-</div>
-<div class="cn-card motion-card" data-width="1" draggable="true" data-id="M07" data-name="Magnetic CTA">
-<div class="cn-card-tag"><span class="drag-handle">⠿</span><span class="card-id-label">#M07 · Magnetic CTA</span><button class="width-toggle">2x</button></div>
-<div class="cn-card-header"><div class="cn-card-title">Magnetic CTA</div><div class="cn-card-desc">The primary action feels tactile.</div></div><div class="cn-card-content"><div class="motion-demo motion-magnetic"><div class="magnet">Try it</div><a href="motion/magnetic-hover/">/motion</a></div></div>
-</div>
-<div class="cn-card motion-card" data-width="1" draggable="true" data-id="M08" data-name="State Transition">
-<div class="cn-card-tag"><span class="drag-handle">⠿</span><span class="card-id-label">#M08 · State Transition</span><button class="width-toggle">2x</button></div>
-<div class="cn-card-header"><div class="cn-card-title">State Transition</div><div class="cn-card-desc">Panels crossfade without losing context.</div></div><div class="cn-card-content"><div class="motion-demo motion-state"><div class="panel"></div><a href="motion/panel-crossfade/">/motion</a></div></div>
-</div>
-<div class="cn-card motion-card" data-width="1" draggable="true" data-id="M09" data-name="Loading Content">
-<div class="cn-card-tag"><span class="drag-handle">⠿</span><span class="card-id-label">#M09 · Loading Content</span><button class="width-toggle">2x</button></div>
-<div class="cn-card-header"><div class="cn-card-title">Loading To Content</div><div class="cn-card-desc">Skeletons settle into usable content.</div></div><div class="cn-card-content"><div class="motion-demo motion-loading"><div class="skeleton"></div><div class="skeleton" style="width:76%"></div><div class="skeleton" style="width:52%"></div><a href="motion/skeleton-settle/">/motion</a></div></div>
-</div>
-<div class="cn-card motion-card" data-width="1" draggable="true" data-id="M10" data-name="Hover Gallery">
-<div class="cn-card-tag"><span class="drag-handle">⠿</span><span class="card-id-label">#M10 · Hover Gallery</span><button class="width-toggle">2x</button></div>
-<div class="cn-card-header"><div class="cn-card-title">Hover Depth Gallery</div><div class="cn-card-desc">Tiles lift into spatial layers.</div></div><div class="cn-card-content"><div class="motion-demo motion-gallery"><div class="tile"></div><div class="tile"></div><div class="tile"></div><a href="effects/3d-card-flip/">/effects</a></div></div>
-</div>
-<div class="cn-card motion-card" data-width="1" draggable="true" data-id="M11" data-name="Stepper Motion">
-<div class="cn-card-tag"><span class="drag-handle">⠿</span><span class="card-id-label">#M11 · Stepper Motion</span><button class="width-toggle">2x</button></div>
-<div class="cn-card-header"><div class="cn-card-title">Stepper Motion</div><div class="cn-card-desc">Progress advances with a clear cue.</div></div><div class="cn-card-content"><div class="motion-demo motion-stepper"><div class="step"><i></i><span class="md-line" style="width:70%"></span></div><div class="step"><i></i><span class="md-line" style="width:58%"></span></div><div class="step"><i></i><span class="md-line" style="width:44%"></span></div><a href="motion/stepper-advance/">/motion</a></div></div>
-</div>
-<div class="cn-card motion-card" data-width="1" draggable="true" data-id="M12" data-name="Ambient Badge">
-<div class="cn-card-tag"><span class="drag-handle">⠿</span><span class="card-id-label">#M12 · Ambient Badge</span><button class="width-toggle">2x</button></div>
-<div class="cn-card-header"><div class="cn-card-title">Ambient Badge Loop</div><div class="cn-card-desc">A small status loop adds life.</div></div><div class="cn-card-content"><div class="motion-demo motion-badge"><span class="badge-loop">Live now</span><span class="orb"></span><a href="effects/glow-pulse/">/effects</a></div></div>
+<div class="cn-card" data-id="H06" data-width="1" draggable="true" data-name="Game Header">
+<div class="cn-card-tag"><span class="drag-handle">⠿</span><span class="card-id-label">#H06 · Game Header</span><button class="width-toggle">2x</button></div>
+<div class="cn-card-header"><div class="cn-card-title">Game Header</div><div class="cn-card-desc">Poster energy with usable structure.</div></div>
+<div class="cn-card-content"><div class="cn-header-preview cn-header-slim"><div class="cn-header-top"><span class="cn-header-logo"><i></i>NightRun</span><button class="cn-btn cn-btn-default cn-btn-sm">Trailer</button></div><div class="cn-header-body"><h3>A launch page with a pulse.</h3><p>Character, stats, and CTA hierarchy without falling into generic game chrome.</p></div></div></div>
 </div>
 <div class="cn-card" data-id="45" data-width="2" draggable="true" data-name="Features">
 <div class="cn-card-tag">

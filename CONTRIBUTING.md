@@ -10,14 +10,14 @@ UnBoring welcomes design methods, motion ideas, interaction patterns, and implem
 - Tokens, CSS, or small HTML/CSS/JS snippets that can run statically.
 - Accessibility and performance notes when relevant.
 - Creative recipes that connect project type, visual principles, motion principles, prompts, Avoid guidance, and token hints.
-- Motion preview cards for the homepage canvas when they are small samplers that link back to the canonical `/motion/` or related detail page.
+- Header, hero, section, and component cards that make the homepage canvas feel closer to a real page preview.
 
 ## Content Rules
 
 - Do not copy proprietary layouts, source code, or visual assets from Awwwards, GSAP Showcase, or other inspiration sites.
 - Abstract the design method instead: rhythm, hierarchy, motion language, interaction model, and constraints.
 - Keep examples framework-neutral unless a component explicitly maps to a known primitive.
-- Keep homepage motion preview cards lightweight. The canvas should show the feeling of the motion; full usage notes belong in `/motion/`.
+- Keep detailed motion education in `/motion/`. Homepage canvas cards should stay focused on page composition and reusable visual direction.
 
 ## Local Checks
 
